@@ -1,23 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
-  ]
+    routes: [
+        {
+            path: '/longlist',
+            // 路由级代码分裂
+            // 这会为此路由生成一个单独的块（[name].[hash].js）
+            // 访问路径时延迟加载。
+            component: () => import('./views/LongList.vue')
+        },
+        {
+            path: '/autocascader',
+            component: () => import('./views/AutoCascader.vue')
+        }
+    ]
 })

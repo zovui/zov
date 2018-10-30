@@ -1,7 +1,6 @@
 {
   "name": "zov",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -23,5 +22,9 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.17"
-  }
+  },
+  "files": [
+    "dist",
+    "core"
+  ]
 }

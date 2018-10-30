@@ -1,0 +1,448 @@
+$titleH: 40px;
+$OperatorPanelH: 53px;
+$panelH: 376px;
+$itemH: 34px;
+$fontSize: 14px;
+$baseColor: #3BC0C2;
+$baseTextColor: #324769;
+$borderColor: #EDF3FD;
+$activeItemColor: #F8FAFC;
+$checkboxBaseColor: #CED9EE;
+$maskColor: rgba(144, 78, 78, 0.075);
+@mixin padd20() {
+    padding: 0 20px;
+}
+
+@mixin shadow($sha : 15px) {
+    box-shadow: 0px 0px $sha rgba(0, 0, 0, 0.35);
+}
+
+@mixin shadowRB() {
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.1);
+}
+
+*:not(input) {
+    user-select: none;
+}
+
+#auto-cascader {
+    font-size: $fontSize;
+    position: relative;
+    float: left;
+    @include shadow
+}
+
+//级联标题
+.auto-titles {
+    width: 100%;
+    height: $titleH;
+    line-height: $titleH;
+    font-weight: 600;
+    background: $activeItemColor;
+    display: flex;
+    border-bottom: 1px solid $borderColor;
+    > * {
+        @include padd20;
+        border-right: 1px solid $borderColor;
+        flex: 1;
+    }
+}
+
+//级联面板
+.auto-panel {
+    background: #fff;
+    overflow: auto;
+    height: $panelH + 8px - $OperatorPanelH;
+    .auto-cas-item {
+        padding: 12px 0;
+        height: 100%;
+        overflow: auto;
+        border-right: 1px solid $borderColor;
+        line-height: $itemH;
+        float: left;
+        > li {
+            transition: all .2s;
+            position: relative;
+            padding: 0 32px 0 20px;
+            cursor: default;
+        }
+        > li:hover {
+            background: $activeItemColor;
+            opacity: .75;
+        }
+        > li.cas-item-active {
+            background: $activeItemColor;
+        }
+        > li.cas-has-children {
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: ($itemH - 8px)/2;
+                right: 12px;
+                height: 8px;
+                border-top: 4px solid transparent;
+                border-bottom: 4px solid transparent;
+                border-left: 6px solid $checkboxBaseColor;
+            }
+        }
+    }
+}
+
+//级联搜索
+.auto-search {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: $maskColor;
+    z-index: 2;
+    .auto-search-title {
+        line-height: $titleH;
+        padding: 4px 20px;
+        background: $activeItemColor;
+        .auto-search-bar {
+            position: relative;
+            input {
+                width: 100%;
+                line-height: 36px;
+                border: 1px solid $borderColor;
+                outline: none;
+                padding: 0 12px;
+                &:focus {
+                    border: 1px solid $baseColor;
+                }
+            }
+            .auto-search-enter {
+                width: $titleH - 8px;
+                height: $titleH - 8px;
+                cursor: pointer;
+                position: absolute;
+                top: 5px;
+                right: 3px;
+                transition: all .5s;
+                &:hover {
+                    > .zj-search-icon {
+                        &:before, &:after {
+                            border-color: $baseColor;
+                        }
+                    }
+                }
+                &:active {
+                    > .zj-search-icon {
+                        transform: scale(1.2) translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+    }
+    .auto-search-panel {
+        background: #ffffff;
+        padding: 20px 0px;
+        max-height: $panelH - $OperatorPanelH;
+        overflow-x: hidden;
+        overflow-y: auto;
+        @include shadowRB;
+        > ul > li {
+            line-height: $itemH;
+            height: $itemH;
+            @include padd20;
+            cursor: pointer;
+            transition: all .4s;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: keep-all;
+            .auto-search-result-item {
+                padding: 0 3px;
+                &:nth-last-of-type(1) {
+                    color: $baseColor;
+                    i {
+                        display: none;
+                    }
+                }
+            }
+            &:hover {
+                background: $activeItemColor;
+            }
+        }
+        .auto-not-found {
+            @include padd20
+        }
+        .auto-search-loading {
+            @include padd20;
+        }
+    }
+}
+
+//【icon】 loading
+.auto-search-loading-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-top: 4px double #ff060d;
+    border-left: 4px double #00c800;
+    border-right: 4px double #0092dd;
+    border-bottom: 4px double #ff8500;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 12px;
+    position: relative;
+    animation: whirl 1s infinite;
+
+}
+
+$searBtn: 35px;
+.auto-search-btn {
+    position: absolute;
+    z-index: 3;
+    @include shadow(8px);
+    width: $searBtn;
+    height: $searBtn;
+    right: $searBtn;
+    bottom: $OperatorPanelH + 5px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    transition: all .3s;
+    opacity: 0.55;
+    > .zj-search-icon {
+        transform: scale(1.2) translate(-50%, -50%);
+    }
+    &:hover {
+        opacity: 1;
+    }
+}
+
+@keyframes whirl {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.auto-operator-panel {
+    height: $OperatorPanelH;
+    background: $activeItemColor;
+    display: flex;
+    justify-content: flex-end;
+    .auto-operator-panel-btns {
+        flex: 1;
+        display: flex;
+        > li {
+            flex: 1;
+            display: flex;
+            margin: 8px 15px 8px 0px;
+            line-height: $OperatorPanelH - 16px;
+            justify-content: center;
+            align-items: center;
+            color: $baseColor;
+            transition: all .3s;
+            cursor: pointer;
+            position: relative;
+            min-width: 86px;
+            &:nth-of-type(1) {
+                margin-left: 15px;
+            }
+        }
+        &:not(.auto-result-btns) {
+            > li {
+                &:hover {
+                    color: rgba(59, 192, 194, 0.75);
+                }
+            }
+        }
+    }
+    .auto-result-btns {
+        justify-content: flex-end;
+        max-width: 260px;
+        > .auto-result-btns-ok {
+            background: $baseColor;
+            color: #ffffff;
+            &:hover {
+                background: rgba(59, 192, 194, 0.75);
+            }
+        }
+        > .auto-result-btns-cancel {
+            border: 1px solid $baseColor;
+            &:hover {
+                background: rgba(59, 192, 194, 0.25);
+            }
+        }
+    }
+}
+
+.auto-clean-btn:active {
+    .cas-clean-icon {
+        > * {
+            transform: rotate(-20deg);
+            transform-origin: left;
+        }
+    }
+}
+
+//【icon】 搜索
+.zj-search-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: scale(1.3) translate(-50%, -50%);
+    transition: all .3s;
+}
+
+.zj-search-icon:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #ccc;
+    transition: all .3s;
+    border-radius: 50%;
+}
+
+.zj-search-icon:after {
+    content: "";
+    display: block;
+    width: 8px;
+    transition: all .3s;
+    border-bottom: 3px solid #CCCCCC;
+    position: absolute;
+    bottom: 1px;
+    right: 2px;
+    -webkit-transform-origin: right;
+    -webkit-transform: rotate(-137deg);
+    transform-origin: right;
+    transform: rotate(-137deg);
+    border-radius: 3px 0 0 3px;
+}
+
+//【icon】 radio & checkbox
+.cas-radio-icon, .cas-checkbox-icon {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border: 1px solid $checkboxBaseColor;
+    vertical-align: middle;
+    margin-right: 7px;
+    &:not(.cas-checkbox-icon) {
+        border-radius: 50%;
+    }
+}
+
+.cas-radio-icon.checked, .cas-checkbox-icon.checked {
+    border: 1px solid $baseColor;
+    &:before {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 4px;
+        position: absolute;
+        left: 3px;
+        top: 3px;
+        border-left: 1px solid $baseColor;
+        border-bottom: 1px solid $baseColor;
+        transform: rotate(-45deg);
+    }
+}
+
+//【icon】 dustbin/垃圾桶
+.cas-clean-icon {
+    display: inline-block;
+    margin-right: 7px;
+    width: 12px;
+    height: 11px;
+    border: 1px solid $baseColor;
+    border-top: 0px;
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 3px;
+        width: 4px;
+        height: 6px;
+        border-left: 1px solid $baseColor;
+        border-right: 1px solid $baseColor;
+    }
+    > * {
+        position: absolute;
+        width: 16px;
+        height: 3px;
+        border-bottom: 1px solid $baseColor;
+        left: -3px;
+        top: -3px;
+        transition: all .065s;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            width: 8px;
+            height: 1px;
+            background: $baseColor;
+        }
+    }
+    &:active {
+        > * {
+            transform: rotate(-20deg);
+            transform-origin: left;
+        }
+    }
+}
+
+//loading
+.auto-cas-loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    text-align: center;
+    background: rgba(236, 233, 233, 0.55);
+    color: #8e8e8e;
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        width: 0;
+        vertical-align: middle;
+    }
+}
+
+//动画 渐隐渐现
+.opacity-fade-enter-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.opacity-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.opacity-fade-enter, .opacity-fade-leave-to {
+    position: absolute;
+    opacity: 0;
+}
+
+//动画 背景闪烁
+[animitions="flicker"] {
+    animation: flicker 1s;
+}
+
+@keyframes flicker {
+    0% {
+        background: $activeItemColor;
+    }
+    25% {
+        background: #e8e8e8;
+    }
+    50% {
+        background: $activeItemColor;
+    }
+    75% {
+        background: #e8e8e8;
+    }
+    100% {
+        background: $activeItemColor;
+    }
+}
