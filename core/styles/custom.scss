@@ -1,0 +1,28 @@
+@import "colors";
+
+// 前缀
+$prefix                     :   zov-;
+$prefix-icon                :   zov-icon;
+
+// 基础配置项
+$font-family                :   "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !default;
+$code-family                :   Consolas,Menlo,Courier,monospace !default;
+$font-size-base             :   14px !default;
+$font-size-small            :   12px !default;
+$font-size-large            :   16px !default;
+$line-height-base           :   1.5 !default;
+$line-height-computed       :   floor(($font-size-base * $line-height-base));
+// link a标签
+$link-color                 :   $color-primary !default;
+$link-hover-color           :   $color-light-primary !default;
+$link-active-color          :   $color-dark-primary !default;
+$cursor-disabled            :   not-allowed !default;
+// border 圆角
+$border-radius-base         :   6px !default;
+$border-width-base          :   1px !default;
+$border-color-base          :   $color-border !default;  // 当边框作为边框
+$border-color-split         :   $color-divider !default; // 当边框作为分割线
+$box-shadow-color           :   $color-shadow !default;
+// 过度时间
+$transition-time            :   .5s !default;
+$animation-time             :   .3s !default;

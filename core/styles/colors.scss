@@ -1,0 +1,42 @@
+// 主题色
+$color-primary                      :   #2d8cf0 !default;
+$color-light-primary                :   lighten($color-primary, 7.5%) !default;
+$color-dark-primary                 :   darken($color-primary, 7.5) !default;
+
+// 辅助色
+$color-info                         :   #2db7f5 !default;
+$color-success                      :   #19be6b !default;
+$color-warning                      :   #ff9900 !default;
+$color-error                        :   #ed4014 !default;
+
+
+/**
+* 模式 【light、dark】
+**/
+// 中性色
+$color-black-1                      :   #17233d !default;    // 深色-1
+$color-black-2                      :   #515a6e !default;    // 深色-2
+$color-black-3                      :   #808695 !default;    // 深色-3
+$color-black-4                      :   #c5c8ce !default;    // 深色-4
+$color-black-5                      :   #dcdee2 !default;    // 深色-5
+$color-black-6                      :   #e8eaec !default;    // 深色-6
+$color-black-7                      :   #f8f8f9 !default;    // 深色-7
+// 标题色，正文色，图标色，失效色，边框，分割线，背景色
+// light
+$color-title                        :   $color-black-1 !default;
+$color-text                         :   $color-black-2 !default;
+$color-sub                          :   $color-black-3 !default;
+$color-disabled                     :   $color-black-4 !default;
+$color-border                       :   $color-black-5 !default;
+$color-divider                      :   $color-black-6 !default;
+$color-background                   :   $color-black-7 !default;
+$color-shadow                       :   rgba(0,0,0,0.25) !default;
+// dark
+$color-dark-title                   :   $color-black-7 !default;
+$color-dark-text                    :   $color-black-6 !default;
+$color-dark-sub                     :   $color-black-5 !default;
+$color-dark-disabled                :   $color-black-4 !default;
+$color-dark-border                  :   $color-black-3 !default;
+$color-dark-divider                 :   $color-black-2 !default;
+$color-dark-background              :   $color-black-1 !default;
+$color-dark-shadow                  :   rgba(0,0,0,0.75) !default;

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import zov, { LongList, AutoCascader } from '../core'
+import './app.scss'
 // Vue.component('LongList', LongList)
 // Vue.component('AutoCascader', AutoCascader)
 Vue.use(zov)

@@ -5,6 +5,11 @@
                 <router-link :to="item.path" :key="index">{{ item.path.substr(1) }}</router-link>
                 {{ index ===  $router.options.routes.length - 1 ? '' : '|'}}
             </template>
+            <p class="c">
+                test text 这是一大段文字
+            </p>
+            <input type="text" placeholder="请输入哈哈哈">
+            <input type="text" placeholder="请输入哈哈哈" disabled>
         </div>
         <router-view/>
     </div>
@@ -15,16 +20,11 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
     }
     #nav {
         padding: 30px;
         a {
             font-weight: bold;
-            color: #2c3e50;
-            &.router-link-exact-active {
-                color: #42b983;
-            }
         }
     }
 </style>
