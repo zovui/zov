@@ -90,7 +90,7 @@
 
     .ll-enter {
         transform: scale(.8);
-        border: 1px solid #00c800;
+        border: 5px solid #00c800;
     }
 
     .ll-leave-to {

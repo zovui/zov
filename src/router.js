@@ -14,6 +14,10 @@ export default new Router({
         {
             path: '/autocascader',
             component: () => import('./views/AutoCascader.vue')
+        },
+        {
+            path: '/loadingbar',
+            component: () => import('./views/LoadingBar.vue')
         }
     ]
 })

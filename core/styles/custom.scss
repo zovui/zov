@@ -24,5 +24,18 @@ $border-color-base          :   $color-border !default;  // 当边框作为边�
 $border-color-split         :   $color-divider !default; // 当边框作为分割线
 $box-shadow-color           :   $color-shadow !default;
 // 过度时间
-$transition-time            :   .5s !default;
+$transition-time            :   .2s !default;
 $animation-time             :   .3s !default;
+// Z-index
+$zindex-spin                :   8;
+$zindex-affix               :   10;
+$zindex-back-top            :   10;
+$zindex-select              :   900;
+$zindex-modal               :   1000;
+$zindex-drawer              :   1000;
+$zindex-message             :   1010;
+$zindex-notification        :   1010;
+$zindex-tooltip             :   1060;
+$zindex-transfer            :   1060;
+$zindex-loading-bar         :   2000;
+$zindex-spin-fullscreen     :   2010;

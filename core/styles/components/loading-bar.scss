@@ -1,0 +1,24 @@
+.#{$prefix}loading-bar {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    z-index: $zindex-loading-bar;
+    &-inner{
+        transition: width $transition-time linear;
+        height: 100%;
+        &-color-primary {
+            background-color: $color-primary;
+        }
+        &-color-finish {
+            background-color: $color-success;
+        }
+        &-color-error {
+            background-color: $color-error;
+        }
+        &-color-warning {
+            background-color: $color-warning;
+        }
+    }
+}
