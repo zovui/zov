@@ -1,7 +1,7 @@
 import LongList from './components/long-list'
 import AutoCascader from './components/auto-cascader'
 import LoadingBar from './components/loading-bar'
-
+import Notice from './components/notice'
 const components = {
     LongList,
     AutoCascader
@@ -14,6 +14,7 @@ const install = (Vue, option = {}) => {
     }
     // 下面是全局安装的方法【弹窗】
     Vue.prototype.$LoadingBar = LoadingBar
+    Vue.prototype.$Notice = Notice
 }
 // 自动安装【browser端引用的时候可以省去Vue.use】
 if (typeof window !== 'undefined' && window.Vue) {

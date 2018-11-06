@@ -1,0 +1,12 @@
+.#{$prefix}notice{
+    width: 335px;
+    position: fixed;
+    top: 25px;
+    right: 18px;
+    padding: 15px;
+    background-color: $color-background;
+    z-index: $zindex-notice;
+    border: $border-width-base solid $border-color-base;
+    border-radius: $border-radius-base;
+    box-shadow: 0 0 $box-shadow-blur $box-shadow-spread $box-shadow-color;
+}

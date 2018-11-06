@@ -1,9 +1,7 @@
 import LoadingBar from './loading-bar'
 import Vue from 'vue'
-import {TransitionEnd} from '../../utils'
-console.log(TransitionEnd)
 let timer;
-let Loading = {
+export default {
     _instance: undefined,
     init (opts) {
         // new 一个新vue实例
@@ -84,5 +82,3 @@ let Loading = {
         this._hide()
     }
 }
-
-export default Loading

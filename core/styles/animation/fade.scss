@@ -22,7 +22,6 @@ leave-to           【2.1.8版及以上】 定义离开过渡的结束状态。�
     opacity: 0;
 }
 .#{$prefix}fade-enter-active{
-    opacity: 0;
     transition: opacity 0.4s cubic-bezier(0.22, 1.17, 0.24, 1.04);
 }
 .#{$prefix}fade-enter-to{
@@ -32,8 +31,7 @@ leave-to           【2.1.8版及以上】 定义离开过渡的结束状态。�
     opacity: 1;
 }
 .#{$prefix}fade-leave-active{
-    opacity: 1;
-    transition: opacity 0.8s cubic-bezier(0.22, 1.17, 0.24, 1.04);
+    transition: opacity 1s cubic-bezier(0.22, 1.17, 0.24, 1.04);
 }
 .#{$prefix}fade-leave-to{
     opacity: 0;

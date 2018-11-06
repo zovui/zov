@@ -18,6 +18,10 @@ export default new Router({
         {
             path: '/loadingbar',
             component: () => import('./views/LoadingBar.vue')
+        },
+        {
+            path: '/notice',
+                component: () => import('./views/Notice.vue')
         }
     ]
 })
