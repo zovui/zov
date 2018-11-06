@@ -6,3 +6,11 @@
         <button @click="$LoadingBar.warning()">waring</button> |
     </div>
 </template>
+<script>
+    export default {
+        mounted () {
+            this.$LoadingBar.finish()
+            this.$LoadingBar.start()
+        }
+    }
+</script>

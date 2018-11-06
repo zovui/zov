@@ -1,5 +1,7 @@
 import LoadingBar from './loading-bar'
 import Vue from 'vue'
+import {TransitionEnd} from '../../utils'
+console.log(TransitionEnd)
 let timer;
 let Loading = {
     _instance: undefined,
@@ -23,17 +25,16 @@ let Loading = {
         timer = null
     },
     _keep ({show = false, width = 0, status = 'primary'}) {
+        // 直接操作组件上的data
         this._getInstance().show = show
         this._getInstance().width = width
         this._getInstance().status = status
     },
     _hide () {
-        setTimeout(() => {
-            this._keep({
-                // show: false,
-                status: 'primary'
-            })
-        }, 800)
+        let t = setTimeout(() => {
+            clearTimeout(t)
+            this._getInstance().show = false
+        }, 500)
     },
     start () {
         if (timer) {
