@@ -1,0 +1,47 @@
+/*
+* 变量说明
+* X、Y代表坐标轴决定translate的运动轴
+* l:从左向右left、r:从右向左right、u:从上向下up、d:从下向上down
+* t:进入和离开同向
+* b:进入和离开背向
+*/
+$list : (X, ll, -100%, -100%),
+        (X, lr, -100%, 100%),
+        (X, rr, 100%, 100%),
+        (X, rl, 100%, -100%),
+        (Y, uu, -60%, -60%),
+        (Y, ud, -100%, 100%),
+        (Y, dd, 100%, 100%),
+        (Y, du, 100%, -100%);
+@function translateW($w, $const){
+    @if $w == X {
+        @return translateX(#{$const})
+    }
+    @else {
+        @return translateY(#{$const})
+    }
+}
+@each $axis, $type, $t, $b in $list{
+    .#{$prefix}slide-#{$type}{
+        &-enter{
+            opacity: 0;
+            transform: translateW($axis, $t);
+            &-active{
+                transition: transform $transition-time $bezier,opacity $transition-time $bezier;
+            }
+        }
+        &-leave{
+            &-to{
+                opacity: 0;
+                transform: translateW($axis, $b);
+            }
+            &-active{
+                position: absolute!important;
+                transition: transform $transition-time $bezier,opacity $transition-time $bezier;
+            }
+        }
+        &-move{
+            transition: all $transition-time $bezier;
+        }
+    }
+}

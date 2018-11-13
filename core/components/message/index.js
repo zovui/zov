@@ -1,4 +1,4 @@
-import Notice from './notice'
+import Notice from '../notice/notice'
 import Vue from 'vue'
 export default {
     _instance: undefined,
@@ -7,7 +7,7 @@ export default {
         const instance = new Vue({
             render: h => h(Notice, {
                 props: {
-                    type: 'notice'
+                    type: 'message'
                 }
             })
         })

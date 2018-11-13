@@ -1,6 +1,9 @@
-@import "custom",
-"colors",
-"common/normalize",
-"common/reset",
-"animation/index",
-"components/index";
+@import
+"common/normalize",     // priority：1，使浏览器行为一致化，不依赖变量
+"colors",               // priority：2，一级变量
+"custom",               // priority：3，二级变量 暴露到组件外
+"mixins/index",         // priority：4，混入
+"functions/index",      // priority：5，函数
+"animation/index",      // priority：6，动画
+"common/reset",         // priority：7，组件提供的基础重设，依赖变量
+"components/index";     // priority：8，组件

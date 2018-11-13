@@ -16,12 +16,20 @@ export default new Router({
             component: () => import('./views/AutoCascader.vue')
         },
         {
+            path: '/icon',
+            component: () => import('./views/Icon.vue')
+        },
+        {
             path: '/loadingbar',
             component: () => import('./views/LoadingBar.vue')
         },
         {
             path: '/notice',
-                component: () => import('./views/Notice.vue')
+            component: () => import('./views/Notice.vue')
+        },
+        {
+            path: '/message',
+            component: () => import('./views/Message.vue')
         }
     ]
 })

@@ -10,6 +10,7 @@
             </p>
             <input type="text" placeholder="请输入哈哈哈">
             <input type="text" placeholder="请输入哈哈哈" disabled>
+            <button @click="isdark = !isdark"> dark </button>
         </div>
         <router-view/>
     </div>
@@ -25,3 +26,17 @@
         }
     }
 </style>
+<script>
+export default {
+    data () {
+        return {
+            isdark: false
+        }
+    },
+    watch: {
+        'isdark' (val) {
+            val ? this.$Dark.open() : this.$Dark.close()
+        }
+    }
+}
+</script>

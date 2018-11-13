@@ -1,9 +1,9 @@
 import LoadingBar from './loading-bar'
 import Vue from 'vue'
-let timer;
+let timer, t
 export default {
     _instance: undefined,
-    init (opts) {
+    _init () {
         // new 一个新vue实例
         const instance = new Vue({
             render: h => h(LoadingBar)
@@ -16,28 +16,29 @@ export default {
     },
     _getInstance () {
         // 获取loading-bar的实例，如果实例未创建，则创建并返回
-        return this._instance ? this._instance : this.init()
+        return this._instance ? this._instance : this._init()
     },
     _clearTimer () {
         clearInterval(timer)
         timer = null
+        clearTimeout(t)
+        t = null
     },
     _keep ({show = false, width = 0, status = 'primary'}) {
+        // 任何需要重新更新的操作都需要清除计时器
+        this._clearTimer()
         // 直接操作组件上的data
         this._getInstance().show = show
         this._getInstance().width = width
         this._getInstance().status = status
     },
     _hide () {
-        let t = setTimeout(() => {
-            clearTimeout(t)
+        t = setTimeout(() => {
+            this._clearTimer()
             this._getInstance().show = false
-        }, 500)
+        }, 1000)
     },
     start () {
-        if (timer) {
-            this._clearTimer()
-        }
         let percent = 0
         this._keep({
             show: true,
@@ -55,7 +56,6 @@ export default {
         }, 200)
     },
     finish () {
-        this._clearTimer()
         this._keep({
             show: true,
             width: '100%',
@@ -64,7 +64,6 @@ export default {
         this._hide()
     },
     warning () {
-        this._clearTimer()
         this._keep({
             show: true,
             width: '100%',
@@ -73,7 +72,6 @@ export default {
         this._hide()
     },
     error () {
-        this._clearTimer()
         this._keep({
             show: true,
             width: '100%',

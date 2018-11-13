@@ -2,7 +2,7 @@ module.exports = {
     css: {
         sourceMap: true
     },
-    baseUrl: undefined,
+    baseUrl: './',
     outputDir: undefined,
     assetsDir: undefined,
     runtimeCompiler: undefined,

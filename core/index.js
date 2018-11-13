@@ -1,10 +1,18 @@
+// icons
+import './icons/iconfont'
+// 全局注册式组件
 import LongList from './components/long-list'
 import AutoCascader from './components/auto-cascader'
+import Icon from './components/icon'
+// 全局方法式组件
+import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
 import Notice from './components/notice'
+import Message from './components/message'
 const components = {
     LongList,
-    AutoCascader
+    AutoCascader,
+    Icon
 }
 
 const install = (Vue, option = {}) => {
@@ -12,9 +20,11 @@ const install = (Vue, option = {}) => {
     for (let key in components) {
         Vue.component(key, components[key])
     }
-    // 下面是全局安装的方法【弹窗】
+    // 下面是全局安装的方法
+    Vue.prototype.$Dark = Dark
     Vue.prototype.$LoadingBar = LoadingBar
     Vue.prototype.$Notice = Notice
+    Vue.prototype.$Message = Message
 }
 // 自动安装【browser端引用的时候可以省去Vue.use】
 if (typeof window !== 'undefined' && window.Vue) {
@@ -25,6 +35,7 @@ let zov = {
 }
 export {
     LongList,
-    AutoCascader
+    AutoCascader,
+    Icon
 }
 export default zov

@@ -1,5 +1,3 @@
-@import "colors";
-
 // 前缀
 $prefix                     :   zov-;
 $prefix-icon                :   zov-icon;
@@ -18,16 +16,17 @@ $link-hover-color           :   $color-light-primary !default;
 $link-active-color          :   $color-dark-primary !default;
 $cursor-disabled            :   not-allowed !default;
 // border 圆角
-$border-radius-base         :   12px !default;
+$border-radius-base         :   9px !default;
 $border-width-base          :   1px !default;
 $border-color-base          :   $color-border !default;  // 当边框作为边框
 $border-color-split         :   $color-divider !default; // 当边框作为分割线
 $box-shadow-color           :   $color-shadow !default;
-$box-shadow-blur            :   25px;
-$box-shadow-spread          :   2px;
+$box-shadow-blur            :   15px;
+$box-shadow-spread          :   0px;
 // 过度时间
-$transition-time            :   .2s !default;
+$transition-time            :   .3s !default;
 $animation-time             :   .3s !default;
+$bezier                     :   ease-in-out;
 // Z-index
 $zindex-spin                :   8;
 $zindex-affix               :   10;
@@ -35,9 +34,14 @@ $zindex-back-top            :   10;
 $zindex-select              :   900;
 $zindex-modal               :   1000;
 $zindex-drawer              :   1000;
-$zindex-message             :   1010;
 $zindex-notice              :   1010;
 $zindex-tooltip             :   1060;
 $zindex-transfer            :   1060;
 $zindex-loading-bar         :   2000;
 $zindex-spin-fullscreen     :   2010;
+
+// 间隙
+$gap-base                   :   15px;
+
+// text
+$title-font-weight          :   500;
