@@ -1,0 +1,88 @@
+.#{$prefix}button{
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation; // 功能见：https://www.zhangxinxu.com/wordpress/2018/07/chrome-safari-touchmove-preventdefault-treated-as-passive/
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    user-select: none;
+    transition: color $transition-btn-time $bezier,
+                background-color $transition-btn-time $bezier,
+                border $transition-btn-time $bezier,
+                box-shadow $transition-btn-time $bezier;
+    font-size: $font-size-base;
+    line-height: 1;
+    padding: $gap-base / 2 - 1 $gap-base $gap-base / 2 $gap-base;
+    border-radius: $border-radius-button;
+    border: 1px solid;
+    @include get-color-border();
+    @include get-color-text();
+    @include get-color-bg();
+    @include outline();
+    &:hover{
+        color: $color-primary;
+        border-color: $color-primary;
+    }
+    &-info{
+        color: $color-background;
+        border: none;
+        background-color: $color-primary;
+        @include outline($color-primary);
+        &:hover{
+            color: $color-background;
+            background-color: lighten($color-primary, $toning-ratio);
+        }
+        &:active{
+            color: $color-background;
+            background-color: darken($color-primary, $toning-ratio);
+        }
+    }
+    &-success{
+        color: $color-background;
+        border: none;
+        background-color: $color-success;
+        @include outline($color-success);
+        &:hover{
+            color: $color-background;
+            background-color: lighten($color-success, $toning-ratio);
+        }
+        &:active{
+            color: $color-background;
+            background-color: darken($color-success, $toning-ratio);
+        }
+    }
+    &-warning{
+        color: $color-background;
+        border: none;
+        background-color: $color-warning;
+        @include outline($color-warning);
+        &:hover{
+            color: $color-background;
+            background-color: lighten($color-warning, $toning-ratio);
+        }
+        &:active{
+            color: $color-background;
+            background-color: darken($color-warning, $toning-ratio);
+        }
+    }
+    &-error{
+        color: $color-background;
+        border: none;
+        background-color: $color-error;
+        @include outline($color-error);
+        &:hover{
+            color: $color-background;
+            background-color: lighten($color-error, $toning-ratio);
+        }
+        &:active{
+            color: $color-background;
+            background-color: darken($color-error, $toning-ratio);
+        }
+    }
+    &>*{
+        display: inline-block;
+    }
+}

@@ -1,40 +1,41 @@
 <template>
     <div>
         <p>
-            <button @click="test">全配置项</button>
+            全配置项
+            <Button @click="test">open</Button>
         </p>
         <p>
             无配置
-            <button @click="$Message.open()">普通消息</button> |
-            <button @click="$Message.info()">带图标的普通消息</button> |
-            <button @click="$Message.success()">success</button> |
-            <button @click="$Message.error()">error</button> |
-            <button @click="$Message.warning()">waring</button>
+            <Button @click="$Message.open()">open</Button> |
+            <Button color="info" @click="$Message.info()">info</Button> |
+            <Button color="success" @click="$Message.success()">success</Button> |
+            <Button color="error" @click="$Message.error()">error</Button> |
+            <Button color="warning" @click="$Message.warning()">waring</Button>
         </p>
         <p>
             灵活配置
-            <button @click="$Message.open({
+            <Button @click="$Message.open({
                 title: '提示',
-                text:  '您打开了一条 普通 的Message消息！'
-            })">普通消息</button> |
-            <button @click="$Message.info({
+                text:  '您打开了一条 普通 的notice消息！'
+            })">open</Button> |
+            <Button color="info" @click="$Message.info({
                 title: '提示',
-                text:  '您打开了一条 info 的Message消息！不自动关闭',
+                text:  '您打开了一条 info 的notice消息！不自动关闭',
                 duration:0
-            })">带图标的普通消息</button> |
-            <button @click="$Message.success({
-                text: '您打开了一条 success 的Message消息！10s，没有关闭按钮',
+            })">info</Button> |
+            <Button color="success" @click="$Message.success({
+                text: '您打开了一条 success 的notice消息！10s，没有关闭按钮',
                 duration:10000,
                 closable:false
-            })">success</button> |
-            <button @click="$Message.error({
-                text: '您打开了一条 error 的Message消息！不自动关闭',
+            })">success</Button> |
+            <Button color="error" @click="$Message.error({
+                text: '您打开了一条 error 的notice消息！不自动关闭',
                 duration:0
-            })">error</button> |
-            <button @click="$Message.warning({
-                text: '您打开了一条 waring 的Message消息！不自动关闭',
+            })">error</Button> |
+            <Button color="warning" @click="$Message.warning({
+                text: '您打开了一条 waring 的notice消息！不自动关闭',
                 duration:0
-            })">waring</button>
+            })">waring</Button>
         </p>
     </div>
 </template>

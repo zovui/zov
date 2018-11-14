@@ -11,75 +11,75 @@
 </template>
 
 <script>
-    export default {
-        name: 'LongList',
-        props: {
-            longList: {
-                //列表数据
-                type: Array,
-                default() {
-                    return []
-                }
-            },
-            itemH: {
-                //列表项的高度（定高项必传）
-                type: Number,
-                default() {
-                    return 1
-                }
-            },
-            threshold: {
-                //阈值，窗口外预留节点数，此缓冲值适当设置的大一些可以提高视图插入视觉体验
-                type: Number,
-                default() {
-                    return 35
-                }
+export default {
+    name: 'zov-long-list',
+    props: {
+        longList: {
+            // 列表数据
+            type: Array,
+            default () {
+                return []
             }
         },
-        data() {
-            return {
-                //窗口高度
-                winH: 0,
-                startI: 0,
-                listStyle: {}
+        itemH: {
+            // 列表项的高度（定高项必传）
+            type: Number,
+            default () {
+                return 1
             }
         },
-        computed: {
-            //窗口显示item的数量
-            remain() {
-                return Math.ceil(this.winH / this.itemH)
-            },
-
-            endI() {
-                return this.startI + this.remain
-            },
-            sI() {
-                return this.startI < this.threshold ? 0 : this.startI - this.threshold;
-            },
-            eI() {
-                return (this.longList.length - this.endI) < this.threshold ? this.longList.length : this.endI + this.threshold;
-            },
-            list() {
-                return this.longList.slice(this.sI, this.eI)
+        threshold: {
+            // 阈值，窗口外预留节点数，此缓冲值适当设置的大一些可以提高视图插入视觉体验
+            type: Number,
+            default () {
+                return 35
             }
-        },
-        methods: {
-            setStyle() {
-                this.listStyle = {
-                    'padding-top': this.itemH * this.sI + 'px',
-                    'padding-bottom': this.itemH * (this.longList.length - this.eI) + 'px'
-                }
-            },
-            onScroll() {
-                this.startI = Math.floor(this.$el.scrollTop / this.itemH);
-                this.setStyle()
-            }
-        },
-        mounted() {
-            this.winH = this.$el.offsetHeight;
-            this.setStyle();
         }
+    },
+    data () {
+        return {
+            // 窗口高度
+            winH: 0,
+            startI: 0,
+            listStyle: {}
+        }
+    },
+    computed: {
+        // 窗口显示item的数量
+        remain () {
+            return Math.ceil(this.winH / this.itemH)
+        },
+
+        endI () {
+            return this.startI + this.remain
+        },
+        sI () {
+            return this.startI < this.threshold ? 0 : this.startI - this.threshold
+        },
+        eI () {
+            return (this.longList.length - this.endI) < this.threshold ? this.longList.length : this.endI + this.threshold
+        },
+        list () {
+            return this.longList.slice(this.sI, this.eI)
+        }
+    },
+    methods: {
+        setStyle () {
+            this.listStyle = {
+                'padding-top': this.itemH * this.sI + 'px',
+                'padding-bottom': this.itemH * (this.longList.length - this.eI) + 'px'
+            }
+        },
+        onScroll () {
+            this.startI = Math.floor(this.$el.scrollTop / this.itemH)
+            this.setStyle()
+        }
+    },
+    mounted () {
+        this.winH = this.$el.offsetHeight
+        this.setStyle()
     }
+}
 </script>
 <style lang="scss" scoped>
     .long_list {

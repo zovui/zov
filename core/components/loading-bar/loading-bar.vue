@@ -8,7 +8,7 @@
 <script>
 let $prefix = 'zov-loading-bar'
 export default {
-    name: 'loading-bar',
+    name: $prefix,
     data () {
         return {
             show: false,

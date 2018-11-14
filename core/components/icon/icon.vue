@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-    name: 'icon',
+    name: 'zov-icon',
     props: {
         iconname: {
             type: String,

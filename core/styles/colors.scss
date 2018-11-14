@@ -1,8 +1,10 @@
 // 【scss】配置，静态变量，项目构建依赖
 // 主题色
+$toning-ratio                       :   3.5%;
+$toning-ratio                       :   3.5%;
 $color-primary                      :   #2d8cf0 !default;
-$color-light-primary                :   lighten($color-primary, 7.5%) !default;
-$color-dark-primary                 :   darken($color-primary, 7.5) !default;
+$color-light-primary                :   lighten($color-primary, $toning-ratio) !default;
+$color-dark-primary                 :   darken($color-primary, $toning-ratio) !default;
 // 辅助色
 $color-info                         :   #2db7f5 !default;
 $color-success                      :   #19be6b !default;
@@ -12,7 +14,7 @@ $color-error                        :   #ed4014 !default;
 $color-black-1                      :   #262626 !default;    // 深色-1
 $color-black-2                      :   #404040 !default;    // 深色-2
 $color-black-3                      :   #808695 !default;    // 深色-3
-$color-black-4                      :   #c5c8ce !default;    // 深色-4
+$color-black-4                      :   #cdcdcd !default;    // 深色-4
 $color-black-5                      :   #dcdee2 !default;    // 深色-5
 $color-black-6                      :   #e8eaec !default;    // 深色-6
 $color-black-7                      :   #f8f8f9 !default;    // 深色-7
@@ -20,7 +22,7 @@ $color-black-7                      :   #f8f8f9 !default;    // 深色-7
 $color-title                        :   $color-black-1 !default;
 $color-text                         :   $color-black-2 !default;
 $color-sub                          :   $color-black-3 !default;
-$color-disabled                     :   $color-black-4 !default;
+$color-disabled                     :   lighten($color-black-4, 13%)!default;
 $color-border                       :   $color-black-5 !default;
 $color-divider                      :   $color-black-6 !default;
 $color-background                   :   $color-black-7 !default;
@@ -33,38 +35,38 @@ body{
     */
     --color-light-primary                       :   #{$color-light-primary};
     --color-dark-primary                        :   #{$color-dark-primary};
-    --color-title                               :   #{$color-black-1};
-    --color-text                                :   #{$color-black-2};
-    --color-sub                                 :   #{$color-black-3};
-    --color-disabled                            :   #{$color-black-4};
-    --color-border                              :   #{$color-black-5};
-    --color-divider                             :   #{$color-black-6};
-    --color-background                          :   #{$color-black-7};
+    --color-title                               :   #{$color-title};
+    --color-text                                :   #{$color-text};
+    --color-sub                                 :   #{$color-sub};
+    --color-disabled                            :   #{$color-disabled};
+    --color-border                              :   #{$color-border};
+    --color-divider                             :   #{$color-divider};
+    --color-background                          :   #{$color-background};
     --color-shadow                              :   rgba(0,0,0,0.25);
     /*
     * light
     */
     --light-color-light-primary                 :   #{$color-light-primary};
     --light-color-dark-primary                  :   #{$color-dark-primary};
-    --light-color-title                         :   #{$color-black-1};
-    --light-color-text                          :   #{$color-black-2};
-    --light-color-sub                           :   #{$color-black-3};
-    --light-color-disabled                      :   #{$color-black-4};
-    --light-color-border                        :   #{$color-black-5};
-    --light-color-divider                       :   #{$color-black-6};
-    --light-color-background                    :   #{$color-black-7};
+    --light-color-title                         :   #{$color-title};
+    --light-color-text                          :   #{$color-text};
+    --light-color-sub                           :   #{$color-sub};
+    --light-color-disabled                      :   #{$color-disabled};
+    --light-color-border                        :   #{$color-border};
+    --light-color-divider                       :   #{$color-divider};
+    --light-color-background                    :   #{$color-background};
     --light-color-shadow                        :   rgba(0,0,0,0.25);
     /*
     * dark 见 @core/commponents/dark
     */
     --dark-color-light-primary                  :   #{$color-dark-primary};
     --dark-color-dark-primary                   :   #{$color-light-primary};
-    --dark-color-title                          :   #{$color-black-7};
-    --dark-color-text                           :   #{$color-black-6};
-    --dark-color-sub                            :   #{$color-black-5};
-    --dark-color-disabled                       :   #{$color-black-4};
-    --dark-color-border                         :   #{$color-black-3};
-    --dark-color-divider                        :   #{$color-black-2};
-    --dark-color-background                     :   #{$color-black-1};
+    --dark-color-title                          :   #{$color-background};
+    --dark-color-text                           :   #{$color-divider};
+    --dark-color-sub                            :   #{$color-border};
+    --dark-color-disabled                       :   #{darken($color-black-4, 45%)};
+    --dark-color-border                         :   #{$color-sub};
+    --dark-color-divider                        :   #{$color-text};
+    --dark-color-background                     :   #{$color-title};
     --dark-color-shadow                         :   rgba(0,0,0,0.75);
 }

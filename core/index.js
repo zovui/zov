@@ -4,6 +4,7 @@ import './icons/iconfont'
 import LongList from './components/long-list'
 import AutoCascader from './components/auto-cascader'
 import Icon from './components/icon'
+import Button from './components/button'
 // 全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -12,7 +13,8 @@ import Message from './components/message'
 const components = {
     LongList,
     AutoCascader,
-    Icon
+    Icon,
+    Button
 }
 
 const install = (Vue, option = {}) => {
@@ -36,6 +38,7 @@ let zov = {
 export {
     LongList,
     AutoCascader,
-    Icon
+    Icon,
+    Button
 }
 export default zov

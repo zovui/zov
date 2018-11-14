@@ -1,29 +1,45 @@
+// 主题hvoer色，主题active色
+@mixin get-color-primary-hover () {
+    color: $color-light-primary;
+    color: var(--color-light-primary);
+}
+@mixin get-color-primary-active () {
+    color: $color-dark-primary;
+    color: var(--color-dark-primary);
+}
 // 标题色，正文色，辅助/图标色，失效色，边框，分割线，背景色，阴影
-@mixin title-color () {
+@mixin get-color-title () {
     color: $color-title;
     color: var(--color-title);
 }
-@mixin text-color () {
+@mixin get-color-text () {
     color: $color-text;
     color: var(--color-text);
 }
-@mixin sub-color ($color:color) {
+@mixin get-color-sub ($color:color) {
     #{$color}: $color-sub;
     #{$color}: var(--color-sub);
 }
-@mixin disabled-color ($color:background-color) {
+@mixin get-color-sub-hover ($color:color) {
+    #{$color}: lighten($color-sub, 10%);
+}
+@mixin get-color-disabled ($color:background-color) {
     #{$color}: $color-disabled;
     #{$color}: var(--color-disabled);
 }
-@mixin divider-color ($color:border-color) {
+@mixin get-color-border ($color:border-color) {
+    #{$color}: $color-border;
+    #{$color}: var(--color-border);
+}
+@mixin get-color-divider ($color:border-color) {
     #{$color}: $color-divider;
     #{$color}: var(--color-divider);
 }
-@mixin shadow-color ($blur:#{$box-shadow-blur},$spread:#{$box-shadow-spread}) {
+@mixin get-color-shadow ($blur:#{$box-shadow-blur},$spread:#{$box-shadow-spread}) {
     box-shadow: 0 0 $blur $spread $color-shadow;
     box-shadow: 0 0 $blur $spread var(--color-shadow);
 }
-@mixin bg-color () {
+@mixin get-color-bg () {
     background-color: $color-background;
     background-color: var(--color-background);
 }

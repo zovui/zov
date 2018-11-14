@@ -3,25 +3,28 @@
     z-index: $zindex-notice;
     top: 0;
     right: 0;
+    padding-right: $gap-base;
     pointer-events: none; // 此属性支持到ie10+，意思为将鼠标事件忽略，在这里的作用是【忽略遮罩，以减少消息提示对页面主内容的遮挡】
     &-case{
         pointer-events: auto;
         position: relative;
         width: 335px;
         padding: $gap-base;
-        margin: $gap-base;
-        @include bg-color();
+        margin-top: $gap-base;
+        @include get-color-bg();
         border: $border-width-base solid;
-        @include divider-color();
+        @include get-color-divider();
         border-radius: $border-radius-base;
-        @include shadow-color();
+        @include get-color-shadow();
         &-close{
             position: absolute;
             top: $gap-base;
             right: $gap-base;
             cursor: pointer;
+            font-size: 16px;
             &:hover{
-                @include disabled-color(color)
+                @include get-color-sub-hover();
+                transition: all $transition-time linear;
             }
         }
         &-icon{
@@ -44,7 +47,7 @@
             padding-left: $font-size-small * 2 + $gap-base;
         }
         &-title{
-            @include title-color();
+            @include get-color-title();
             font-weight: $title-font-weight;
             font-size: $font-size-large;
         }
@@ -64,7 +67,4 @@
     flex-direction: column;
     align-items: center;
     pointer-events: none; // 此属性支持到ie10+，意思为将鼠标事件忽略，在这里的作用是【忽略遮罩，以减少消息提示对页面主内容的遮挡】
-}
-.#{$prefix}notice-case{
-    margin: $gap-base 0 0 0;
 }

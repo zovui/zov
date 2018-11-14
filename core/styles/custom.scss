@@ -17,6 +17,7 @@ $link-active-color          :   $color-dark-primary !default;
 $cursor-disabled            :   not-allowed !default;
 // border 圆角
 $border-radius-base         :   9px !default;
+$border-radius-button       :   4px !default;
 $border-width-base          :   1px !default;
 $border-color-base          :   $color-border !default;  // 当边框作为边框
 $border-color-split         :   $color-divider !default; // 当边框作为分割线
@@ -26,6 +27,7 @@ $box-shadow-spread          :   0px;
 // 过度时间
 $transition-time            :   .3s !default;
 $animation-time             :   .3s !default;
+$transition-btn-time        :   .2s !default;
 $bezier                     :   ease-in-out;
 // Z-index
 $zindex-spin                :   8;
@@ -45,3 +47,6 @@ $gap-base                   :   15px;
 
 // text
 $title-font-weight          :   500;
+
+// form
+$outline-width              :   3px;

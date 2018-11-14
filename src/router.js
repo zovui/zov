@@ -30,6 +30,10 @@ export default new Router({
         {
             path: '/message',
             component: () => import('./views/Message.vue')
+        },
+        {
+            path: '/button',
+            component: () => import('./views/Button.vue')
         }
     ]
 })

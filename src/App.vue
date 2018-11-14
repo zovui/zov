@@ -10,7 +10,7 @@
             </p>
             <input type="text" placeholder="请输入哈哈哈">
             <input type="text" placeholder="请输入哈哈哈" disabled>
-            <button @click="isdark = !isdark"> dark </button>
+            <Button @click="isdark = !isdark"> dark </Button>
         </div>
         <router-view/>
     </div>

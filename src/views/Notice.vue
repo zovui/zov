@@ -1,40 +1,41 @@
 <template>
     <div>
         <p>
-            <button @click="test">全配置项</button>
+            全配置项
+            <Button @click="test">open</Button>
         </p>
         <p>
             无配置
-            <button @click="$Notice.open()">普通消息</button> |
-            <button @click="$Notice.info()">带图标的普通消息</button> |
-            <button @click="$Notice.success()">success</button> |
-            <button @click="$Notice.error()">error</button> |
-            <button @click="$Notice.warning()">waring</button>
+            <Button @click="$Notice.open()">open</Button> |
+            <Button color="info" @click="$Notice.info()">info</Button> |
+            <Button color="success" @click="$Notice.success()">success</Button> |
+            <Button color="error" @click="$Notice.error()">error</Button> |
+            <Button color="warning" @click="$Notice.warning()">waring</Button>
         </p>
         <p>
             灵活配置
-            <button @click="$Notice.open({
+            <Button @click="$Notice.open({
                 title: '提示',
                 text:  '您打开了一条 普通 的notice消息！'
-            })">普通消息</button> |
-            <button @click="$Notice.info({
+            })">open</Button> |
+            <Button color="info" @click="$Notice.info({
                 title: '提示',
                 text:  '您打开了一条 info 的notice消息！不自动关闭',
                 duration:0
-            })">带图标的普通消息</button> |
-            <button @click="$Notice.success({
+            })">info</Button> |
+            <Button color="success" @click="$Notice.success({
                 text: '您打开了一条 success 的notice消息！10s，没有关闭按钮',
                 duration:10000,
                 closable:false
-            })">success</button> |
-            <button @click="$Notice.error({
+            })">success</Button> |
+            <Button color="error" @click="$Notice.error({
                 text: '您打开了一条 error 的notice消息！不自动关闭',
                 duration:0
-            })">error</button> |
-            <button @click="$Notice.warning({
+            })">error</Button> |
+            <Button color="warning" @click="$Notice.warning({
                 text: '您打开了一条 waring 的notice消息！不自动关闭',
                 duration:0
-            })">waring</button>
+            })">waring</Button>
         </p>
     </div>
 </template>
