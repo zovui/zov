@@ -1,3 +1,21 @@
+@mixin btn-type ($color-type, $color) {
+    &-#{$color-type}{
+        color: $color-background;
+        border-color: transparent;
+        background-color: $color;
+        @include outline($color);
+        &:hover{
+            color: $color-background;
+            border-color: lighten($color, $toning-ratio);
+            background-color: lighten($color, $toning-ratio);
+        }
+        &:active{
+            color: $color-background;
+            border-color: darken($color, $toning-ratio);
+            background-color: darken($color, $toning-ratio);
+        }
+    }
+}
 .#{$prefix}button{
     display: inline-block;
     font-weight: 400;
@@ -14,75 +32,50 @@
                 border $transition-btn-time $bezier,
                 box-shadow $transition-btn-time $bezier;
     font-size: $font-size-base;
-    line-height: 1;
-    padding: $gap-base / 2 - 1 $gap-base $gap-base / 2 $gap-base;
     border-radius: $border-radius-button;
+    padding: $btn-padding;
+    line-height: $btn-line-height;
     border: 1px solid;
     @include get-color-border();
-    @include get-color-text();
-    @include get-color-bg();
     @include outline();
     &:hover{
         color: $color-primary;
         border-color: $color-primary;
     }
-    &-info{
-        color: $color-background;
-        border: none;
-        background-color: $color-primary;
-        @include outline($color-primary);
-        &:hover{
-            color: $color-background;
-            background-color: lighten($color-primary, $toning-ratio);
+    // type对应的样式分类
+    &-type{
+        @include btn-type(primary,$color-primary);
+        @include btn-type(info,$color-info);
+        @include btn-type(success,$color-success);
+        @include btn-type(warning,$color-warning);
+        @include btn-type(error,$color-error);
+        &-dashed{
+            border-style: dashed;
         }
-        &:active{
-            color: $color-background;
-            background-color: darken($color-primary, $toning-ratio);
-        }
-    }
-    &-success{
-        color: $color-background;
-        border: none;
-        background-color: $color-success;
-        @include outline($color-success);
-        &:hover{
-            color: $color-background;
-            background-color: lighten($color-success, $toning-ratio);
-        }
-        &:active{
-            color: $color-background;
-            background-color: darken($color-success, $toning-ratio);
+        &-text{
+            border: none;
         }
     }
-    &-warning{
-        color: $color-background;
-        border: none;
-        background-color: $color-warning;
-        @include outline($color-warning);
-        &:hover{
-            color: $color-background;
-            background-color: lighten($color-warning, $toning-ratio);
-        }
-        &:active{
-            color: $color-background;
-            background-color: darken($color-warning, $toning-ratio);
+    // shape对应的样式分类
+    &-shape{
+        &-circle{
+            border-radius: 2em;
         }
     }
-    &-error{
-        color: $color-background;
-        border: none;
-        background-color: $color-error;
-        @include outline($color-error);
-        &:hover{
-            color: $color-background;
-            background-color: lighten($color-error, $toning-ratio);
+    // size对应的样式分类
+    &-size{
+        &-large{
+            font-size: $font-size-large;
         }
-        &:active{
-            color: $color-background;
-            background-color: darken($color-error, $toning-ratio);
+        &-small{
+            font-size: $font-size-small;
+            &>span{
+                margin-bottom: 1px;
+            }
         }
     }
-    &>*{
+    &>span{
         display: inline-block;
+        margin-bottom: 2px;
     }
 }

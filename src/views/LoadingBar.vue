@@ -1,9 +1,9 @@
 <template>
     <div>
-        <button @click="$LoadingBar.start()">start</button> |
-        <button @click="$LoadingBar.finish()">finish</button> |
-        <button @click="$LoadingBar.error()">error</button> |
-        <button @click="$LoadingBar.warning()">waring</button>
+        <Button type="primary" @click="$LoadingBar.start()">start</Button> |
+        <Button type="success" @click="$LoadingBar.finish()">finish</Button> |
+        <Button type="error" @click="$LoadingBar.error()">error</Button> |
+        <Button type="warning" @click="$LoadingBar.warning()">waring</Button>
     </div>
 </template>
 <script>

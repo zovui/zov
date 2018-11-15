@@ -5,8 +5,8 @@
 </style>
 <template>
     <div>
-        <button @click="Bshow = true;Bshow1 = false">alert first</button>
-        <button @click="Bshow = false;Bshow1 = true">alert secont</button>
+        <Button @click="Bshow = true;Bshow1 = false">alert first</Button>
+        <Button @click="Bshow = false;Bshow1 = true">alert secont</Button>
         <AutoCascader
             v-model="Bshow"
             style="width:700px;"

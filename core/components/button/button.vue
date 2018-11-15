@@ -17,71 +17,56 @@ export default {
         /*
         *  type -> shape -> size -> loading
         * */
-        // type有4种，default、primary、dashed、text
+        // type有4种，default、primary、dashed、text、info、success、warning、error
         type: {
             type: String,
-            default () {
-                return ''
-            }
-        },
-        // 按钮颜色4种，info、success、warning、error
-        color: {
-            type: String,
-            default () {
-                return ''
-            }
+            validator (value) {
+                return ['default', 'primary', 'dashed', 'text', 'info', 'success', 'warning', 'error'].indexOf(value) !== -1
+            },
+            default: 'default'
         },
         // 形状有2种，default、circle
         shape: {
             type: String,
-            default () {
-                return ''
-            }
+            validator (value) {
+                return ['default', 'circle'].indexOf(value) !== -1
+            },
+            default: 'default'
         },
         // 尺寸有3中，small、default(middle)、large。说明：尺寸标识着按钮在项目中的不同语义，如：适用于长流程、多嵌套的form编辑中涉及到的多级别操作按钮
         size: {
             type: String,
+            validator (value) {
+                return ['small', 'default', 'large'].indexOf(value) !== -1
+            },
             default () {
-                return 'middle'
+                return 'default'
             }
         },
         // 是否开启loading状态
         loading: {
             type: Boolean,
-            default () {
-                return false
-            }
+            default: false
         },
         // loading 样式，见Spin组件
         spin: {
             type: String,
-            default () {
-                return 'lo'
-            }
-        },
-        // 按钮为块级元素
-        block: {
-            type: Boolean,
-            default () {
-                return false
-            }
+            default: 'lo'
         },
         // 原生buttom类型，submit、reset ...
         htmlType: {
             type: String,
-            default () {
-                return ''
-            }
+            default: 'button'
         }
     },
     computed: {
         classes () {
             return [
-                'zov-button',
                 {
-                    [prefix + this.type]: this.type,
-                    [prefix + this.color]: this.color,
-                    [prefix + this.shape]: this.shape
+                    [prefix + 'type-' + this.type]: this.type && this.type !== 'default',
+                    [prefix + 'shape-' + this.shape]: this.shape && this.shape !== 'default',
+                    [prefix + 'size-' + this.size]: this.size && this.size !== 'default',
+                    'zov-button': true
                 }
             ]
         }

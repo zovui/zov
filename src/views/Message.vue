@@ -7,10 +7,10 @@
         <p>
             无配置
             <Button @click="$Message.open()">open</Button> |
-            <Button color="info" @click="$Message.info()">info</Button> |
-            <Button color="success" @click="$Message.success()">success</Button> |
-            <Button color="error" @click="$Message.error()">error</Button> |
-            <Button color="warning" @click="$Message.warning()">waring</Button>
+            <Button type="info" @click="$Message.info()">info</Button> |
+            <Button type="success" @click="$Message.success()">success</Button> |
+            <Button type="error" @click="$Message.error()">error</Button> |
+            <Button type="warning" @click="$Message.warning()">waring</Button>
         </p>
         <p>
             灵活配置
@@ -18,21 +18,21 @@
                 title: '提示',
                 text:  '您打开了一条 普通 的notice消息！'
             })">open</Button> |
-            <Button color="info" @click="$Message.info({
+            <Button type="info" @click="$Message.info({
                 title: '提示',
                 text:  '您打开了一条 info 的notice消息！不自动关闭',
                 duration:0
             })">info</Button> |
-            <Button color="success" @click="$Message.success({
+            <Button type="success" @click="$Message.success({
                 text: '您打开了一条 success 的notice消息！10s，没有关闭按钮',
                 duration:10000,
                 closable:false
             })">success</Button> |
-            <Button color="error" @click="$Message.error({
+            <Button type="error" @click="$Message.error({
                 text: '您打开了一条 error 的notice消息！不自动关闭',
                 duration:0
             })">error</Button> |
-            <Button color="warning" @click="$Message.warning({
+            <Button type="warning" @click="$Message.warning({
                 text: '您打开了一条 waring 的notice消息！不自动关闭',
                 duration:0
             })">waring</Button>

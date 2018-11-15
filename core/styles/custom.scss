@@ -8,13 +8,16 @@ $code-family                :   Consolas,Menlo,Courier,monospace !default;
 $font-size-base             :   14px !default;
 $font-size-small            :   12px !default;
 $font-size-large            :   16px !default;
-$line-height-base           :   1.5 !default;
+$title-font-weight          :   500 !default;
+$line-height-base           :   1 !default;
 $line-height-computed       :   floor(($font-size-base * $line-height-base));
+
 // link a标签
 $link-color                 :   $color-primary !default;
 $link-hover-color           :   $color-light-primary !default;
 $link-active-color          :   $color-dark-primary !default;
 $cursor-disabled            :   not-allowed !default;
+
 // border 圆角
 $border-radius-base         :   9px !default;
 $border-radius-button       :   4px !default;
@@ -24,29 +27,32 @@ $border-color-split         :   $color-divider !default; // 当边框作为分�
 $box-shadow-color           :   $color-shadow !default;
 $box-shadow-blur            :   15px;
 $box-shadow-spread          :   0px;
+
 // 过度时间
 $transition-time            :   .3s !default;
 $animation-time             :   .3s !default;
 $transition-btn-time        :   .2s !default;
-$bezier                     :   ease-in-out;
+$bezier                     :   ease-in-out !default;
+
 // Z-index
-$zindex-spin                :   8;
-$zindex-affix               :   10;
-$zindex-back-top            :   10;
-$zindex-select              :   900;
-$zindex-modal               :   1000;
-$zindex-drawer              :   1000;
-$zindex-notice              :   1010;
-$zindex-tooltip             :   1060;
-$zindex-transfer            :   1060;
-$zindex-loading-bar         :   2000;
-$zindex-spin-fullscreen     :   2010;
+$zindex-spin                :   8 !default;
+$zindex-affix               :   10 !default;
+$zindex-back-top            :   10 !default;
+$zindex-select              :   900 !default;
+$zindex-modal               :   1000 !default;
+$zindex-drawer              :   1000 !default;
+$zindex-notice              :   1010 !default;
+$zindex-tooltip             :   1060 !default;
+$zindex-transfer            :   1060 !default;
+$zindex-loading-bar         :   2000 !default;
+$zindex-spin-fullscreen     :   2010 !default;
 
 // 间隙
-$gap-base                   :   15px;
-
-// text
-$title-font-weight          :   500;
+$gap-base                   :   15px !default;
 
 // form
-$outline-width              :   3px;
+$outline-width              :   3px !default;
+
+// button
+$btn-padding                :   0 $gap-base !default;
+$btn-line-height            :   2.2 !default;
