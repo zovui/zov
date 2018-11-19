@@ -2,11 +2,11 @@
 ## 锚点
 ### 待解决
 
-`#001`
+### 已经解决
 
+`#001`
 > 主题准备用 css变量 来实现，对于不支持css变量的浏览器放弃提供主题功能，主题还可以通过类名方案，但是会造成许多多余类名，而且不易维护。
 > 并提供默认主题，dark主题则是将light主题色逆序。
-
 ```scss
     // 主题色
     --light-color-light-primary                :   #{$color-light-primary};
@@ -21,10 +21,7 @@
     --light-color-background                   :   #{$color-black-7};
 ```
 
-### 已经解决
-
 `#002`
-
 > 在使用<transition-group/>的时候，发现数组插入数据不论push、unshift都会导致列表最后一项执行动画，为了解决这个问题，将循环项的key设置为item，而不是index。如：
 
 ```vue
@@ -38,7 +35,7 @@
 ```
 
 `#003`
-```css
+```scss
     //在scss中
     $path: '/'
     @font-face{
@@ -46,3 +43,18 @@
     }
 ```
 > 在这里path必须为绝对路径，否则加载不到
+
+`#004`，`stroke : currentColor`
+> 这是一个css关键字，用于存储当前选择器所具有的color值，遵循css向上继承。兼容与ie9+，一般应用于同色，或者不支持color直接操作的，如svg的path
+```scss
+    path{
+        cx: 0.5em;
+        cy: 0.5em;
+        r: 0.4em;
+        stroke-width: 2px;
+        fill: none;
+        transform-origin: center;
+        stroke: currentColor; // #004
+        animation: #{$prefix-spin-bars-chrome-loading}dasharray-change 1.5s linear infinite;
+    }
+```

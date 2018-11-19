@@ -22,6 +22,7 @@
             right: $gap-base;
             cursor: pointer;
             font-size: 16px;
+            @include get-color-sub();
             &:hover{
                 @include get-color-sub-hover();
                 transition: all $transition-time linear;

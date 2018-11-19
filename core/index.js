@@ -5,6 +5,7 @@ import LongList from './components/long-list'
 import AutoCascader from './components/auto-cascader'
 import Icon from './components/icon'
 import Button from './components/button'
+import Spin from './components/spin'
 // 全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -14,7 +15,8 @@ const components = {
     LongList,
     AutoCascader,
     Icon,
-    Button
+    Button,
+    Spin
 }
 
 const install = (Vue, option = {}) => {
@@ -35,10 +37,13 @@ if (typeof window !== 'undefined' && window.Vue) {
 let zov = {
     install
 }
+// 按需暴露全局组件
 export {
     LongList,
     AutoCascader,
     Icon,
-    Button
+    Button,
+    Spin
 }
+// 将整个zov暴露出去
 export default zov

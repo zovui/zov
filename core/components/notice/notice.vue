@@ -40,7 +40,7 @@
 <script>
 import renderCell from './render'
 export default {
-    name: 'notice-message',
+    name: 'zov-notice-message',
     components: {
         renderCell
     },

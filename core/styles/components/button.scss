@@ -1,3 +1,4 @@
+$prefix-button : #{$prefix}button;
 @mixin btn-type ($color-type, $color) {
     &-#{$color-type}{
         color: $color-background;
@@ -16,11 +17,10 @@
         }
     }
 }
-.#{$prefix}button{
+.#{$prefix-button}{
     display: inline-block;
     font-weight: 400;
     text-align: center;
-    vertical-align: middle;
     -ms-touch-action: manipulation;
     touch-action: manipulation; // 功能见：https://www.zhangxinxu.com/wordpress/2018/07/chrome-safari-touchmove-preventdefault-treated-as-passive/
     cursor: pointer;
@@ -69,13 +69,26 @@
         }
         &-small{
             font-size: $font-size-small;
-            &>span{
-                margin-bottom: 1px;
-            }
         }
     }
-    &>span{
-        display: inline-block;
-        margin-bottom: 2px;
+    &>*{
+        &.zov-spin{
+            color: unset;
+        }
+        margin-right: 5px;
+        &:nth-last-child(1){
+            margin-right: 0;
+        }
+    }
+    &[disabled]{
+        cursor: $cursor-disabled;
+        @include get-color-disabled();
+        @include get-color-sub();
+        @include get-color-disabled(border-color);
+        &:hover,&:focus,&:active{
+            @include get-color-disabled();
+            @include get-color-disabled(border-color);
+            box-shadow: 0 0 0 0 transparent;
+        }
     }
 }

@@ -1,6 +1,5 @@
 // 前缀
 $prefix                     :   zov-;
-$prefix-icon                :   zov-icon;
 
 // 基础配置项
 $font-family                :   "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !default;
@@ -9,7 +8,7 @@ $font-size-base             :   14px !default;
 $font-size-small            :   12px !default;
 $font-size-large            :   16px !default;
 $title-font-weight          :   500 !default;
-$line-height-base           :   1 !default;
+$line-height-base           :   1.5 !default;
 $line-height-computed       :   floor(($font-size-base * $line-height-base));
 
 // link a标签

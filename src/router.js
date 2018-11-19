@@ -34,6 +34,10 @@ export default new Router({
         {
             path: '/button',
             component: () => import('./views/Button.vue')
+        },
+        {
+            path: '/spin',
+            component: () => import('./views/Spin.vue')
         }
     ]
 })

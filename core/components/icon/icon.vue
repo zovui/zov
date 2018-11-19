@@ -1,13 +1,19 @@
 <template>
-    <i @click="clickHandle" class="zov-icon">
-        <svg class="zov-icon-svg" aria-hidden="true">
+    <i @click="clickHandle" :class="prefix">
+        <svg :class="prefix + '-svg'" aria-hidden="true">
             <use :xlink:href="'#' + iconname"></use>
         </svg>
     </i>
 </template>
 <script>
+let prefix = 'zov-icon'
 export default {
-    name: 'zov-icon',
+    name: prefix,
+    data () {
+        return {
+            prefix: prefix
+        }
+    },
     props: {
         iconname: {
             type: String,

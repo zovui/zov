@@ -1,6 +1,6 @@
-.zov-icon{
+$prefix-icon : #{$prefix}icon;
+.#{$prefix-icon}{
     line-height: 1;
-    @include get-color-sub();
     &-svg {
         /* 通过设置 font-size 来改变图标大小 */
         width: 1em; height: 1em;

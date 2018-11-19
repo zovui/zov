@@ -1,4 +1,5 @@
-.#{$prefix}loading-bar {
+$prefix-loading-bar:#{$prefix}loading-bar;
+ .#{$prefix-loading-bar}{
     position: fixed;
     top:0;
     left: 0;

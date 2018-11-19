@@ -4,15 +4,23 @@
         :type="htmlType"
         :class="classes"
     >
-        <span>
+        <!-- 自定义Spin, 默认为 `loading` -->
+        <Spin v-if="loading" :spinname="spinname || 'loading'"/>
+        <!-- 自定义图标 -->
+        <Icon v-if="iconname" :iconname="iconname"/>
+        <span v-if="$slots.default">
             <slot></slot>
         </span>
     </button>
 </template>
 <script>
-let prefix = 'zov-button-'
+import Spin from '../spin'
+let prefix = 'zov-button'
 export default {
-    name: 'zov-button',
+    name: prefix,
+    components: {
+        Spin
+    },
     props: {
         /*
         *  type -> shape -> size -> loading
@@ -43,15 +51,18 @@ export default {
                 return 'default'
             }
         },
-        // 是否开启loading状态
+        // loading 样式，见Spin组件
         loading: {
             type: Boolean,
             default: false
         },
-        // loading 样式，见Spin组件
-        spin: {
+        spinname: {
             type: String,
-            default: 'lo'
+            default: ''
+        },
+        iconname: {
+            type: String,
+            default: ''
         },
         // 原生buttom类型，submit、reset ...
         htmlType: {
@@ -63,9 +74,9 @@ export default {
         classes () {
             return [
                 {
-                    [prefix + 'type-' + this.type]: this.type && this.type !== 'default',
-                    [prefix + 'shape-' + this.shape]: this.shape && this.shape !== 'default',
-                    [prefix + 'size-' + this.size]: this.size && this.size !== 'default',
+                    [prefix + '-type-' + this.type]: this.type && this.type !== 'default',
+                    [prefix + '-shape-' + this.shape]: this.shape && this.shape !== 'default',
+                    [prefix + '-size-' + this.size]: this.size && this.size !== 'default',
                     'zov-button': true
                 }
             ]
@@ -75,6 +86,9 @@ export default {
         clickHandle (event) {
             this.$emit('click', event)
         }
+    },
+    mounted () {
+        console.log(this.$slots)
     }
 }
 </script>

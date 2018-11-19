@@ -49,7 +49,6 @@ ul,li{
 [disabled]{
     @include get-color-disabled();
     cursor: $cursor-disabled;
-    //pointer-events: none;
 }
 ::placeholder{
     @include get-color-sub()
