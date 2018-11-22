@@ -44,8 +44,8 @@
 ```
 > 在这里path必须为绝对路径，否则加载不到
 
-`#004`，`stroke : currentColor`
-> 这是一个css关键字，用于存储当前选择器所具有的color值，遵循css向上继承。兼容与ie9+，一般应用于同色，或者不支持color直接操作的，如svg的path
+`#004`
+> `stroke : currentColor`；这是一个css关键字，用于存储当前选择器所具有的color值，遵循css向上继承。兼容与ie9+，一般应用于同色，或者不支持color直接操作的，如svg的path
 ```scss
     path{
         cx: 0.5em;
@@ -58,3 +58,8 @@
         animation: #{$prefix-spin-bars-chrome-loading}dasharray-change 1.5s linear infinite;
     }
 ```
+
+`#005`
+> 在对input、select等原生组件进行封装时，经常遇到原生组件被包装到其他元素内部，致使事件、属性不能直接挂在到原生元素上，此时就可以利用，$attr(属性)、$listeners(事件)，将组件
+上挂在的的属性、事件通过 v-bind、v-on挂在到原生元素上。见 [vue 官方文档-自定义事件](https://cn.vuejs.org/v2/guide/components-custom-events.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E7%9A%84-v-model)
+

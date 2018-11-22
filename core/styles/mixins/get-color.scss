@@ -8,20 +8,21 @@
     color: var(--color-dark-primary);
 }
 // 标题色，正文色，辅助/图标色，失效色，边框，分割线，背景色，阴影
-@mixin get-color-title () {
-    color: $color-title;
-    color: var(--color-title);
+@mixin get-color-title ($color:color) {
+    #{$color}: $color-title;
+    #{$color}: var(--color-title);
 }
-@mixin get-color-text () {
-    color: $color-text;
-    color: var(--color-text);
+@mixin get-color-text ($color:color) {
+    #{$color}: $color-text;
+    #{$color}: var(--color-text);
 }
 @mixin get-color-sub ($color:color) {
     #{$color}: $color-sub;
     #{$color}: var(--color-sub);
 }
-@mixin get-color-sub-hover ($color:color) {
-    #{$color}: lighten($color-sub, 10%);
+@mixin get-color-placeholder ($color:color) {
+    #{$color}: $color-placeholder;
+    #{$color}: var(--color-placeholder);;
 }
 @mixin get-color-disabled ($color:background-color) {
     #{$color}: $color-disabled;
@@ -42,4 +43,9 @@
 @mixin get-color-bg () {
     background-color: $color-background;
     background-color: var(--color-background);
+}
+
+// 图标hover色
+@mixin get-color-sub-hover ($color:color) {
+    #{$color}: lighten($color-sub, 13%);
 }

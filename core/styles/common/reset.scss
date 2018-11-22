@@ -51,19 +51,19 @@ ul,li{
     cursor: $cursor-disabled;
 }
 ::placeholder{
-    @include get-color-sub()
+    @include get-color-placeholder();
 }
 ::-webkit-input-placeholder{
-    @include get-color-sub()
+    @include get-color-placeholder();
 }
 ::-moz-placeholder{   /* Mozilla Firefox 19+ */
-    @include get-color-sub()
+    @include get-color-placeholder();
 }
 :-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-    @include get-color-sub()
+    @include get-color-placeholder();
 }
 :-ms-input-placeholder{  /* Internet Explorer 10-11 */
-    @include get-color-sub()
+    @include get-color-placeholder();
 }
 
 a {

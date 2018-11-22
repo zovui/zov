@@ -1,0 +1,53 @@
+$prefix-input : #{$prefix}input;
+.#{$prefix-input}{
+    $gap-y : 0.25em;
+    $gap-x : 0.5em;
+    display: inline-block;
+    position: relative;
+    border-radius: $border-radius-button;
+    &>input{
+        padding-top:  $gap-y;
+        padding-bottom:  $gap-y;
+        border: 1px solid;
+        @include get-color-border();
+        border-radius: $border-radius-button;
+        transition: color $transition-btn-time $bezier,
+                    background-color $transition-btn-time $bezier,
+                    border $transition-btn-time $bezier,
+                    box-shadow $transition-btn-time $bezier;
+        &:hover{
+            border-color: $color-light-primary;
+        }
+        @include outline();
+        @include disabled();
+    }
+    &-prefix,&-suffix{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        @include get-color-sub();
+    }
+    &-prefix{
+        left: 0;
+        &>.zov-icon{
+            margin-left: $gap-x;
+        }
+    }
+    &-suffix{
+        right: 0;
+        &>.zov-icon{
+            margin-right: $gap-x;
+        }
+    }
+    @for $i from 0 through 3 {
+        $gap : $gap-x + ($i * 1.5);
+        @if($i < 2){
+            &-prefix-#{$i}{
+                padding-left: $gap;
+            }
+        }
+        &-suffix-#{$i}{
+            padding-right: $gap;
+        }
+    }
+}

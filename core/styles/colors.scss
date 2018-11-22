@@ -11,21 +11,23 @@ $color-success                      :   #19be6b !default;
 $color-warning                      :   #ff9900 !default;
 $color-error                        :   #ed4014 !default;
 // 中性色
-$color-black-1                      :   #262626 !default;    // 深色-1
-$color-black-2                      :   #404040 !default;    // 深色-2
-$color-black-3                      :   #808695 !default;    // 深色-3
-$color-black-4                      :   #cdcdcd !default;    // 深色-4
-$color-black-5                      :   #dcdee2 !default;    // 深色-5
-$color-black-6                      :   #e8eaec !default;    // 深色-6
-$color-black-7                      :   #f8f8f9 !default;    // 深色-7
-// 标题色，正文色，辅助色/图标色，失效色，边框，分割线，背景色，阴影
+$color-black-1                      :   #262626 !default;
+$color-black-2                      :   #404040 !default;
+$color-black-3                      :   #787777 !default;
+$color-black-4                      :   #7f7f7f !default;
+$color-black-5                      :   #cbcbcb !default;
+$color-black-6                      :   #e4e4e4 !default;
+$color-black-7                      :   #e8eaec !default;
+$color-black-8                      :   #fbfbfc !default;
+// 标题色(title)，正文色(text)，辅助色/图标色(sub)，占位符(placeholder)，失效色(disabled)，边框(border)，分割线(dirvider)，背景色(background)，阴影(shadow)
 $color-title                        :   $color-black-1 !default;
 $color-text                         :   $color-black-2 !default;
 $color-sub                          :   $color-black-3 !default;
-$color-disabled                     :   lighten($color-black-4, 13%)!default;
-$color-border                       :   $color-black-5 !default;
-$color-divider                      :   $color-black-6 !default;
-$color-background                   :   $color-black-7 !default;
+$color-placeholder                  :   $color-black-4 !default;
+$color-disabled                     :   $color-black-5 !default;
+$color-border                       :   $color-black-6 !default;
+$color-divider                      :   $color-black-7 !default;
+$color-background                   :   $color-black-8 !default;
 $color-shadow                       :   rgba(0,0,0,0.25) !default;
 
 // 【css】变量，动态变量，项目运行依赖 「#001」
@@ -38,6 +40,7 @@ body{
     --color-title                               :   #{$color-title};
     --color-text                                :   #{$color-text};
     --color-sub                                 :   #{$color-sub};
+    --color-placeholder                         :   #{$color-placeholder};
     --color-disabled                            :   #{$color-disabled};
     --color-border                              :   #{$color-border};
     --color-divider                             :   #{$color-divider};
@@ -51,6 +54,7 @@ body{
     --light-color-title                         :   #{$color-title};
     --light-color-text                          :   #{$color-text};
     --light-color-sub                           :   #{$color-sub};
+    --light-color-placeholder                   :   #{$color-placeholder};
     --light-color-disabled                      :   #{$color-disabled};
     --light-color-border                        :   #{$color-border};
     --light-color-divider                       :   #{$color-divider};
@@ -64,7 +68,8 @@ body{
     --dark-color-title                          :   #{$color-background};
     --dark-color-text                           :   #{$color-divider};
     --dark-color-sub                            :   #{$color-border};
-    --dark-color-disabled                       :   #{darken($color-black-4, 45%)};
+    --dark-color-placeholder                    :   #{$color-disabled};
+    --dark-color-disabled                       :   #{$color-placeholder};
     --dark-color-border                         :   #{$color-sub};
     --dark-color-divider                        :   #{$color-text};
     --dark-color-background                     :   #{$color-title};

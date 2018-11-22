@@ -1,9 +1,9 @@
 <template>
     <button
         @click="clickHandle"
-        :type="htmlType"
+        v-bind="$attrs"
         :class="classes"
-    >
+        >
         <!-- 自定义Spin, 默认为 `loading` -->
         <Spin v-if="loading" :spinname="spinname || 'loading'"/>
         <!-- 自定义图标 -->
@@ -23,10 +23,10 @@ export default {
     },
     props: {
         /*
-        *  type -> shape -> size -> loading
+        *  looks -> shape -> size -> loading
         * */
-        // type有4种，default、primary、dashed、text、info、success、warning、error
-        type: {
+        // style，default、primary、dashed、text、info、success、warning、error
+        looks: {
             type: String,
             validator (value) {
                 return ['default', 'primary', 'dashed', 'text', 'info', 'success', 'warning', 'error'].indexOf(value) !== -1
@@ -63,18 +63,13 @@ export default {
         iconname: {
             type: String,
             default: ''
-        },
-        // 原生buttom类型，submit、reset ...
-        htmlType: {
-            type: String,
-            default: 'button'
         }
     },
     computed: {
         classes () {
             return [
                 {
-                    [prefix + '-type-' + this.type]: this.type && this.type !== 'default',
+                    [prefix + '-type-' + this.looks]: this.looks && this.looks !== 'default',
                     [prefix + '-shape-' + this.shape]: this.shape && this.shape !== 'default',
                     [prefix + '-size-' + this.size]: this.size && this.size !== 'default',
                     'zov-button': true
@@ -86,9 +81,6 @@ export default {
         clickHandle (event) {
             this.$emit('click', event)
         }
-    },
-    mounted () {
-        console.log(this.$slots)
     }
 }
 </script>

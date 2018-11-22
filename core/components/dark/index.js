@@ -8,10 +8,11 @@ let colorsName = [
     // 主题色
     'color-light-primary',
     'color-dark-primary',
-    // 标题色，正文色，图标色，失效色，边框，分割线，背景色
+    // 标题色，正文色，占位符，图标色，失效色，边框，分割线，背景色
     'color-title',
     'color-text',
     'color-sub',
+    'color-placeholder',
     'color-disabled',
     'color-border',
     'color-divider',
@@ -19,26 +20,17 @@ let colorsName = [
     'color-shadow'
 ]
 let dark = {
-    _setTheme (theme) {
-        localStorage['zov-theme'] = theme
-    },
-    _getTheme () {
-        return localStorage['zov-theme']
-    },
-    open () {
+    open (callback) {
         colorsName.forEach((item) => {
             _styles.setProperty('--' + item, _style.getPropertyValue('--dark-' + item))
         })
-        this._setTheme('dark')
+        callback()
     },
-    close () {
+    close (callback) {
         colorsName.forEach((item) => {
             _styles.setProperty('--' + item, _style.getPropertyValue('--light-' + item))
         })
-        this._setTheme('light')
+        callback()
     }
 }
-setTimeout(() => {
-    dark._getTheme() === 'dark' ? dark.open() : dark.close()
-})
 export default dark

@@ -6,17 +6,24 @@ import AutoCascader from './components/auto-cascader'
 import Icon from './components/icon'
 import Button from './components/button'
 import Spin from './components/spin'
+import Switcher from './components/switch'
+import Input from './components/input'
 // 全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
 import Notice from './components/notice'
 import Message from './components/message'
+
+// 全局指令
+import './directives'
 const components = {
     LongList,
     AutoCascader,
     Icon,
     Button,
-    Spin
+    Spin,
+    Switcher,
+    Input
 }
 
 const install = (Vue, option = {}) => {
@@ -43,7 +50,9 @@ export {
     AutoCascader,
     Icon,
     Button,
-    Spin
+    Spin,
+    Switcher,
+    Input
 }
 // 将整个zov暴露出去
 export default zov

@@ -1,0 +1,76 @@
+$prefix-switch : #{$prefix}switch;
+.#{$prefix-switch}{
+    $width: 3.5em;
+    $height: 2em;
+    $inner-active-width: 2.5em;
+    cursor: pointer;
+    user-select: none;
+    font-size: $font-size-base;
+    min-width: $width;
+    height: $height;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    vertical-align: middle;
+    box-sizing: border-box;
+    color: $color-background;
+    transition: background-color $transition-btn-time $bezier,
+                border $transition-btn-time $bezier,
+                box-shadow $transition-btn-time $bezier;
+    @include get-color-sub(background-color);
+    border-radius: $height + 0.5em;
+    &-inner{
+        @include get-color-bg();
+        width: $height;
+        height: $height;
+        border-radius: $height + 0.5em;
+        transform: scale(0.85);
+        box-shadow: 0 0 5px rgba(0,0,0,0.35);
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        transition: left $transition-btn-time $bezier,
+                    width $transition-btn-time $bezier;
+    }
+    &:active{
+        .#{$prefix-switch}-inner{
+            width: $inner-active-width;
+        }
+    }
+    &-open{
+        &:active{
+            .#{$prefix-switch}-inner{
+                left: $width - $inner-active-width;
+            }
+        }
+        background-color: $color-primary;
+        .#{$prefix-switch}-inner{
+            left: $width - $height;
+        }
+    }
+    // 自定义文字
+    &>span{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        align-content: space-between;
+        padding: 0 2px;
+        &>*{
+            flex: 1;
+            transform: scale(0.9);
+        }
+    }
+    // 尺寸
+    &-size{
+        &-large{
+            font-size: $font-size-large;
+        }
+        &-small{
+            font-size: $font-size-small;
+        }
+    }
+    // disabled
+    @include disabled();
+}

@@ -3,6 +3,7 @@ $prefix-spin:#{$prefix}spin;
     color: $color-primary;
     display: inline-block;
     &-cover{
+        font-size: 2em;
         position: absolute;
         width: 100%;
         height: 100%;

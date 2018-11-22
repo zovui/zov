@@ -1,9 +1,11 @@
 <template>
-    <div :class="classes">
-        <ChromeLoading v-if="spinname === 'loading'"></ChromeLoading>
-        <DbCircle v-if="spinname === 'dbcircle'"></DbCircle>
-        <slot></slot>
-    </div>
+    <transition :name="cover ? 'zov-fade' : ''">
+        <div :class="classes" v-if="show">
+            <ChromeLoading v-if="spinname === 'loading'"></ChromeLoading>
+            <DbCircle v-if="spinname === 'dbcircle'"></DbCircle>
+            <slot></slot>
+        </div>
+    </transition>
 </template>
 <script>
 import SpinBars from '../spin-bars'
@@ -18,6 +20,11 @@ export default {
         cover: {
             type: Boolean,
             default: false
+        }
+    },
+    data () {
+        return {
+            show: true
         }
     },
     computed: {
@@ -37,7 +44,7 @@ export default {
     },
     methods: {
         _isCover (val) {
-            if (val && console.log(window.getComputedStyle(this.$el.parentNode, null).position) !== 'static') {
+            if (val && this.$el.parentNode && window.getComputedStyle(this.$el.parentNode, null).position === 'static') {
                 this.$el.parentNode.style.position = 'relative'
             }
         }
