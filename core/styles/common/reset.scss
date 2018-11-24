@@ -50,6 +50,9 @@ ul,li{
     @include get-color-disabled();
     cursor: $cursor-disabled;
 }
+[block]{
+    width: 100%!important;
+}
 ::placeholder{
     @include get-color-placeholder();
 }

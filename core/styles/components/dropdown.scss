@@ -1,0 +1,7 @@
+$prefix-drop-down : #{$prefix}-drop-down;
+.#{$prefix-drop-down}{
+    position: absolute;
+    background: red;
+    width: 100px;
+    height: 350px;
+}

@@ -1,11 +1,13 @@
 $prefix-input : #{$prefix}input;
 .#{$prefix-input}{
+    width: 180px;
     $gap-y : 0.25em;
     $gap-x : 0.5em;
     display: inline-block;
     position: relative;
     border-radius: $border-radius-button;
     &>input{
+        width: 100%;
         padding-top:  $gap-y;
         padding-bottom:  $gap-y;
         border: 1px solid;
@@ -37,6 +39,13 @@ $prefix-input : #{$prefix}input;
         right: 0;
         &>.zov-icon{
             margin-right: $gap-x;
+        }
+        &-tool{
+            transition: color $transition-btn-time $bezier;
+            cursor: pointer;
+            &:hover{
+                @include get-color-sub-hover()
+            }
         }
     }
     @for $i from 0 through 3 {

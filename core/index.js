@@ -8,6 +8,8 @@ import Button from './components/button'
 import Spin from './components/spin'
 import Switcher from './components/switch'
 import Input from './components/input'
+import Select from './components/select'
+import DropDown from './components/dropdown'
 // 全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -23,7 +25,9 @@ const components = {
     Button,
     Spin,
     Switcher,
-    Input
+    Input,
+    Select,
+    DropDown
 }
 
 const install = (Vue, option = {}) => {
@@ -52,7 +56,9 @@ export {
     Button,
     Spin,
     Switcher,
-    Input
+    Input,
+    Select,
+    DropDown
 }
 // 将整个zov暴露出去
 export default zov

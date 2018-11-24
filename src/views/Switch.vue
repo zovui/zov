@@ -5,8 +5,8 @@
             <span slot="close">关</span>
         </Switcher>
         <Switcher v-model="v">
-            <Icon slot="open" iconname="zov-icon-folder-open-fill"/>
-            <Icon slot="close" iconname="zov-icon-folder-open"/>
+            <Icon slot="open" iconname="unlock"/>
+            <Icon slot="close" iconname="lock"/>
         </Switcher>
         <p>
             disabled

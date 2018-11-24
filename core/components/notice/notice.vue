@@ -10,7 +10,7 @@
             v-timer="{'item':item, 'index':index}"
         ><!-- #002 -->
             <Icon
-                iconname="zov-icon-close"
+                iconname="close"
                 v-if="item.closable !== false"
                 class="zov-notice-case-close"
                 @click="remove(index); item.onClose && item.onClose()"
@@ -57,10 +57,10 @@ export default {
         return {
             list: {},
             iconnames: {
-                info: 'zov-icon-info-circle',
-                success: 'zov-icon-check-circle',
-                error: 'zov-icon-close-circle',
-                warning: 'zov-icon-info-circle'
+                info: 'information-circle',
+                success: 'arrow-dropdown-circl',
+                error: 'close-circle',
+                warning: 'alert'
             }
         }
     },

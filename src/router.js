@@ -76,6 +76,20 @@ export default new Router({
                 sort: 'form'
             },
             component: () => import('./views/Input.vue')
+        },
+        {
+            path: '/select',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/Select.vue')
+        },
+        {
+            path: '/dropdown',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/DropDown.vue')
         }
     ]
 })

@@ -36,102 +36,102 @@
 export default {
     data () {
         return {
-            Bshow : false,
-            Bshow1:false,
-            ll:[],
-            list : [
+            Bshow: false,
+            Bshow1: false,
+            ll: [],
+            list: [
                 {
-                    name : "直辖市",
-                    id : 100001,
-                    children : [{
-                        name : "北京",
-                        id : 1,
-                        children : [{
-                            name : "朝阳",
-                            id : 1142,
-                            children : [{
-                                name : "国贸",
-                                id : 1195,
-                            },{
-                                name : "大望路",
-                                id : 5785,
-                            }],
-                        },{
-                            name : "海淀",
-                            id : 1143,
-                            children : [{
-                                name : "中关村",
-                                id : 1295,
-                            },{
-                                name : "五道口",
-                                id : 6485,
+                    name: '直辖市',
+                    id: 100001,
+                    children: [{
+                        name: '北京',
+                        id: 1,
+                        children: [{
+                            name: '朝阳',
+                            id: 1142,
+                            children: [{
+                                name: '国贸',
+                                id: 1195
+                            }, {
+                                name: '大望路',
+                                id: 5785
                             }]
-                        }],
-                    },{
-                        name : "上海",
-                        id : 2,
-                        children : [],
+                        }, {
+                            name: '海淀',
+                            id: 1143,
+                            children: [{
+                                name: '中关村',
+                                id: 1295
+                            }, {
+                                name: '五道口',
+                                id: 6485
+                            }]
+                        }]
+                    }, {
+                        name: '上海',
+                        id: 2,
+                        children: []
                     }]
-                },{
-                    name : "山西",
-                    id : 100005,
-                    children : [{
-                        name : "太原",
-                        id : 740,
-                        children : [{
-                            name : "小店",
-                            id : 1740,
-                            children : [{
-                                name : "小店1",
-                                id : 1340,
-                            },{
-                                name : "小店2",
-                                id : 1140,
+                }, {
+                    name: '山西',
+                    id: 100005,
+                    children: [{
+                        name: '太原',
+                        id: 740,
+                        children: [{
+                            name: '小店',
+                            id: 1740,
+                            children: [{
+                                name: '小店1',
+                                id: 1340
+                            }, {
+                                name: '小店2',
+                                id: 1140
                             }]
-                        },{
-                            name : "哈哈",
-                            id : 2740,
-                        }],
-                    },{
-                        name : "临汾",
-                        id : 5669,
-                        children : [],
-                    },{
-                        name : "大同",
-                        id : 10034,
-                        children : [{
-                            name : "阳高",
-                            id : 1534,
-                            children:[{
-                                name : "金光街",
-                                id : 10134,
-                            },{
-                                name : "学府街",
-                                id : 21534,
+                        }, {
+                            name: '哈哈',
+                            id: 2740
+                        }]
+                    }, {
+                        name: '临汾',
+                        id: 5669,
+                        children: []
+                    }, {
+                        name: '大同',
+                        id: 10034,
+                        children: [{
+                            name: '阳高',
+                            id: 1534,
+                            children: [{
+                                name: '金光街',
+                                id: 10134
+                            }, {
+                                name: '学府街',
+                                id: 21534
                             }]
-                        },{
-                            name : "浑源",
-                            id : 10934,
-                        }],
-                    }],
-                },{
-                    name : "河北",
-                    id : 100004,
-                    children : [],
+                        }, {
+                            name: '浑源',
+                            id: 10934
+                        }]
+                    }]
+                }, {
+                    name: '河北',
+                    id: 100004,
+                    children: []
                 }
             ],
-            list1 : [],
-            value : {id:55975},
-            values2 : [2],
-            values : [1,2]
+            list1: [],
+            value: { id: 55975 },
+            values2: [2],
+            values: [1, 2]
         }
     },
-    methods : {
-        OK (){
+    methods: {
+        OK () {
             // console.log(this.values)
         }
     },
-    mounted (){
+    mounted () {
         let _this = this
     }
 }

@@ -1,0 +1,3 @@
+<template>
+    <Select></Select>
+</template>

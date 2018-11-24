@@ -9,14 +9,15 @@
         <input
             :value="value"
             :class="innerClasses"
-            v-bind="$attrs"
+            v-bind="inputAttrs"
             v-on="inputListeners"
             >
         <div class="zov-input-suffix" v-if="clearable || suffix">
             <!-- 自定义后缀icon -->
             <Icon v-if="suffix" :iconname="suffix"/>
             <!-- 功能性后缀icon -->
-            <Icon v-if="clearable && value" iconname="zov-icon-close-circle-fill"/>
+            <Icon class="zov-input-suffix-tool" v-if="eye && value" :iconname="canSee ? 'eye-off' : 'eye'" @click="see"/>
+            <Icon class="zov-input-suffix-tool" v-if="clearable && value" iconname="close-circle" @click="clear"/>
         </div>
     </div>
 </template>
@@ -30,15 +31,12 @@ export default {
             type: String,
             default: ''
         },
-        // 基本属性
-        type: {
-            validator (value) {
-                return ['text', 'textarea', 'password', 'url', 'email', 'date'].indexOf(value) !== -1
-            },
-            default: 'text'
-        },
         // 扩展属性
         clearable: {
+            type: Boolean,
+            default: false
+        },
+        eye: {
             type: Boolean,
             default: false
         },
@@ -51,6 +49,11 @@ export default {
             default: ''
         }
     },
+    data () {
+        return {
+            canSee: this.eye
+        }
+    },
     computed: {
         classes () {
             return [
@@ -61,33 +64,46 @@ export default {
         innerClasses () {
             return [
                 // 计算后缀个数，决定input padding值。
-                prefix + '-prefix-' + this._transCount([this.prefix]),
+                prefix + '-prefix-' + this.transCount([this.prefix]),
                 // 计算后缀个数，决定input padding值。
-                prefix + '-suffix-' + this._transCount([this.clearable && this.value, this.suffix])
+                prefix + '-suffix-' + this.transCount([this.clearable && this.value, this.suffix])
             ]
         },
-        inputListeners: function () {
-            let vm = this
+        inputListeners () {
+            let _this = this
             // `Object.assign` 将所有的对象合并为一个新对象
-            return Object.assign({},
-                // 我们从父级添加所有的监听器
-                vm.$listeners,
+            return Object.assign({}, _this.$listeners,
                 {
                     // 这里确保组件配合 `v-model` 的工作
                     input (event) {
-                        vm.$emit('input', event.target.value)
+                        _this.$emit('input', event.target.value)
                     }
                 }
             )
+        },
+        inputAttrs () {
+            let _this = this
+            let _type = this.$attrs.type
+            return Object.assign(_this.$attrs, {
+                type: _this.canSee ? 'password' : _type === 'password' ? 'text' : _type
+            })
         }
     },
     methods: {
-        _transCount (arr) {
+        transCount (arr) {
             let num = 0
             arr.forEach((item) => {
                 num += Number(Boolean(item))
             })
             return num
+        },
+        clear () {
+            this.$el.getElementsByTagName('input')[0].focus()
+            this.$emit('input', '')
+        },
+        see () {
+            this.$el.getElementsByTagName('input')[0].focus()
+            this.canSee = !this.canSee
         }
     }
 }

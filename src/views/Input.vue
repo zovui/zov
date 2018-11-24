@@ -32,12 +32,21 @@
             </li>
         </ul>
         <ul>
+            自定义图标
+            <li>
+                <Input v-model="inputV" prefix="contact" suffix="search" placeholder="输入用户名"/>
+            </li>
+        </ul>
+        <ul>
             自定义功能
             <li>
-                <Input v-model="inputV" clearable suffix="zov-icon-search" placeholder="这是一个可清除,并加搜索的input"/>
+                <Input block v-model="inputV" clearable suffix="search" placeholder="这是一个可清除,并加搜索的input"/>
             </li>
             <li>
-                <Input v-model="inputV" suffix="zov-icon-search" placeholder="这是一个加搜索按钮的input"/>
+                <Input v-model="inputV" type="number" placeholder="这是一个加搜索按钮的input"/>
+            </li>
+            <li>
+                <Input v-model="inputV" clearable eye type="password" placeholder="这是一个可看的密码input"/>
             </li>
         </ul>
     </div>

@@ -41,8 +41,8 @@
         </p>
         <p>
             Icon
-            <Button looks="info" iconname="zov-icon-wifi">自定义icon</Button>
-            <Button loading iconname="zov-icon-cloud-download">自定义icon</Button>
+            <Button looks="info" iconname="wifi">自定义icon</Button>
+            <Button loading iconname="download">自定义icon</Button>
         </p>
         <p>
             loading 异步
@@ -62,8 +62,8 @@
         <p>
             无文本 button
             <Button loading />
-            <Button looks="info" iconname="zov-icon-wifi" />
-            <Button looks="success" shape="circle" iconname="zov-icon-wifi"/>
+            <Button looks="info" iconname="wifi" />
+            <Button looks="success" shape="circle" iconname="wifi"/>
         </p>
     </div>
 </template>

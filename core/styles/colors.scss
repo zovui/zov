@@ -1,8 +1,7 @@
 // 【scss】配置，静态变量，项目构建依赖
 // 主题色
-$toning-ratio                       :   3.5%;
-$toning-ratio                       :   3.5%;
 $color-primary                      :   #2d8cf0 !default;
+$toning-ratio                       :   5.5%;
 $color-light-primary                :   lighten($color-primary, $toning-ratio) !default;
 $color-dark-primary                 :   darken($color-primary, $toning-ratio) !default;
 // 辅助色
@@ -13,22 +12,35 @@ $color-error                        :   #ed4014 !default;
 // 中性色
 $color-black-1                      :   #262626 !default;
 $color-black-2                      :   #404040 !default;
-$color-black-3                      :   #787777 !default;
+$color-black-3                      :   #777777 !default;
 $color-black-4                      :   #7f7f7f !default;
 $color-black-5                      :   #cbcbcb !default;
 $color-black-6                      :   #e4e4e4 !default;
-$color-black-7                      :   #e8eaec !default;
-$color-black-8                      :   #fbfbfc !default;
+$color-black-7                      :   #eaeaea !default;
+$color-black-8                      :   #fcfcfc !default;
+
+// 中性色基准色，默认为主题色
+$color-neutral                      :   $color-primary !default;
+// 获取主题色相
+$color-primary-hue                  :   hue($color-neutral);
+// 中性色饱和度， 当值为0%时则饱和度为0，色阶为黑白灰。当值向大调时中性色将混入一定饱和度的主题色
+$color-neutral-saturate             :   0% !default;
+/*
+* 构建中性色
+*
+*/
 // 标题色(title)，正文色(text)，辅助色/图标色(sub)，占位符(placeholder)，失效色(disabled)，边框(border)，分割线(dirvider)，背景色(background)，阴影(shadow)
-$color-title                        :   $color-black-1 !default;
-$color-text                         :   $color-black-2 !default;
-$color-sub                          :   $color-black-3 !default;
-$color-placeholder                  :   $color-black-4 !default;
-$color-disabled                     :   $color-black-5 !default;
-$color-border                       :   $color-black-6 !default;
-$color-divider                      :   $color-black-7 !default;
-$color-background                   :   $color-black-8 !default;
+$color-title                        :   adjust-hue(saturate($color-black-1,$color-neutral-saturate),$color-primary-hue) !default;
+$color-text                         :   adjust-hue(saturate($color-black-2,$color-neutral-saturate),$color-primary-hue) !default;
+$color-sub                          :   adjust-hue(saturate($color-black-3,$color-neutral-saturate),$color-primary-hue) !default;
+$color-placeholder                  :   adjust-hue(saturate($color-black-4,$color-neutral-saturate),$color-primary-hue) !default;
+$color-disabled                     :   adjust-hue(saturate($color-black-5,$color-neutral-saturate),$color-primary-hue) !default;
+$color-border                       :   adjust-hue(saturate($color-black-6,$color-neutral-saturate),$color-primary-hue) !default;
+$color-divider                      :   adjust-hue(saturate($color-black-7,$color-neutral-saturate),$color-primary-hue) !default;
+$color-background                   :   adjust-hue(saturate($color-black-8,$color-neutral-saturate),$color-primary-hue) !default;
 $color-shadow                       :   rgba(0,0,0,0.25) !default;
+
+
 
 // 【css】变量，动态变量，项目运行依赖 「#001」
 body{
