@@ -36,16 +36,22 @@
     #{$color}: $color-divider;
     #{$color}: var(--color-divider);
 }
-@mixin get-color-shadow ($blur:#{$box-shadow-blur},$spread:#{$box-shadow-spread}) {
-    box-shadow: 0 0 $blur $spread $color-shadow;
-    box-shadow: 0 0 $blur $spread var(--color-shadow);
+@mixin get-color-shadow ($x:0,$y:0,$blur:#{$box-shadow-blur},$spread:#{$box-shadow-spread}) {
+    box-shadow: $x $y $blur $spread $color-shadow;
+    box-shadow: $x $y $blur $spread var(--color-shadow);
 }
-@mixin get-color-bg () {
-    background-color: $color-background;
-    background-color: var(--color-background);
+@mixin get-color-bg ($color:background-color) {
+    #{$color}: $color-background;
+    #{$color}: var(--color-background);
 }
 
 // 图标hover色
 @mixin get-color-sub-hover ($color:color) {
     #{$color}: lighten($color-sub, 13%);
+}
+
+// highColor，常用于组件色彩增强
+@mixin get-color-high-color () {
+    @include get-color-text(background-color);
+    @include get-color-bg(color)
 }

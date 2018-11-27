@@ -1,8 +1,8 @@
 <template>
     <div>
-        <DropDown>
+        <Popper>
             <slot></slot>
-        </DropDown>
+        </Popper>
     </div>
 </template>
 <script>

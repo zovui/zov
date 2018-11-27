@@ -5,9 +5,9 @@ export default {
         let instance = new Vue({
             render (h) {
                 return h(Spin, {
-                    props: Object.assign({
+                    props: {
                         cover: true
-                    })
+                    }
                 })
             }
         })

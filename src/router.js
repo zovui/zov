@@ -85,11 +85,18 @@ export default new Router({
             component: () => import('./views/Select.vue')
         },
         {
-            path: '/dropdown',
+            path: '/popper',
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/DropDown.vue')
+            component: () => import('./views/Popper.vue')
+        },
+        {
+            path: '/tooltip',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/ToolTip.vue')
         }
     ]
 })

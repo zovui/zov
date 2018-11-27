@@ -38,7 +38,7 @@
     </transition-group>
 </template>
 <script>
-import renderCell from './render'
+import renderCell from '../../utils/render-cell'
 export default {
     name: 'zov-notice-message',
     components: {
@@ -58,7 +58,7 @@ export default {
             list: {},
             iconnames: {
                 info: 'information-circle',
-                success: 'arrow-dropdown-circl',
+                success: 'arrow-popper-circl',
                 error: 'close-circle',
                 warning: 'alert'
             }

@@ -1,0 +1,25 @@
+$prefix-popper : #{$prefix}popper;
+.#{$prefix-popper}{
+    $arrowWidth: 6px;
+    @include get-color-bg();
+    @include get-color-shadow();
+    border-radius: $border-radius-button;
+    z-index: $zindex-tooltip;
+    &-arrow{
+        position: absolute;
+        width: $arrowWidth;
+        height: $arrowWidth;
+        @include get-color-bg();
+        @include get-color-shadow(1px, -1px, 2px, -1px);
+        border-top-right-radius: $border-radius-button / 2;
+    }
+    @each $dir1, $dir2, $deg in (left,right,45deg) (right,left,-135deg) (top,bottom,135deg) (bottom,top,-45deg) {
+        &[x-placement^='#{$dir1}']{
+            margin-#{$dir2}: $arrowWidth;
+            .#{$prefix-popper}-arrow{
+                #{$dir2} : -$arrowWidth / 2;
+                transform: rotate($deg);
+            }
+        }
+    }
+}

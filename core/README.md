@@ -1,4 +1,95 @@
 # 说明
+## 开发规范
+### 命名规则
+1、文件，以 `-` 链接
+
+> eg:
+
+```
+.
+|__文件夹-[附属名]
+   |__文件名-[附属名].vue
+   |__index.js
+```
+
+2、类、vue组件，大驼峰
+
+> eg:
+
+```javascript
+import LoadingBar from './input.vue'
+export default LoadingBar
+```
+
+```vue
+<Button looks="info" @click="$Notice.info()">info</Button> 
+<!-- 这里的$Notice，是vue组件 -->
+```
+
+3、函数、js参数，小驼峰
+
+> eg:
+
+```javascript
+export default {
+    props: {
+        enterDelay: false
+    },
+    methods: {
+        clickHandle () {}
+    }
+}
+```
+
+4、vue组件props参数名，以 `-` 链接，结合vue自动将带`-`参数转化为小驼峰的功能。
+
+> eg:
+
+```vue
+<ToolTip
+         title="提示"
+         text="这是通过click等待1秒后弹出的tooltip"
+         trigger="click"
+         enter-delay="1000"
+         >
+    <Button>click 延时1s后呼出</Button>
+</ToolTip>
+```
+
+5、组件命名，以 `-` 链接
+
+> eg:
+
+```javascript
+export default {
+    name: 'zov-input'
+}
+```
+
+6、css命名空间，以 `-` 链接
+
+> eg:
+
+```scss
+$prefix: zov-;
+.#{$prefix}{
+    &-inner{}
+}
+```
+
+7、组件引用，大驼峰
+
+> eg:
+
+```vue
+<ToolTip
+         title="提示"
+         text="这是通过click等待1秒后弹出的tooltip"
+         >
+    <Button>click 延时1s后呼出</Button>
+</ToolTip>
+```
+
 ## 锚点
 ### 待解决
 

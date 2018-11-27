@@ -7135,6 +7135,10 @@ uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"
   resolved "http://registry.npm.taobao.org/uuid/download/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
 
+v-click-outside-x@^3.5.5:
+  version "3.5.5"
+  resolved "http://registry.npm.taobao.org/v-click-outside-x/download/v-click-outside-x-3.5.5.tgz#a28a841b3c610eeec85cac3d63b3f94cbf87047f"
+
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "http://registry.npm.taobao.org/validate-npm-package-license/download/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
