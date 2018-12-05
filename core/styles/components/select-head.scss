@@ -1,0 +1,7 @@
+$prefix-select-head: #{$prefix}select-head;
+.#{$prefix-select-head}{
+    border-radius: $border-radius-button;
+    .#{$prefix}input{
+        width: 100%;
+    }
+}

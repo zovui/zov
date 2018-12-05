@@ -16,7 +16,7 @@ export default {
         },
         fix: {
             type: Boolean,
-            default: false
+            default: true
         },
         noArrow: {
             type: Boolean,
@@ -28,36 +28,47 @@ export default {
             popper: null
         }
     },
+    methods: {
+        // 为了配合css变形动画，所以在popper更新后重设origin
+        resetTransfromOrigin (origin) {
+            let transObj = {
+                'right': 'left',
+                'left': 'right',
+                'bottom': 'top',
+                'top': 'bottom'
+            }
+            this.popper.popper.style.transformOrigin = transObj[origin]
+        }
+    },
     mounted () {
-        let vm = this
-        vm.popper = new Popper(
-            vm.$el.parentNode,
-            vm.$el,
+        let _this = this
+        _this.popper = new Popper(
+            _this.$el.parentNode,
+            _this.$el,
             {
-                placement: vm.placement, // 默认位置，默认【'bottom'】
-                positionFixed: vm.fix, // 定位是否为position: fixed，默认【false】
+                placement: _this.placement, // 默认位置，默认【'bottom'】
+                positionFixed: _this.fix, // 定位是否为position: fixed，默认【false】
                 // eventsEnabled: true, // 是否启用事件，默认【true】
                 // removeOnDestroy: false, // 在销毁（调用destroy）时，是否移除popper节点，默认【false】
-                // onCreate: (data) => {
-                //     console.log(data)
-                //     console.log('popper 创建了')
-                // },
-                // onUpdate: (data) => {
-                //     console.log('popper 更新了')
-                // },
+                onCreate: (data) => {
+                    this.resetTransfromOrigin(data.placement)
+                },
+                onUpdate: (data) => {
+                    this.resetTransfromOrigin(data.placement)
+                },
                 // 自定义修饰
                 modifiers: {
                     arrow: {
                         element: '.zov-popper-arrow'
                     },
                     computeStyle: {
-                        gpuAcceleration: true // 使用CSS 3D转换来定位popper
+                        gpuAcceleration: false // 使用CSS 3D转换来定位popper
                     },
                     flip: {
                         // behavior: 'clockwise' // 转换方式，默认【'flip'】
                     },
                     preventOverflow: {
-                        boundariesElement: document.body // 边界元素， 'window'、 'viewport' 默认【scrollParent】
+                        boundariesElement: 'window' // 边界元素， 'window'、 'viewport' 默认【scrollParent】
                     }
                 }
             }

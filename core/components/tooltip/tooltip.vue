@@ -3,15 +3,15 @@
         class="zov-tooltip"
         @mouseenter="hoverHandle('enter')"
         @mouseleave="hoverHandle('leave')"
-        @click="toggleHandle"
+        @click.stop="toggleHandle"
         @focus.capture="focusHandle('enter')"
         @blur.capture="focusHandle('leave')"
-        v-click-outside="outCloseHandle"
+        v-click-outside.capture="outCloseHandle"
     >
         <slot></slot>
-        <transition name="zov-fade">
+        <transition :name="animationName">
             <Popper :placement="placement"
-                    :high-color="highColor"
+                    :no-arrow="noArrow"
                     :class="{'zov-tooltip-high-color': highColor}"
                     v-show="visible"
             >
@@ -28,13 +28,14 @@
                         class="zov-tooltip-close"
                         @click.stop="closeHandle"
                     />
+                    <slot name="tooltip"></slot>
                 </div>
             </Popper>
         </transition>
     </div>
 </template>
 <script>
-import { directive as clickOutside } from 'v-click-outside-x';
+import { directive as clickOutside } from 'v-click-outside-x'
 let prefix = 'zov-tooltip'
 export default {
     name: prefix,
@@ -63,9 +64,17 @@ export default {
             default: 'top'
         },
         trigger: {
-            type: String,
+            type: [String, Array],
             validator (value) {
-                return ['hover', 'click', 'focus', 'init'].indexOf(value) !== -1
+                let triggers = ['hover', 'click', 'focus']
+                if (typeof value === 'string') {
+                    return triggers.indexOf(value) !== -1
+                } else if (value instanceof Array) {
+                    if (value.length > triggers.length) return false
+                    return value.every((item) => {
+                        return triggers.indexOf(item) !== -1
+                    })
+                }
             },
             default: 'hover'
         },
@@ -88,11 +97,27 @@ export default {
         never: {
             type: Boolean,
             default: false
+        },
+        noArrow: {
+            type: Boolean,
+            default: false
+        },
+        animationName: {
+            type: String,
+            default: 'zov-fade'
+        },
+        autoPopup: {
+            type: Boolean,
+            default: false
+        },
+        noDelay: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
-            visible: this.trigger === 'init',
+            visible: false,
             timer: null,
             mouseStatus: 'leave'
         }
@@ -100,33 +125,59 @@ export default {
     watch: {
         value (val) {
             this.visible = val
+        },
+        visible (val) {
+            this.mouseStatus = this.visible ? 'enter' : 'leave'
+            this.$emit('input', val)
         }
     },
     methods: {
+        noTrigger (trigger) {
+            if (this.never) {
+                return true
+            }
+            if (typeof this.trigger === 'string') {
+                return this.trigger !== trigger
+            } else if (this.trigger instanceof Array) {
+                return this.trigger.indexOf(trigger) === -1
+            }
+        },
         clearTimer () {
             clearTimeout(this.timer)
             this.timer = null
         },
         setVisible () {
             this.clearTimer()
+            /**
+            * 非延时模式，为内部提供，在drop中调用不需要延时处理
+            **/
+            if (this.noDelay) {
+                this.visible = this.mouseStatus === 'enter'
+                return
+            }
+            /**
+            * 此处必须为异步
+            * 1、配合呼出、收起的延时；
+            * 2、在v-model模式下，我们期望通过v-model连接多个双向响应的组件，此时点击当前组件就会响应到v-model上，从而响应到另一个tooltip组件上，此时同事触发了另一个tooltip
+            * 上的out-click事件，因此会出现我们不期望的效果，这里的异步就可以解决此问题。
+            **/
             this.timer = setTimeout(() => {
                 this.visible = this.mouseStatus === 'enter'
-                this.$emit('input', this.visible)
                 this.clearTimer()
             }, Number(this[this.mouseStatus + 'Delay']))
         },
         hoverHandle (type) {
-            if (this.trigger !== 'hover') return
+            if (this.noTrigger('hover')) return
             this.mouseStatus = type
             this.setVisible()
         },
         toggleHandle () {
-            if (this.trigger !== 'click') return
+            if (this.noTrigger('click')) return
             this.mouseStatus = this.mouseStatus === 'leave' ? 'enter' : 'leave'
             this.setVisible()
         },
         focusHandle (type) {
-            if (this.trigger !== 'focus') return
+            if (this.noTrigger('focus')) return
             this.mouseStatus = type
             this.setVisible()
         },
@@ -137,6 +188,13 @@ export default {
         outCloseHandle () {
             if (this.never) return
             this.closeHandle()
+        }
+    },
+    mounted () {
+        // 初始化设置visible的值
+        if (this.autoPopup || this.value) {
+            this.mouseStatus = 'enter'
+            this.setVisible()
         }
     }
 }

@@ -128,11 +128,8 @@ export default {
     },
     methods: {
         OK () {
-            // console.log(this.values)
+            console.log(this.values)
         }
-    },
-    mounted () {
-        let _this = this
     }
 }
 </script>

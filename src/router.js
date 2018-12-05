@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Zov from '../core'
 Vue.use(Router)
-
-export default new Router({
+let router = new Router({
     routes: [
         {
             path: '/longlist',
@@ -12,91 +12,108 @@ export default new Router({
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/LongList.vue')
+            component: () => import('./views/LongListDemo.vue')
         },
         {
             path: '/autocascader',
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/AutoCascader.vue')
+            component: () => import('./views/AutoCascaderDemo.vue')
         },
         {
             path: '/icon',
             meta: {
                 sort: 'base'
             },
-            component: () => import('./views/Icon.vue')
+            component: () => import('./views/IconDemo.vue')
         },
         {
             path: '/loadingbar',
             meta: {
                 sort: 'feedback'
             },
-            component: () => import('./views/LoadingBar.vue')
+            component: () => import('./views/LoadingBarDemo.vue')
         },
         {
             path: '/notice',
             meta: {
                 sort: 'feedback'
             },
-            component: () => import('./views/Notice.vue')
+            component: () => import('./views/NoticeDemo.vue')
         },
         {
             path: '/message',
             meta: {
                 sort: 'feedback'
             },
-            component: () => import('./views/Message.vue')
+            component: () => import('./views/MessageDemo.vue')
         },
         {
             path: '/button',
             meta: {
                 sort: 'feedback'
             },
-            component: () => import('./views/Button.vue')
+            component: () => import('./views/ButtonDemo.vue')
         },
         {
             path: '/spin',
             meta: {
                 sort: 'feedback'
             },
-            component: () => import('./views/Spin.vue')
+            component: () => import('./views/SpinDemo.vue')
         },
         {
             path: '/switch',
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/Switch.vue')
+            component: () => import('./views/SwitchDemo.vue')
         },
         {
             path: '/input',
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/Input.vue')
+            component: () => import('./views/InputDemo.vue')
         },
         {
             path: '/select',
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/Select.vue')
+            component: () => import('./views/SelectDemo.vue')
         },
         {
             path: '/popper',
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/Popper.vue')
+            component: () => import('./views/PopperDemo.vue')
+        },
+        {
+            path: '/drop',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/DropDemo.vue')
         },
         {
             path: '/tooltip',
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/ToolTip.vue')
+            component: () => import('./views/ToolTipDemo.vue')
         }
     ]
 })
+router.beforeEach((to, from, next) => {
+    Zov.LoadingBar.start()
+    document.title = to.name || to.path.substr(1)
+    next()
+})
+router.afterEach((to, from, next) => {
+    Zov.LoadingBar.finish()
+    window.scrollTo(0, 0)
+})
+export default router

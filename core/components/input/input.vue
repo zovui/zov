@@ -28,7 +28,7 @@ export default {
     props: {
         // 值
         value: {
-            type: String,
+            type: [String, Number],
             default: ''
         },
         // 扩展属性
@@ -71,7 +71,7 @@ export default {
         },
         inputListeners () {
             let _this = this
-            // `Object.assign` 将所有的对象合并为一个新对象
+            // `Object.assign` 将所有的对象合并为一个新对象，「#006」
             return Object.assign({}, _this.$listeners,
                 {
                     // 这里确保组件配合 `v-model` 的工作
@@ -84,7 +84,7 @@ export default {
         inputAttrs () {
             let _this = this
             let _type = this.$attrs.type
-            return Object.assign(_this.$attrs, {
+            return Object.assign({}, _this.$attrs, {
                 type: _this.canSee ? 'password' : _type === 'password' ? 'text' : _type
             })
         }

@@ -1,10 +1,10 @@
 <template>
-    <div :class="classes" @click.stop="toggle" :disabled="disabled">
-        <div class="zov-switch-inner"></div>
+    <div :class="classes" @click="toggle" :disabled="disabled">
         <span>
             <slot name="open"></slot>
             <slot name="close"></slot>
         </span>
+        <div class="zov-switch-inner"></div>
     </div>
 </template>
 <script>

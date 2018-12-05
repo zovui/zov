@@ -10,7 +10,7 @@ export default {
             }
         }
     },
-    render: (h, ctx) => {
+    render (h, ctx) {
         return ctx.props.render(h)
     }
 }

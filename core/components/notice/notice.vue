@@ -32,17 +32,17 @@
                 <p class="zov-notice-case-description">
                     {{ item.text }}
                 </p>
-                <render-cell :render="item.render"/>
+                <RenderCell :render="item.render"/>
             </div>
         </li>
     </transition-group>
 </template>
 <script>
-import renderCell from '../../utils/render-cell'
+import RenderCell from '../../utils/render-cell'
 export default {
     name: 'zov-notice-message',
     components: {
-        renderCell
+        RenderCell
     },
     props: {
         // notice、message模式

@@ -24,12 +24,13 @@ leave-to           【2.1.8版及以上】 定义离开过渡的结束状态。�
 .#{$prefix}fade-enter-active{
     transition: opacity $transition-time $bezier;
 }
-.#{$prefix}fade-enter-to{
-    opacity: 1;
-}
-.#{$prefix}fade-leave{
-    opacity: 1;
-}
+// 由于opacity 默认值为 1 ，因此在进入后和离开前的opacity不用重新设置
+//.#{$prefix}fade-enter-to{
+//    opacity: 1;
+//}
+//.#{$prefix}fade-leave{
+//    opacity: 1;
+//}
 .#{$prefix}fade-leave-active{
     transition: opacity $transition-time $bezier;
 }

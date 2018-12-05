@@ -14,6 +14,8 @@ body {
     line-height: $line-height-base;
     @include get-color-text();
     @include get-color-bg();
+    transition: background-color $transition-time $bezier,
+                color $transition-time $bezier;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -27,6 +29,7 @@ button, input, select, textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+    -webkit-appearance: none;
     @include get-color-text();
     @include get-color-bg();
 }
@@ -49,6 +52,7 @@ ul,li{
 [disabled]{
     @include get-color-disabled();
     cursor: $cursor-disabled;
+    user-select: none;
 }
 [block]{
     width: 100%!important;

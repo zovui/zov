@@ -2,7 +2,7 @@ $prefix-tooltip: #{$prefix}tooltip;
 .#{$prefix-tooltip}{
     display: inline-block;
     &-body{
-        width: 256px;
+        width: 220px;
         padding: $gap-base / 2 $gap-base / 4 * 3;
     }
     &-high-color{

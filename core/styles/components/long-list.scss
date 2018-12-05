@@ -1,0 +1,20 @@
+$prefix-long-list: #{$prefix}long-list;
+.#{$prefix-long-list} {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    animation: #{$prefix-long-list}loading .75s ease-in-out infinite;
+    &>*>*{
+        @include get-color-bg();
+    }
+}
+@keyframes #{$prefix-long-list}loading {
+    to {
+        @include get-color-bg();
+    }
+    50% {
+        @include get-color-border(background-color);
+    }
+    from{
+        @include get-color-bg();
+    }
+}

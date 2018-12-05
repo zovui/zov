@@ -1,11 +1,11 @@
 // 主题hvoer色，主题active色
-@mixin get-color-primary-hover () {
-    color: $color-light-primary;
-    color: var(--color-light-primary);
+@mixin get-color-primary-hover ($color:color) {
+    #{$color}: $color-light-primary;
+    #{$color}: var(--color-light-primary);
 }
-@mixin get-color-primary-active () {
-    color: $color-dark-primary;
-    color: var(--color-dark-primary);
+@mixin get-color-primary-active ($color:color) {
+    #{$color}: $color-dark-primary;
+    #{$color}: var(--color-dark-primary);
 }
 // 标题色，正文色，辅助/图标色，失效色，边框，分割线，背景色，阴影
 @mixin get-color-title ($color:color) {

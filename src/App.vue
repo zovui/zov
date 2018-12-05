@@ -44,7 +44,6 @@ export default {
     },
     mounted () {
         this.isdark = (localStorage.getItem('zov-theme') === 'dark')
-        console.log(this.version)
     }
 }
 </script>

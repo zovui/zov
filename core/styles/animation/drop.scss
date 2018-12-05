@@ -1,0 +1,9 @@
+.#{$prefix}drop-enter, .#{$prefix}drop-leave-to{
+    opacity: 0;
+    transform: scaleY(0.9);
+}
+.#{$prefix}drop-enter-active, .#{$prefix}drop-leave-active{
+    transform-origin: top;
+    transition: opacity $transition-time $bezier,
+                transform $transition-time $bezier;
+}

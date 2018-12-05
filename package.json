@@ -8,6 +8,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "popper.js": "^1.14.5",
     "v-click-outside-x": "^3.5.5",
     "vue": "^2.5.17"

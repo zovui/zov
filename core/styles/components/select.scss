@@ -1,0 +1,39 @@
+$prefix-select: #{$prefix}select;
+.#{$prefix-select}{
+    display: inline-block;
+    text-align: left;
+    border-radius: $border-radius-button;
+    &>.#{$prefix}tooltip{
+        width: 100%;
+
+        & .#{$prefix}tooltip-body{
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
+        }
+    }
+    &-body{
+        max-height: 220px;
+        overflow-y: auto;
+    }
+    &-option{
+        padding: 0 1em;
+        cursor: pointer;
+        line-height: 2.2;
+        transition: background-color $transition-time $bezier;
+        &[disabled]{
+            background-color: unset;
+            opacity: 0.55;
+            cursor: $cursor-disabled;
+            &:hover{
+                background-color: unset;
+            }
+        }
+        &[selected]{
+            color: $color-primary;
+        }
+        &:hover{
+            @include get-color-divider(background-color);
+        }
+    }
+}

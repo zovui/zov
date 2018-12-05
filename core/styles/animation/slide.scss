@@ -17,7 +17,7 @@ $list : (X, ll, -100%, -100%),
     @if $w == X {
         @return translateX(#{$const})
     }
-    @else {
+    @else if $w == Y {
         @return translateY(#{$const})
     }
 }

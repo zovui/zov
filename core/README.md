@@ -154,3 +154,27 @@ $prefix: zov-;
 > 在对input、select等原生组件进行封装时，经常遇到原生组件被包装到其他元素内部，致使事件、属性不能直接挂在到原生元素上，此时就可以利用，$attr(属性)、$listeners(事件)，将组件
 上挂在的的属性、事件通过 v-bind、v-on挂在到原生元素上。见 [vue 官方文档-自定义事件](https://cn.vuejs.org/v2/guide/components-custom-events.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E7%9A%84-v-model)
 
+`#006`
+
+> 这里为什么要拼接空 `{}`，因为当引用组件上未设置属性时，此时$attrs或者$listeners为空对象，vue会抛出警告。[Vue warn]: Error in render: "TypeError: Cannot add property type, object is not extensible"
+
+```javascript
+inputListeners () {
+    let _this = this
+    // `Object.assign` 将所有的对象合并为一个新对象，「#006」
+    return Object.assign({}, _this.$listeners,{
+        // 这里确保组件配合 `v-model` 的工作
+        input (event) {
+            _this.$emit('input', event.target.value)
+        }
+    })
+},
+inputAttrs () {
+    let _this = this
+    let _type = this.$attrs.type
+    return Object.assign({}, _this.$attrs, {
+    	type: _this.canSee ? 'password' : _type === 'password' ? 'text' : _type
+    })
+}
+```
+
