@@ -57,6 +57,13 @@ let router = new Router({
             component: () => import('./views/ButtonDemo.vue')
         },
         {
+            path: '/tag',
+            meta: {
+                sort: 'feedback'
+            },
+            component: () => import('./views/TagDemo.vue')
+        },
+        {
             path: '/spin',
             meta: {
                 sort: 'feedback'
@@ -78,13 +85,6 @@ let router = new Router({
             component: () => import('./views/InputDemo.vue')
         },
         {
-            path: '/select',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/SelectDemo.vue')
-        },
-        {
             path: '/popper',
             meta: {
                 sort: 'form'
@@ -104,6 +104,20 @@ let router = new Router({
                 sort: 'form'
             },
             component: () => import('./views/ToolTipDemo.vue')
+        },
+        {
+            path: '/select',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/SelectDemo.vue')
+        },
+        {
+            path: '/bigdatalist',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/BigDataList.vue')
         }
     ]
 })

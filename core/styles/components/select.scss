@@ -1,5 +1,6 @@
 $prefix-select: #{$prefix}select;
 .#{$prefix-select}{
+    width: $form-dom-width;
     display: inline-block;
     text-align: left;
     border-radius: $border-radius-button;
@@ -16,11 +17,14 @@ $prefix-select: #{$prefix}select;
         max-height: 220px;
         overflow-y: auto;
     }
+    &-no-data{
+        padding: 0 1em;
+    }
     &-option{
         padding: 0 1em;
         cursor: pointer;
         line-height: 2.2;
-        transition: background-color $transition-time $bezier;
+        position: relative;
         &[disabled]{
             background-color: unset;
             opacity: 0.55;
@@ -35,5 +39,12 @@ $prefix-select: #{$prefix}select;
         &:hover{
             @include get-color-divider(background-color);
         }
+        &-selected{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0.5em;
+        }
+
     }
 }

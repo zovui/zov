@@ -16,8 +16,8 @@
             <!-- 自定义后缀icon -->
             <Icon v-if="suffix" :iconname="suffix"/>
             <!-- 功能性后缀icon -->
-            <Icon class="zov-input-suffix-tool" v-if="eye && value" :iconname="canSee ? 'eye-off' : 'eye'" @click="see"/>
-            <Icon class="zov-input-suffix-tool" v-if="clearable && value" iconname="close-circle" @click="clear"/>
+            <Icon class="zov-input-suffix-tool" v-if="eye && value" :iconname="canSee ? 'eye-off' : 'eye'" @click.stop="see"/>
+            <Icon class="zov-input-suffix-tool" v-if="clearable && value" iconname="close-circle" @click.stop="clear"/>
         </div>
     </div>
 </template>

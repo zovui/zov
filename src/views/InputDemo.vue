@@ -3,7 +3,7 @@
         <ul>
             <b>属性</b>
             <li>
-                <Input placeholder="这是一个普通input"/>
+                <Input autofocus placeholder="这是一个自定获取焦点的input"/>
             </li>
             <li>
                 <Input disabled placeholder="这是一个disabled的input"/>

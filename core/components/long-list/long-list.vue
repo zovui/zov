@@ -1,5 +1,5 @@
 <template>
-    <div class="zov-long-list" @scroll="onScroll">
+    <div class="zov-long-list" @scroll="update">
         <div :style="listStyle">
             <slot v-for="(item,index) in list" :props="{item, index : sI + index}"></slot>
         </div>
@@ -52,12 +52,18 @@ export default {
             return this.data.slice(this.sI, this.eI)
         },
         getThreshold () {
-            return this.threshold || (this.data.length > 10000 ? 20 : 10)
+            return this.threshold || (this.data.length < 20000 ? 10 : 20)
+        }
+    },
+    watch: {
+        data () {
+            this.update()
         }
     },
     methods: {
         getElH (el) {
             // 给定值1，防止NAN参与计算
+            if (!el) return 1
             return el.offsetHeight || parseInt(window.getComputedStyle(el, null).height) || parseInt(window.getComputedStyle(el, null).maxHeight) || parseInt(window.getComputedStyle(el, null).lineHeight) || 1
         },
         setStyle () {
@@ -66,7 +72,8 @@ export default {
                 'padding-bottom': this.itemHeight * (this.data.length - this.eI) + 'px'
             }
         },
-        onScroll () {
+        update () {
+            // 小于20000不节流
             if (this.data.length < 20000) {
                 this.startI = Math.floor(this.$el.scrollTop / this.itemHeight)
                 this.setStyle()
@@ -78,7 +85,7 @@ export default {
                     this.setStyle()
                     clearTimeout(this.timer)
                     this.timer = null
-                }, 0)
+                }, 50)
             }
         }
     },
@@ -86,17 +93,17 @@ export default {
         // 当窗口或者子项高度变化导致组件更新后重新计算依赖这两个高度的数值。
         if (this.winH !== this.getElH(this.$el)) {
             this.winH = this.getElH(this.$el)
-            this.onScroll()
+            this.update()
         }
         if (this.itemHeight !== this.getElH(this.$el.childNodes[0].childNodes[0])) {
             this.itemHeight = this.getElH(this.$el.childNodes[0].childNodes[0])
-            this.onScroll()
+            this.update()
         }
     },
     mounted () {
         this.winH = this.getElH(this.$el)
         this.itemHeight = this.getElH(this.$el.childNodes[0].childNodes[0])
-        this.onScroll()
+        this.update()
     }
 }
 </script>

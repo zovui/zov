@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </LongList>
-            <LongList style="max-height: 220px" :data="list" :threshold="2">
+            <LongList style="max-height: 220px" :data="list">
                 <div slot-scope="{props}" :index="props.item.id">
                     下标：{{ props.index }}内容：{{ props.item.text }}
                 </div>

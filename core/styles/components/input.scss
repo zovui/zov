@@ -1,15 +1,13 @@
 $prefix-input : #{$prefix}input;
 .#{$prefix-input}{
-    width: 180px;
-    $gap-y : 0.25em;
+    width: $form-dom-width;
     $gap-x : 0.5em;
     display: inline-block;
     position: relative;
     border-radius: $border-radius-button;
+    line-height: $btn-line-height;
     &>input{
         width: 100%;
-        padding-top:  $gap-y;
-        padding-bottom:  $gap-y;
         border: 1px solid;
         @include get-color-border();
         border-radius: $border-radius-button;

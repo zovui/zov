@@ -178,3 +178,16 @@ inputAttrs () {
 }
 ```
 
+`#007`
+
+> 在tooltip组件内，根据visible状态切换popper.js对popper实例的更新监听。
+>
+> 这在页面具有很多popper的时候，对性能有明显提高。
+
+```
+Popper.enableEventListeners（）
+它将添加调整大小/滚动事件，并在触发时重新计算popper元素的位置。
+Popper.disableEventListeners（）
+它将删除调整大小/滚动事件，并且在触发时不会重新计算波普尔位置。onUpdate除非您update手动调用方法，否则它也不会再触发回调。
+```
+

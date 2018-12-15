@@ -1,0 +1,9 @@
+.#{$prefix}scale-enter, .#{$prefix}scale-leave-to{
+    opacity: 0;
+    transform: scale(0.9);
+}
+.#{$prefix}scale-enter-active, .#{$prefix}scale-leave-active{
+    transform-origin: center;
+    transition: opacity $transition-time $bezier,
+    transform $transition-time $bezier;
+}

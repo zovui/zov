@@ -1,4 +1,4 @@
-# ZOV-SELECT
+# ZOV-BIG-DATA-LIST
 
 > 记录zov-select组件实现的一些想法，组件的目的是解决下拉组件基本功能外，为承载大量数据做优化。
 

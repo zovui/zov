@@ -5,15 +5,16 @@
         @mouseleave="hoverHandle('leave')"
         @click.stop="toggleHandle"
         @focus.capture="focusHandle('enter')"
-        @blur.capture="focusHandle('leave')"
         v-click-outside.capture="outCloseHandle"
     >
         <slot></slot>
         <transition :name="animationName">
-            <Popper :placement="placement"
+            <Popper ref="zov-popper"
+                    :placement="placement"
                     :no-arrow="noArrow"
                     :class="{'zov-tooltip-high-color': highColor}"
                     v-show="visible"
+                    :size="currentH+'-'+currentW"
             >
                 <div class="zov-tooltip-body">
                     <p v-if="title" class="zov-tooltip-title">
@@ -119,7 +120,9 @@ export default {
         return {
             visible: false,
             timer: null,
-            mouseStatus: 'leave'
+            mouseStatus: 'leave',
+            currentW: '',
+            currentH: ''
         }
     },
     watch: {
@@ -129,6 +132,7 @@ export default {
         visible (val) {
             this.mouseStatus = this.visible ? 'enter' : 'leave'
             this.$emit('input', val)
+            this.transPopperEventListeners(val)
         }
     },
     methods: {
@@ -188,6 +192,10 @@ export default {
         outCloseHandle () {
             if (this.never) return
             this.closeHandle()
+        },
+        transPopperEventListeners (val) {
+            // 根据tooltip组件的显示状态，决定popper的自动更新 「#007」
+            val ? this.$refs['zov-popper'].popper.enableEventListeners() : this.$refs['zov-popper'].popper.disableEventListeners()
         }
     },
     mounted () {
@@ -195,6 +203,15 @@ export default {
         if (this.autoPopup || this.value) {
             this.mouseStatus = 'enter'
             this.setVisible()
+        }
+        this.currentW = this.$el.offsetWidth
+        this.currentH = this.$el.offsetHeight
+        this.transPopperEventListeners(this.visible)
+    },
+    updated () {
+        if (this.currentW !== this.$el.offsetWidth || this.currentH !== this.$el.offsetHeight) {
+            this.currentW = this.$el.offsetWidth
+            this.currentH = this.$el.offsetHeight
         }
     }
 }

@@ -1,0 +1,14 @@
+$prefix-tag: #{$prefix}tag;
+.#{$prefix-tag}{
+    padding: 0 0.7em;
+    line-height: $btn-line-height;
+    &:active, &:focus{
+        box-shadow: 0 0 0 transparent;
+    }
+    &-close{
+        margin-left: 0.25em;
+        &:hover{
+            @include get-color-sub-hover()
+        }
+    }
+}
