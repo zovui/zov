@@ -27,16 +27,48 @@
                      'width': dropWidth + 'px'
                 }"
             >
-                <div class="zov-select-option"
-                     v-for="(item, index) in filterable && query ? queryResult : currentData"
-                     :key="index"
-                     @click.stop.capture="select(item)"
-                     :selected="item.selected"
-                     :disabled="item.disabled"
-                >
-                    <slot :props="{item, index}"></slot>
-                    <Icon class="zov-select-option-selected" v-if="item.selected" iconname="checkmark"/>
-                </div>
+                <!-- 分组 -->
+                <template v-if="group">
+                    <template v-if="filterable && query">
+                        <Option
+                            :data="queryResult"
+                            @on-click="select"
+                        >
+                            <template slot-scope="{props}">
+                                <slot :props="props"></slot>
+                            </template>
+                        </Option>
+                    </template>
+                    <template v-else>
+                        <div
+                            v-for="(item, index) in currentData"
+                            :key="index"
+                        >
+                            <div class="zov-select-option-group-title">
+                                {{ item[groupLabelName] }}
+                            </div>
+                            <Option
+                                :data="item[groupChildName]"
+                                @on-click="select"
+                            >
+                                <template slot-scope="{props}">
+                                    <slot :props="props"></slot>
+                                </template>
+                            </Option>
+                        </div>
+                    </template>
+                </template>
+                <!-- 不分组 -->
+                <template v-else>
+                    <Option
+                        :data="filterable && query ? queryResult : currentData"
+                        @on-click="select"
+                    >
+                        <template slot-scope="{props}">
+                            <slot :props="props"></slot>
+                        </template>
+                    </Option>
+                </template>
             </div>
             <div
                 class="zov-select-no-data"
@@ -51,12 +83,14 @@
 </template>
 <script>
 import SelectHead from './select-head'
+import Option from './option'
 import SelectedMixin from './selected-mixin'
 let prefix = 'zov-select'
 export default {
     name: prefix,
     components: {
-        SelectHead
+        SelectHead,
+        Option
     },
     mixins: [
         SelectedMixin
@@ -66,6 +100,18 @@ export default {
         filterable: {
             type: Boolean,
             default: false
+        },
+        group: {
+            type: Boolean,
+            default: false
+        },
+        groupChildName: {
+            type: String,
+            default: 'label'
+        },
+        groupLabelName: {
+            type: String,
+            default: 'label'
         }
     },
     data () {
@@ -85,10 +131,20 @@ export default {
             this.queryLoading = true
             if (val === '') return
             this.throttleFn(() => {
-                for (let i = 0; i < this.currentData.length; i++) {
-                    let item = this.currentData[i]
-                    if (new RegExp(val).test(item[this.currentQueryName].toString())) {
-                        this.queryResult.push(item)
+                if (this.group) {
+                    this.currentData.forEach((group) => {
+                        group[this.groupChildName].forEach((item) => {
+                            if (new RegExp(val).test(item[this.currentQueryName].toString())) {
+                                this.queryResult.push(item)
+                            }
+                        })
+                    })
+                } else {
+                    for (let i = 0; i < this.currentData.length; i++) {
+                        let item = this.currentData[i]
+                        if (new RegExp(val).test(item[this.currentQueryName].toString())) {
+                            this.queryResult.push(item)
+                        }
                     }
                 }
                 this.queryLoading = false

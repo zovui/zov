@@ -84,7 +84,7 @@
                 v-model="value4"
                 value-name="id"
                 label-name="text"
-                query-name="text"
+                query-name="id"
                 @on-change="change"
                 @on-open-change="open"
                 autofocus
@@ -94,13 +94,35 @@
                 </div>
             </Select>
         </div>
+        <div>
+            分组
+            <Select
+                :data="listGroup"
+                placeholder="分组select"
+                multiple
+                filterable
+                v-model="value4"
+                value-name="id"
+                label-name="text"
+                query-name="text"
+                group
+                group-label-name="label"
+                group-child-name="children"
+                @on-change="change"
+                @on-open-change="open"
+            >
+                <div slot-scope="{props}">
+                    {{ props.item.text }}
+                </div>
+            </Select>
+        </div>
         <h3>测试数据量较大的情况下，常规select的性能，【卡顿，而且组件内部单独维护data，内存占用率较高】，可以到 BigDataList 组件测试数据量较大是组件的性能表现</h3>
         <div style="max-height: 400px;overflow: auto; border:3px dashed">
             <Select
-                v-for="(item, index) in listGroup"
+                v-for="(item, index) in values"
                 placeholder="循环出来的"
                 :key="index"
-                :data="ls"
+                :data="lists"
                 v-model="item.v"
                 filterable
                 value-name="id"
@@ -129,11 +151,7 @@ export default {
                 }
                 return d
             })(),
-            value1: 4,
-            value2: '',
-            value3: [0, 2, 4],
-            value4: [2, 3],
-            ls: (() => {
+            lists: (() => {
                 let d = []
                 for (let i = 0; i < 100; i++) {
                     d.push({
@@ -143,13 +161,35 @@ export default {
                 }
                 return d
             })(),
-            listGroup: (() => {
+            values: (() => {
                 let d = []
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 10; i++) {
                     d.push({ v: null })
                 }
                 return d
-            })()
+            })(),
+            listGroup: (() => {
+                let d = []
+                for (let i = 0; i < 4; i++) {
+                    let x = {
+                        label: '第' + i + '组',
+                        children: []
+                    }
+                    for (let j = 0; j < 5; j++) {
+                        x.children.push({
+                            id: i + '---' + j,
+                            text: 'item#' + (i + '---' + (j + 1))
+                        })
+                    }
+                    d.push(x)
+                }
+                return d
+            })(),
+            value1: 4,
+            value2: '',
+            value3: [0, 2, 4],
+            value4: [2, 3],
+            value5: ''
         }
     },
     methods: {

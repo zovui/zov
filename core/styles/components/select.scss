@@ -45,6 +45,10 @@ $prefix-select: #{$prefix}select;
             transform: translateY(-50%);
             right: 0.5em;
         }
+        &-group-title{
+            @include get-color-sub(color);
+            padding: 0 0.5em;
+        }
 
     }
 }
