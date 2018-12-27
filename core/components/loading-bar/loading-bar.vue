@@ -1,7 +1,7 @@
 <template>
     <transition name="zov-fade">
-        <div :class="outC" v-show="show">
-            <div :class="C" :style="style"></div>
+        <div :class="outClasses" v-show="show">
+            <div :class="Classes" :style="style"></div>
         </div>
     </transition>
 </template>
@@ -17,10 +17,10 @@ export default {
         }
     },
     computed: {
-        outC () {
+        outClasses () {
             return `${$prefix}`
         },
-        C () {
+        Classes () {
             return [
                 `${$prefix}-inner`,
                 `${$prefix}-inner-color-${this.status}`

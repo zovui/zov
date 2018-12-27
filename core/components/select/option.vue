@@ -1,15 +1,19 @@
 <template>
     <div>
         <div
-            class="zov-select-option"
+            :class="[
+                'zov-select-option',
+                {
+                    'zov-select-option-selected': selectedValues.indexOf(item[valueName]) !== -1
+                }
+            ]"
             v-for="(item, index) in data"
-            :key="index"
+            :key="index + ''"
             @click.stop.capture="$emit('on-click', item)"
-            :selected="item.selected"
             :disabled="item.disabled"
         >
             <slot :props="{item, index}"></slot>
-            <Icon class="zov-select-option-selected" v-if="item.selected" iconname="checkmark"/>
+            <Icon v-if="selectedValues.indexOf(item[valueName]) !== -1" iconname="checkmark"/>
         </div>
     </div>
 </template>
@@ -21,7 +25,14 @@ export default {
             default () {
                 return []
             }
-        }
+        },
+        selectedValues: {
+            type: Array,
+            default () {
+                return []
+            }
+        },
+        valueName: ''
     }
 }
 </script>

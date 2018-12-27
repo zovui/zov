@@ -117,7 +117,14 @@ let router = new Router({
             meta: {
                 sort: 'form'
             },
-            component: () => import('./views/BigDataList.vue')
+            component: () => import('./views/BigDataListDemo.vue')
+        },
+        {
+            path: '/cascader',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/CascaderDemo.vue')
         }
     ]
 })

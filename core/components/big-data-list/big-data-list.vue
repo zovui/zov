@@ -19,24 +19,28 @@
                 :dropShow="dropShow"
                 @on-remove-tag="select"
                 @click.native="!disabled && dropShowFocus()"
-                @remove-tag-end="removeTagEnd"
+                @remove-tag-end="dropUpdate"
             />
             <LongList
                 class="zov-select-body"
                 :style="{
-                    'width': dropWidth + 'px'
+                    'width': width + 'px'
                 }"
                 :data="query ? queryResult : currentData"
             >
-                <div class="zov-select-option"
+                <div :class="[
+                        'zov-select-option',
+                        {
+                            'zov-select-option-selected': currentValueArr.indexOf(props.item[valueName]) !== -1
+                        }
+                    ]"
                      slot-scope="{props}"
-                     :key="props.index"
+                     :key="props.index + ''"
                      @click.stop.capture="select(props.item)"
-                     :selected="props.item.selected"
                      :disabled="props.item.disabled"
                 >
                     <slot :props="props"></slot>
-                    <Icon class="zov-select-option-selected" v-if="props.item.selected" iconname="checkmark"/>
+                    <Icon v-if="currentValueArr.indexOf(props.item[valueName]) !== -1" iconname="checkmark"/>
                 </div>
             </LongList>
             <div
@@ -52,7 +56,7 @@
 </template>
 <script>
 import SelectHead from '../select/select-head'
-import SelectedMixin from '../select/selected-mixin'
+import SelectedMixin from '../select/select-mixin'
 import worker from '../../worker'
 let prefix = 'zov-big-data-list'
 export default {
@@ -63,18 +67,6 @@ export default {
     mixins: [
         SelectedMixin
     ],
-    props: {
-        noRepeat: {
-            // 复用同一组源数据的组件，在dropDown呼出后要清洗数据
-            type: Boolean,
-            default: false
-        }
-    },
-    data () {
-        return {
-            currentData: this.data
-        }
-    },
     watch: {
         query (val) {
             this.queryResult = []
@@ -84,7 +76,7 @@ export default {
                 /**
                  * [test: 20万数据搜索耗时256ms]，【阻塞主线程】以下注释代码为主线程query操作，内存消耗为两部分，一、遍历；二、正则匹配
                  **/
-                console.time('主线程运行，用时')
+                // console.time('主线程运行，用时')
                 for (let i = 0; i < this.currentData.length; i++) {
                     let item = this.currentData[i]
                     if (new RegExp(val).test(item[this.currentQueryName].toString())) {
@@ -92,7 +84,7 @@ export default {
                     }
                 }
                 this.queryLoading = false
-                console.timeEnd('主线程运行，用时')
+                // console.timeEnd('主线程运行，用时')
                 /**
                  * [test: 20万数据搜索耗时800ms]，【部分时间阻塞主线程】以下为子线程处理query操作的代码，将正则匹配部分放在子线程操作，换来的是子线程向主线程传输数据的内存消耗和子线程生成数据的内存消耗。
                  **/
@@ -122,54 +114,10 @@ export default {
                 //     console.timeEnd('子线程运行，用时')
                 // }
             }, 500)
-        },
-        dropShow (val) {
-            !this.noRepeat && val && this.defaultSelected()
         }
     },
     methods: {
-        select (item, isDefault) {
-            if (item.disabled) return
-            this.multiple ? this.check(item, isDefault) : this.single(item, isDefault)
-        },
-        single (item, isDefault) {
-            // 单选
-            this.currentItemArr.length && this.$set(this.currentItemArr[0], 'selected', false)
-            // 清洗已选
-            this.currentItemArr = []
-            this.currentValueArr = []
-            // 记录已选
-            this.currentItemArr.push(item)
-            this.currentValueArr.push(item[this.valueName])
-            // 修改源数据
-            this.$set(item, 'selected', true)
-            // 暴露数据
-            this.$emit('input', item[this.valueName])
-            this.$emit('on-change', item)
-            // 单选query值设置
-            this.query = item[this.currentQueryName]
-            // 收起下拉
-            !isDefault && this.dropHideBlur()
-        },
-        check (item, isDefault) {
-            if (item.selected) {
-                // 清洗已选
-                this.$delete(this.currentItemArr, this.currentItemArr.indexOf(item))
-                this.$delete(this.currentValueArr, this.currentValueArr.indexOf(item[this.valueName]))
-            } else {
-                // 记录已选
-                this.currentItemArr.push(item)
-                !isDefault && this.currentValueArr.push(item[this.valueName])
-            }
-            // 修改源数据
-            this.$set(item, 'selected', !item.selected)
-            // 暴露数据
-            this.$emit('input', this.currentValueArr)
-            this.$emit('on-change', this.currentItemArr)
-            !isDefault && this.dropShowFocus()
-        },
         defaultSelected (callback) {
-            !this.noRepeat && this.dataCleaning()
             if (this.value === null || this.value === undefined || !this.value.toString()) {
                 this.loading = false
                 return
@@ -200,20 +148,13 @@ export default {
                 `
             })
             wk.onmessage = function (e) {
-                console.log('default--子线程数据接收成功')
+                // console.log('default--子线程数据接收成功')
                 e.data.forEach((item) => {
                     _this.select(_this.currentData[item], 'default')
                 })
                 _this.loading = false
                 callback && callback()
                 wk.terminate()
-            }
-        },
-        dataCleaning () {
-            this.loading = true
-            this.currentItemArr = []
-            for (let i = 0; i < this.currentData.length; i++) {
-                this.currentData[i].selected = false
             }
         }
     }

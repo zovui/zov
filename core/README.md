@@ -96,20 +96,21 @@ $prefix: zov-;
 ### 已经解决
 
 `#001`
-> 主题准备用 css变量 来实现，对于不支持css变量的浏览器放弃提供主题功能，主题还可以通过类名方案，但是会造成许多多余类名，而且不易维护。
+> 主题用 css变量 来实现，对于不支持css变量的浏览器放弃提供主题功能，主题还可以通过类名方案，但是会造成许多多余类名，而且不易维护。
 > 并提供默认主题，dark主题则是将light主题色逆序。
 ```scss
     // 主题色
     --light-color-light-primary                :   #{$color-light-primary};
     --light-color-dark-primary                 :   #{$color-dark-primary};
     // 标题色，正文色，图标色，失效色，边框，分割线，背景色
-    --light-color-title                        :   #{$color-black-1};
-    --light-color-text                         :   #{$color-black-2};
-    --light-color-sub                          :   #{$color-black-3};
-    --light-color-disabled                     :   #{$color-black-4};
-    --light-color-border                       :   #{$color-black-5};
-    --light-color-divider                      :   #{$color-black-6};
-    --light-color-background                   :   #{$color-black-7};
+    --color-title                               :   #{$color-title};
+    --color-text                                :   #{$color-text};
+    --color-sub                                 :   #{$color-sub};
+    --color-placeholder                         :   #{$color-placeholder};
+    --color-disabled                            :   #{$color-disabled};
+    --color-border                              :   #{$color-border};
+    --color-divider                             :   #{$color-divider};
+    --color-background                          :   #{$color-background};
 ```
 
 `#002`
@@ -126,6 +127,7 @@ $prefix: zov-;
 ```
 
 `#003`
+
 ```scss
     //在scss中
     $path: '/'
@@ -189,5 +191,37 @@ Popper.enableEventListeners（）
 它将添加调整大小/滚动事件，并在触发时重新计算popper元素的位置。
 Popper.disableEventListeners（）
 它将删除调整大小/滚动事件，并且在触发时不会重新计算波普尔位置。onUpdate除非您update手动调用方法，否则它也不会再触发回调。
+```
+
+`008`
+
+> `display: inline-block;` 代替 `flot:left`，通过设置 `white-space:nowrap;` 防止换行`.zov-cascader-body`宽度塌陷导致的`popper`组件`update`不彻底的问题。
+>
+> 说明：这里是在写级联插件的收用到的布局，是递归嵌套且同行展示的案例。
+
+```scss
+&-body{
+    &>.#{$prefix-cascader}-column{
+        border-left: none;
+}
+white-space:nowrap;
+}
+// 「#008」`display: inline-block;` 代替 `flot:left`，通过设置 `white-space:nowrap;` 防止换行`.zov-cascader-body`宽度塌陷导致的popper组件update不彻底的问题。
+&-column{
+    display: inline-block;
+    height: $drop-down-max-height;
+    border-left: 1px solid;
+    @include get-color-border();
+    white-space:nowrap;
+    &-inner{
+        white-space: unset;
+        display: inline-block;
+        height: 100%;
+        min-width: 120px;
+        padding-top: $gap-base / 2;
+        padding-bottom: $gap-base / 2;
+        overflow-y: auto;
+    }
+}
 ```
 

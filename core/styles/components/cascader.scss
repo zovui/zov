@@ -1,0 +1,58 @@
+$prefix-cascader : #{$prefix}cascader;
+.#{$prefix-cascader}{
+    .#{$prefix}tooltip-body{
+        padding: 0;
+    }
+    &-body{
+        & > div > .#{$prefix-cascader}-column{
+            border-left: none;
+        }
+        white-space:nowrap;
+        &-search-box > div{
+            padding: $gap-base / 2 0;
+            max-height: $drop-down-max-height;
+            overflow-y: auto;
+        }
+    }
+    // 「#008」`display: inline-block;` 代替 `flot:left`，通过设置 `white-space:nowrap;` 防止换行后body`.zov-cascader-body`宽度塌陷导致的popper update不彻底的问题
+    &-column{
+        display: inline-block;
+        vertical-align: top;
+        height: $drop-down-max-height;
+        border-left: 1px solid;
+        @include get-color-border();
+        white-space:nowrap;
+        &-inner{
+            display: inline-block;
+            height: 100%;
+            min-width: 120px;
+            padding-top: $gap-base / 2;
+            padding-bottom: $gap-base / 2;
+            overflow-y: auto;
+        }
+    }
+    &-option{
+        &-active{
+            @include get-color-divider(background-color);
+        }
+        &-selected{
+            color: $color-primary;
+        }
+        &-arrow-forward{
+            &>.zov-icon:nth-of-type(2){
+                @include get-color-text();
+            }
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0.5em;
+        }
+        &-match{
+            font-weight: bold;
+        }
+    }
+    &-no-data{
+        padding: $gap-base / 2 1em;
+        line-height: $btn-line-height;
+    }
+}

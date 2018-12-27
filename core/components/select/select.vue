@@ -19,12 +19,12 @@
                 :dropShow="dropShow"
                 @on-remove-tag="select"
                 @click.native="!disabled && dropShowFocus()"
-                @remove-tag-end="removeTagEnd"
+                @remove-tag-end="dropUpdate"
             />
             <div
                 class="zov-select-body"
                 :style="{
-                     'width': dropWidth + 'px'
+                     'width': width + 'px'
                 }"
             >
                 <!-- 分组 -->
@@ -32,6 +32,8 @@
                     <template v-if="filterable && query">
                         <Option
                             :data="queryResult"
+                            :selected-values="currentValueArr"
+                            :value-name="valueName"
                             @on-click="select"
                         >
                             <template slot-scope="{props}">
@@ -42,13 +44,15 @@
                     <template v-else>
                         <div
                             v-for="(item, index) in currentData"
-                            :key="index"
+                            :key="index + ''"
                         >
                             <div class="zov-select-option-group-title">
-                                {{ item[groupLabelName] }}
+                                {{ item[labelName] }}
                             </div>
                             <Option
-                                :data="item[groupChildName]"
+                                :data="item[childName]"
+                                :selected-values="currentValueArr"
+                                :value-name="valueName"
                                 @on-click="select"
                             >
                                 <template slot-scope="{props}">
@@ -62,6 +66,8 @@
                 <template v-else>
                     <Option
                         :data="filterable && query ? queryResult : currentData"
+                        :selected-values="currentValueArr"
+                        :value-name="valueName"
                         @on-click="select"
                     >
                         <template slot-scope="{props}">
@@ -84,7 +90,7 @@
 <script>
 import SelectHead from './select-head'
 import Option from './option'
-import SelectedMixin from './selected-mixin'
+import SelectedMixin from './select-mixin'
 let prefix = 'zov-select'
 export default {
     name: prefix,
@@ -101,22 +107,14 @@ export default {
             type: Boolean,
             default: false
         },
-        group: {
-            type: Boolean,
-            default: false
-        },
-        groupChildName: {
-            type: String,
-            default: 'label'
-        },
-        groupLabelName: {
+        childName: {
             type: String,
             default: 'label'
         }
     },
     data () {
         return {
-            currentData: JSON.parse(JSON.stringify(this.data))
+            group: this.data[0] && this.data[0].children && this.data[0].children.length
         }
     },
     computed: {
@@ -133,66 +131,24 @@ export default {
             this.throttleFn(() => {
                 if (this.group) {
                     this.currentData.forEach((group) => {
-                        group[this.groupChildName].forEach((item) => {
+                        group[this.childName].forEach((item) => {
                             if (new RegExp(val).test(item[this.currentQueryName].toString())) {
                                 this.queryResult.push(item)
                             }
                         })
                     })
                 } else {
-                    for (let i = 0; i < this.currentData.length; i++) {
-                        let item = this.currentData[i]
+                    this.currentData.forEach((item) => {
                         if (new RegExp(val).test(item[this.currentQueryName].toString())) {
                             this.queryResult.push(item)
                         }
-                    }
+                    })
                 }
                 this.queryLoading = false
             }, 10)
         }
     },
     methods: {
-        select (item, isDefault) {
-            if (item.disabled) return
-            this.multiple ? this.check(item, isDefault) : this.single(item, isDefault)
-        },
-        single (item, isDefault) {
-            // 单选
-            this.currentItemArr.length && this.$set(this.currentItemArr[0], 'selected', false)
-            // 清洗已选
-            this.currentItemArr = []
-            this.currentValueArr = []
-            // 修改源数据
-            this.$set(item, 'selected', true)
-            // 记录已选
-            this.currentItemArr.push(item)
-            this.currentValueArr.push(item[this.valueName])
-            // 暴露数据
-            this.$emit('input', item[this.valueName])
-            this.$emit('on-change', item)
-            // 单选query值设置
-            this.query = item[this.currentQueryName]
-            // 收起下拉
-            !isDefault && this.dropHideBlur()
-        },
-        check (item, isDefault) {
-            if (item.selected) {
-                // 清洗已选
-                this.$delete(this.currentItemArr, this.currentItemArr.indexOf(item))
-                this.$delete(this.currentValueArr, this.currentValueArr.indexOf(item[this.valueName]))
-            } else {
-                // 记录已选
-                this.currentItemArr.push(item)
-                !isDefault && this.currentValueArr.push(item[this.valueName])
-            }
-            // 修改源数据
-            this.$set(item, 'selected', !item.selected)
-            // 暴露数据
-            this.$emit('input', this.currentValueArr)
-            this.$emit('on-change', this.currentItemArr)
-            // 获取焦点
-            !isDefault && this.dropShowFocus()
-        },
         defaultSelected (callback) {
             if (this.value === null || this.value === undefined || !this.value.toString()) {
                 this.loading = false

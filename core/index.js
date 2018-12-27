@@ -14,6 +14,7 @@ import ToolTip from './components/tooltip'
 import Drop from './components/drop'
 import Select from './components/select'
 import BigDataList from './components/big-data-list'
+import Cascader from './components/cascader'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -40,7 +41,8 @@ const components = {
     ToolTip,
     Drop,
     Select,
-    BigDataList
+    BigDataList,
+    Cascader
 }
 
 const install = (Vue, option = {}) => {
@@ -82,7 +84,8 @@ export {
     ToolTip,
     Drop,
     Select,
-    BigDataList
+    BigDataList,
+    Cascader
 }
 // 将整个zov暴露出去
 export default zov

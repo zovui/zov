@@ -4,9 +4,9 @@ $prefix-select: #{$prefix}select;
     display: inline-block;
     text-align: left;
     border-radius: $border-radius-button;
+    user-select: none;
     &>.#{$prefix}tooltip{
         width: 100%;
-
         & .#{$prefix}tooltip-body{
             padding-left: 0;
             padding-right: 0;
@@ -14,16 +14,17 @@ $prefix-select: #{$prefix}select;
         }
     }
     &-body{
-        max-height: 220px;
+        max-height: $drop-down-max-height;
         overflow-y: auto;
     }
     &-no-data{
         padding: 0 1em;
+        line-height: $btn-line-height;
     }
     &-option{
-        padding: 0 1em;
+        padding: 0 2em 0 1em;
         cursor: pointer;
-        line-height: 2.2;
+        line-height: $btn-line-height;
         position: relative;
         &[disabled]{
             background-color: unset;
@@ -33,20 +34,20 @@ $prefix-select: #{$prefix}select;
                 background-color: unset;
             }
         }
-        &[selected]{
-            color: $color-primary;
-        }
         &:hover{
             @include get-color-divider(background-color);
         }
         &-selected{
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 0.5em;
+            color: $color-primary;
+            &>.zov-icon{
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0.5em;
+            }
         }
         &-group-title{
-            @include get-color-sub(color);
+            @include get-color-placeholder(color);
             padding: 0 0.5em;
         }
 

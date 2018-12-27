@@ -7,6 +7,7 @@ $prefix-select-head: #{$prefix}select-head;
     line-height: $btn-line-height;
     position: relative;
     cursor: text;
+    padding-right: 2em;
     & .#{$prefix}input{
         width: 100%;
         &>input{
@@ -53,9 +54,10 @@ $prefix-select-head: #{$prefix}select-head;
         padding-left: 0.5em;
         min-height: #{$btn-line-height}em;
         &-tags{
+            width: 100%;
             max-height: $btn-line-height * 4em;
             display: inline-block;
-            vertical-align: middle;
+            vertical-align: top;
             overflow: auto;
         }
         & .#{$prefix}input{
@@ -65,6 +67,8 @@ $prefix-select-head: #{$prefix}select-head;
         }
         .#{$prefix}tag{
             margin-left: 0;
+            border: none;
+            @include get-color-divider(background-color);
             &:hover{
                 @include get-color-text();
                 @include get-color-border();

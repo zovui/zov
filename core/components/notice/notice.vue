@@ -6,9 +6,9 @@
     >
         <li class="zov-notice-case"
             v-for="(item, index) in list"
-            :key="index"
+            :key="index + ''"
             v-timer="{'item':item, 'index':index}"
-        ><!-- #002 -->
+        ><!-- 「#002」 -->
             <Icon
                 iconname="close"
                 v-if="item.closable !== false"

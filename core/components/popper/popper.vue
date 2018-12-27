@@ -81,6 +81,7 @@ export default {
                             // behavior: 'clockwise' // 转换方式，默认【'flip'】
                         },
                         preventOverflow: {
+                            padding: 15,
                             boundariesElement: 'window' // 边界元素， 'window'、 'viewport' 默认【scrollParent】
                         }
                     }
