@@ -106,7 +106,7 @@
             <p>@child-name                          非必传，String，分组数据中children字段的映射key，默认'children'</p>
             <p>@multiple                            非必传，Boolean，多选，默认:false</p>
             <p>@filterable                          非必传，Boolean，可搜索，默认:false</p>
-            <p>@no-arrow                            非必传，Boolean，drop容器的尖角，默认:false</p>
+            <p>@no-arrow                            非必传，Boolean，drop容器的尖角，默认:true</p>
             <p>@placeholder                         非必传，String，placeholder，默认:''</p>
             <p>@autofocus                           非必传，Boolean，自动获取焦点，默认:false</p>
             <p>@disabled                            非必传，Boolean，disabled，默认:false</p>

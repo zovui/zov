@@ -34,7 +34,7 @@ export default {
         // drop 属性
         noArrow: {
             type: Boolean,
-            default: false
+            default: true
         },
         // select-head 属性
         placeholder: {
