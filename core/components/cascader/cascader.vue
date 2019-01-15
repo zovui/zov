@@ -3,7 +3,7 @@
         <Drop
             :no-arrow="noArrow"
             :trigger="trigger"
-            :placement="'bottom-start'"
+            placement="bottom-start"
             :never="disabled"
             v-model="dropShow"
         >

@@ -9,9 +9,6 @@
                 label-name="text"
                 disabled
             >
-                <div slot-scope="{props}">
-                    {{ props.item.text }}
-                </div>
             </BigDataList>
             <BigDataList
                 placeholder="单选"
@@ -20,9 +17,6 @@
                 value-name="id"
                 label-name="text"
             >
-                <div slot-scope="{props}">
-                    {{ props.item.text }}
-                </div>
             </BigDataList>
             <BigDataList
                 placeholder="多选"

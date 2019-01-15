@@ -12,9 +12,6 @@
                 autofocus
                 :no-arrow="false"
             >
-                <div slot-scope="{props}">
-                    {{ props.item.text }}
-                </div>
             </Select>
             单选可搜索
             <Select

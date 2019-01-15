@@ -39,7 +39,9 @@
                      @click.stop.capture="select(props.item)"
                      :disabled="props.item.disabled"
                 >
-                    <slot :props="props"></slot>
+                    <slot :props="props">
+                        {{ props.item[labelName] }}
+                    </slot>
                     <Icon v-if="currentValueArr.indexOf(props.item[valueName]) !== -1" iconname="checkmark"/>
                 </div>
             </LongList>

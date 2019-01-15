@@ -125,6 +125,13 @@ let router = new Router({
                 sort: 'form'
             },
             component: () => import('./views/CascaderDemo.vue')
+        },
+        {
+            path: '/modal',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/ModalDemo.vue')
         }
     ]
 })

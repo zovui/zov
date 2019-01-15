@@ -37,7 +37,9 @@
                             @on-click="select"
                         >
                             <template slot-scope="{props}">
-                                <slot :props="props"></slot>
+                                <slot :props="props">
+                                    {{ props.item[labelName] }}
+                                </slot>
                             </template>
                         </Option>
                     </template>
@@ -56,7 +58,9 @@
                                 @on-click="select"
                             >
                                 <template slot-scope="{props}">
-                                    <slot :props="props"></slot>
+                                    <slot :props="props">
+                                        {{ props.item[labelName] }}
+                                    </slot>
                                 </template>
                             </Option>
                         </div>
@@ -71,7 +75,9 @@
                         @on-click="select"
                     >
                         <template slot-scope="{props}">
-                            <slot :props="props"></slot>
+                            <slot :props="props">
+                                {{ props.item[labelName] }}
+                            </slot>
                         </template>
                     </Option>
                 </template>
@@ -109,7 +115,7 @@ export default {
         },
         childName: {
             type: String,
-            default: 'label'
+            default: 'children'
         }
     },
     data () {
@@ -169,6 +175,9 @@ export default {
             this.loading = false
             callback()
         }
+    },
+    mounted () {
+        console.log(this)
     }
 }
 </script>

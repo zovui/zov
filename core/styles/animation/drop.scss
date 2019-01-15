@@ -1,14 +1,19 @@
 .#{$prefix}drop{
+    &-enter-active, &-leave-active{
+        transform-origin: top;
+        transition: opacity $transition-time $bezier,
+        transform $transition-time $bezier;
+    }
     &-enter, &-leave-to{
         opacity: 0;
         transform: scaleY(0.9);
     }
-    &-enter-active, &-leave-active{
-        transform-origin: top;
-        transition: opacity $transition-time $bezier,
-                    transform $transition-time $bezier;
-    }
     &-move{
         transition: all $transition-time $bezier;
+    }
+}
+@each $dir1, $dir2, $deg in (top-start,bottom) (top-end,bottom) (top, bottom){
+    [x-placement^='#{$dir1}'].#{$prefix}drop-enter-active, [x-placement^='#{$dir1}'].#{$prefix}drop-leave-active{
+        transform-origin: #{$dir2};
     }
 }
