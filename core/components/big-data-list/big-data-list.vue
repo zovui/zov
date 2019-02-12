@@ -57,14 +57,14 @@
     </div>
 </template>
 <script>
-import SelectHead from '../select/select-head'
+import LongList from '../long-list'
 import SelectedMixin from '../select/select-mixin'
 import worker from '../../worker'
 let prefix = 'zov-big-data-list'
 export default {
     name: prefix,
     components: {
-        SelectHead
+        LongList
     },
     mixins: [
         SelectedMixin

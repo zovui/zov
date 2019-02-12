@@ -1,8 +1,8 @@
 <template>
     <transition :name="cover ? 'zov-fade' : ''">
         <div :class="classes" v-if="show">
-            <ChromeLoading v-if="spinname === 'loading'"></ChromeLoading>
-            <DbCircle v-if="spinname === 'dbcircle'"></DbCircle>
+            <ChromeLoading v-if="spinname === 'loading'"/>
+            <DbCircle v-if="spinname === 'dbcircle'"/>
             <slot></slot>
         </div>
     </transition>
@@ -12,6 +12,7 @@ import SpinBars from '../spin-bars'
 let prefix = 'zov-spin'
 export default {
     name: prefix,
+    components: SpinBars,
     props: {
         spinname: {
             type: String,
@@ -49,7 +50,6 @@ export default {
             }
         }
     },
-    components: SpinBars,
     mounted () {
         this._isCover(this.cover)
     }

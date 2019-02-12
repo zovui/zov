@@ -127,6 +127,13 @@ let router = new Router({
             component: () => import('./views/CascaderDemo.vue')
         },
         {
+            path: '/datepicker',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/DatePickerDemo.vue')
+        },
+        {
             path: '/modal',
             meta: {
                 sort: 'form'

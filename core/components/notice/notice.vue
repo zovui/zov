@@ -39,10 +39,12 @@
 </template>
 <script>
 import RenderCell from '../../utils/render-cell'
+import Icon from '../icon'
 export default {
     name: 'zov-notice-message',
     components: {
-        RenderCell
+        RenderCell,
+        Icon
     },
     props: {
         // notice、message模式

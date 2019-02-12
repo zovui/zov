@@ -43,10 +43,12 @@
     </span>
 </template>
 <script>
+import Icon from '../icon'
 import CascaderMixin from './cascader-mixin'
 let prefix = 'zov-cascader-column'
 export default {
     name: prefix,
+    components: { Icon },
     mixins: [
         CascaderMixin
     ],

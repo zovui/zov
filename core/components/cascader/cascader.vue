@@ -85,7 +85,7 @@
     </div>
 </template>
 <script>
-import SelectHead from '../select/select-head'
+
 import CascaderColumn from './cascader-column'
 import SelectedMixin from '../select/select-mixin'
 import CascaderMixin from './cascader-mixin'
@@ -93,7 +93,6 @@ let prefix = 'zov-cascader'
 export default {
     name: prefix,
     components: {
-        SelectHead,
         CascaderColumn
     },
     mixins: [
@@ -132,7 +131,6 @@ export default {
             this.queryLoading = true
             if (val === '') return
             this.throttleFn(() => {
-                console.log(this.querySelections.length)
                 for (let i = 0; i < this.querySelections.length; i++) {
                     let item = this.querySelections[i]
                     if (new RegExp(val).test(item[this.currentQueryName].toString())) {

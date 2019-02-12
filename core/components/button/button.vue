@@ -15,11 +15,13 @@
 </template>
 <script>
 import Spin from '../spin'
+import Icon from '../icon'
 let prefix = 'zov-button'
 export default {
     name: prefix,
     components: {
-        Spin
+        Spin,
+        Icon
     },
     props: {
         /*

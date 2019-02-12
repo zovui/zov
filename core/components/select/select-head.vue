@@ -45,13 +45,21 @@
                 ref="zov-select-head-input"
             />
         </template>
-        <Icon :class="arrowDownClasses" iconname="arrow-down"/>
+        <Icon :class="arrowDownClasses" :iconname="iconname"/>
     </div>
 </template>
 <script>
+import Tag from '../tag'
+import Icon from '../icon'
+import Input from '../input'
 let prefix = 'zov-select-head'
 export default {
     name: prefix,
+    components: {
+        Tag,
+        Icon,
+        Input
+    },
     props: {
         value: {
             type: [String, Number],
@@ -86,6 +94,10 @@ export default {
         dropShow: {
             type: Boolean,
             default: false
+        },
+        iconname: {
+            type: String,
+            default: 'arrow-down'
         }
     },
     data () {

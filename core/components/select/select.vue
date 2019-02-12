@@ -94,14 +94,12 @@
     </div>
 </template>
 <script>
-import SelectHead from './select-head'
 import Option from './option'
 import SelectedMixin from './select-mixin'
 let prefix = 'zov-select'
 export default {
     name: prefix,
     components: {
-        SelectHead,
         Option
     },
     mixins: [
@@ -175,9 +173,6 @@ export default {
             this.loading = false
             callback()
         }
-    },
-    mounted () {
-        console.log(this)
     }
 }
 </script>

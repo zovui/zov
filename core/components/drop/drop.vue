@@ -8,9 +8,13 @@
     </ToolTip>
 </template>
 <script>
+import ToolTip from '../tooltip'
 let prefix = 'zov-drop'
 export default {
     name: prefix,
+    components: {
+        ToolTip
+    },
     data () {
         return {
             visible: this.value

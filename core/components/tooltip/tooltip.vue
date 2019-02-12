@@ -36,10 +36,16 @@
     </div>
 </template>
 <script>
+import Popper from '../popper'
+import Icon from '../icon'
 import { directive as clickOutside } from 'v-click-outside-x'
 let prefix = 'zov-tooltip'
 export default {
     name: prefix,
+    components: {
+        Popper,
+        Icon
+    },
     directives: {
         clickOutside
     },

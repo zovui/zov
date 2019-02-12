@@ -18,7 +18,11 @@
     </div>
 </template>
 <script>
+import Icon from '../icon'
 export default {
+    components: {
+        Icon
+    },
     props: {
         data: {
             type: Array,

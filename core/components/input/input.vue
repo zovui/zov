@@ -22,9 +22,13 @@
     </div>
 </template>
 <script>
+import Icon from '../icon'
 let prefix = 'zov-input'
 export default {
     name: prefix,
+    components: {
+        Icon
+    },
     props: {
         // 值
         value: {

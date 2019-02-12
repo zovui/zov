@@ -9,8 +9,10 @@
     </Button>
 </template>
 <script>
+import Icon from '../icon'
 let prefix = 'zov-tag'
 export default {
-    name: prefix
+    name: prefix,
+    components: { Icon }
 }
 </script>

@@ -1,4 +1,14 @@
+import SelectHead from './select-head'
+import Drop from '../drop'
+import Icon from '../icon'
+import Spin from '../spin'
 export default {
+    components: {
+        SelectHead,
+        Drop,
+        Icon,
+        Spin
+    },
     props: {
         // 组件组装
         value: {
@@ -72,6 +82,9 @@ export default {
     watch: {
         dropShow (val) {
             this.$emit('on-open-change', val)
+            if (!val && !this.multiple) {
+                this.query = this.currentItemArr[0] ? this.currentItemArr[0][this.currentQueryName] : ''
+            }
         }
     },
     methods: {
@@ -96,7 +109,6 @@ export default {
             this.timer = setTimeout(callback, timeInterval || 300)
         },
         select (item, isDefault) {
-            console.log(item)
             if (item.disabled) return
             this.multiple ? this.check(item, isDefault) : this.single(item, isDefault)
         },
