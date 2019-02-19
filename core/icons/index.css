@@ -1,10 +1,10 @@
 @font-face {
     font-family: "zov-iconfont";
-    src: url('fonts/iconfont.eot'); /* IE9 */
-    src: url('fonts/iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('fonts/iconfont.woff2') format('woff2'),
-    url('fonts/iconfont.woff') format('woff'),
-    url('fonts/iconfont.ttf') format('truetype');
+    src: url('fonts/zov_iconfont.eot'); /* IE9 */
+    src: url('fonts/zov_iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/zov_iconfont.woff2') format('woff2'),
+    url('fonts/zov_iconfont.woff') format('woff'),
+    url('fonts/zov_iconfont.ttf') format('truetype');
 }
 
 .zov-iconfont {

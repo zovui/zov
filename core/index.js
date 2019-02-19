@@ -1,4 +1,5 @@
-import './icons/iconfont.css'
+// 「#003」
+import './icons/index.css'
 // 【_c】全局注册式组件
 import LongList from './components/long-list'
 import Icon from './components/icon'

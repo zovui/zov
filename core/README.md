@@ -129,15 +129,15 @@ $prefix: zov-;
 `#003`
 
 ```scss
-    //在scss中
-    $path: '/'
-    @font-face{
-        src: url('#{path}iconfont.ttf')
-    }
+    // 「#003」
+    import './icons/index.css'
+    // 【_c】全局注册式组件
+    import LongList from './components/long-list'
 ```
-> 在这里path必须为绝对路径，否则加载不到
+> 在scss中, url必须为绝对路径或者模块~引用，因此将字体 index.css 在入口引用
 
 `#004`
+
 > `stroke : currentColor`；这是一个css关键字，用于存储当前选择器所具有的color值，遵循css向上继承。兼容与ie9+，一般应用于同色，或者不支持color直接操作的，如svg的path
 ```scss
     path{
