@@ -114,11 +114,11 @@ $prefix: zov-;
 ```
 
 `#002`
-> 在使用<transition-group/>的时候，发现数组插入数据不论push、unshift都会导致列表最后一项执行动画，为了解决这个问题，将循环项的key设置为item，而不是index。如：
+> 在使用<transition-group/>的时候，发现数组插入数据不论push、unshift都会导致列表最后一项执行动画，为了解决这个问题，将循环项的key设置为index +""，而不是index。如：
 
 ```vue
 <transition-group name="zov-slide" tag="div">
-    <li class="zov-notice-case" v-for="item in list" :key="item || item.title"><!-- 这里注意 -->
+    <li class="zov-notice-case" v-for="item in list" :key="index + ''"><!-- 这里注意 -->
         <div>
             {{ item.title }}
         </div>

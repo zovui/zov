@@ -1,9 +1,11 @@
 <template>
-    <i @click="clickHandle" :class="prefix">
-        <svg :class="prefix + '-svg'" aria-hidden="true">
-            <use :xlink:href="'#' + iconname"></use>
-        </svg>
-    </i>
+    <span v-bind="$attrs"
+          v-on="$listeners"
+          :class="[
+            prefix,
+            'zov-iconfont',
+            'zi-' + iconname
+        ]"></span>
 </template>
 <script>
 let prefix = 'zov-icon'
@@ -18,12 +20,6 @@ export default {
         iconname: {
             type: String,
             default: ''
-        }
-    },
-    methods: {
-        // 将click事件暴露到组件根上
-        clickHandle (event) {
-            this.$emit('click', event)
         }
     }
 }

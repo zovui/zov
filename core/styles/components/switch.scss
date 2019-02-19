@@ -57,6 +57,7 @@ $prefix-switch : #{$prefix}switch;
         height: 100%;
         align-content: space-between;
         padding: 0 2px;
+        text-align: center;
         &>*{
             flex: 1;
             transform: scale(0.9);

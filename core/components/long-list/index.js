@@ -1,3 +1,3 @@
-import LongList from './long-list';
+import LongList from './long-list'
 
-export default LongList;
+export default LongList

@@ -1,5 +1,6 @@
 let _isSupported = window.CSS && window.CSS.supports && window.CSS.supports('--zovtest', 0)
 if (!_isSupported) {
+    /* eslint-disable no-console */
     console.warn('ZOV主题：浏览器不支持css自定义属性，不支持主题切换')
 }
 let _style = window.getComputedStyle(document.querySelector('body'), null)

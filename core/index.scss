@@ -1,0 +1,9 @@
+@import
+"styles/common/normalize",              // priority：1，使浏览器行为一致化，不依赖变量
+"styles/colors",                        // priority：2，一级变量
+"styles/custom",                        // priority：3，二级变量 暴露到组件外
+"styles/mixins/index",                  // priority：4，混入
+"styles/animation/index",               // priority：5，动画
+"styles/common/reset",                  // priority：6，组件提供的基础重设，依赖变量
+"styles/components/index";              // priority：7，组件
+

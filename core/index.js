@@ -1,8 +1,6 @@
-// icons
-import './icons/iconfont'
+import './icons/iconfont.css'
 // 【_c】全局注册式组件
 import LongList from './components/long-list'
-import AutoCascader from './components/auto-cascader'
 import Icon from './components/icon'
 import Button from './components/button'
 import Tag from './components/tag'
@@ -31,7 +29,6 @@ const components = {
     Message,
     // 【_f】
     LongList,
-    AutoCascader,
     Icon,
     Button,
     Tag,
@@ -46,7 +43,9 @@ const components = {
     Cascader,
     DatePicker
 }
-
+Object.keys(components).forEach(key => {
+    components['z' + key] = components[key]
+})
 const install = (Vue, option = {}) => {
     if (install.installed) return // 防止多次安装
     for (let key in components) {
@@ -62,7 +61,7 @@ const install = (Vue, option = {}) => {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue) // 调用 `MyPlugin.install(Vue)`
 }
-let zov = {
+const zov = {
     install,
     ...components
 }
@@ -75,7 +74,6 @@ export {
     Message,
     // 【_f】
     LongList,
-    AutoCascader,
     Icon,
     Button,
     Tag,

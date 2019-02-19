@@ -24,7 +24,6 @@ export default function (option) {
                 let callback = new Function('e', e.data.callback)
                 callback(e)
                 self.close()
-                console.log('close test')
             }, false)
         `
     ])

@@ -1,9 +1,4 @@
 module.exports = {
-    css: undefined,
-    baseUrl: './',
-    outputDir: undefined,
-    assetsDir: undefined,
-    runtimeCompiler: undefined,
-    productionSourceMap: undefined,
-    parallel: undefined
+    publicPath: './',
+    outputDir: process.env.CORE_MIN === 'lib' ? 'lib' : 'dist'
 }

@@ -19,7 +19,7 @@
                 v-model="query"
                 :dropShow="dropShow"
                 @on-remove-tag="activeItem"
-                @click.native="!disabled && dropShowFocus()"
+                @click.native.stop="!disabled && dropShowFocus()"
                 @remove-tag-end="dropUpdate"
             />
             <div class="zov-cascader-body"

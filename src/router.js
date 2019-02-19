@@ -15,13 +15,6 @@ let router = new Router({
             component: () => import('./views/LongListDemo.vue')
         },
         {
-            path: '/autocascader',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/AutoCascaderDemo.vue')
-        },
-        {
             path: '/icon',
             meta: {
                 sort: 'base'

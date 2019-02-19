@@ -24,7 +24,7 @@ export default {
         clearTimeout(t)
         t = null
     },
-    _keep ({show = false, width = 0, status = 'primary'}) {
+    _keep ({ show = false, width = 0, status = 'primary' }) {
         // 任何需要重新更新的操作都需要清除计时器
         this._clearTimer()
         // 直接操作组件上的data

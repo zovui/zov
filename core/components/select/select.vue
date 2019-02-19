@@ -18,7 +18,7 @@
                 v-model="query"
                 :dropShow="dropShow"
                 @on-remove-tag="select"
-                @click.native="!disabled && dropShowFocus()"
+                @click.native.stop="!disabled && dropShowFocus()"
                 @remove-tag-end="dropUpdate"
             />
             <div

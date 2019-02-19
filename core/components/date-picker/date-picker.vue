@@ -13,9 +13,8 @@
                 :data="currentItemArr"
                 :disabled="disabled"
                 :placeholder="placeholder"
-                :filterable="filterable"
+                :filterable="true"
                 :multiple="multiple"
-                :label-name="labelName"
                 v-model="query"
                 :dropShow="dropShow"
                 @on-remove-tag="select"
@@ -66,6 +65,7 @@ export default {
     },
     data () {
         return {
+            currentItemArr: [],
             query: '',
             dropShow: false
         }
