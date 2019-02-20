@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang=en>
-<head>
-    <meta charset=utf-8>
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <meta name=viewport content="width=device-width,initial-scale=1">
-    <link rel=icon href=favicon.ico><title>zov</title>
-    <link href=../lib/zov.css rel=stylesheet>
-    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
-</head>
-<body>
-<noscript><strong>We're sorry but zov doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-<div id=app>
-    <z-input autofocus placeholder="这是一个自定获取焦点的input"></z-input>
-    <z-drop
-        v-model="open"
-        trigger="hover"
-        no-arrow
-    >
-        <z-input placeholder="hover" slot="drop-head"></z-input>
-        <div style="height: 200px;border: 2px solid">
-            内容
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv=X-UA-Compatible content="IE=edge">
+        <meta name=viewport content="width=device-width,initial-scale=1">
+        <link rel=icon href=favicon.ico>
+        <title>zov</title>
+        <link href=css/zov.css rel=stylesheet>
+    </head>
+    <body>
+        <div id=app>
+            <z-input autofocus placeholder="这是一个自定获取焦点的input"></z-input>
+            <z-drop
+                v-model="open"
+                trigger="hover"
+                no-arrow
+            >
+                <z-input placeholder="hover" slot="drop-head"></z-input>
+                <div style="height: 200px;border: 2px solid">
+                    内容
+                </div>
+            </z-drop>
+            <Switcher v-model="open">
+                <span slot="open">开</span>
+                <span slot="close">关</span>
+            </Switcher>
+            <z-button loading iconname="download">自定义icon</z-button>
+            <z-select
+                :data="[{
+                            value: 1,
+                            label: 'item#1',
+                            disabled: true
+                        }, {
+                            value: 2,
+                            label: 'item#2'
+                        }]"
+                placeholder="单选，某项disabled"
+            >
+                <div slot-scope="{props}">
+                    {{ props.item.label }}
+                </div>
+            </z-select>
         </div>
-    </z-drop>
-    <Switcher v-model="open">
-        <span slot="open">开</span>
-        <span slot="close">关</span>
-    </Switcher>
-    <z-button loading iconname="download">自定义icon</z-button>
-    <z-select
-        :data="[{
-                    value: 1,
-                    label: 'item#1',
-                    disabled: true
-                }, {
-                    value: 2,
-                    label: 'item#2'
-                }]"
-        placeholder="单选，某项disabled"
-    >
-        <div slot-scope="{props}">
-            {{ props.item.label }}
-        </div>
-    </z-select>
-</div>
-</body>
+    </body>
 </html>
-<script src=../lib/zov.umd.min.js></script>
+<script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+<script src=zov.min.js></script>
 <script>
-
-    var app = new Vue({
+    new Vue({
         el: '#app',
         data: {
             msg: '123',
@@ -58,5 +57,4 @@
             this.$LoadingBar.finish();
         }
     })
-    console.log(app)
 </script>
