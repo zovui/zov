@@ -90,7 +90,67 @@ $prefix: zov-;
 </ToolTip>
 ```
 
+8、browser端的组件引用，z-[component]
+
+> eg:
+
+```vue
+<link href=css/zov.css rel=stylesheet>
+
+<div id=app>
+    <z-input autofocus placeholder="这是一个自定获取焦点的input"></z-input>
+    <z-drop
+            v-model="open"
+            trigger="hover"
+            no-arrow
+            >
+        <z-input placeholder="hover" slot="drop-head"></z-input>
+        <div style="height: 200px;border: 2px solid">
+            内容
+        </div>
+    </z-drop>
+    <z-switcher v-model="open">
+        <span slot="open">开</span>
+        <span slot="close">关</span>
+    </z-switcher>
+    <z-button loading iconname="download">自定义icon</z-button>
+    <z-select
+              :data="[{
+                     value: 1,
+                     label: 'item#1',
+                     disabled: true
+                     }, {
+                     value: 2,
+                     label: 'item#2'
+                     }]"
+              placeholder="单选，某项disabled"
+              >
+        <div slot-scope="{props}">
+            {{ props.item.label }}
+        </div>
+    </z-select>
+</div>
+<script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+<script src=zov.min.js></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            msg: '123',
+            open: true
+        },
+        mounted () {
+            this.$LoadingBar.finish();
+        }
+    })
+</script>
+
+```
+
+
+
 ## 锚点
+
 ### 待解决
 
 ### 已经解决
