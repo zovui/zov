@@ -22,7 +22,7 @@
                 @remove-tag-end="dropUpdate"
             />
             <div>
-                asdfasdfasdf
+                <DayTable/>
             </div>
         </Drop>
     </div>
@@ -30,10 +30,11 @@
 <script>
 import Drop from '../drop'
 import SelectHead from '../select/select-head'
+import DayTable from './date-table/day-table'
 let prefix = 'zov-data-picker'
 export default {
     name: prefix,
-    components: { Drop, SelectHead },
+    components: { Drop, SelectHead, DayTable },
     props: {
         // 组件组装
         value: {
