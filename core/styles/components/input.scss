@@ -11,10 +11,10 @@ $prefix-input : #{$prefix}input;
         border: 1px solid;
         @include get-color-border();
         border-radius: $border-radius-button;
-        transition: color $transition-btn-time $bezier,
-                    background-color $transition-btn-time $bezier,
-                    border $transition-btn-time $bezier,
-                    box-shadow $transition-btn-time $bezier;
+        transition: color $transition-hover-time $bezier,
+                    background-color $transition-hover-time $bezier,
+                    border $transition-hover-time $bezier,
+                    box-shadow $transition-hover-time $bezier;
         &:hover{
             border-color: $color-light-primary;
         }
@@ -39,7 +39,7 @@ $prefix-input : #{$prefix}input;
             margin-right: $gap-x;
         }
         &-tool{
-            transition: color $transition-btn-time $bezier;
+            transition: color $transition-hover-time $bezier;
             cursor: pointer;
             &:hover{
                 @include get-color-sub-hover()

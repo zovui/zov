@@ -42,10 +42,6 @@
     content: "\e972";
 }
 
-.zi-aperture:before {
-    content: "\e973";
-}
-
 .zi-analytics:before {
     content: "\e974";
 }
@@ -158,10 +154,6 @@
     content: "\e98f";
 }
 
-.zi-bonfire:before {
-    content: "\e990";
-}
-
 .zi-book:before {
     content: "\e991";
 }
@@ -190,14 +182,6 @@
     content: "\e997";
 }
 
-.zi-cafe:before {
-    content: "\e998";
-}
-
-.zi-bulb:before {
-    content: "\e999";
-}
-
 .zi-calculator:before {
     content: "\ea21";
 }
@@ -212,10 +196,6 @@
 
 .zi-wifi:before {
     content: "\ea24";
-}
-
-.zi-water:before {
-    content: "\ea25";
 }
 
 .zi-volume-mute:before {
@@ -236,10 +216,6 @@
 
 .zi-volume-low:before {
     content: "\ea2a";
-}
-
-.zi-undo:before {
-    content: "\ea2b";
 }
 
 .zi-unlock:before {
@@ -318,14 +294,6 @@
     content: "\ea3e";
 }
 
-.zi-cloudy:before {
-    content: "\ea3f";
-}
-
-.zi-cloudy-night:before {
-    content: "\ea40";
-}
-
 .zi-code-working:before {
     content: "\ea41";
 }
@@ -390,10 +358,6 @@
     content: "\ea50";
 }
 
-.zi-cut:before {
-    content: "\ea51";
-}
-
 .zi-create:before {
     content: "\ea52";
 }
@@ -402,20 +366,12 @@
     content: "\ea53";
 }
 
-.zi-disc:before {
-    content: "\ea54";
-}
-
 .zi-document:before {
     content: "\ea55";
 }
 
 .zi-done-all:before {
     content: "\ea56";
-}
-
-.zi-egg:before {
-    content: "\ea57";
 }
 
 .zi-download:before {
@@ -452,10 +408,6 @@
 
 .zi-filing:before {
     content: "\ea60";
-}
-
-.zi-fitness:before {
-    content: "\ea61";
 }
 
 .zi-flag:before {
@@ -498,10 +450,6 @@
     content: "\ea6b";
 }
 
-.zi-football:before {
-    content: "\ea6c";
-}
-
 .zi-funnel:before {
     content: "\ea6d";
 }
@@ -510,32 +458,8 @@
     content: "\ea6e";
 }
 
-.zi-git-branch:before {
-    content: "\ea6f";
-}
-
-.zi-git-merge:before {
-    content: "\ea70";
-}
-
-.zi-git-commit:before {
-    content: "\ea71";
-}
-
-.zi-git-network:before {
-    content: "\ea72";
-}
-
-.zi-git-compare:before {
-    content: "\ea73";
-}
-
 .zi-glasses:before {
     content: "\ea74";
-}
-
-.zi-git-pull-request:before {
-    content: "\ea75";
 }
 
 .zi-globe:before {
@@ -602,10 +526,6 @@
     content: "\ea85";
 }
 
-.zi-ice-cream:before {
-    content: "\ea86";
-}
-
 .zi-image:before {
     content: "\ea87";
 }
@@ -630,10 +550,6 @@
     content: "\ea8c";
 }
 
-.zi-jet:before {
-    content: "\ea8d";
-}
-
 .zi-journal:before {
     content: "\ea8e";
 }
@@ -648,10 +564,6 @@
 
 .zi-laptop:before {
     content: "\ea91";
-}
-
-.zi-leaf:before {
-    content: "\ea92";
 }
 
 .zi-list-box:before {
@@ -682,10 +594,6 @@
     content: "\ea99";
 }
 
-.zi-magnet:before {
-    content: "\ea9a";
-}
-
 .zi-mail-open:before {
     content: "\ea9b";
 }
@@ -710,24 +618,12 @@
     content: "\eaa0";
 }
 
-.zi-medal:before {
-    content: "\eaa1";
-}
-
 .zi-medical:before {
     content: "\eaa2";
 }
 
-.zi-medkit:before {
-    content: "\eaa3";
-}
-
 .zi-menu:before {
     content: "\eaa4";
-}
-
-.zi-megaphone:before {
-    content: "\eaa5";
 }
 
 .zi-mic-off:before {
@@ -752,10 +648,6 @@
 
 .zi-musical-note:before {
     content: "\eaab";
-}
-
-.zi-microphone:before {
-    content: "\eaac";
 }
 
 .zi-navigate:before {
@@ -790,10 +682,6 @@
     content: "\eab4";
 }
 
-.zi-nutrition:before {
-    content: "\eab5";
-}
-
 .zi-paper-plane:before {
     content: "\eab6";
 }
@@ -802,20 +690,12 @@
     content: "\eab7";
 }
 
-.zi-outlet:before {
-    content: "\eab8";
-}
-
 .zi-pause:before {
     content: "\eab9";
 }
 
 .zi-paw:before {
     content: "\eaba";
-}
-
-.zi-partly-sunny:before {
-    content: "\eabb";
 }
 
 .zi-people:before {
@@ -828,10 +708,6 @@
 
 .zi-person-add:before {
     content: "\eabe";
-}
-
-.zi-phone-landscape:before {
-    content: "\eabf";
 }
 
 .zi-phone-portrait:before {
@@ -850,14 +726,6 @@
     content: "\eac3";
 }
 
-.zi-pint:before {
-    content: "\eac4";
-}
-
-.zi-pizza:before {
-    content: "\eac5";
-}
-
 .zi-play:before {
     content: "\eac6";
 }
@@ -868,10 +736,6 @@
 
 .zi-podium:before {
     content: "\eac8";
-}
-
-.zi-planet:before {
-    content: "\eac9";
 }
 
 .zi-power:before {
@@ -914,10 +778,6 @@
     content: "\ead3";
 }
 
-.zi-rainy:before {
-    content: "\ead4";
-}
-
 .zi-recording:before {
     content: "\ead5";
 }
@@ -958,16 +818,8 @@
     content: "\eade";
 }
 
-.zi-restaurant:before {
-    content: "\eadf";
-}
-
 .zi-return-left:before {
     content: "\eae0";
-}
-
-.zi-reverse-camera:before {
-    content: "\eae1";
 }
 
 .zi-rewind:before {
@@ -976,14 +828,6 @@
 
 .zi-return-right:before {
     content: "\eae3";
-}
-
-.zi-ribbon:before {
-    content: "\eae4";
-}
-
-.zi-rose:before {
-    content: "\eae5";
 }
 
 .zi-sad:before {
@@ -998,20 +842,12 @@
     content: "\eae8";
 }
 
-.zi-school:before {
-    content: "\eae9";
-}
-
 .zi-search:before {
     content: "\eaea";
 }
 
 .zi-send:before {
     content: "\eaeb";
-}
-
-.zi-share-alt:before {
-    content: "\eaec";
 }
 
 .zi-settings:before {
@@ -1074,10 +910,6 @@
     content: "\eafb";
 }
 
-.zi-subway:before {
-    content: "\eafc";
-}
-
 .zi-swap:before {
     content: "\eafd";
 }
@@ -1090,10 +922,6 @@
     content: "\eaff";
 }
 
-.zi-tablet-landscape:before {
-    content: "\eb00";
-}
-
 .zi-sync:before {
     content: "\eb01";
 }
@@ -1102,16 +930,8 @@
     content: "\eb02";
 }
 
-.zi-tennisball:before {
-    content: "\eb03";
-}
-
 .zi-text:before {
     content: "\eb04";
-}
-
-.zi-thermometer:before {
-    content: "\eb05";
 }
 
 .zi-thumbs-down:before {
@@ -1134,16 +954,8 @@
     content: "\eb0a";
 }
 
-.zi-train:before {
-    content: "\eb0b";
-}
-
 .zi-time:before {
     content: "\eb0c";
-}
-
-.zi-transgender:before {
-    content: "\eb0d";
 }
 
 .zi-trash:before {
@@ -1158,27 +970,10 @@
     content: "\eb10";
 }
 
-.zi-tv:before {
-    content: "\eb11";
-}
-
-.zi-trophy:before {
-    content: "\eb12";
-}
-
-.zi-umbrella:before {
-    content: "\eb13";
-}
-
-.zi-undo1:before {
+.zi-undo:before {
     content: "\eb14";
-}
-
-.zi-unlock1:before {
-    content: "\eb15";
 }
 
 .zi-videocam:before {
     content: "\eb16";
 }
-

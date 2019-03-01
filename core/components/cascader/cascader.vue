@@ -20,7 +20,6 @@
                 :dropShow="dropShow"
                 @on-remove-tag="activeItem"
                 @click.native.stop="!disabled && dropShowFocus()"
-                @remove-tag-end="dropUpdate"
             />
             <div class="zov-cascader-body"
             >

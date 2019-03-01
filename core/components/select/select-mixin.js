@@ -91,10 +91,6 @@ export default {
         isThisComponent (component) {
             return this.$options.name === component
         },
-        dropUpdate () {
-            // 解决删除tags动画完成后的高度变化导致popper不更新问题
-            this.$children[0].$children[0].$children[1] && this.$children[0].$children[0].$children[1].popper.update()
-        },
         dropShowFocus () {
             this.$refs['zov-select-head'].headFocus()
             this.dropShow = true

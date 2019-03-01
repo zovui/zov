@@ -19,7 +19,6 @@
                 :dropShow="dropShow"
                 @on-remove-tag="select"
                 @click.native.stop="!disabled && dropShowFocus()"
-                @remove-tag-end="dropUpdate"
             />
             <div
                 class="zov-select-body"

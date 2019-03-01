@@ -19,7 +19,6 @@
                 :dropShow="dropShow"
                 @on-remove-tag="select"
                 @click.native="!disabled && dropShowFocus()"
-                @remove-tag-end="dropUpdate"
             />
             <LongList
                 class="zov-select-body"

@@ -1,0 +1,63 @@
+$prefix-date-table: #{$prefix}date-table;
+.#{$prefix-date-table}{
+    $grid-size: 24px;
+    @mixin cells {
+        display: inline-block;
+        width: $grid-size;
+        height: $grid-size;
+        margin: 2px;
+        text-align: center;
+        line-height: $grid-size;
+    }
+    &-header{
+        text-align: right;
+        &>span{
+            @include cells();
+            font-weight: 600;
+            @include get-color-title();
+        }
+    }
+    &-body{
+
+    }
+    &-cell{
+        position: relative;
+        @include cells();
+        border-radius: $border-radius-button;
+        transition: color $transition-hover-time $bezier,
+                    background-color $transition-hover-time $bezier;
+        &-not-in-month{
+            background-color: transparent;
+            @include get-color-disabled(color);
+        }
+        cursor: pointer;
+        &:not([disabled]):hover{
+            @include get-color-divider(background-color);
+        }
+        &-today{
+            &:after{
+                content: '';
+                position: absolute;
+                display: block;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: $color-primary;
+                right: 0;
+                top: 0;
+            }
+        }
+        &-week{
+            @include cells();
+            @include get-color-sub-hover(color);
+            font-weight: bold;
+        }
+        &-selected{
+            background: $color-primary;
+            @include get-color-text();
+            &:not([disabled]):hover{
+                @include get-color-primary-hover(background-color);
+            }
+        }
+    }
+}

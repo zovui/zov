@@ -11,12 +11,16 @@ export default {
         }
     },
     methods: {
+        dropUpdate () {
+            this.$children[0].$children[0].$children[1] && this.$children[0].$children[0].$children[1].popper.update()
+        },
         hasChildren (data) {
             return data[this.childName] && data[this.childName].length
         },
         findCascaderComponent () {
             let component = null
             function f (c) {
+                if (!c && c.$options) return
                 if (c.$options.name === 'zov-cascader') {
                     component = c
                     return

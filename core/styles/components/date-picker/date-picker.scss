@@ -1,0 +1,16 @@
+$prefix-date-picker: #{$prefix}date-picker;
+.#{$prefix-date-picker}{
+    width: $form-dom-width;
+    display: inline-block;
+    text-align: left;
+    border-radius: $border-radius-button;
+    user-select: none;
+    & .#{$prefix}tooltip{
+        &-body{
+            width: unset;
+            min-width: 220px;
+            max-width: 248px;
+        }
+        width: 100%;
+    }
+}

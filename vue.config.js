@@ -10,6 +10,12 @@ module.exports = {
                     './core/index.scss'
                 ]
             }
+            webpackConfig.externals = {
+                'vue': 'Vue',
+                'vue-router': 'VueRouter',
+                'vuex': 'Vuex',
+                'axios': 'axios'
+            }
             webpackConfig.optimization.splitChunks = {}
             webpackConfig.output.filename = '[name].min.js'
         }

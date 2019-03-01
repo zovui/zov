@@ -9,7 +9,7 @@
             <div class="zov-select-head-multiple-tags">
                 <transition-group
                     name="zov-scale"
-                    @after-leave="removeTagEnd"
+                    @after-leave="$emit('remove-tag-end')"
                 >
                     <Tag
                         size="small"
@@ -149,10 +149,6 @@ export default {
         },
         deleteTag () {
             !this.currentValue && this.multiple && this.data.length && this.$emit('on-remove-tag', this.data[this.data.length - 1])
-        },
-        removeTagEnd () {
-            // 解决删除tags动画完成后的高度变化导致popper不更新问题
-            this.$parent.$children[1] && this.$parent.$children[1].popper.update()
         }
     },
     mounted () {

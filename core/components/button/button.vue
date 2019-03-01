@@ -1,6 +1,6 @@
 <template>
     <button
-        @click="clickHandle"
+        v-on="$listeners"
         v-bind="$attrs"
         :class="classes"
         >
@@ -65,6 +65,10 @@ export default {
         iconname: {
             type: String,
             default: ''
+        },
+        to: {
+            type: String,
+            default: ''
         }
     },
     computed: {
@@ -77,11 +81,6 @@ export default {
                     'zov-button': true
                 }
             ]
-        }
-    },
-    methods: {
-        clickHandle (event) {
-            this.$emit('click', event)
         }
     }
 }

@@ -8,8 +8,12 @@
             </Switcher>
         </p>
         <ul id="nav">
-            <Button v-for="(item,index) in $router.options.routes" :key="index">
-                <router-link :to="item.path" :key="index">{{ item.path.substr(1) }}</router-link>
+            <Button
+                v-for="(item,index) in $router.options.routes"
+                :key="index"
+                @click="$router.push({path: item.path})"
+            >
+                {{ item.path.substr(1) }}
             </Button>
         </ul>
         <router-view/>

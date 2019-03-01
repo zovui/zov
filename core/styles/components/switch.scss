@@ -14,9 +14,9 @@ $prefix-switch : #{$prefix}switch;
     vertical-align: middle;
     box-sizing: border-box;
     color: $color-background;
-    transition: background-color $transition-btn-time $bezier,
-                border $transition-btn-time $bezier,
-                box-shadow $transition-btn-time $bezier;
+    transition: background-color $transition-hover-time $bezier,
+                border $transition-hover-time $bezier,
+                box-shadow $transition-hover-time $bezier;
     @include get-color-sub(background-color);
     border-radius: $height + 0.5em;
     &-inner{
@@ -29,8 +29,8 @@ $prefix-switch : #{$prefix}switch;
         position: absolute;
         top: 0;
         left: 0;
-        transition: left $transition-btn-time $bezier,
-                    width $transition-btn-time $bezier;
+        transition: left $transition-hover-time $bezier,
+                    width $transition-hover-time $bezier;
     }
     &:active{
         .#{$prefix-switch}-inner{
