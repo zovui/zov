@@ -55,3 +55,8 @@
     @include get-color-text(background-color);
     @include get-color-bg(color)
 }
+
+// 背景为主题色或者辅助色填充时，文案的颜色应该永远为高亮
+@mixin get-color-background-coloured () {
+    color: $color-background;
+}

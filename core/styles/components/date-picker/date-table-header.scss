@@ -1,14 +1,17 @@
 $prefix-date-picker-header: #{$prefix}date-picker-header;
 .#{$prefix-date-picker-header}{
     $grid-size: 24px;
-    padding: 4px 0;
+    $interval: 5px;
+    padding: 0 0 $interval 0;
     display: flex;
     font-weight: bold;
     text-align: center;
+    border-bottom: 1px solid;
+    @include get-color-sub-hover(border-color);
+    margin-bottom: $interval * 2;
     &-btns{
         max-width: 50px;
         &>*{
-            overflow: hidden;
             display: inline-block;
             width: $grid-size;
             height: $grid-size;
@@ -17,6 +20,7 @@ $prefix-date-picker-header: #{$prefix}date-picker-header;
             border-radius: $border-radius-button;
             cursor: pointer;
             transition: color $transition-hover-time linear;
+            vertical-align: middle;
             &:hover{
                 @include get-color-sub-hover();
 

@@ -1,17 +1,17 @@
 $prefix-button : #{$prefix}button;
 @mixin btn-type ($color-type, $color) {
     &-#{$color-type}{
-        color: $color-background;
+        @include get-color-background-coloured();
         border-color: transparent;
         background-color: $color;
         @include outline($color);
         &:hover{
-            color: $color-background;
+            @include get-color-background-coloured();
             border-color: lighten($color, $toning-ratio);
             background-color: lighten($color, $toning-ratio);
         }
         &:active{
-            color: $color-background;
+            @include get-color-background-coloured();
             border-color: darken($color, $toning-ratio);
             background-color: darken($color, $toning-ratio);
         }

@@ -28,8 +28,8 @@
                     'zov-month-table-cell',
                     {
                         'zov-month-table-cell-today': item.origin.format('YYYY-MM') === today.format('YYYY-MM'),
-                        'zov-month-table-cell-current': !isThisPanel('month') && item.origin.format('YYYY-MM') === currentDate.format('YYYY-MM'),
-                        'zov-month-table-cell-selected': isThisPanel('month') && isSelected(item)
+                        'zov-month-table-cell-current': !isThisPanel('month') && item.origin.format('YYYY-MM') === date.format('YYYY-MM'),
+                        'zov-month-table-cell-selected': isThisPanel('month') && datePickerComponent.isSelected(item)
                     }
                 ]"
                 :disabled="item.disabled"

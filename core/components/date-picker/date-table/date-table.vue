@@ -3,13 +3,13 @@
         <!-- 操作 -->
         <div class="zov-date-picker-header">
             <div class="zov-date-picker-header-btns">
-                <span @click="() => yearIndex--">
+                <span @click="yearIndex--">
                     <Icon iconname="arrow-back"/>
                     <Icon iconname="arrow-back"/>
                 </span>
                 <Icon
                     iconname="arrow-back"
-                    @click="() => monthIndex--"
+                    @click="monthIndex--"
                 />
             </div>
             <div class="zov-date-picker-header-center">
@@ -23,9 +23,9 @@
             <div class="zov-date-picker-header-btns">
                 <Icon
                     iconname="arrow-forward"
-                    @click="() => monthIndex++"
+                    @click="monthIndex++"
                 />
-                <span @click="() => yearIndex++">
+                <span @click="yearIndex++">
                     <Icon iconname="arrow-forward"/>
                     <Icon iconname="arrow-forward"/>
                 </span>
@@ -33,6 +33,7 @@
         </div>
         <!-- 展示 -->
         <div class="zov-date-table-header">
+            <span v-if="showWeekNumbers"></span>
             <span
                 v-for="(item, index) in datesHeader"
                 :key="index + ''"
@@ -42,8 +43,18 @@
         </div>
         <div class="zov-date-table-body">
             <template v-for="(item, index) in weeks">
-                <div :key="index + ''">
-                    <span class="zov-date-table-cell-week">
+                <div
+                    :class="[
+                        'zov-date-table-week',
+                        {
+                            'zov-date-table-week-optional' : datePickerComponent.type === 'week',
+                            'zov-date-table-week-optional-selected' : datePickerComponent.type === 'week' && datePickerComponent.isSelected(item[0])
+                        }
+                    ]"
+                    :key="index + ''"
+                    @click="datePickerComponent.type === 'week' && active(item[0])"
+                >
+                    <span v-if="showWeekNumbers" class="zov-date-table-cell-week">
                         {{ item[0].origin.week() }}
                     </span>
                     <span
@@ -52,7 +63,7 @@
                             {
                                 'zov-date-table-cell-today': innerItem.origin.format('YYYY-MM-DD') === today.format('YYYY-MM-DD'),
                                 'zov-date-table-cell-not-in-month': innerItem.notInMonth,
-                                'zov-date-table-cell-selected': isSelected(innerItem)
+                                'zov-date-table-cell-selected': datePickerComponent.type !== 'week' && isThisPanel('date') && datePickerComponent.isSelected(innerItem)
                             }
                         ]"
                         :disabled="innerItem.disabled"

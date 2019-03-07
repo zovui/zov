@@ -3,7 +3,7 @@
         <!-- 操作 -->
         <div class="zov-date-picker-header">
             <div class="zov-date-picker-header-btns">
-                <span @click="() => yearsIndex--">
+                <span @click="yearsIndex--">
                     <Icon iconname="arrow-back"/>
                     <Icon iconname="arrow-back"/>
                 </span>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="zov-date-picker-header-btns">
-                <span @click="() => yearsIndex++">
+                <span @click="yearsIndex++">
                     <Icon iconname="arrow-forward"/>
                     <Icon iconname="arrow-forward"/>
                 </span>
@@ -28,8 +28,8 @@
                     'zov-month-table-cell',
                     {
                         'zov-month-table-cell-today': item.origin.format('YYYY') === today.format('YYYY'),
-                        'zov-month-table-cell-current': !isThisPanel('year') && item.origin.format('YYYY') === currentDate.format('YYYY'),
-                        'zov-month-table-cell-selected': isThisPanel('year') && isSelected(item)
+                        'zov-month-table-cell-current': !isThisPanel('year') && item.origin.format('YYYY') === date.format('YYYY'),
+                        'zov-month-table-cell-selected': isThisPanel('year') && datePickerComponent.isSelected(item)
                     }
                 ]"
                 :disabled="item.disabled"

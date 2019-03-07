@@ -2,27 +2,53 @@ $prefix-date-table: #{$prefix}date-table;
 .#{$prefix-date-table}{
     $grid-size: 24px;
     @mixin cells {
-        display: inline-block;
         width: $grid-size;
         height: $grid-size;
-        margin: 2px;
+        margin: 2px 0;
         text-align: center;
         line-height: $grid-size;
     }
     &-header{
         text-align: right;
+        display: flex;
+        justify-content: space-around;
         &>span{
             @include cells();
             font-weight: 600;
             @include get-color-title();
         }
     }
-    &-body{
-
+    &-week{
+        display: flex;
+        justify-content: space-around;
+        border-radius: $border-radius-button;
+        margin: 2px 0;
+        transition: color $transition-hover-time $bezier,
+                    background-color $transition-hover-time $bezier;
+        &-optional{
+            position: relative;
+            cursor: pointer;
+            &:after{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+            &:not([disabled]):hover{
+                @include get-color-divider(background-color);
+            }
+            &-selected{
+                background: $color-primary;
+                @include get-color-background-coloured();
+                &:not([disabled]):hover{
+                    @include get-color-primary-hover(background-color);
+                }
+            }
+        }
     }
     &-cell{
-        position: relative;
         @include cells();
+        position: relative;
         border-radius: $border-radius-button;
         transition: color $transition-hover-time $bezier,
                     background-color $transition-hover-time $bezier;
@@ -54,7 +80,7 @@ $prefix-date-table: #{$prefix}date-table;
         }
         &-selected{
             background: $color-primary;
-            @include get-color-text();
+            @include get-color-background-coloured();
             &:not([disabled]):hover{
                 @include get-color-primary-hover(background-color);
             }

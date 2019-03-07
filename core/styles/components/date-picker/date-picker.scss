@@ -7,9 +7,7 @@ $prefix-date-picker: #{$prefix}date-picker;
     user-select: none;
     & .#{$prefix}tooltip{
         &-body{
-            width: unset;
-            min-width: 220px;
-            max-width: 248px;
+            width: 248px;
         }
         width: 100%;
     }

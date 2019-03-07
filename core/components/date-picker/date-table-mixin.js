@@ -1,13 +1,26 @@
 import Icon from '../icon'
-import DatePickerMixin from './date-picker-mixin'
 export default {
-    mixins: [ DatePickerMixin ],
     components: {
         Icon
     },
     props: {
         date: '',
         today: ''
+    },
+    computed: {
+        datePickerComponent () {
+            let component = null
+            function f (c) {
+                if (!c && c.$options) return
+                if (c.$options.name === 'zov-date-picker') {
+                    component = c
+                    return
+                }
+                f(c.$parent)
+            }
+            f(this)
+            return component
+        }
     },
     methods: {
         updateDate (date) {
@@ -25,6 +38,11 @@ export default {
             let _that = this.datePickerComponent
             _that.tableShow.pop()
             _that.dropShowFocus()
+        },
+        active (val) {
+            let _that = this.datePickerComponent
+            this.updateDate(val.origin)
+            _that.tableShow.length > 1 ? this.back() : _that.select(val)
         },
         isThisPanel (type) {
             return this.datePickerComponent.tableShow[0] === type

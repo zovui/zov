@@ -42,7 +42,7 @@ $prefix-month-table: #{$prefix}month-table;
         }
         &-selected{
             background: $color-primary;
-            @include get-color-text();
+            @include get-color-background-coloured();
             &:not([disabled]):hover{
                 @include get-color-primary-hover(background-color);
             }
