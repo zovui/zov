@@ -3,6 +3,8 @@
         :class="classes"
         :disabled="disabled"
         @keydown.delete="deleteTag"
+        @mouseenter="mouseStatus = 'enter'"
+        @mouseleave="mouseStatus = 'leave'"
     >
         <template v-if="multiple">
             <!-- 多选 -->
@@ -45,7 +47,11 @@
                 ref="zov-select-head-input"
             />
         </template>
-        <Icon :class="arrowDownClasses" :iconname="iconname"/>
+        <Icon
+            :class="arrowDownClasses"
+            :iconname="clearStatus ? 'close-circle' : iconname"
+            @click.self="clearHandle"
+        />
     </div>
 </template>
 <script>
@@ -75,6 +81,10 @@ export default {
             type: Boolean,
             default: false
         },
+        clearable: {
+            type: Boolean,
+            default: true
+        },
         filterable: {
             type: Boolean,
             default: false
@@ -98,12 +108,17 @@ export default {
         iconname: {
             type: String,
             default: 'arrow-down'
+        },
+        arrowDownNoAnimation: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
             currentValue: this.value,
-            currentWidth: null
+            currentWidth: null,
+            mouseStatus: 'leave'
         }
     },
     watch: {
@@ -133,9 +148,13 @@ export default {
         arrowDownClasses () {
             return [
                 prefix + '-arrow-down', {
-                    [prefix + '-arrow-up']: this.dropShow
+                    [prefix + '-arrow-up']: this.dropShow && !this.arrowDownNoAnimation,
+                    [prefix + '-clear-hover']: this.clearStatus
                 }
             ]
+        },
+        clearStatus () {
+            return this.clearable && (this.currentValue || this.data.length) && this.mouseStatus === 'enter'
         }
     },
     methods: {
@@ -149,6 +168,9 @@ export default {
         },
         deleteTag () {
             !this.currentValue && this.multiple && this.data.length && this.$emit('on-remove-tag', this.data[this.data.length - 1])
+        },
+        clearHandle () {
+            this.clearStatus && this.$emit('on-clear')
         },
         removeTagEnd () {
             // 解决删除tags动画完成后的高度变化导致popper不更新问题

@@ -12,11 +12,15 @@ $prefix-date-table: #{$prefix}date-table;
         text-align: right;
         display: flex;
         justify-content: space-around;
+        padding: 0 $gap-base / 4 * 3;
         &>span{
             @include cells();
             font-weight: 600;
             @include get-color-title();
         }
+    }
+    &-body{
+        padding: 0 $gap-base / 4 * 3;
     }
     &-week{
         display: flex;
@@ -42,6 +46,11 @@ $prefix-date-table: #{$prefix}date-table;
                 @include get-color-background-coloured();
                 &:not([disabled]):hover{
                     @include get-color-primary-hover(background-color);
+                }
+                &>span{
+                    &:after{
+                        background: currentColor;
+                    }
                 }
             }
         }
@@ -69,8 +78,8 @@ $prefix-date-table: #{$prefix}date-table;
                 height: 6px;
                 border-radius: 50%;
                 background: $color-primary;
-                right: 0;
-                top: 0;
+                right: 1px;
+                top: 1px;
             }
         }
         &-week{
@@ -83,6 +92,9 @@ $prefix-date-table: #{$prefix}date-table;
             @include get-color-background-coloured();
             &:not([disabled]):hover{
                 @include get-color-primary-hover(background-color);
+            }
+            &:after{
+                background: currentColor;
             }
         }
     }

@@ -2,7 +2,9 @@ import SelectHead from './select-head'
 import Drop from '../drop'
 import Icon from '../icon'
 import Spin from '../spin'
+import { UseSelectHeaderMixin } from '../../mixins'
 export default {
+    mixins: [UseSelectHeaderMixin],
     components: {
         SelectHead,
         Drop,
@@ -90,14 +92,6 @@ export default {
     methods: {
         isThisComponent (component) {
             return this.$options.name === component
-        },
-        dropShowFocus () {
-            this.$refs['zov-select-head'].headFocus()
-            this.dropShow = true
-        },
-        dropHideBlur () {
-            this.$refs['zov-select-head'].headBlur()
-            this.dropShow = false
         },
         throttleFn (callback, timeInterval) {
             clearTimeout(this.timer)

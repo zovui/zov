@@ -42,39 +42,39 @@
             </span>
         </div>
         <div class="zov-date-table-body">
-            <template v-for="(item, index) in weeks">
-                <div
+            <div
+                v-for="(item, index) in weeks"
+                :key="index + ''"
+                :class="[
+                    'zov-date-table-week',
+                    {
+                        'zov-date-table-week-optional' : datePickerComponent.type === 'week',
+                        'zov-date-table-week-optional-selected' : datePickerComponent.type === 'week' && datePickerComponent.isSelected(item[0])
+                    }
+                ]"
+                @click="datePickerComponent.type === 'week' && active(item[0])"
+                :disabled="datePickerComponent.type === 'week' && item[0].disabled"
+            >
+                <span v-if="showWeekNumbers" class="zov-date-table-cell-week">
+                    {{ item[0].origin.week() }}
+                </span>
+                <span
+                    v-for="(innerItem, innerIndex) in item"
+                    :key="innerIndex + ''"
                     :class="[
-                        'zov-date-table-week',
+                        'zov-date-table-cell',
                         {
-                            'zov-date-table-week-optional' : datePickerComponent.type === 'week',
-                            'zov-date-table-week-optional-selected' : datePickerComponent.type === 'week' && datePickerComponent.isSelected(item[0])
+                            'zov-date-table-cell-today': innerItem.origin.format('YYYY-MM-DD') === today.format('YYYY-MM-DD'),
+                            'zov-date-table-cell-not-in-month': innerItem.notInMonth,
+                            'zov-date-table-cell-selected': datePickerComponent.type !== 'week' && isThisPanel('date') && datePickerComponent.isSelected(innerItem)
                         }
                     ]"
-                    :key="index + ''"
-                    @click="datePickerComponent.type === 'week' && active(item[0])"
+                    :disabled="innerItem.disabled"
+                    @click="active(innerItem)"
                 >
-                    <span v-if="showWeekNumbers" class="zov-date-table-cell-week">
-                        {{ item[0].origin.week() }}
-                    </span>
-                    <span
-                        :class="[
-                            'zov-date-table-cell',
-                            {
-                                'zov-date-table-cell-today': innerItem.origin.format('YYYY-MM-DD') === today.format('YYYY-MM-DD'),
-                                'zov-date-table-cell-not-in-month': innerItem.notInMonth,
-                                'zov-date-table-cell-selected': datePickerComponent.type !== 'week' && isThisPanel('date') && datePickerComponent.isSelected(innerItem)
-                            }
-                        ]"
-                        :disabled="innerItem.disabled"
-                        v-for="(innerItem, innerIndex) in item"
-                        :key="innerIndex + ''"
-                        @click="active(innerItem)"
-                    >
-                        {{ innerItem.origin.toObject().date }}
-                    </span>
-                </div>
-            </template>
+                    {{ innerItem.origin.toObject().date }}
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -102,6 +102,10 @@ export default {
         date () {
             this.yearIndex = 0
             this.monthIndex = 0
+        },
+        dropShow () {
+            this.yearIndex = 0
+            this.monthIndex = 0
         }
     },
     computed: {
@@ -122,13 +126,15 @@ export default {
                 let date = startDate.subtract(j + 1, 'day')
                 arr.unshift({
                     notInMonth: true,
-                    origin: date
+                    origin: date,
+                    disabled: this.disabledDate(date)
                 })
             }
             for (let i = 0; i < date.daysInMonth(); i++) {
                 let date = startDate.add(i, 'day')
                 arr.push({
-                    origin: date
+                    origin: date,
+                    disabled: this.disabledDate(date)
                 })
             }
             let l = 42 - arr.length
@@ -136,7 +142,8 @@ export default {
                 let date = endDate.add(k + 1, 'day')
                 arr.push({
                     notInMonth: true,
-                    origin: date
+                    origin: date,
+                    disabled: this.disabledDate(date)
                 })
             }
             return arr

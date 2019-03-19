@@ -1,0 +1,48 @@
+$prefix-time-spinner: #{$prefix}time-spinner;
+.#{$prefix-time-spinner}{
+    $itemH: 32px;
+    $H: 265px;
+    height: $H;
+    display: flex;
+    border-radius: $border-radius-button;
+    overflow: hidden;
+    @include get-color-bg();
+    &-list{
+        flex: 1;
+        height: 100%;
+        border-left: 1px solid;
+        overflow-y: hidden;
+        @include get-color-border();
+        &:hover{
+            overflow-y: auto;
+        }
+        &:nth-of-type(1){
+            border-left: none;
+        }
+        &-box{
+            padding-bottom: $H - $itemH;
+        }
+        &-cell{
+            height: $itemH;
+            line-height: $itemH;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+            &:not([disabled]):hover{
+                @include get-color-divider(background-color);
+            }
+            &-selected{
+                @include get-color-divider(background-color);
+                font-weight: bold;
+            }
+        }
+    }
+    & [disabled]{
+        background-color: unset;
+        opacity: 0.55;
+        cursor: $cursor-disabled;
+        &:hover{
+            background-color: unset;
+        }
+    }
+}

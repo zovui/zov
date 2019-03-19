@@ -6,9 +6,10 @@ $prefix-spin-bars-chrome-loading : #{$prefix}spin-bars-chrome-loading;
     overflow: hidden;
     animation: #{$prefix-spin-bars-chrome-loading}rotate 3s linear infinite;
     &-path{
-        cx: 0.5em;
-        cy: 0.5em;
-        r: 0.4em;
+        // 「#00」
+        //cx: 0.5em;
+        //cy: 0.5em;
+        //r: 0.4em;
         stroke-width: 2px;
         fill: none;
         transform-origin: center;

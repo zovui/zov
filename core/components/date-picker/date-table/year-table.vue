@@ -58,6 +58,9 @@ export default {
     watch: {
         date () {
             this.yearsIndex = 0
+        },
+        dropShow () {
+            this.yearsIndex = 0
         }
     },
     computed: {
@@ -68,8 +71,10 @@ export default {
             let arr = []
             let date = this.currentDate
             for (let i = 0; i < 12; i++) {
+                let d = date.add(i - 1, 'year')
                 arr.push({
-                    origin: date.add(i - 1, 'year')
+                    origin: d,
+                    disabled: this.disabledDate(d)
                 })
             }
             return arr

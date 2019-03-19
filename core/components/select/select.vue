@@ -14,10 +14,12 @@
                 :placeholder="placeholder"
                 :filterable="filterable"
                 :multiple="multiple"
+                :clearable="clearable"
                 :label-name="labelName"
                 v-model="query"
                 :dropShow="dropShow"
                 @on-remove-tag="select"
+                @on-clear="clear"
                 @click.native.stop="!disabled && dropShowFocus()"
             />
             <div
@@ -170,7 +172,7 @@ export default {
                 }
             })
             this.loading = false
-            callback()
+            callback && callback()
         }
     }
 }

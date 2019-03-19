@@ -14,10 +14,12 @@
                 :placeholder="placeholder"
                 filterable
                 :multiple="multiple"
+                :clearable="clearable"
                 :label-name="labelName"
                 v-model="query"
                 :dropShow="dropShow"
                 @on-remove-tag="select"
+                @on-clear="clear"
                 @click.native="!disabled && dropShowFocus()"
             />
             <LongList
@@ -87,7 +89,7 @@ export default {
                 this.queryLoading = false
                 // console.timeEnd('主线程运行，用时')
                 /**
-                 * [test: 20万数据搜索耗时800ms]，【部分时间阻塞主线程】以下为子线程处理query操作的代码，将正则匹配部分放在子线程操作，换来的是子线程向主线程传输数据的内存消耗和子线程生成数据的内存消耗。
+                 * [test: 20万数据搜索耗时800ms]，【部分时间阻塞主线程】以下为子线程处理query操作的代码，将正则匹配部分放在子线程操作，换来的是子线程向主线程传输数据的内存消耗和子线程生成数据的内存消耗，还有由于子线程想主线程回传一个新的数据，所以vue双向绑定数据也造成了较大的时间开销。
                  **/
                 // console.time('子线程运行，用时')
                 // let _this = this
@@ -128,6 +130,8 @@ export default {
                 : this.currentValueArr[0] = this.value
             /**
              * 经过测试，在1万条数据的阶乘循环上，webworker明显不阻塞主线程。
+             * 此处用webworker的原因是因为，如果组件为多选并已经有了许多默认选项，这种情况下，高密集运算比数据量更耗时，
+             * 而且主线程需要的计算结果只是一组经过筛选的下标（数据量相对减少了），并且这组数据不会被vue直接绑定双向响应，因此主线程不会受到这组数据的多大影响。
              **/
             let _this = this
             let wk = worker()

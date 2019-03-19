@@ -58,6 +58,9 @@ export default {
     watch: {
         date () {
             this.yearIndex = 0
+        },
+        dropShow () {
+            this.yearIndex = 0
         }
     },
     computed: {
@@ -69,8 +72,10 @@ export default {
             let date = this.currentDate
             let months = date.toObject().months
             for (let i = 0; i < 12; i++) {
+                let d = date.add(i - months, 'month')
                 arr.push({
-                    origin: date.add(i - months, 'month')
+                    origin: d,
+                    disabled: this.disabledDate(d)
                 })
             }
             return arr

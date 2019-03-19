@@ -10,32 +10,66 @@
                 ref="zov-select-head"
                 slot="drop-head"
                 iconname="calendar"
+                arrow-down-no-animation
                 :data="currentItemArr"
                 :disabled="disabled"
                 :placeholder="placeholder"
                 :filterable="true"
-                :multiple="multiple"
+                :clearable="clearable"
+                :multiple="multipleOfCorrect"
                 v-model="query"
                 :dropShow="dropShow"
-                @click.native="!disabled && dropShowFocus()"
                 @on-remove-tag="select"
+                @on-clear="clearDate"
+                @click.native="!disabled && dropShowFocus()"
             />
-            <DateTable
-                v-if="tableShow[tableShow.length - 1] === 'date'"
-                :date="date"
-                :today="today"
-                :showWeekNumbers="showWeekNumbers"
-            />
-            <MonthTable
-                v-if="tableShow[tableShow.length - 1] === 'month'"
-                :date="date"
-                :today="today"
-            />
-            <YearTable
-                v-if="tableShow[tableShow.length - 1] === 'year'"
-                :date="date"
-                :today="today"
-            />
+            <div class="zov-date-picker-body">
+                <DateTable
+                    v-if="tableShow[tableShow.length - 1] === 'date'"
+                    :drop-show="dropShow"
+                    :date="date"
+                    :today="today"
+                    :show-week-numbers="showWeekNumbers"
+                    :disabled-date="disabledDate"
+                />
+                <MonthTable
+                    v-if="tableShow[tableShow.length - 1] === 'month'"
+                    :drop-show="dropShow"
+                    :date="date"
+                    :today="today"
+                    :disabled-date="disabledDate"
+                />
+                <YearTable
+                    v-if="tableShow[tableShow.length - 1] === 'year'"
+                    :drop-show="dropShow"
+                    :date="date"
+                    :today="today"
+                    :disabled-date="disabledDate"
+                />
+                <TimeSpinner
+                    v-if="type === 'datetime'"
+                    v-show="timeSpinnerShow"
+                    :dropShow="dropShow && timeSpinnerShow"
+                    :format="format"
+                    :steps="steps"
+                    :clock-column="clockColumn"
+                    :disabled-times="disabledTimes"
+                    :hide-disabled-options="hideDisabledOptions"
+                    :use12-hour-system="use12HourSystem"
+                    v-model="time"
+                />
+            </div>
+            <div
+                v-if="type === 'datetime'"
+                class="zov-date-picker-footer"
+            >
+                <Button
+                    looks="text"
+                    @click="timeSpinnerShow = !timeSpinnerShow"
+                >
+                    {{ timeSpinnerShow ? '选择日期' : '选择时间' }}
+                </Button>
+            </div>
         </Drop>
     </div>
 </template>
@@ -45,7 +79,8 @@ import SelectHead from '../select/select-head'
 import DateTable from './date-table/date-table'
 import MonthTable from './date-table/month-table'
 import YearTable from './date-table/year-table'
-import DatePickerMixin from './date-picker-mixin'
+import { UseSelectHeaderMixin } from '../../mixins'
+import TimePickerMixin from '../time-picker/time-picker-mixin'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
@@ -53,7 +88,7 @@ let today = dayjs()
 let prefix = 'zov-date-picker'
 export default {
     name: prefix,
-    mixins: [ DatePickerMixin ],
+    mixins: [UseSelectHeaderMixin, TimePickerMixin],
     components: {
         Drop,
         SelectHead,
@@ -93,7 +128,7 @@ export default {
         type: {
             type: String,
             validator (value) {
-                return ['date', 'daterange', 'datetime', 'datetimerange', 'year', 'month', 'week'].indexOf(value) !== -1
+                return ['date', 'datetime', 'year', 'month', 'week'].indexOf(value) !== -1
             },
             default: 'date'
         },
@@ -111,8 +146,11 @@ export default {
                 case 'week':
                     f = 'YYYY-WW'
                     break
-                default:
+                case 'date':
                     f = 'YYYY-MM-DD'
+                    break
+                case 'datetime':
+                    f = this.use12HourSystem ? 'YYYY-MM-DD hh:mm:ss a' : 'YYYY-MM-DD HH:mm:ss'
                     break
                 }
                 return f
@@ -121,6 +159,10 @@ export default {
         showWeekNumbers: {
             type: Boolean,
             default: true
+        },
+        disabledDate: {
+            type: Function,
+            default: () => false
         }
     },
     data () {
@@ -129,9 +171,10 @@ export default {
             currentValueArr: [],
             query: '',
             dropShow: false,
+            timeSpinnerShow: false,
             tableShow: (() => {
                 let f = []
-                if (this.type === 'daterange' || this.type === 'datetime' || this.type === 'datetimerange' || this.type === 'week') {
+                if (this.type === 'datetime' || this.type === 'week') {
                     f.push('date')
                 } else {
                     f.push(this.type)
@@ -142,19 +185,43 @@ export default {
             today: today
         }
     },
+    computed: {
+        multipleOfCorrect () {
+            return this.type === 'datetime' ? false : this.multiple
+        }
+    },
     watch: {
         dropShow (val) {
             this.$emit('on-open-change', val)
+            !this.multipleOfCorrect && (this.query = this.currentValueArr[0])
+        },
+        query (val) {
+            if (!val) {
+                this.date = today
+                return
+            }
+            let date = dayjs(this.parseDate(val))
+            date.isValid() && (this.date = date)
+        },
+        time () {
+            let len = this.currentItemArr.length
+            if (!(len && this.type === 'datetime')) return
+            let date = this.setTimeToDate(this.currentItemArr[len - 1].origin)
+            this.currentItemArr[len - 1].origin = date
+            this.currentItemArr[len - 1].label = date.format(this.format)
+            this.currentValueArr[len - 1] = date.format(this.format)
+            this.query = this.currentValueArr[0]
+            this.$emit('input', this.currentValueArr[0])
+            this.$emit('on-change', this.currentItemArr[0])
         }
     },
     methods: {
-        dropShowFocus () {
-            this.$refs['zov-select-head'].headFocus()
-            this.dropShow = true
+        clearDate () {
+            this.clear()
+            this.time = [0, 0, 0]
         },
-        dropHideBlur () {
-            this.$refs['zov-select-head'].headBlur()
-            this.dropShow = false
+        setTimeToDate (date) {
+            return date.set('hour', this.time[0]).set('minute', this.time[1]).set('second', this.time[2])
         },
         dateFormatValue (date) {
             if (this.type === 'week') {
@@ -167,6 +234,8 @@ export default {
                 } else if (weekRegExp.test(this.format)) {
                     return dateValue.replace(weekRegExp, date.week())
                 }
+            } else if (this.type === 'datetime') {
+                return this.setTimeToDate(date).format(this.format)
             } else {
                 return date.format(this.format)
             }
@@ -177,7 +246,7 @@ export default {
         },
         select (val, isDefault) {
             if (val.disabled) return
-            this.multiple ? this.check(val, isDefault) : this.single(val, isDefault)
+            this.multipleOfCorrect ? this.check(val, isDefault) : this.single(val, isDefault)
         },
         single (val, isDefault) {
             let date = val.origin
@@ -192,11 +261,11 @@ export default {
             this.currentValueArr.push(this.dateFormatValue(date))
             // 暴露数据
             this.$emit('input', this.currentValueArr[0])
-            this.$emit('on-change', date)
+            this.$emit('on-change', val)
             // 单选query值设置
             this.query = this.currentValueArr[0]
             // 收起下拉
-            !isDefault && this.dropHideBlur()
+            !isDefault && !(this.type === 'datetime') && this.dropHideBlur()
         },
         check (val, isDefault) {
             let date = val.origin
@@ -223,29 +292,33 @@ export default {
             this.$emit('on-change', this.currentItemArr)
             // 获取焦点
             !isDefault && this.dropShowFocus()
-        }
-    },
-    mounted () {
-        let _this = this
-        function _parseDate (val) {
+        },
+        parseDate (val) {
             // 根据type解析日期
-            if (_this.type === 'week') {
+            if (this.type === 'week') {
                 let parseArr = val.replace(/[^0-9]+/g, ' ').trim().split(' ')
                 return dayjs(parseArr[0]).week(parseArr[1])
             }
+            if (this.type === 'datetime') {
+                this.time = dayjs(val).toArray().slice(3, 6)
+            }
             return val
-        }
-        if (!(this.value === null || this.value === undefined || !this.value.toString())) {
-            if (this.value instanceof Array) {
-                this.value.forEach((item) => {
-                    this.select({ origin: dayjs(_parseDate(item)) }, 'default')
-                })
-            } else if (typeof this.value === 'string') {
-                this.select({ origin: dayjs(_parseDate(this.value)) }, 'default')
+        },
+        defaultSelected () {
+            if (!(this.value === null || this.value === undefined || !this.value.toString())) {
+                if (this.value instanceof Array) {
+                    this.value.forEach((item) => {
+                        this.select({ origin: dayjs(this.parseDate(item)) }, 'default')
+                    })
+                } else if (typeof this.value === 'string') {
+                    this.select({ origin: dayjs(this.parseDate(this.value)) }, 'default')
+                }
             }
         }
+    },
+    mounted () {
+        this.defaultSelected()
         this.autofocus ? this.dropShowFocus() : this.dropHideBlur()
-        console.log(dayjs('2019-45').week(5).format('YYYY-MM-DD'))
     }
 }
 </script>

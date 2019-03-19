@@ -127,6 +127,13 @@ let router = new Router({
             component: () => import('./views/DatePickerDemo.vue')
         },
         {
+            path: '/timepicker',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/TimePickerDemo.vue')
+        },
+        {
             path: '/modal',
             meta: {
                 sort: 'form'

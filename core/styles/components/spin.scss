@@ -20,5 +20,8 @@ $prefix-spin:#{$prefix}spin;
             @include get-color-bg ();
             opacity: 0.85;
         }
+        &>*{
+            z-index: 1;
+        }
     }
 }

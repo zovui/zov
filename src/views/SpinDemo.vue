@@ -47,7 +47,7 @@
         </div>
         <div class="spins">
             spins 枚举
-            <Spin></Spin>
+            <Spin>&nbsp;loading...</Spin>
             <Spin spinname="dbcircle"></Spin>
         </div>
     </div>

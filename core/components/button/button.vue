@@ -1,9 +1,10 @@
 <template>
-    <button
+    <RenderElTag
         v-on="$listeners"
         v-bind="$attrs"
+        :tag="tag"
         :class="classes"
-        >
+    >
         <!-- 自定义Spin, 默认为 `loading` -->
         <Spin v-if="loading" :spinname="spinname || 'loading'"/>
         <!-- 自定义图标 -->
@@ -11,17 +12,19 @@
         <span v-if="$slots.default">
             <slot></slot>
         </span>
-    </button>
+    </RenderElTag>
 </template>
 <script>
 import Spin from '../spin'
 import Icon from '../icon'
+import RenderElTag from '../../utils/render-el-tag'
 let prefix = 'zov-button'
 export default {
     name: prefix,
     components: {
         Spin,
-        Icon
+        Icon,
+        RenderElTag
     },
     props: {
         /*
@@ -66,9 +69,9 @@ export default {
             type: String,
             default: ''
         },
-        to: {
+        tag: {
             type: String,
-            default: ''
+            default: 'button'
         }
     },
     computed: {

@@ -17,7 +17,7 @@
 > eg:
 
 ```javascript
-import LoadingBar from './input.vue'
+import LoadingBar from './loading-bar.vue'
 export default LoadingBar
 ```
 
@@ -153,11 +153,17 @@ $prefix: zov-;
 
 ### 待解决
 
+目前无
+
 ### 已经解决
 
 `#001`
-> 主题用 css变量 来实现，对于不支持css变量的浏览器放弃提供主题功能，主题还可以通过类名方案，但是会造成许多多余类名，而且不易维护。
-> 并提供默认主题，dark主题则是将light主题色逆序。
+> 主题用 css变量 来实现，对于不支持css变量的浏览器放弃提供主题功能。
+>
+> 主题还可以通过类名方案，但是会造成许多多余类名，而且不易维护。
+> 提供默认主题，dark主题则是将light主题色逆序。
+>
+> 此处默认设置了—light和—dark的变量，目的是为了记录两组颜色，方便在浏览器端通过js脚本将存下来的颜色重新赋值到—变量上，见dark组件
 ```scss
     // 主题色
     --light-color-light-primary                :   #{$color-light-primary};
@@ -253,7 +259,7 @@ Popper.disableEventListeners（）
 它将删除调整大小/滚动事件，并且在触发时不会重新计算波普尔位置。onUpdate除非您update手动调用方法，否则它也不会再触发回调。
 ```
 
-`008`
+`#008`
 
 > `display: inline-block;` 代替 `flot:left`，通过设置 `white-space:nowrap;` 防止换行`.zov-cascader-body`宽度塌陷导致的`popper`组件`update`不彻底的问题。
 >
@@ -285,3 +291,69 @@ white-space:nowrap;
 }
 ```
 
+`#009`
+
+> 由于firfox不支持在css中定义svg.circle上的cx、cy、r等属性，所以需要将这些属性写到标签上
+
+```vue
+<circle cx="0.5em" cy="0.5em" r="0.4em"/>
+<style>
+     cx: 0.5em;
+     cy: 0.5em;
+     r: 0.4em;
+</style>
+```
+
+`#010`
+
+> scrollIntoView方法支持接收一个对象作为一个参数
+>
+> 1. `behavior` 表示滚动方式。`auto` 表示使用当前元素的 `scroll-behavior` 样式。`instant` 和 `smooth` 表示 `直接滚到底` 和 `使用平滑滚动`。
+> 2. `block` 表示块级元素排列方向要滚动到的位置。对于默认的 `writing-mode: horizontal-tb` 来说，就是竖直方向。`start` 表示将视口的顶部和元素顶部对齐；`center` 表示将视口的中间和元素的中间对齐；`end` 表示将视口的底部和元素底部对齐；`nearest` 表示就近对齐。
+> 3. `inline` 表示行内元素排列方向要滚动到的位置。对于默认的 `writing-mode: horizontal-tb` 来说，就是水平方向。其值与 `block` 类似。
+>
+> 见：[mozilla.scrollIntoView](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
+
+```javascript
+e.target.scrollIntoView({
+    behavior: "auto" | "instant" | "smooth", // 默认 auto
+    block: "start" | "center" | "end" | "nearest", // 默认 center
+    inline: "start" | "center" | "end" | "nearest", // 默认 nearest
+})
+```
+
+>css中也有一个属性是能够解决scroll平滑过渡的。
+>
+>见[mozilla.scroll-behavior](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior)
+
+<span style="color: red;">注意：</span>
+
+```javascript
+方法一：
+el.scrollIntoView({ behavior: 'smooth' })
+el.scrollIntoView({ behavior: 'smooth' })
+===
+方法二：
+el.children[12].scrollIntoView()
+el.scrollIntoView()
++
+// css
+[el]{
+   scroll-behavior: smooth;
+}
+```
+
+> 以上两种方法效果是一样的，但是都有同一种问题，就是多个scrollIntoView在定义动画后并发执行的时候，只有最后一次有效果，说明scrollIntoView的动画是同步执行的，且scrollIntoView是单例方法。在同时想要有多条滚动条参与动画的情况下，此两种方法都不可行。
+
+解决：
+
+```javascript
+el.scrollTop = '100';
++
+// css
+[el]{
+   scroll-behavior: smooth;
+}
+```
+
+但是 scroll-behavior 兼容较差。 

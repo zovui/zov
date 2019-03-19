@@ -115,8 +115,8 @@
             <p>@everyoneOptional                    非必传，Boolean，规定每列的项可选，默认:false</p>
             <p>@whichColumnOptional                 非必传，Array，规定那一列的项可选，默认:[]</p>
             <h3>回调事件</h3>
-            <p>@on-change                           组件drop呼出、收起的回调，形参：Boolean</p>
-            <p>@on-open-change                      组件值发生变化后的回调，形参：单选【当前所选项的item】，多选【已选所有项的items】</p>
+            <p>@on-open-change                      组件drop呼出、收起的回调，形参：Boolean</p>
+            <p>@on-change                           组件值发生变化后的回调，形参：单选【当前所选项的item】，多选【已选所有项的items】</p>
             <h3>补充说明</h3>
             <p style="color: red">
                 1、不同列可选，优先级：优先级 whichColumnOptional > everyoneOptional > last【default：最后一项】
@@ -158,7 +158,7 @@ export default {
                 return d
             })(),
             value: '',
-            value1: [],
+            value1: ['1,1,1', '1,1,2'],
             value2: '',
             value3: [],
             value4: '',

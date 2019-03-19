@@ -1,0 +1,10 @@
+$prefix-time-picker: #{$prefix}time-picker;
+.#{$prefix-time-picker}{
+    display: inline-block;
+    & .#{$prefix}tooltip{
+        width: 100%;
+        &-body{
+            padding: 0;
+        }
+    }
+}

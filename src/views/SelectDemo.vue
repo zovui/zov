@@ -149,8 +149,8 @@
             <p>@no-data-text    非必传，String，无数据文案，默认:'无数据...'</p>
             <p>child-name       非必传，String，分组数据中children字段的映射key，默认'children'</p>
             <h3>回调事件</h3>
-            <p>@on-change       组件drop呼出、收起的回调，形参：Boolean</p>
-            <p>@on-open-change  组件值发生变化后的回调，形参：单选【当前所选项的item】，多选【已选所有项的items】</p>
+            <p>@on-open-change       组件drop呼出、收起的回调，形参：Boolean</p>
+            <p>@on-change            组件值发生变化后的回调，形参：单选【当前所选项的item】，多选【已选所有项的items】</p>
             <h3>补充说明</h3>
             <p style="color: red">分组功能是组件内根据数据格式自动识别的，数据结构必须如下：最多两层嵌套，再多层数的分组应该选择Cascader组件，组件会根据数据结构选择渲染是否为分组</p>
             <pre>

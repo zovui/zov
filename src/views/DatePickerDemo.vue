@@ -49,15 +49,96 @@
             format="YY年，第W周"
             v-model="d4"
         />
+        时：
+        <DatePicker
+            autofocus
+            placeholder="时间 time"
+            type="datetime"
+            v-model="d5"
+        />
+        <h3> 限制 </h3>
+        <DatePicker
+            multiple
+            placeholder="年"
+            type="year"
+            :disabled-date="(date) => {
+                return date.format('YYYY') < new Date('2023').getFullYear()
+            }"
+        />
+        <DatePicker
+            placeholder="日"
+            :disabled-date="(date) => {
+                return date.format('DD') % 2 === 0 && date.isBefore(new Date())
+            }"
+        />
+        <DatePicker
+            placeholder="月"
+            type="month"
+            :disabled-date="(date) => {
+                return date.isBefore(new Date())
+            }"
+        />
+        <DatePicker
+            value="2019-14"
+            placeholder="周"
+            type="week"
+        />
+        <DatePicker
+            multiple
+            placeholder="时间,内部将 multiple 转换为单选"
+            type="datetime"
+            v-model="d6"
+            format="YYYY-MM-DD HH:mm"
+            :disabled-times="{
+                h: [1, 2],
+                m: (() => {
+                    return [2, 4, 6, 8]
+                })(),
+                s: []
+            }"
+        />
+        <!-- 参数-->
         <div style="border: 3px dashed; text-align: left; margin: 15px;padding: 15px">
             <h3>参数</h3>
             <p>@v-model         必传，Array || String，组件输出的值</p>
+            <p>@type            非必传，String，组件类型，['date', 'datetime', 'year', 'month', 'week']</p>
+                <span style="color: green">
+                    说明：
+                    1、目前不支持daterange、monthrange、yearrange、weekrange、datetimerange等范围类型的控件，这种控件表现能力有限，可以通过业务代码两个控件实现。
+                    2、datetime模式下不支持多选，组件会将@multiple参数设置为false。
+                </span>
             <p>@format          非必传，Date类型，可以根据下面表格对照组合format后的日期string</p>
-            <p>@multiple        非必传，Boolean，多选，默认:false</p>
+            <p>@multiple        非必传，Boolean，多选，默认:false，仅在 date、week、month、year 下可用</p>
             <p>@no-arrow        非必传，Boolean，drop容器的尖角，默认:true</p>
             <p>@placeholder     非必传，String，placeholder，默认:''</p>
             <p>@autofocus       非必传，Boolean，自动获取焦点，默认:false</p>
             <p>@disabled        非必传，Boolean，disabled，默认:false</p>
+            <p>@disabled-date   非必传，Function，限制禁用日期，默认: () => false</p>
+                <span style="color: green">
+                    用法：
+                    // @date 每一天、每一年今天、每一月今天、每一周今天。返回表达式的结果作为组件内部的判断依据；date为一个dayjs对象。
+                    eg:
+                    (date) => {
+                        // 小于今天的偶数日
+                        date.format('DD') % 2 === 0 && date.isBefore(new Date())
+                    }
+                </span>
+            <p>@disabled-times  非必传，Object，限制禁用时间，默认: {h: [], m: [], s: []}</p>
+                <span style="color: green">
+                    用法：
+                    {
+                        h: [1, 2],
+                        m: [...],
+                        s: [...]
+                    }
+                </span>
+            <p>@hide-disabled-options  非必传，Boolean，隐藏限制项，默认: false</p>
+            <p>@use12HourSystem        非必传，Boolean，采用12时制，默认：false</p>
+                <span style="color: green">
+                    说明：采用12时制度后 format 默认设置为 YYYY-MM-DD hh:mm:ss a ，调用者应当遵循12时制format规则
+                    <br> 如：YYYY-MM-DD h:m:s a 或者 YYYY-MM-DD h:m:s A等。
+                    <br> 注意：此参数优先级低于format。
+                </span>
             <h3>回调事件</h3>
             <p>@on-change       组件drop呼出、收起的回调，形参：Boolean</p>
             <p>@on-open-change  组件值发生变化后的回调，形参：单选【当前所选项的item】，多选【已选所有项的items】</p>
@@ -86,7 +167,7 @@
                 <br>开发者也可以通过on-change事件的回调中对dayjs对象进行format
             </p>
             <b>format 格式：</b>
-            <table>
+            <table border="1px">
                 <thead>
                 <tr>
                     <th width="100">格式</th>
@@ -247,17 +328,17 @@
                 </tr>
                 </tbody>
             </table>
-<pre>
-    format 是矫正时间格式的依赖，开发者需要保证给组件传入默认的value格式是遵循format规定的。
-    默认：
-    YYYY
-    YYYY-MM
-    YYYY-MM-DD
-    YYYY-WW
-    YYYY hh
-    YYYY hh:mm
-    YYYY hh:mm:ss
-</pre>
+            <pre>
+                format 是矫正时间格式的依赖，开发者需要保证给组件传入默认的value格式是遵循format规定的。
+                默认：
+                YYYY
+                YYYY-MM
+                YYYY-MM-DD
+                YYYY-WW
+                YYYY HH
+                YYYY HH:mm
+                YYYY HH:mm:ss
+            </pre>
         </div>
     </div>
 </template>
@@ -265,13 +346,15 @@
 export default {
     data () {
         return {
-            a1: '2019-03-10',
+            a1: '2019-03-11',
             a2: '2019-02',
             a3: '2019-02',
             d1: ['2019-03-10', '2019-03-11'],
             d2: ['2019-01', '2019-02'],
-            d3: ['2019-02', '2018'], // 从第一项可以看出有值矫正
-            d4: ['2019-09']
+            d3: ['2019-02', '2020'], // 从第一项可以看出有值矫正
+            d4: ['2019-09'],
+            d5: '2019-03-12 10:12:33',
+            d6: ['2019-03-12 10:12:33', '2019-03-14 15:15:83']
         }
     }
 }

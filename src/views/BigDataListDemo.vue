@@ -73,8 +73,8 @@
             <p>@disabled        非必传，Boolean，disabled，默认:false</p>
             <p>@no-data-text    非必传，String，无数据文案，默认:'无数据...'</p>
             <h3>回调事件</h3>
-            <p>@on-change       组件drop呼出、收起的回调，形参：Boolean</p>
-            <p>@on-open-change  组件值发生变化后的回调，形参：单选【当前所选项的item】，多选【已选所有项的items】</p>
+            <p>@on-open-change       组件drop呼出、收起的回调，形参：Boolean</p>
+            <p>@on-change            组件值发生变化后的回调，形参：单选【当前所选项的item】，多选【已选所有项的items】</p>
             <h3>补充说明</h3>
             <h5 style="color: red">
                 注意：由于BigDataList组件目的为承载较大数据，所以与Select组件有一下区别：<br>

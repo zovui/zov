@@ -1,7 +1,7 @@
 // 【scss】配置，静态变量，项目构建依赖
 // 主题色
 $color-primary                      :   #2d8cf0 !default;
-$toning-ratio                       :   5.5%;
+$toning-ratio                       :   5.5% !default;
 $color-light-primary                :   lighten($color-primary, $toning-ratio) !default;
 $color-dark-primary                 :   darken($color-primary, $toning-ratio) !default;
 // 辅助色
@@ -10,14 +10,14 @@ $color-success                      :   #19be6b !default;
 $color-warning                      :   #ff9900 !default;
 $color-error                        :   #ed4014 !default;
 // 中性色
-$color-black-1                      :   #262626 !default;
-$color-black-2                      :   #404040 !default;
-$color-black-3                      :   #777777 !default;
-$color-black-4                      :   #7f7f7f !default;
-$color-black-5                      :   #cbcbcb !default;
-$color-black-6                      :   #e4e4e4 !default;
-$color-black-7                      :   #eaeaea !default;
-$color-black-8                      :   #fcfcfc !default;
+$color-default-title                :   #262626 !default;
+$color-default-text                 :   #404040 !default;
+$color-default-sub                  :   #777777 !default;
+$color-default-placeholder          :   #7f7f7f !default;
+$color-default-disabled             :   #cbcbcb !default;
+$color-default-border               :   #e4e4e4 !default;
+$color-default-divider              :   #eaeaea !default;
+$color-default-background           :   #fcfcfc !default;
 
 // 中性色基准色，默认为主题色
 $color-neutral                      :   $color-primary !default;
@@ -30,14 +30,14 @@ $color-neutral-saturate             :   0% !default;
 *
 */
 // 标题色(title)，正文色(text)，辅助色/图标色(sub)，占位符(placeholder)，失效色(disabled)，边框(border)，分割线(dirvider)，背景色(background)，阴影(shadow)
-$color-title                        :   adjust-hue(saturate($color-black-1,$color-neutral-saturate),$color-primary-hue) !default;
-$color-text                         :   adjust-hue(saturate($color-black-2,$color-neutral-saturate),$color-primary-hue) !default;
-$color-sub                          :   adjust-hue(saturate($color-black-3,$color-neutral-saturate),$color-primary-hue) !default;
-$color-placeholder                  :   adjust-hue(saturate($color-black-4,$color-neutral-saturate),$color-primary-hue) !default;
-$color-disabled                     :   adjust-hue(saturate($color-black-5,$color-neutral-saturate),$color-primary-hue) !default;
-$color-border                       :   adjust-hue(saturate($color-black-6,$color-neutral-saturate),$color-primary-hue) !default;
-$color-divider                      :   adjust-hue(saturate($color-black-7,$color-neutral-saturate),$color-primary-hue) !default;
-$color-background                   :   adjust-hue(saturate($color-black-8,$color-neutral-saturate),$color-primary-hue) !default;
+$color-title                        :   adjust-hue(saturate($color-default-title,$color-neutral-saturate),$color-primary-hue) !default;
+$color-text                         :   adjust-hue(saturate($color-default-text,$color-neutral-saturate),$color-primary-hue) !default;
+$color-sub                          :   adjust-hue(saturate($color-default-sub,$color-neutral-saturate),$color-primary-hue) !default;
+$color-placeholder                  :   adjust-hue(saturate($color-default-placeholder,$color-neutral-saturate),$color-primary-hue) !default;
+$color-disabled                     :   adjust-hue(saturate($color-default-disabled,$color-neutral-saturate),$color-primary-hue) !default;
+$color-border                       :   adjust-hue(saturate($color-default-border,$color-neutral-saturate),$color-primary-hue) !default;
+$color-divider                      :   adjust-hue(saturate($color-default-divider,$color-neutral-saturate),$color-primary-hue) !default;
+$color-background                   :   adjust-hue(saturate($color-default-background,$color-neutral-saturate),$color-primary-hue) !default;
 $color-shadow                       :   rgba(0,0,0,0.25) !default;
 
 

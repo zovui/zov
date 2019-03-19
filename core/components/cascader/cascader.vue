@@ -15,10 +15,12 @@
                 :placeholder="placeholder"
                 :filterable="filterable"
                 :multiple="multiple"
+                :clearable="clearable"
                 :label-name="'__' + labelName"
                 v-model="query"
                 :dropShow="dropShow"
                 @on-remove-tag="activeItem"
+                @on-clear="clear"
                 @click.native.stop="!disabled && dropShowFocus()"
             />
             <div class="zov-cascader-body"
@@ -194,7 +196,8 @@ export default {
             // 初始化选择
             this.currentValueArr.forEach((item) => {
                 for (let i = 0; i < this.querySelections.length; i++) {
-                    if (item === this.querySelections[i][this.valueName]) {
+                    let x = this.querySelections[i]
+                    if (item === x['__' + this.valueName]) {
                         this.activeItem(this.querySelections[i], 'default')
                         break
                     }

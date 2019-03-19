@@ -2,6 +2,7 @@
     <div>
         <div style="border: 1px dashed">
             常用于下拉面板，开发者用于开发一些下拉选择组件，如级联、select
+            <p>@dropUpdate drop组件上的一个方法，供组件更新popper的位置</p>
         </div>
         <Drop
             placement="right"

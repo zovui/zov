@@ -1,25 +1,24 @@
 import Icon from '../icon'
+import { findComponentUpward } from '../../utils'
 export default {
     components: {
         Icon
     },
     props: {
         date: '',
-        today: ''
+        today: '',
+        disabledDate: {
+            type: Function,
+            default: () => false
+        },
+        dropShow: {
+            type: Boolean,
+            default: false
+        }
     },
     computed: {
         datePickerComponent () {
-            let component = null
-            function f (c) {
-                if (!c && c.$options) return
-                if (c.$options.name === 'zov-date-picker') {
-                    component = c
-                    return
-                }
-                f(c.$parent)
-            }
-            f(this)
-            return component
+            return findComponentUpward(this, 'zov-date-picker')
         }
     },
     methods: {
@@ -40,6 +39,7 @@ export default {
             _that.dropShowFocus()
         },
         active (val) {
+            if (val.disabled) return
             let _that = this.datePickerComponent
             this.updateDate(val.origin)
             _that.tableShow.length > 1 ? this.back() : _that.select(val)

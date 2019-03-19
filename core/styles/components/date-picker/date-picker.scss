@@ -6,9 +6,88 @@ $prefix-date-picker: #{$prefix}date-picker;
     border-radius: $border-radius-button;
     user-select: none;
     & .#{$prefix}tooltip{
-        &-body{
-            width: 248px;
-        }
         width: 100%;
+        &-body{
+            width: 100%;
+            padding: 0;
+        }
+    }
+    &-body{
+        width: 248px;
+        padding: $gap-base / 2 0;
+        position: relative;
+        .#{$prefix}time-spinner{
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+        }
+    }
+    & [disabled]{
+        @include get-color-placeholder();
+        @include get-color-disabled(background-color);
+        opacity: 0.55;
+        cursor: $cursor-disabled;
+        &:hover{
+            @include get-color-placeholder();
+            @include get-color-disabled(background-color);
+        }
+    }
+    &-header{
+        $grid-size: 24px;
+        $interval: 5px;
+        padding: 0 $gap-base / 4 * 3 $interval $gap-base / 4 * 3;
+        display: flex;
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 1px solid;
+        @include get-color-divider();
+        margin-bottom: $interval * 2;
+        &-btns{
+            max-width: 50px;
+            &>*{
+                display: inline-block;
+                width: $grid-size;
+                height: $grid-size;
+                text-align: center;
+                line-height: $grid-size;
+                border-radius: $border-radius-button;
+                cursor: pointer;
+                transition: color $transition-hover-time linear;
+                vertical-align: middle;
+                &:hover{
+                    @include get-color-sub-hover();
+
+                }
+            }
+            &>span{
+                padding-left: 3px;
+                &>span{
+                    float: left;
+                    width: 5px;
+                    height: $grid-size;
+                    line-height: $grid-size;
+                }
+            }
+        }
+        &-center{
+            flex: 1;
+            &>span{
+                display: inline-block;
+                height: $grid-size;
+                line-height: $grid-size;
+                padding: 0 3px;
+                border-radius: $border-radius-button;
+                cursor: pointer;
+                transition: color $transition-hover-time linear;
+                &:hover{
+                    @include get-color-sub-hover();
+                }
+            }
+        }
+    }
+    &-footer{
+        border-top: 1px solid;
+        @include get-color-divider();
     }
 }

@@ -8,7 +8,6 @@ $font-size-small            :   12px !default;
 $font-size-large            :   16px !default;
 $title-font-weight          :   500 !default;
 $line-height-base           :   1.5 !default;
-$line-height-computed       :   floor(($font-size-base * $line-height-base));
 
 // link a标签
 $link-color                 :   $color-primary !default;
