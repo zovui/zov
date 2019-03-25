@@ -3,7 +3,9 @@
         v-model="visible"
         v-bind="tooltipAttrs"
         >
-        <slot slot="tooltip"></slot>
+        <template #tooltip>
+            <slot></slot>
+        </template>
         <slot name="drop-head"></slot>
     </ToolTip>
 </template>

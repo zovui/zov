@@ -14,7 +14,8 @@ export default {
     props: {
         // 组件组装
         value: {
-            type: [Number, String, Array]
+            type: [Number, String, Array],
+            default: ''
         },
         data: {
             type: Array,

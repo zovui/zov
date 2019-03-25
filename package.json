@@ -12,8 +12,9 @@
     "dayjs": "^1.8.6",
     "lodash": "^4.17.11",
     "popper.js": "^1.14.5",
+    "tinycolor2": "^1.4.1",
     "v-click-outside-x": "^3.5.5",
-    "vue": "2.6.6"
+    "vue": "^2.6.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
@@ -26,7 +27,7 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "2.6.6"
+    "vue-template-compiler": "^2.6.6"
   },
   "license": "ISC",
   "main": "core/index.js",

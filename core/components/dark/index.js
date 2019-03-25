@@ -3,8 +3,9 @@ if (!_isSupported) {
     /* eslint-disable no-console */
     console.warn('ZOV主题：浏览器不支持css自定义属性，不支持主题切换')
 }
-let _style = window.getComputedStyle(document.querySelector('body'), null)
-let _styles = document.querySelector('body').style
+let el = document.body
+let _style = el && window.getComputedStyle(el, null)
+let _styles = el && el.style
 let colorsName = [
     // 主题色
     'color-light-primary',

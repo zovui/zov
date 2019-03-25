@@ -66,9 +66,8 @@ yarn run lib
 │   │   ├── zov_iconfont.ttf
 │   │   ├── zov_iconfont.eot
 │   │   └── zov_iconfont.woff
-│   ├── css
-│   │   └── zov.css                                 // css包
 │   ├── demo.html                                   // 测试页面
+│   ├── zov.min.css                                 // css包
 │   └── zov.min.js                                  // js包
 ├── public                                          // 【入口html、图标】
 ├── src                                             // 【demo 开发目录】

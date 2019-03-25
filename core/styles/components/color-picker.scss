@@ -1,0 +1,107 @@
+$prefix-color-picker: #{$prefix}color-picker;
+.#{$prefix-color-picker}{
+    $bar-W: 10px;
+    & .#{$prefix}tooltip{
+        width: 100%;
+        &-body{
+            width: 100%;
+            padding: 8px;
+        }
+    }
+    @mixin foucus () {
+        @include outline();
+        transition: box-shadow $transition-hover-time $bezier;
+    }
+    /*
+    * 拾色面板
+    */
+    &-main-panel{
+        width: 220px;
+        height: 220px;
+        position: relative;
+        @include foucus();
+        cursor: pointer;
+        &>*{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        // HLS
+        &-hue{
+            background: $color-primary;
+        }
+        &-saturation{
+            background: linear-gradient(90deg, #fff, transparent);
+        }
+        &-lightness{
+            background: linear-gradient(0deg, #000, transparent);
+        }
+        &-pointer{
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px $color-shadow, 0 0 1px 2px $color-shadow;
+            box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px var(--color-shadow), 0 0 1px 2px var(--color-shadow);
+        }
+    }
+    /*
+    * 操作条
+    */
+    &-bars{
+        $H: 30px;
+        display: flex;
+        align-items: center;
+        margin: $bar-W 0;
+        &-current{
+            width: $H;
+            height: $H;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+        &-tools{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: $H;
+            justify-content: space-around;
+        }
+    }
+    /*
+    * 色相条
+    */
+    @mixin bar () {
+        position: relative;
+        height: $bar-W;
+        &-pointer{
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #fff, inset 0 0 1px 1px $color-shadow, 0 0 1px 3px $color-shadow;
+            box-shadow: 0 0 0 3px #fff, inset 0 0 1px 1px var(--color-shadow), 0 0 1px 3px var(--color-shadow);
+            transform: translateY(2px);
+            cursor: pointer;
+        }
+    }
+    &-hue-bar{
+        @include foucus();
+        background: linear-gradient(90deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red);
+        @include bar();
+        cursor: pointer;
+    }
+    /*
+    * 透明度条
+    */
+    &-alpha-bar{
+        @include foucus();
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+        cursor: pointer;
+        &-gradient{
+            height: $bar-W;
+            background: linear-gradient(90deg, rgba(23, 33, 45, 0), rgba(23, 33, 45, 1));
+            @include bar();
+        }
+    }
+}

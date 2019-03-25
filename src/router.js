@@ -139,6 +139,13 @@ let router = new Router({
                 sort: 'form'
             },
             component: () => import('./views/ModalDemo.vue')
+        },
+        {
+            path: '/colorpicker',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/ColorPickerDemo.vue')
         }
     ]
 })

@@ -9,9 +9,7 @@
         <Spin v-if="loading" :spinname="spinname || 'loading'"/>
         <!-- 自定义图标 -->
         <Icon v-if="iconname" :iconname="iconname"/>
-        <span v-if="$slots.default">
-            <slot></slot>
-        </span>
+        <slot></slot>
     </RenderElTag>
 </template>
 <script>

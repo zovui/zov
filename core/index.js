@@ -16,6 +16,7 @@ import BigDataList from './components/big-data-list'
 import Cascader from './components/cascader'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
+import ColorPicker from './components/color-picker'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -44,7 +45,8 @@ const components = {
     BigDataList,
     Cascader,
     DatePicker,
-    TimePicker
+    TimePicker,
+    ColorPicker
 }
 Object.keys(components).forEach(key => {
     components['z' + key] = components[key]
@@ -90,7 +92,8 @@ export {
     BigDataList,
     Cascader,
     DatePicker,
-    TimePicker
+    TimePicker,
+    ColorPicker
 }
 // 将整个zov暴露出去
 export default zov

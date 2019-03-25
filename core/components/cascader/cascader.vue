@@ -7,24 +7,24 @@
             :never="disabled"
             v-model="dropShow"
         >
-            <SelectHead
-                ref="zov-select-head"
-                slot="drop-head"
-                :data="currentItemArr"
-                :disabled="disabled"
-                :placeholder="placeholder"
-                :filterable="filterable"
-                :multiple="multiple"
-                :clearable="clearable"
-                :label-name="'__' + labelName"
-                v-model="query"
-                :dropShow="dropShow"
-                @on-remove-tag="activeItem"
-                @on-clear="clear"
-                @click.native.stop="!disabled && dropShowFocus()"
-            />
-            <div class="zov-cascader-body"
-            >
+            <template #drop-head>
+                <SelectHead
+                    ref="zov-select-head"
+                    :data="currentItemArr"
+                    :disabled="disabled"
+                    :placeholder="placeholder"
+                    :filterable="filterable"
+                    :multiple="multiple"
+                    :clearable="clearable"
+                    :label-name="'__' + labelName"
+                    v-model="query"
+                    :dropShow="dropShow"
+                    @on-remove-tag="activeItem"
+                    @on-clear="clear"
+                    @click.native.stop="!disabled && dropShowFocus()"
+                />
+            </template>
+            <div class="zov-cascader-body">
                 <div
                     class="zov-cascader-body-search-box"
                     :style="{

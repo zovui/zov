@@ -6,21 +6,22 @@
             :never="disabled"
             v-model="dropShow"
         >
-            <SelectHead
-                ref="zov-select-head"
-                slot="drop-head"
-                iconname="clock"
-                arrowDownNoAnimation
-                :disabled="disabled"
-                :placeholder="placeholder"
-                :multiple="false"
-                :clearable="clearable"
-                v-model="currentValue"
-                :dropShow="dropShow"
-                @on-remove-tag="'select'"
-                @on-clear="clearTime"
-                @click.native="!disabled && dropShowFocus()"
-            />
+            <template #drop-head>
+                <SelectHead
+                    ref="zov-select-head"
+                    iconname="clock"
+                    arrowDownNoAnimation
+                    :disabled="disabled"
+                    :placeholder="placeholder"
+                    :multiple="false"
+                    :clearable="clearable"
+                    v-model="currentValue"
+                    :dropShow="dropShow"
+                    @on-remove-tag="'select'"
+                    @on-clear="clearTime"
+                    @click.native="!disabled && dropShowFocus()"
+                />
+            </template>
             <TimeSpinner
                 :dropShow="dropShow"
                 :format="format"
@@ -40,6 +41,8 @@ import SelectHead from '../select/select-head'
 import { UseSelectHeaderMixin } from '../../mixins'
 import TimePickerMixin from './time-picker-mixin'
 import dayjs from 'dayjs'
+import toArray from 'dayjs/plugin/toArray'
+dayjs.extend(toArray)
 let now = dayjs()
 let prefix = 'zov-time-picker'
 export default {
@@ -52,7 +55,7 @@ export default {
     props: {
         // 组件组装
         value: {
-            type: String,
+            type: [Number, String],
             default: ''
         },
         // drop 属性

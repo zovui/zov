@@ -6,22 +6,23 @@
             :never="disabled"
             v-model="dropShow"
         >
-            <SelectHead
-                ref="zov-select-head"
-                slot="drop-head"
-                :data="currentItemArr"
-                :disabled="disabled"
-                :placeholder="placeholder"
-                :filterable="filterable"
-                :multiple="multiple"
-                :clearable="clearable"
-                :label-name="labelName"
-                v-model="query"
-                :dropShow="dropShow"
-                @on-remove-tag="select"
-                @on-clear="clear"
-                @click.native.stop="!disabled && dropShowFocus()"
-            />
+            <template #drop-head>
+                <SelectHead
+                    ref="zov-select-head"
+                    :data="currentItemArr"
+                    :disabled="disabled"
+                    :placeholder="placeholder"
+                    :filterable="filterable"
+                    :multiple="multiple"
+                    :clearable="clearable"
+                    :label-name="labelName"
+                    v-model="query"
+                    :dropShow="dropShow"
+                    @on-remove-tag="select"
+                    @on-clear="clear"
+                    @click.native.stop="!disabled && dropShowFocus()"
+                />
+            </template>
             <div
                 class="zov-select-body"
                 :style="{
@@ -30,18 +31,19 @@
             >
                 <!-- 分组 -->
                 <template v-if="group">
-                    <template v-if="filterable && query">
+                    <template
+                        v-if="filterable && query"
+                    >
                         <Option
                             :data="queryResult"
                             :selected-values="currentValueArr"
                             :value-name="valueName"
                             @on-click="select"
+                            v-slot="{props}"
                         >
-                            <template slot-scope="{props}">
-                                <slot :props="props">
-                                    {{ props.item[labelName] }}
-                                </slot>
-                            </template>
+                            <slot :props="props">
+                                {{ props.item[labelName] }}
+                            </slot>
                         </Option>
                     </template>
                     <template v-else>
@@ -57,12 +59,11 @@
                                 :selected-values="currentValueArr"
                                 :value-name="valueName"
                                 @on-click="select"
+                                v-slot="{props}"
                             >
-                                <template slot-scope="{props}">
-                                    <slot :props="props">
-                                        {{ props.item[labelName] }}
-                                    </slot>
-                                </template>
+                                <slot :props="props">
+                                    {{ props.item[labelName] }}
+                                </slot>
                             </Option>
                         </div>
                     </template>
@@ -74,12 +75,11 @@
                         :selected-values="currentValueArr"
                         :value-name="valueName"
                         @on-click="select"
+                        v-slot="{props}"
                     >
-                        <template slot-scope="{props}">
-                            <slot :props="props">
-                                {{ props.item[labelName] }}
-                            </slot>
-                        </template>
+                        <slot :props="props">
+                            {{ props.item[labelName] }}
+                        </slot>
                     </Option>
                 </template>
             </div>

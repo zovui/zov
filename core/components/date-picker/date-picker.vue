@@ -6,23 +6,24 @@
             :never="disabled"
             v-model="dropShow"
         >
-            <SelectHead
-                ref="zov-select-head"
-                slot="drop-head"
-                iconname="calendar"
-                arrow-down-no-animation
-                :data="currentItemArr"
-                :disabled="disabled"
-                :placeholder="placeholder"
-                :filterable="true"
-                :clearable="clearable"
-                :multiple="multipleOfCorrect"
-                v-model="query"
-                :dropShow="dropShow"
-                @on-remove-tag="select"
-                @on-clear="clearDate"
-                @click.native="!disabled && dropShowFocus()"
-            />
+            <template #drop-head>
+                <SelectHead
+                    ref="zov-select-head"
+                    iconname="calendar"
+                    arrow-down-no-animation
+                    :data="currentItemArr"
+                    :disabled="disabled"
+                    :placeholder="placeholder"
+                    :filterable="true"
+                    :clearable="clearable"
+                    :multiple="multipleOfCorrect"
+                    v-model="query"
+                    :dropShow="dropShow"
+                    @on-remove-tag="select"
+                    @on-clear="clearDate"
+                    @click.native="!disabled && dropShowFocus()"
+                />
+            </template>
             <div class="zov-date-picker-body">
                 <DateTable
                     v-if="tableShow[tableShow.length - 1] === 'date'"
@@ -76,13 +77,17 @@
 <script>
 import Drop from '../drop'
 import SelectHead from '../select/select-head'
-import DateTable from './date-table/date-table'
-import MonthTable from './date-table/month-table'
-import YearTable from './date-table/year-table'
+import DateTable from './table/date-table'
+import MonthTable from './table/month-table'
+import YearTable from './table/year-table'
 import { UseSelectHeaderMixin } from '../../mixins'
 import TimePickerMixin from '../time-picker/time-picker-mixin'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
+import toArray from 'dayjs/plugin/toArray'
+import toObject from 'dayjs/plugin/toObject'
+dayjs.extend(toArray)
+dayjs.extend(toObject)
 dayjs.extend(weekOfYear)
 let today = dayjs()
 let prefix = 'zov-date-picker'
@@ -99,7 +104,8 @@ export default {
     props: {
         // 组件组装
         value: {
-            type: [String, Array]
+            type: [Number, String, Array],
+            default: ''
         },
         // 多选
         multiple: {

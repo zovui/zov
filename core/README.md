@@ -357,3 +357,28 @@ el.scrollTop = '100';
 ```
 
 但是 scroll-behavior 兼容较差。 
+
+`#011`
+
+在vue2.6.10版本中在browser端slot-scpoe嵌套需要用v-slot语法。
+
+```vue
+<template v-slot="{props}"> <!-- # -->
+	<div :class="[
+    	'zov-select-option',
+        {
+           'zov-select-option-selected': currentValueArr.indexOf(props.item[valueName]) !== -1
+        }
+     ]"
+     :key="props.index + ''"
+     @click.stop.capture="select(props.item)"
+     :disabled="props.item.disabled"
+     >
+        <slot :props="props"> <!-- # -->
+            {{ props.item[labelName] }}
+        </slot>
+    	<Icon v-if="currentValueArr.indexOf(props.item[valueName]) !== -1" iconname="checkmark"/>
+    </div>
+</template>
+```
+

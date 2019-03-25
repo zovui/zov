@@ -6,22 +6,23 @@
             :never="disabled"
             v-model="dropShow"
         >
-            <SelectHead
-                ref="zov-select-head"
-                slot="drop-head"
-                :data="currentItemArr"
-                :disabled="disabled"
-                :placeholder="placeholder"
-                filterable
-                :multiple="multiple"
-                :clearable="clearable"
-                :label-name="labelName"
-                v-model="query"
-                :dropShow="dropShow"
-                @on-remove-tag="select"
-                @on-clear="clear"
-                @click.native="!disabled && dropShowFocus()"
-            />
+            <template #drop-head>
+                <SelectHead
+                    ref="zov-select-head"
+                    :data="currentItemArr"
+                    :disabled="disabled"
+                    :placeholder="placeholder"
+                    filterable
+                    :multiple="multiple"
+                    :clearable="clearable"
+                    :label-name="labelName"
+                    v-model="query"
+                    :dropShow="dropShow"
+                    @on-remove-tag="select"
+                    @on-clear="clear"
+                    @click.native="!disabled && dropShowFocus()"
+                />
+            </template>
             <LongList
                 class="zov-select-body"
                 :style="{
@@ -29,22 +30,24 @@
                 }"
                 :data="query ? queryResult : currentData"
             >
-                <div :class="[
-                        'zov-select-option',
-                        {
-                            'zov-select-option-selected': currentValueArr.indexOf(props.item[valueName]) !== -1
-                        }
-                    ]"
-                     slot-scope="{props}"
-                     :key="props.index + ''"
-                     @click.stop.capture="select(props.item)"
-                     :disabled="props.item.disabled"
-                >
-                    <slot :props="props">
-                        {{ props.item[labelName] }}
-                    </slot>
-                    <Icon v-if="currentValueArr.indexOf(props.item[valueName]) !== -1" iconname="checkmark"/>
-                </div>
+                <!-- 「#011」 -->
+                <template v-slot="{props}">
+                    <div :class="[
+                            'zov-select-option',
+                            {
+                                'zov-select-option-selected': currentValueArr.indexOf(props.item[valueName]) !== -1
+                            }
+                        ]"
+                         :key="props.index + ''"
+                         @click.stop.capture="select(props.item)"
+                         :disabled="props.item.disabled"
+                    >
+                        <slot :props="props">
+                            {{ props.item[labelName] }}
+                        </slot>
+                        <Icon v-if="currentValueArr.indexOf(props.item[valueName]) !== -1" iconname="checkmark"/>
+                    </div>
+                </template>
             </LongList>
             <div
                 class="zov-select-no-data"
