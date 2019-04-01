@@ -17,6 +17,7 @@ import Cascader from './components/cascader'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import ColorPicker from './components/color-picker'
+import Menu from './components/menu'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -46,7 +47,8 @@ const components = {
     Cascader,
     DatePicker,
     TimePicker,
-    ColorPicker
+    ColorPicker,
+    Menu
 }
 Object.keys(components).forEach(key => {
     components['z' + key] = components[key]
@@ -93,7 +95,8 @@ export {
     Cascader,
     DatePicker,
     TimePicker,
-    ColorPicker
+    ColorPicker,
+    Menu
 }
 // 将整个zov暴露出去
 export default zov

@@ -1,17 +1,21 @@
-@mixin form-dom-size ($difference-value: 0) {
+@mixin form-dom-size ($difference-value: 0, $hasBorder: yes) {
+    $borderSize: 2;
+    @if $hasBorder == no {
+        $borderSize: 0;
+    }
     font-size: $font-size-base;
     height: $form-dom-height-base + $difference-value;
-    line-height: $form-dom-height-base + $difference-value;
+    line-height: $form-dom-height-base - $borderSize + $difference-value;
     &-size{
         &-large{
             font-size: $font-size-large;
             height: $form-dom-height-large + $difference-value;
-            line-height: $form-dom-height-large + $difference-value;
+            line-height: $form-dom-height-large - $borderSize + $difference-value;
         }
         &-small{
             font-size: $font-size-small;
             height: $form-dom-height-small + $difference-value;
-            line-height: $form-dom-height-small + $difference-value;
+            line-height: $form-dom-height-small - $borderSize + $difference-value;
         }
     }
 }

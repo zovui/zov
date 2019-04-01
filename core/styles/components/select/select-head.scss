@@ -77,7 +77,7 @@ $prefix-select-head: #{$prefix}select-head;
         }
         .#{$prefix}tag{
             vertical-align: center;
-            margin: 0 2px;
+            margin: 0 4px 0 0;
             border: none;
             @include get-color-divider(background-color);
             &:hover{
@@ -87,7 +87,7 @@ $prefix-select-head: #{$prefix}select-head;
         }
         .#{$prefix-button}{
             // 重写在不同size下tag组件的size
-            @include form-dom-size(-4);
+            @include form-dom-size(-4, no);
         }
     }
     &-placeholder{

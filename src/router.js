@@ -146,6 +146,13 @@ let router = new Router({
                 sort: 'form'
             },
             component: () => import('./views/ColorPickerDemo.vue')
+        },
+        {
+            path: '/menu',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/MenuDemo.vue')
         }
     ]
 })
