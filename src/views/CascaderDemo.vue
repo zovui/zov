@@ -4,6 +4,7 @@
             <h3> 常规 </h3>
             <div class="box">
                 <Cascader
+                    size="small"
                     placeholder="单选"
                     :data="list"
                     v-model="value"

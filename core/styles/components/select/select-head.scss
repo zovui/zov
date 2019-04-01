@@ -4,10 +4,21 @@ $prefix-select-head: #{$prefix}select-head;
     border: 1px solid;
     @include get-color-border();
     @include get-color-bg();
-    line-height: $btn-line-height;
     position: relative;
     cursor: text;
     padding-right: 2em;
+    @include form-dom-size();
+    // 此处设置unset是考虑多选情况系tag项换行，动态高度。
+    // 而高度是考line-height撑开。
+    height: unset;
+    &-size{
+        &-large{
+            height: unset;
+        }
+        &-small{
+            height: unset;
+        }
+    }
     & .#{$prefix}input{
         width: 100%;
         &>input{
@@ -52,10 +63,9 @@ $prefix-select-head: #{$prefix}select-head;
     }
     &-multiple{
         padding-left: 0.5em;
-        min-height: #{$btn-line-height}em;
         &-tags{
             width: 100%;
-            max-height: $btn-line-height * 4em;
+            max-height: 10em;
             display: inline-block;
             vertical-align: top;
             overflow: auto;
@@ -66,13 +76,18 @@ $prefix-select-head: #{$prefix}select-head;
             }
         }
         .#{$prefix}tag{
-            margin-left: 0;
+            vertical-align: center;
+            margin: 0 2px;
             border: none;
             @include get-color-divider(background-color);
             &:hover{
                 @include get-color-text();
                 @include get-color-border();
             }
+        }
+        .#{$prefix-button}{
+            // 重写在不同size下tag组件的size
+            @include form-dom-size(-4);
         }
     }
     &-placeholder{

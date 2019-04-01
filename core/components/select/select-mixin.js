@@ -65,6 +65,15 @@ export default {
         noDataText: {
             type: String,
             default: '无数据...'
+        },
+        size: {
+            type: String,
+            validator (value) {
+                return ['small', 'default', 'large'].indexOf(value) !== -1
+            },
+            default () {
+                return 'default'
+            }
         }
     },
     data () {

@@ -3,6 +3,7 @@
         <h3>单例：每个组价对应一组data</h3>
         <div class="box">
             <BigDataList
+                size="large"
                 placeholder="单选"
                 :data="[]"
                 value-name="id"
@@ -11,6 +12,7 @@
             >
             </BigDataList>
             <BigDataList
+                size="small"
                 placeholder="单选"
                 :data="list"
                 v-model="value"
@@ -87,7 +89,6 @@
 </template>
 <script>
 export default {
-    name: 'big-data-list',
     data () {
         return {
             list: (() => {

@@ -1,5 +1,5 @@
 <template>
-    <div :class="classes" @click="toggle" :disabled="disabled">
+    <div :class="classes" @click.stop="toggle" :disabled="disabled">
         <span>
             <slot name="open"></slot>
             <slot name="close"></slot>

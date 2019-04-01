@@ -11,6 +11,7 @@
                     ref="zov-select-head"
                     :data="currentItemArr"
                     :disabled="disabled"
+                    :size="size"
                     :placeholder="placeholder"
                     :filterable="filterable"
                     :multiple="multiple"

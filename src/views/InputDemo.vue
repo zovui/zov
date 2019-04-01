@@ -3,13 +3,13 @@
         <ul>
             <b>属性</b>
             <li>
-                <Input autofocus placeholder="这是一个自定获取焦点的input"/>
+                大：<Input size="large" autofocus placeholder="这是一个自动获取焦点的input"/>
             </li>
             <li>
-                <Input disabled placeholder="这是一个disabled的input"/>
+                默认：<Input disabled placeholder="这是一个disabled的input"/>
             </li>
             <li>
-                <Input clearable placeholder="这是一个可清除的input"/>
+                小：<Input size="small" clearable placeholder="这是一个可清除的input"/>
             </li>
         </ul>
         <ul>

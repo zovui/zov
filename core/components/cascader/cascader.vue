@@ -13,6 +13,7 @@
                     :data="currentItemArr"
                     :disabled="disabled"
                     :placeholder="placeholder"
+                    :size="size"
                     :filterable="filterable"
                     :multiple="multiple"
                     :clearable="clearable"

@@ -13,6 +13,7 @@
                     arrowDownNoAnimation
                     :disabled="disabled"
                     :placeholder="placeholder"
+                    :size="size"
                     :multiple="false"
                     :clearable="clearable"
                     v-model="currentValue"
@@ -67,6 +68,15 @@ export default {
         placeholder: {
             type: String,
             default: ''
+        },
+        size: {
+            type: String,
+            validator (value) {
+                return ['small', 'default', 'large'].indexOf(value) !== -1
+            },
+            default () {
+                return 'default'
+            }
         },
         autofocus: {
             type: Boolean,

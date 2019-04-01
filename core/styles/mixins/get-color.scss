@@ -36,9 +36,15 @@
     #{$color}: $color-divider;
     #{$color}: var(--color-divider);
 }
-@mixin get-color-shadow ($x:0,$y:0,$blur:#{$box-shadow-blur},$spread:#{$box-shadow-spread}) {
-    box-shadow: $x $y $blur $spread $color-shadow;
-    box-shadow: $x $y $blur $spread var(--color-shadow);
+@mixin get-color-shadow ($x:0,$y:0,$blur:#{$box-shadow-blur},$spread:#{$box-shadow-spread},$model:'') {
+    @if $model == inset {
+        box-shadow: $model $x $y $blur $spread $color-shadow;
+        box-shadow: $model $x $y $blur $spread var(--color-shadow);
+    }
+    @else {
+        box-shadow: $x $y $blur $spread $color-shadow;
+        box-shadow: $x $y $blur $spread var(--color-shadow);
+    }
 }
 @mixin get-color-bg ($color:background-color) {
     #{$color}: $color-background;

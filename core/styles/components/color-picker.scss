@@ -1,25 +1,126 @@
 $prefix-color-picker: #{$prefix}color-picker;
 .#{$prefix-color-picker}{
+    $W: 240px;
     $bar-W: 10px;
-    & .#{$prefix}tooltip{
-        width: 100%;
-        &-body{
-            width: 100%;
-            padding: 8px;
-        }
+    @mixin png-bg () {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
     }
     @mixin foucus () {
         @include outline();
         transition: box-shadow $transition-hover-time $bezier;
     }
+    @mixin mask () {
+        position: relative;
+        &:after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+    }
+    @mixin bar () {
+        position: relative;
+        height: $bar-W;
+        &-pointer{
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            @include get-color-shadow(0, 0, 7px, 1px);
+            transform: translate(-50%, -1px);
+            background-color: #fff;
+            cursor: pointer;
+        }
+    }
+    /*
+    * header
+    */
+    display: inline-block;
+    @include get-color-bg();
+    border: 1px solid;
+    @include get-color-border();
+    border-radius: $border-radius-button;
+    // 不同size下的 header的样式
+    &{
+        @mixin c ($type: $form-dom-height-base) {
+            $clearance: 12px;
+            @if $type == $form-dom-height-large {
+                $clearance: 14px
+            }
+            @if $type == $form-dom-height-small {
+                $clearance: 10px
+            }
+            &-color, &-arrow{
+                margin: $clearance / 2 - 1px;
+                $size: $type - $clearance;
+                width: $size;
+                height: $size;
+                line-height: $size;
+            }
+        }
+        @include form-dom-size();
+        &-header{
+            @include c();
+        }
+        &-size{
+            &-large{
+                .#{$prefix-color-picker}-header{
+                    @include c($form-dom-height-large);
+                }
+            }
+            &-small{
+                .#{$prefix-color-picker}-header{
+                    @include c($form-dom-height-small);
+                }
+            }
+        }
+    }
+    &-header{
+        height: 100%;
+        cursor: pointer;
+        &>div{
+            float: left;
+        }
+        &-color{
+            @include png-bg();
+            &>div{
+                box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+                height: 100%;
+                width: 100%;
+            }
+        }
+        &-arrow{
+            @include get-color-sub();
+            transform-origin: center;
+            transition: transform $transition-time $bezier;
+            &-up{
+                transform: rotate(180deg);
+            }
+        }
+    }
+    /*
+    * reset tooletip
+    */
+    & .#{$prefix}tooltip{
+        width: 100%;
+        height: 100%;
+        &-body{
+            width: 100%;
+            padding: 0;
+        }
+    }
     /*
     * 拾色面板
     */
     &-main-panel{
-        width: 220px;
-        height: 220px;
-        position: relative;
+        width: $W;
+        height: 140px;
         @include foucus();
+        @include mask();
+        overflow: hidden;
+        border-radius: $border-radius-button $border-radius-button 0 0;
         cursor: pointer;
         &>*{
             position: absolute;
@@ -38,27 +139,38 @@ $prefix-color-picker: #{$prefix}color-picker;
         }
         &-pointer{
             position: absolute;
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px $color-shadow, 0 0 1px 2px $color-shadow;
-            box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px var(--color-shadow), 0 0 1px 2px var(--color-shadow);
+            box-shadow: 0 0 0 1px #fff, inset 0 0 1px 1px $color-shadow, 0 0 1px 2px $color-shadow;
+            box-shadow: 0 0 0 1px #fff, inset 0 0 1px 1px var(--color-shadow), 0 0 1px 2px var(--color-shadow);
+            transform: translate(-50%, -50%);
         }
     }
     /*
     * 操作条
     */
     &-bars{
-        $H: 30px;
+        $H: 34px;
         display: flex;
         align-items: center;
-        margin: $bar-W 0;
+        padding: $bar-W 15px;
         &-current{
             width: $H;
             height: $H;
-            margin-right: 8px;
+            margin-right: 12px;
             border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            @include png-bg();
+            &>div{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+            }
         }
         &-tools{
             flex: 1;
@@ -71,37 +183,124 @@ $prefix-color-picker: #{$prefix}color-picker;
     /*
     * 色相条
     */
-    @mixin bar () {
-        position: relative;
-        height: $bar-W;
-        &-pointer{
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px #fff, inset 0 0 1px 1px $color-shadow, 0 0 1px 3px $color-shadow;
-            box-shadow: 0 0 0 3px #fff, inset 0 0 1px 1px var(--color-shadow), 0 0 1px 3px var(--color-shadow);
-            transform: translateY(2px);
-            cursor: pointer;
-        }
-    }
     &-hue-bar{
         @include foucus();
         background: linear-gradient(90deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red);
         @include bar();
         cursor: pointer;
+        @include mask();
     }
     /*
     * 透明度条
     */
     &-alpha-bar{
         @include foucus();
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+        @include png-bg();
         cursor: pointer;
+        @include mask();
         &-gradient{
             height: $bar-W;
             background: linear-gradient(90deg, rgba(23, 33, 45, 0), rgba(23, 33, 45, 1));
             @include bar();
         }
+    }
+    /*
+    * 值返显区
+    */
+    &-values{
+        width: $W;
+        padding: 0 15px 10px 15px;
+        &-rgba{
+            display: flex;
+            justify-content: space-between;
+            &>div{
+                flex: 1;
+                &>.zov-input{
+                    font-size: $font-size-small;
+                    & input{
+                        height: 26px;
+                        text-align: center;
+                    }
+                    width: 90%;
+                }
+                &>div:nth-of-type(2){
+                    @include get-color-placeholder();
+                }
+            }
+        }
+        &-hex{
+            &>.zov-input{
+                font-size: $font-size-small;
+                width: 100%;
+                & input{
+                    height: 26px;
+                    text-align: center;
+                }
+            }
+            &>div{
+                @include get-color-placeholder();
+            }
+        }
+    }
+    /*
+    * 推荐颜色展示区
+    */
+    &-recommend-colors{
+        width: $W;
+        padding: 10px;
+        border-top: 1px solid;
+        @include get-color-border();
+        display: flex;
+        flex-wrap: wrap;
+        &-item{
+            width: 14px;
+            height: 14px;
+            margin: 5px;
+            cursor: pointer;
+            transition: box-shadow 0.2s $bezier;
+            position: relative;
+            border-radius: $border-radius-button;
+            border: 1px solid;
+            @include get-color-border();
+            overflow: hidden;
+            &:after{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                @include png-bg();
+            }
+            &>div{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: 1;
+            }
+            &:hover{
+                @include get-color-shadow(0, 0, 5px, 1px);
+            }
+        }
+    }
+    /*
+    * footer
+    */
+    &-footer{
+        padding: 10px;
+        border-top: 1px solid;
+        @include get-color-border();
+        text-align: right;
+    }
+
+    /*
+    * disabled
+    */
+    &[disabled]{
+        @include get-color-placeholder();
+        @include get-color-disabled(background-color);
+        cursor: $cursor-disabled;
     }
 }

@@ -14,7 +14,7 @@
                     @after-leave="removeTagEnd"
                 >
                     <Tag
-                        size="small"
+                        :size="size"
                         v-if="data.length"
                         v-for="(item) in data"
                         :key="item[labelName]"
@@ -24,6 +24,7 @@
                     </Tag>
                 </transition-group>
                 <Input
+                    :size="size"
                     v-if="filterable"
                     v-model="currentValue"
                     :style="styles"
@@ -42,6 +43,7 @@
         <template v-else>
             <!-- 单选 -->
             <Input
+                :size="size"
                 :placeholder="placeholder"
                 v-model="currentValue"
                 ref="zov-select-head-input"
@@ -58,9 +60,11 @@
 import Tag from '../tag'
 import Icon from '../icon'
 import Input from '../input'
+import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
 let prefix = 'zov-select-head'
 export default {
     name: prefix,
+    mixins: [FormDomSizeMixin],
     components: {
         Tag,
         Icon,
@@ -116,6 +120,7 @@ export default {
     },
     data () {
         return {
+            stylePrefix: prefix,
             currentValue: this.value,
             currentWidth: null,
             mouseStatus: 'leave'
@@ -132,10 +137,11 @@ export default {
     computed: {
         classes () {
             return [
-                prefix,
+                this.stylePrefix,
+                this.sizeClasses,
                 {
-                    [prefix + '-no-filterable']: !this.filterable && !this.multiple,
-                    [prefix + '-multiple']: this.multiple
+                    [this.stylePrefix + '-no-filterable']: !this.filterable && !this.multiple,
+                    [this.stylePrefix + '-multiple']: this.multiple
                 }
             ]
         },
@@ -147,9 +153,9 @@ export default {
         },
         arrowDownClasses () {
             return [
-                prefix + '-arrow-down', {
-                    [prefix + '-arrow-up']: this.dropShow && !this.arrowDownNoAnimation,
-                    [prefix + '-clear-hover']: this.clearStatus
+                this.stylePrefix + '-arrow-down', {
+                    [this.stylePrefix + '-arrow-up']: this.dropShow && !this.arrowDownNoAnimation,
+                    [this.stylePrefix + '-clear-hover']: this.clearStatus
                 }
             ]
         },

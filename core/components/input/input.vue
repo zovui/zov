@@ -23,9 +23,11 @@
 </template>
 <script>
 import Icon from '../icon'
+import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
 let prefix = 'zov-input'
 export default {
     name: prefix,
+    mixins: [FormDomSizeMixin],
     components: {
         Icon
     },
@@ -55,22 +57,23 @@ export default {
     },
     data () {
         return {
+            stylePrefix: prefix,
             canSee: this.eye
         }
     },
     computed: {
         classes () {
             return [
-                prefix,
-                {}
+                this.stylePrefix,
+                this.sizeClasses
             ]
         },
         innerClasses () {
             return [
                 // 计算后缀个数，决定input padding值。
-                prefix + '-prefix-' + this.transCount([this.prefix]),
+                this.stylePrefix + '-prefix-' + this.transCount([this.prefix]),
                 // 计算后缀个数，决定input padding值。
-                prefix + '-suffix-' + this.transCount([this.clearable && this.value, this.suffix])
+                this.stylePrefix + '-suffix-' + this.transCount([this.clearable && this.value, this.suffix])
             ]
         },
         inputListeners () {

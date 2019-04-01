@@ -1,8 +1,15 @@
 <template>
     <div class="out-box">
+        <p style="margin-bottom: 30px">
+            size
+            <Button size="large" @click="size = 'large'">large</Button>
+            <Button @click="size = 'default'">default</Button>
+            <Button size="small" @click="size = 'small'">small</Button>
+        </p>
         <div class="box">
             单选不可搜索
             <Select
+                :size="size"
                 :data="list"
                 placeholder="autofocus,单选"
                 v-model="value1"
@@ -28,21 +35,9 @@
             </Select>
         </div>
         <div class="box">
-            多选，不可搜索
-            <Select
-                :data="list"
-                placeholder="多选"
-                multiple
-                v-model="value3"
-                value-name="id"
-                label-name="text"
-            >
-                <div slot-scope="{props}">
-                    {{ props.item.text }}
-                </div>
-            </Select>
             多选，可搜索
             <Select
+                :size="size"
                 :data="list"
                 placeholder="autofocus, 多选"
                 multiple
@@ -54,6 +49,19 @@
                 @on-change="change"
                 @on-open-change="open"
                 autofocus
+            >
+                <div slot-scope="{props}">
+                    {{ props.item.text }}
+                </div>
+            </Select>
+            多选，不可搜索
+            <Select
+                :data="list"
+                placeholder="多选"
+                multiple
+                v-model="value3"
+                value-name="id"
+                label-name="text"
             >
                 <div slot-scope="{props}">
                     {{ props.item.text }}
@@ -188,6 +196,7 @@
 export default {
     data () {
         return {
+            size: 'default',
             list: (() => {
                 let d = []
                 for (let i = 0; i < 200; i++) {

@@ -1,23 +1,23 @@
 $prefix-button : #{$prefix}button;
-@mixin btn-type ($color-type, $color) {
-    &-#{$color-type}{
-        @include get-color-background-coloured();
-        border-color: transparent;
-        background-color: $color;
-        @include outline($color);
-        &:hover{
+.#{$prefix-button}{
+    @mixin btn-type ($color-type, $color) {
+        &-#{$color-type}{
             @include get-color-background-coloured();
-            border-color: lighten($color, $toning-ratio);
-            background-color: lighten($color, $toning-ratio);
-        }
-        &:active{
-            @include get-color-background-coloured();
-            border-color: darken($color, $toning-ratio);
-            background-color: darken($color, $toning-ratio);
+            border-color: transparent;
+            background-color: $color;
+            @include outline($color);
+            &:hover{
+                @include get-color-background-coloured();
+                border-color: lighten($color, $toning-ratio);
+                background-color: lighten($color, $toning-ratio);
+            }
+            &:active{
+                @include get-color-background-coloured();
+                border-color: darken($color, $toning-ratio);
+                background-color: darken($color, $toning-ratio);
+            }
         }
     }
-}
-.#{$prefix-button}{
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -32,11 +32,9 @@ $prefix-button : #{$prefix}button;
                 border $transition-hover-time $bezier,
                 opacity $transition-hover-time $bezier,
                 box-shadow $transition-hover-time $bezier;
-    font-size: $font-size-base;
     border-radius: $border-radius-button;
     padding: $btn-padding;
     margin: $outline-width;
-    line-height: $btn-line-height;
     border: 1px solid;
     @include get-color-border();
     @include outline();
@@ -44,6 +42,8 @@ $prefix-button : #{$prefix}button;
         color: $color-primary;
         border-color: $color-primary;
     }
+    // size对应的样式分类
+    @include form-dom-size();
     // type对应的样式分类
     &-type{
         @include btn-type(primary,$color-primary);
@@ -62,15 +62,6 @@ $prefix-button : #{$prefix}button;
     &-shape{
         &-circle{
             border-radius: 2em;
-        }
-    }
-    // size对应的样式分类
-    &-size{
-        &-large{
-            font-size: $font-size-large;
-        }
-        &-small{
-            font-size: $font-size-small;
         }
     }
     &>*{

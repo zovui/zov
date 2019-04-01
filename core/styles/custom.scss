@@ -47,9 +47,14 @@ $zindex-spin-fullscreen     :   2010 !default;
 // 间隙
 $gap-base                   :   15px !default;
 
-// form
+/*
+* form
+*/
 $outline-width              :   2px !default;
 $form-dom-width             :   160px !default;
+$form-dom-height-base       :   32px !default;
+$form-dom-height-large      :   36px !default;
+$form-dom-height-small      :   24px !default;
 $drop-down-max-height       :   220px !default;
 
 // button

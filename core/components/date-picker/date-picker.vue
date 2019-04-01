@@ -14,6 +14,7 @@
                     :data="currentItemArr"
                     :disabled="disabled"
                     :placeholder="placeholder"
+                    :size="size"
                     :filterable="true"
                     :clearable="clearable"
                     :multiple="multipleOfCorrect"
@@ -121,6 +122,15 @@ export default {
         placeholder: {
             type: String,
             default: ''
+        },
+        size: {
+            type: String,
+            validator (value) {
+                return ['small', 'default', 'large'].indexOf(value) !== -1
+            },
+            default () {
+                return 'default'
+            }
         },
         autofocus: {
             type: Boolean,

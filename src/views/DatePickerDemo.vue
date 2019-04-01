@@ -3,6 +3,7 @@
         <p> 单选 </p>
         日：
         <DatePicker
+            size="large"
             autofocus
             placeholder="日"
             v-model="a1"
@@ -10,6 +11,7 @@
         />
         月：
         <DatePicker
+            size="small"
             placeholder="月"
             type="month"
             v-model="a2"

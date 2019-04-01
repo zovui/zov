@@ -24,7 +24,7 @@ export default {
         },
         activeItem (item, isdefault) {
             if (item.disabled) return
-            let cascaderComponent = this.cascaderComponent
+            const { cascaderComponent } = this
             cascaderComponent.activeArr[item.__floor] = item['__' + this.valueName]
             // 向子组件传输数据
             this.hasChildren(item) ? this.subData = item[this.childName] : this.subData = []
