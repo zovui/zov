@@ -40,7 +40,6 @@ export default {
     },
     computed: {
         tooltipAttrs () {
-            console.log()
             let _this = this
             // `Object.assign` 将所有的对象合并为一个新对象
             return Object.assign({}, _this.$attrs,

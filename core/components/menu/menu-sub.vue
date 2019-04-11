@@ -135,7 +135,6 @@ export default {
             this.opened = !opened
         },
         upDateOpened () {
-            console.log(123)
             this.opened = this.menuComponent.currentOpenNames.join(',').split(',').indexOf(String(this.name)) !== -1
         }
     },
