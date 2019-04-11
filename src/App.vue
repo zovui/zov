@@ -1,13 +1,13 @@
 <template>
-    <div id="app">
-        <p style="padding: 15px 0">
+    <div>
+        <p style="padding: 15px 0; text-align: center">
             主题
             <Switcher v-model="isdark">
                 <span slot="open">亮</span>
                 <span slot="close">暗</span>
             </Switcher>
         </p>
-        <ul id="nav">
+        <ul class="nav">
             <Button
                 v-for="(item,index) in $router.options.routes"
                 :key="index"
@@ -20,10 +20,7 @@
     </div>
 </template>
 <style lang="scss">
-    #app {
-        text-align: center;
-    }
-    #nav {
+    .nav {
         padding: 30px;
         a {
             font-weight: bold;

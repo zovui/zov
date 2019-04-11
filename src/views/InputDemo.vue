@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="text-align: center">
         <ul>
             <b>属性</b>
             <li>

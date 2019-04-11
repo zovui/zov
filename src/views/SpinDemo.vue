@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="text-align: center">
         <Switcher v-model="cover">切换</Switcher>
         <div class="box">
             <div class="div">

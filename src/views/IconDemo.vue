@@ -982,6 +982,7 @@
             padding: 10px;
             border:1px solid #dedede;
             border-radius: 10px;
+            text-align: center;
         }
         .name{
             font-size: 16px;

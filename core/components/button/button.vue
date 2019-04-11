@@ -15,7 +15,7 @@
 <script>
 import Spin from '../spin'
 import Icon from '../icon'
-import RenderElTag from '../../utils/render-el-tag'
+import RenderElTag from '../base/render-el-tag'
 import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
 let prefix = 'zov-button'
 export default {

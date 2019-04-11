@@ -1,7 +1,7 @@
 <template>
     <div class="zov-popper">
         <slot></slot>
-        <span v-if="!this.noArrow" class="zov-popper-arrow"></span>
+        <span v-show="!this.noArrow" class="zov-popper-arrow" ref="zov-popper-arrow"></span>
     </div>
 </template>
 <script>
@@ -72,7 +72,7 @@ export default {
                     // 自定义修饰
                     modifiers: {
                         arrow: {
-                            element: '.zov-popper-arrow'
+                            element: this.$refs['zov-popper-arrow']
                         },
                         computeStyle: {
                             gpuAcceleration: false // 使用CSS 3D转换来定位popper

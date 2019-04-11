@@ -8,13 +8,22 @@
         v-click-outside.capture="outCloseHandle"
     >
         <slot></slot>
-        <transition :name="animationName">
+        <transition
+            :name="animationName"
+            @before-enter="$emit('before-enter')"
+            @enter="$emit('enter')"
+            @after-enter="$emit('after-enter')"
+            @before-leave="$emit('before-leave')"
+            @leave="$emit('leave')"
+            @after-leave="$emit('after-leave')"
+        >
             <Popper ref="zov-popper"
                     :placement="placement"
                     :no-arrow="noArrow"
                     :class="{'zov-tooltip-high-color': highColor}"
                     v-show="visible"
                     :size="currentH+'-'+currentW"
+                    :fix="fix"
             >
                 <div class="zov-tooltip-body">
                     <p v-if="title" class="zov-tooltip-title">
@@ -120,6 +129,10 @@ export default {
         noDelay: {
             type: Boolean,
             default: false
+        },
+        fix: {
+            type: Boolean,
+            default: true
         }
     },
     data () {
@@ -133,7 +146,7 @@ export default {
     },
     watch: {
         value (val) {
-            this.visible = val
+            this.updateVisible(val)
         },
         visible (val) {
             this.mouseStatus = this.visible ? 'enter' : 'leave'
@@ -142,6 +155,9 @@ export default {
         }
     },
     methods: {
+        updateVisible (status) {
+            this.visible = status
+        },
         noTrigger (trigger) {
             if (this.never) {
                 return true
@@ -162,7 +178,7 @@ export default {
             * 非延时模式，为内部提供，在drop中调用不需要延时处理
             **/
             if (this.noDelay) {
-                this.visible = this.mouseStatus === 'enter'
+                this.updateVisible(this.mouseStatus === 'enter')
                 return
             }
             /**
@@ -172,7 +188,7 @@ export default {
             * 上的out-click事件，因此会出现我们不期望的效果，这里的异步就可以解决此问题。
             **/
             this.timer = setTimeout(() => {
-                this.visible = this.mouseStatus === 'enter'
+                this.updateVisible(this.mouseStatus === 'enter')
                 this.clearTimer()
             }, Number(this[this.mouseStatus + 'Delay']))
         },
@@ -215,6 +231,7 @@ export default {
         this.transPopperEventListeners(this.visible)
     },
     updated () {
+        this.flag = false
         if (this.currentW !== this.$el.offsetWidth || this.currentH !== this.$el.offsetHeight) {
             this.currentW = this.$el.offsetWidth
             this.currentH = this.$el.offsetHeight

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="text-align: center">
         Tag组件是复用的Button组件，稍微做了调试改动。
         <p>
             size

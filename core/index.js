@@ -17,7 +17,7 @@ import Cascader from './components/cascader'
 import DatePicker from './components/date-picker'
 import TimePicker from './components/time-picker'
 import ColorPicker from './components/color-picker'
-import Menu from './components/menu'
+import { Menu, MenuSub, MenuGroup, MenuItem } from './components/menu'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -48,7 +48,10 @@ const components = {
     DatePicker,
     TimePicker,
     ColorPicker,
-    Menu
+    Menu,
+    MenuSub,
+    MenuGroup,
+    MenuItem
 }
 Object.keys(components).forEach(key => {
     components['z' + key] = components[key]
@@ -96,7 +99,10 @@ export {
     DatePicker,
     TimePicker,
     ColorPicker,
-    Menu
+    Menu,
+    MenuSub,
+    MenuGroup,
+    MenuItem
 }
 // 将整个zov暴露出去
 export default zov

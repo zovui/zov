@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="text-align: center">
         <Switcher :value="v">
             <span slot="open">开</span>
             <span slot="close">关</span>

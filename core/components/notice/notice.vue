@@ -38,7 +38,7 @@
     </transition-group>
 </template>
 <script>
-import RenderCell from '../../utils/render-cell'
+import RenderCell from '../base/render-cell'
 import Icon from '../icon'
 export default {
     name: 'zov-notice-message',

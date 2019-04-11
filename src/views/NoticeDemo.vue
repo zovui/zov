@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="text-align: center">
         <p>
             全配置项
             <Button @click="test">open</Button>

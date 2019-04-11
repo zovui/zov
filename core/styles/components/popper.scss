@@ -17,7 +17,17 @@ $prefix-popper : #{$prefix}popper;
     @each $dir1, $dir2, $deg in (left,right,45deg) (right,left,-135deg) (top,bottom,135deg) (bottom,top,-45deg) {
         &[x-placement^='#{$dir1}']{
             margin-#{$dir2}: $arrowWidth;
-            .#{$prefix-popper}-arrow{
+            &:after{
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                #{$dir2}: -$arrowWidth;
+                content: ' ';
+                z-index: -1;
+            }
+            &>.#{$prefix-popper}-arrow{
                 #{$dir2} : -$arrowWidth / 2;
                 transform: rotate($deg);
             }

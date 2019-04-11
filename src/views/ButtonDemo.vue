@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="text-align: center">
         <p>
             size
             <Button size="large" @click="size = 'large'">large</Button>

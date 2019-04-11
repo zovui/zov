@@ -47,6 +47,7 @@ body{
     /*
     * 默认
     */
+    --color-primary                             :   #{$color-primary};
     --color-light-primary                       :   #{$color-light-primary};
     --color-dark-primary                        :   #{$color-dark-primary};
     --color-title                               :   #{$color-title};
