@@ -61,7 +61,8 @@ import Tag from '../tag'
 import Icon from '../icon'
 import Input from '../input'
 import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
-let prefix = 'zov-select-head'
+import { findComponentDownward } from '../../utils'
+const prefix = 'zov-select-head'
 export default {
     name: prefix,
     mixins: [FormDomSizeMixin],
@@ -141,14 +142,17 @@ export default {
                 this.sizeClasses,
                 {
                     [this.stylePrefix + '-no-filterable']: !this.filterable && !this.multiple,
-                    [this.stylePrefix + '-multiple']: this.multiple
+                    [this.stylePrefix + '-multiple']: this.multiple,
+                    [this.stylePrefix + '-multiple-no-filterable']: !this.filterable && this.multiple
                 }
             ]
         },
         styles () {
-            let w = this.currentValue.length * 14 + 3
+            let ctx = document.createElement('canvas').getContext('2d')
+            let w = ctx.measureText(this.currentValue).width + 3
+            let W = this.currentWidth - 37
             return {
-                width: (w > this.currentWidth ? this.currentWidth : w) + 'px'
+                width: (w > W ? W : w) + 'px'
             }
         },
         arrowDownClasses () {
@@ -180,7 +184,7 @@ export default {
         },
         removeTagEnd () {
             // 解决删除tags动画完成后的高度变化导致popper不更新问题
-            this.$parent.$children[1] && this.$parent.$children[1].popper.update()
+            findComponentDownward(this.$parent, 'zov-popper').popper.update()
         }
     },
     mounted () {

@@ -65,7 +65,7 @@
 import LongList from '../long-list'
 import SelectedMixin from '../select/select-mixin'
 import worker from '../../worker'
-let prefix = 'zov-big-data-list'
+const prefix = 'zov-big-data-list'
 export default {
     name: prefix,
     components: {

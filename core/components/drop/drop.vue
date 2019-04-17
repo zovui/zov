@@ -12,7 +12,7 @@
 <script>
 import ToolTip from '../tooltip'
 import { DropUpdateMixin } from '../../mixins'
-let prefix = 'zov-drop'
+const prefix = 'zov-drop'
 export default {
     name: prefix,
     mixins: [DropUpdateMixin],

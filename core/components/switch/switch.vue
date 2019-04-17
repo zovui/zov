@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-let prefix = 'zov-switch'
+const prefix = 'zov-switch'
 export default {
     name: prefix,
     props: {

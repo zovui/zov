@@ -153,6 +153,13 @@ let router = new Router({
                 sort: 'form'
             },
             component: () => import('./views/MenuDemo.vue')
+        },
+        {
+            path: '/layout',
+            meta: {
+                sort: 'form'
+            },
+            component: () => import('./views/LayoutDemo.vue')
         }
     ]
 })

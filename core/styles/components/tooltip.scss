@@ -2,12 +2,15 @@ $prefix-tooltip: #{$prefix}tooltip;
 .#{$prefix-tooltip}{
     display: inline-block;
     &-body{
+        @include get-color-text();
         width: 220px;
         padding: $gap-base / 2 $gap-base / 4 * 3;
     }
     &-high-color{
         @include get-color-title(background-color);
-        @include get-color-divider(color);
+        .#{$prefix-tooltip}-body{
+            @include get-color-divider(color);
+        }
         .#{$prefix-tooltip}-title{
             @include get-color-bg(color);
         }

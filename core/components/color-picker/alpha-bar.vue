@@ -27,7 +27,7 @@
 import HSAMixin from './hsa-mixin'
 import { clamp } from './utils'
 import { changeColor, toRGBAString } from './color-utils'
-let prefix = 'zov-color-picker-alpha-bar'
+const prefix = 'zov-color-picker-alpha-bar'
 export default {
     name: prefix,
     mixins: [HSAMixin],

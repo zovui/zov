@@ -22,7 +22,7 @@
 import HASMixin from './hsa-mixin'
 import { clamp } from './utils'
 import { changeColor } from './color-utils'
-let prefix = 'zov-color-picker-hue-bar'
+const prefix = 'zov-color-picker-hue-bar'
 export default {
     name: prefix,
     mixins: [HASMixin],

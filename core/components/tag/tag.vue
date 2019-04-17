@@ -12,7 +12,7 @@
 <script>
 import Icon from '../icon'
 import Button from '../button'
-let prefix = 'zov-tag'
+const prefix = 'zov-tag'
 export default {
     name: prefix,
     components: { Icon, Button }

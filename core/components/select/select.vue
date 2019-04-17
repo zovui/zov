@@ -98,7 +98,7 @@
 <script>
 import Option from './option'
 import SelectedMixin from './select-mixin'
-let prefix = 'zov-select'
+const prefix = 'zov-select'
 export default {
     name: prefix,
     components: {

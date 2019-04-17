@@ -200,3 +200,60 @@ export function removeClass (el, cls) {
         el.className = trim(curClass)
     }
 }
+// 媒体查询容错函数
+export const dimensionMap = {
+    xs: '480px',
+    sm: '768px',
+    md: '992px',
+    lg: '1200px',
+    xl: '1600px'
+}
+export function setMatchMedia () {
+    if (typeof window !== 'undefined') {
+        const matchMediaPolyfill = mediaQuery => {
+            return {
+                media: mediaQuery,
+                matches: false,
+                on () {},
+                off () {}
+            }
+        }
+        window.matchMedia = window.matchMedia || matchMediaPolyfill
+    }
+}
+
+let prefix = ['webkit', 'moz', 'MS', 'o', '']
+export function prefixedEventListener (element, type, callback) {
+    for (let p = 0; p < prefix.length; p++) {
+        if (!prefix[p]) type = type.toLowerCase()
+        element.addEventListener(prefix[p] + type, callback, false)
+    }
+}
+
+export function transitionEnd (element, callback) {
+    let transitions = {
+        'transition': 'transitionend',
+        'OTransition': 'oTransitionEnd',
+        'MozTransition': 'transitionend',
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MsTransition': 'msTransitionEnd'
+    }
+    for (let t in transitions) {
+        if (element.style[t] !== undefined) {
+            element.addEventListener(transitions[t], callback, false)
+        }
+    }
+}
+export function animitionEnd (element, callback) {
+    let animations = {
+        'animation': 'animationend',
+        'OAnimation': 'oAnimationEnd',
+        'MozAnimation': 'animationend',
+        'WebkitAnimation': 'webkitAnimationEnd'
+    }
+    for (let t in animations) {
+        if (element.style[t] !== undefined) {
+            element.addEventListener(animations[t], callback, false)
+        }
+    }
+}

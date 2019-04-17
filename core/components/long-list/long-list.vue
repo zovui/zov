@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-let prefix = 'zov-long-list'
+const prefix = 'zov-long-list'
 export default {
     name: prefix,
     props: {

@@ -4,8 +4,8 @@
     </ul>
 </template>
 <script>
-import { findComponentsDownward } from '../../utils'
-let prefix = 'zov-menu'
+import { findComponentsDownward, findComponentUpward } from '../../utils'
+const prefix = 'zov-menu'
 export default {
     name: prefix,
     props: {
@@ -38,8 +38,8 @@ export default {
             default: false
         },
         width: {
-            type: [String, Number],
-            default: 240
+            type: String,
+            default: '240px'
         },
         indent: {
             type: [String, Number],
@@ -48,6 +48,14 @@ export default {
         noArrow: {
             type: Boolean,
             default: false
+        },
+        thumbnail: {
+            type: Boolean,
+            default: false
+        },
+        thumbnailWidth: {
+            type: String,
+            default: '56px'
         }
     },
     data () {
@@ -58,23 +66,42 @@ export default {
         }
     },
     computed: {
+        currentThumbnail () {
+            return this.mode === 'vertical' && this.thumbnail
+        },
         classes () {
             return [
                 prefix,
                 prefix + '-' + this.mode,
-                this.highColor && prefix + '-high'
+                this.highColor && prefix + '-high',
+                this.currentThumbnail && prefix + '-thumbnail'
             ]
         },
         styles () {
             return {
                 padding: this.mode === 'vertical' ? '0' : '0 ' + this.indent + 'px',
-                width: this.mode === 'vertical' ? this.width + 'px' : '100%'
+                width: this.mode === 'vertical'
+                    ? this.thumbnail
+                        ? this.siderUpward ? '100%' : this.thumbnailWidth
+                        : this.siderUpward ? '100%' : this.width
+                    : '100%'
             }
+        },
+        siderUpward () {
+            return findComponentUpward(this, 'zov-layout-sider')
         }
     },
     watch: {
-        currentActiveName () {
+        currentActiveName (val) {
             this.updateMenuSubActive()
+            this.$emit('on-change', val)
+        },
+        currentThumbnail (val) {
+            val && setInterval(() => {
+                this.currentThumbnail && findComponentsDownward(this, 'zov-popper').forEach(component => {
+                    component.popper.update()
+                })
+            }, 15)
         }
     },
     methods: {

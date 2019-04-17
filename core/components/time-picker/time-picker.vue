@@ -45,7 +45,7 @@ import dayjs from 'dayjs'
 import toArray from 'dayjs/plugin/toArray'
 dayjs.extend(toArray)
 let now = dayjs()
-let prefix = 'zov-time-picker'
+const prefix = 'zov-time-picker'
 export default {
     name: prefix,
     mixins: [UseSelectHeaderMixin, TimePickerMixin],

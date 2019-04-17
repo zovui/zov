@@ -48,7 +48,7 @@
 import Popper from '../popper'
 import Icon from '../icon'
 import { directive as clickOutside } from 'v-click-outside-x'
-let prefix = 'zov-tooltip'
+const prefix = 'zov-tooltip'
 export default {
     name: prefix,
     components: {
@@ -197,7 +197,8 @@ export default {
             this.mouseStatus = type
             this.setVisible()
         },
-        toggleHandle () {
+        toggleHandle (event) {
+            this.$emit('click', event)
             if (this.noTrigger('click')) return
             this.mouseStatus = this.mouseStatus === 'leave' ? 'enter' : 'leave'
             this.setVisible()

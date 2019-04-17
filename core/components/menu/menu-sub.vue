@@ -1,6 +1,6 @@
 <template>
-    <li class="zov-menu-sub">
-        <template v-if="menuComponent.mode === 'vertical'">
+    <li class="zov-menu-sub" :disabled="disabled">
+        <template v-if="isVerticalMode && !menuComponent.currentThumbnail">
             <div
                 :class="classes"
                 :style="paddingStyle"
@@ -22,7 +22,7 @@
                     v-show="opened"
                 >
                     <slot>
-                        menu item
+                        menu option
                     </slot>
                 </ul>
             </collapse-transition>
@@ -33,14 +33,16 @@
             :no-arrow="menuComponent.noArrow"
             :trigger="menuComponent.trigger"
             :high-color="menuComponent.highColor"
-            :placement="parentsMenuSub.length ? 'right-start' : 'bottom'"
+            :placement="placement"
             :fix="false"
         >
             <template #drop-head>
                 <div
                     :class="classes"
                     :style="paddingStyle"
+                    ref="title"
                 >
+                    <Icon v-if="hasDefaultThumbnailIcon" :iconname="thumbnailIcon" thumbnail-default-icon/>
                     <slot name="title">
                         menu sub title
                     </slot>
@@ -57,7 +59,7 @@
                 @click.stop="opened = true"
             >
                 <slot>
-                    menu item
+                    menu option
                 </slot>
             </ul>
         </Drop>
@@ -69,7 +71,7 @@ import Icon from '../icon'
 import MenuMixin from './menu-mixin'
 import CollapseTransition from '../base/collapse-transition'
 import { findComponentUpward } from '../../utils'
-let prefix = 'zov-menu-sub'
+const prefix = 'zov-menu-sub'
 export default {
     name: prefix,
     mixins: [MenuMixin],
@@ -86,6 +88,10 @@ export default {
         disabled: {
             type: Boolean,
             default: false
+        },
+        thumbnailIcon: {
+            type: String,
+            default: 'options'
         }
     },
     data () {
@@ -110,6 +116,12 @@ export default {
         },
         tooltipUpward () {
             return findComponentUpward(this, 'zov-tooltip')
+        },
+        placement () {
+            return this.menuComponent.currentThumbnail || this.parentsMenuSub.length ? 'right-start' : 'bottom'
+        },
+        hasDefaultThumbnailIcon () {
+            return !this.parentsMenuSub.length && this.menuComponent.currentThumbnail && !this.hasThumbnailIcon
         }
     },
     watch: {

@@ -8,7 +8,7 @@
         ]"></span>
 </template>
 <script>
-let prefix = 'zov-icon'
+const prefix = 'zov-icon'
 export default {
     name: prefix,
     data () {

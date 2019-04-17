@@ -15,7 +15,7 @@ export default {
     },
     computed: {
         cascaderComponent () {
-            return findComponentUpward(this, 'zov-cascader')
+            return this.$options.name === 'zov-cascader' ? this : findComponentUpward(this, 'zov-cascader')
         }
     },
     methods: {

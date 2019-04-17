@@ -6,7 +6,7 @@
 </template>
 <script>
 import Popper from 'popper.js'
-let prefix = 'zov-popper'
+const prefix = 'zov-popper'
 export default {
     name: prefix,
     props: {
@@ -39,6 +39,10 @@ export default {
     },
     watch: {
         size (val) {
+            this.popper.update()
+        },
+        placement (val) {
+            this.popper.options.placement = val
             this.popper.update()
         }
     },

@@ -9,7 +9,7 @@
 </template>
 <script>
 import SpinBars from '../spin-bars'
-let prefix = 'zov-spin'
+const prefix = 'zov-spin'
 export default {
     name: prefix,
     components: SpinBars,

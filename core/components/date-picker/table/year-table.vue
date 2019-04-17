@@ -46,7 +46,7 @@
 </template>
 <script>
 import datePickerMixin from '../date-table-mixin'
-let prefix = 'zov-year-table'
+const prefix = 'zov-year-table'
 export default {
     name: prefix,
     mixins: [ datePickerMixin ],

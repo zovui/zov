@@ -32,7 +32,7 @@
 <script>
 import TimePickerMixin from './time-picker-spinner-mixin'
 import { scrollTop } from '../../utils'
-let prefix = 'zov-time-spinner'
+const prefix = 'zov-time-spinner'
 export default {
     name: prefix,
     mixins: [TimePickerMixin],

@@ -96,7 +96,7 @@ import MainPanel from './main-panel'
 import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
 import tinycolor from 'tinycolor2'
 import { changeColor, toColorModelNum } from './color-utils'
-let prefix = 'zov-color-picker'
+const prefix = 'zov-color-picker'
 export default {
     name: prefix,
     mixins: [FormDomSizeMixin],

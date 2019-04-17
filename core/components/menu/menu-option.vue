@@ -1,14 +1,43 @@
 <template>
-    <li :class="classes" @click.stop="clickHandle" :style="paddingStyle">
-        <slot>item</slot>
+    <ToolTip
+        v-if="isThumbnailMode"
+        placement="right"
+        :high-color="menuComponent.highColor"
+        :class="classes"
+        @click.stop="clickHandle"
+        :style="paddingStyle"
+        :disabled="disabled"
+    >
+        <template #tooltip>
+            <slot>option</slot>
+        </template>
+        <span ref="title">
+            <Icon v-if="!hasThumbnailIcon" :iconname="thumbnailIcon" thumbnail-default-icon/>
+            <slot></slot>
+        </span>
+    </ToolTip>
+    <li
+        v-else
+        :class="classes"
+        @click.stop="clickHandle"
+        :style="paddingStyle"
+        :disabled="disabled"
+    >
+        <slot>option</slot>
     </li>
 </template>
 <script>
 import MenuMixin from './menu-mixin'
-let prefix = 'zov-menu-item'
+import Icon from '../icon'
+import ToolTip from '../tooltip'
+const prefix = 'zov-menu-option'
 export default {
     name: prefix,
     mixins: [MenuMixin],
+    components: {
+        Icon,
+        ToolTip
+    },
     props: {
         name: {
             type: [String, Number],
@@ -17,6 +46,10 @@ export default {
         disabled: {
             type: Boolean,
             default: false
+        },
+        thumbnailIcon: {
+            type: String,
+            default: 'more'
         }
     },
     computed: {
@@ -25,6 +58,9 @@ export default {
                 prefix,
                 this.name === this.menuComponent.currentActiveName && prefix + '-active'
             ]
+        },
+        isThumbnailMode () {
+            return this.menuComponent.currentThumbnail && !this.parentsMenuSub.length && this.parentsMenuGroup.length < 2
         }
     },
     methods: {
@@ -36,9 +72,9 @@ export default {
                 this.menuComponent.activeFullPath.push(name)
                 this.menuComponent.currentOpenNames.indexOf(name) === -1 && this.menuComponent.currentOpenNames.push(name)
             })
-            this.menuComponent.$emit('on-change', this.name)
         },
         clickHandle () {
+            if (this.disabled) return
             this.menuComponent.currentActiveName = this.name
             this.upwardUpdateActive()
         }

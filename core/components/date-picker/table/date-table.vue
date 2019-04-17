@@ -80,7 +80,7 @@
 </template>
 <script>
 import datePickerMixin from '../date-table-mixin'
-let prefix = 'zov-date-table'
+const prefix = 'zov-date-table'
 export default {
     name: prefix,
     mixins: [ datePickerMixin ],

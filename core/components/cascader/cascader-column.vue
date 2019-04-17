@@ -45,7 +45,7 @@
 <script>
 import Icon from '../icon'
 import CascaderMixin from './cascader-mixin'
-let prefix = 'zov-cascader-column'
+const prefix = 'zov-cascader-column'
 export default {
     name: prefix,
     components: { Icon },

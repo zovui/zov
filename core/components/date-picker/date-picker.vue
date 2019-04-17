@@ -91,7 +91,7 @@ dayjs.extend(toArray)
 dayjs.extend(toObject)
 dayjs.extend(weekOfYear)
 let today = dayjs()
-let prefix = 'zov-date-picker'
+const prefix = 'zov-date-picker'
 export default {
     name: prefix,
     mixins: [UseSelectHeaderMixin, TimePickerMixin],

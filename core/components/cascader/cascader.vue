@@ -91,7 +91,7 @@
 import CascaderColumn from './cascader-column'
 import SelectedMixin from '../select/select-mixin'
 import CascaderMixin from './cascader-mixin'
-let prefix = 'zov-cascader'
+const prefix = 'zov-cascader'
 export default {
     name: prefix,
     components: {

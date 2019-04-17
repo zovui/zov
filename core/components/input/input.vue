@@ -24,7 +24,7 @@
 <script>
 import Icon from '../icon'
 import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
-let prefix = 'zov-input'
+const prefix = 'zov-input'
 export default {
     name: prefix,
     mixins: [FormDomSizeMixin],

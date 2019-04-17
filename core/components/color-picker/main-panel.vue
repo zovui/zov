@@ -26,7 +26,7 @@
 import HSAMixin from './hsa-mixin'
 import { clamp, getIncrement } from './utils'
 import { changeColor } from './color-utils'
-let prefix = 'zov-color-picker-main-panel'
+const prefix = 'zov-color-picker-main-panel'
 export default {
     name: prefix,
     mixins: [HSAMixin],

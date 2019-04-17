@@ -60,3 +60,18 @@ $drop-down-max-height       :   220px !default;
 // button
 $btn-padding                :   0 $gap-base !default;
 $btn-line-height            :   2.2 !default;
+
+// Layout and Grid
+$grid-columns                : 24;
+$grid-gutter-width           : 0;
+$layout-body-background      : #f5f7f9;
+$layout-header-background    : #495060;
+$layout-header-height        : 64px;
+$layout-header-padding       : 0 50px;
+$layout-footer-padding       : 24px 50px;
+$layout-footer-background    : $layout-body-background;
+$layout-sider-background     : $layout-header-background;
+$layout-trigger-height       : 48px;
+$layout-trigger-color        : #fff;
+$layout-zero-trigger-width   : 36px;
+$layout-zero-trigger-height  : 42px;

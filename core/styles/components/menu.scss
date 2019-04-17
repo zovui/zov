@@ -2,7 +2,7 @@ $prefix-menu: #{$prefix}menu;
 .#{$prefix-menu}{
     $itemH: 48px;
     @mixin disabled () {
-        &[disabled]{
+        [disabled]{
             position: relative;
             &:after{
                 content: '';
@@ -18,28 +18,39 @@ $prefix-menu: #{$prefix}menu;
         }
     }
 
+    @mixin border-bottom () {
+        box-shadow: 0 -2px 0 0 $color-primary inset;
+    }
+    @mixin border-right () {
+        box-shadow: -2px 0 0 0 $color-primary inset;
+    }
+
     @mixin horizontal-title () {
         color: $color-primary;
-        border-bottom: 2px solid;
-        border-color: $color-primary;
+        @include border-bottom();
     }
 
     @mixin vertical-active () {
         color: $color-primary;
         background-color: rgba($color-primary, 0.2);
-        border-right: 2px solid $color-primary;
+        @include border-right();
     }
 
     border-right: 1px solid;
     @include get-color-border();
     @include get-color-title();
     @include get-color-bg();
+    @include disabled ();
     &-high{
         border-right: 0;
         @include get-color-bg(color);
         @include get-color-title(background-color);
         &-arrow{
             @include get-color-title(background-color);
+        }
+        [disabled]{
+            @include get-color-placeholder(background-color);
+            @include get-color-disabled(color);
         }
     }
     &-sub{
@@ -51,12 +62,12 @@ $prefix-menu: #{$prefix}menu;
                 padding: $gap-base / 2 0;
             }
         }
-        @include disabled();
         &-title{
             height: $itemH;
             line-height: $itemH;
             cursor: pointer;
             user-select: none;
+            transition: color $transition-time;
             &-arrow{
                 float: right;
                 margin-left: $gap-base;
@@ -80,15 +91,20 @@ $prefix-menu: #{$prefix}menu;
 
         }
     }
-    &-item{
-        @include disabled();
+    &-option{
         height: $itemH;
         line-height: $itemH;
         cursor: pointer;
         user-select: none;
         transition: background-color $transition-hover-time,
-                    color $transition-hover-time,
-                    border $transition-hover-time;
+                    color $transition-hover-time;
+        &.#{$prefix}tooltip{
+            display: block;
+            line-height: 1.6;
+            .#{$prefix}tooltip-body{
+                width: auto;
+            }
+        }
     }
     &-horizontal{
         border-right: none;
@@ -110,48 +126,92 @@ $prefix-menu: #{$prefix}menu;
         }
     }
     &-horizontal{
-        .#{$prefix-menu}-item{
-            &:hover, &-active{
+        .#{$prefix-menu}-option{
+            &:not([disabled]):hover, &-active{
                 @include horizontal-title()
             }
         }
         .#{$prefix-menu}-sub{
             &-title{
-                &:hover, &-active{
+                &:not([disabled]):hover, &-active{
                     @include horizontal-title()
                 }
             }
+            @mixin horizontal-option-reset () {
+                $horizontal-itemH: $itemH - 8px;
+                height: $horizontal-itemH;
+                line-height: $horizontal-itemH;
+                box-shadow: none;
+            }
             .#{$prefix-menu}-sub{
                 .#{$prefix-menu}-sub-title{
-                    border-bottom: none;
-                    &:hover, &-active{
+                    @include horizontal-option-reset();
+                    &:not([disabled]):hover, &-active{
                         color: $color-primary;
                     }
                 }
             }
-            .#{$prefix-menu}-item{
-                border-bottom: none;
-                &:hover{
+            .#{$prefix-menu}-option{
+                @include horizontal-option-reset();
+                &:not([disabled]):hover{
                     color: $color-primary;
+                    box-shadow: none;
                 }
                 &-active{
-                    @include vertical-active()
+                    @include vertical-active();
+                    &:not([disabled]):hover{
+                        @include border-right();
+                    }
                 }
             }
         }
     }
     &-vertical{
+        transition: min-width $transition-time,
+                    width $transition-time,
+                    max-width $transition-time;
         .#{$prefix-menu}-sub-title{
-            &:hover, &-active{
+            &:not([disabled]):hover, &-active{
                 color: $color-primary;
             }
         }
-        .#{$prefix-menu}-item{
-            &:hover{
+        .#{$prefix-menu}-option{
+            &:not([disabled]):hover{
                 color: $color-primary;
             }
             &-active{
                 @include vertical-active()
+            }
+        }
+    }
+    &-thumbnail{
+        display: inline-block;
+        &>.#{$prefix-menu}-option,
+        &>.#{$prefix-menu}-group>.#{$prefix-menu}-group-body>.#{$prefix-menu}-option,
+        &>.#{$prefix-menu}-sub>.#{$prefix}tooltip>.#{$prefix-menu}-sub-title{
+            text-align: center;
+            font-size: 0;
+            &:before{
+                content: '';
+                display: inline-block;
+                width: 0;
+                height: 100%;
+                vertical-align: middle;
+            }
+            [thumbnail-icon], [thumbnail-default-icon] {
+                display: inline-block;
+                font-size: $font-size-large;
+                vertical-align: middle;
+            }
+            &>.#{$prefix-menu}-sub-title-arrow{
+                font-size: 15px;
+                display: none;
+            }
+            .#{$prefix}tooltip-body{
+                font-size: $font-size-base;
+                [thumbnail-icon], [thumbnail-default-icon]{
+                    font-size: 0;
+                }
             }
         }
     }
