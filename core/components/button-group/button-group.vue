@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
+    import FormDomSizeMixin from '../../mixins/form-dom-size-mixin'
     let prefix = 'zov-button-group'
     export default {
         name: prefix,

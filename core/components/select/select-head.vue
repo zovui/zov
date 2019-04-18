@@ -60,7 +60,7 @@
 import Tag from '../tag'
 import Icon from '../icon'
 import Input from '../input'
-import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
+import FormDomSizeMixin from '../../mixins/form-dom-size-mixin'
 import { findComponentDownward } from '../../utils'
 const prefix = 'zov-select-head'
 export default {

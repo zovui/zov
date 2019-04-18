@@ -23,7 +23,7 @@
 </template>
 <script>
 import Icon from '../icon'
-import FormDomSizeMixin from '../../mixins/form-dome-size-mixin'
+import FormDomSizeMixin from '../../mixins/form-dom-size-mixin'
 const prefix = 'zov-input'
 export default {
     name: prefix,
