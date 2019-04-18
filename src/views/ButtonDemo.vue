@@ -65,6 +65,28 @@
             <Button looks="info" iconname="wifi" />
             <Button looks="success" shape="circle" iconname="wifi"/>
         </p>
+        <p>
+            组合按钮
+            <ButtonGroup :size="size">
+                <Button>default</Button>
+                <Button looks="primary" disabled>primary</Button>
+                <Button looks="dashed">dashed</Button>
+                <Button looks="info">info</Button>
+                <Button>default</Button>
+            </ButtonGroup>
+            <ButtonGroup :size="size" shape="circle">
+                <Button shape="circle">default</Button>
+                <Button looks="primary">primary</Button>
+                <Button looks="dashed">dashed</Button>
+                <Button looks="info">info</Button>
+            </ButtonGroup>
+            <ButtonGroup :size="size" shape="circle" :vertical="true">
+                <Button shape="circle">default</Button>
+                <Button looks="primary">primary</Button>
+                <Button looks="dashed">dashed</Button>
+                <Button looks="info">info</Button>
+            </ButtonGroup>
+        </p>
     </div>
 </template>
 <script>

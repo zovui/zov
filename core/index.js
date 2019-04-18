@@ -4,6 +4,7 @@ import './icons/index.css'
 import LongList from './components/long-list'
 import Icon from './components/icon'
 import Button from './components/button'
+import ButtonGroup from './components/button-group'
 import Tag from './components/tag'
 import Spin from './components/spin'
 import Switcher from './components/switch'
@@ -36,6 +37,7 @@ const components = {
     LongList,
     Icon,
     Button,
+    ButtonGroup,
     Tag,
     Spin,
     Switcher,
@@ -92,6 +94,7 @@ export {
     LongList,
     Icon,
     Button,
+    ButtonGroup,
     Tag,
     Spin,
     Switcher,

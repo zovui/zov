@@ -1,0 +1,64 @@
+$prefix-button : #{$prefix}button-group;
+
+.#{$prefix-button}{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    border-radius: $border-radius-button;
+    // 默认样式
+    .zov-button {
+        margin: 0;
+        position: relative;
+        vertical-align: middle;
+        border-radius: inherit;
+        &:not(:first-child):not(:last-child) {
+            border-radius: 0;
+        }
+        &:hover {
+            z-index: 2;
+        }
+        &:active {
+            z-index: 2;
+        }
+    }
+    // size对应的样式分类
+    @include form-dom-size(0, yes, '.zov-button');
+
+    // 横向排列
+    &:not(.#{$prefix-button}-vertical) {
+        .zov-button {
+            margin-left: -1px;
+            float: left;
+            &:first-child {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            &:last-child {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+
+    // 纵向排列样式
+    &-vertical {
+        .zov-button {
+            display: block;
+            width: 100%;
+            margin-top: -1px;
+            &:first-child {
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+            &:last-child {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        }
+    }
+
+    // 圆角按钮
+    &-circle {
+        border-radius: 2em;
+    }
+}
