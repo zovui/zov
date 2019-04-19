@@ -3,11 +3,11 @@
         :class="wrapClasses"
         :style="wrapStyles">
         <div :class="childClasses">
-            <slot></slot>
+            <slot>Sider</slot>
         </div>
         <slot name="trigger">
             <div v-show="showBottomTrigger" :class="triggerClasses" @click="toggleCollapse" :style="{width: siderWidth + 'px'}">
-                <Icon iconname="arrow-forward"/>
+                <Icon iconname="arrow-back"/>
             </div>
         </slot>
     </div>
@@ -38,7 +38,7 @@ export default {
         },
         hideTrigger: {
             type: Boolean,
-            default: false
+            default: true
         },
         breakpoint: {
             type: String,
@@ -53,10 +53,6 @@ export default {
         defaultCollapsed: {
             type: Boolean,
             default: false
-        },
-        reverseArrow: {
-            type: Boolean,
-            default: false
         }
     },
     data () {
@@ -69,7 +65,8 @@ export default {
         wrapClasses () {
             return [
                 `${prefix}`,
-                this.value ? `${prefix}-collapsed` : ''
+                this.showBottomTrigger && `${prefix}-has-trigger`,
+                this.value && `${prefix}-collapsed`
             ]
         },
         wrapStyles () {

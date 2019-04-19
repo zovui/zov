@@ -11,8 +11,8 @@
         <template #tooltip>
             <slot>option</slot>
         </template>
+        <Icon v-if="!hasThumbnailIcon" :iconname="thumbnailIcon" thumbnail-icon/>
         <span ref="title">
-            <Icon v-if="!hasThumbnailIcon" :iconname="thumbnailIcon" thumbnail-default-icon/>
             <slot></slot>
         </span>
     </ToolTip>

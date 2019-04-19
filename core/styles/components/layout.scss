@@ -3,7 +3,7 @@ $prefix-layout: #{$prefix}layout;
     display: flex;
     flex-direction: column;
     flex: auto;
-    background: $layout-body-background;
+    @include get-color-bg();
     &.#{$prefix-layout}-has-sider {
         flex-direction: row;
         & > .#{$prefix-layout},
@@ -19,6 +19,20 @@ $prefix-layout: #{$prefix}layout;
         padding: $layout-header-padding;
         height: $layout-header-height;
         line-height: $layout-header-height;
+        .#{$prefix}menu{
+            height: $layout-header-height;
+            line-height: $layout-header-height;
+            &>.#{$prefix}menu-option{
+                height: $layout-header-height;
+                line-height: $layout-header-height;
+            }
+            &>.#{$prefix}menu-sub{
+                .#{$prefix}menu-sub-title{
+                    height: $layout-header-height;
+                    line-height: $layout-header-height;
+                }
+            }
+        }
     }
     &-footer {
         background: $layout-footer-background;
@@ -28,14 +42,13 @@ $prefix-layout: #{$prefix}layout;
     }
     &-content {
         flex: auto;
+        background: $layout-content-background;
     }
     &-sider {
-        transition: all .2s ease-in-out;
+        transition: all $transition-time ease-in-out;
         position: relative;
         background: $layout-sider-background;
-
         min-width: 0;
-
         &-children {
             height: 100%;
             padding-top: 0.1px;
@@ -62,6 +75,7 @@ $prefix-layout: #{$prefix}layout;
             }
             &-collapsed {
                 .#{$prefix}icon {
+                    display: inline-block;
                     transform: rotate(-180deg);
                 }
             }

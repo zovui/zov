@@ -102,6 +102,7 @@ export default {
                     component.popper.update()
                 })
             }, 15)
+            this.$emit('on-collapse', val)
         }
     },
     methods: {

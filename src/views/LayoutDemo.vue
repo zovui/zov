@@ -1,18 +1,27 @@
 <template>
     <div>
-<!--        <Layout>-->
-<!--            <Header>Header</Header>-->
-<!--            <Content>Content</Content>-->
-<!--            <Footer>Footer</Footer>-->
-<!--        </Layout>-->
         <div style="border: 3px dashed; text-align: left; margin: 15px;padding: 15px">
-            xs: '480px',<br>
-            sm: '768px',<br>
-            md: '992px',<br>
-            lg: '1200px',<br>
-            xl: '1600px'<br>
+            <h3>参数</h3>
+            <h4>Sider props</h4>
+            <p>@breakpoint                          非必传，String，触发响应式布局的断点，可选值为xs,sm,md,lg,xl或xxl，若不设此属性则不会触发响应式布局，默认--</p>
+                <span style="color: green">
+                    说明：
+                    xs: '480px',<br>
+                    sm: '768px',<br>
+                    md: '992px',<br>
+                    lg: '1200px',<br>
+                    xl: '1600px'<br>
+                </span>
+            <p>@value                               非必传，Boolean，侧边栏是否收起，可使用 v-model 双向绑定数据。默认: false|展开</p>
+            <p>@width                               非必传，[Number, String]但是只能为数字，宽度，默认：240</p>
+            <p>@collapsible                         非必传，Boolean，是否可以收起，设为false后，默认触发器会隐藏，但响应式布局会触发，默认：false</p>
+            <p>@collapsed-width                     非必传，[Number, String]但是只能为数字，收起状态下的宽度，默认：64</p>
+            <p>@hide-trigger                        非必传，Boolean，隐藏默认触发器，默认：true</p>
+            <h4>Sider events</h4>
+            <p>@on-collapse                         展开-收起时的回调，形参：Boolean</p>
+
         </div>
-        <Layout>
+        <Layout class="container-demo">
             <Header>
                 <Menu high-color mode="horizontal">
                     <MenuOption name="1"/>
@@ -30,7 +39,11 @@
                 </Menu>
             </Header>
             <Layout>
-                <Sider v-model="collapsed" breakpoint="sm">
+                <Sider
+                    v-model="collapsed"
+                    breakpoint="sm"
+                    @on-collapse="collapse"
+                >
                     <Menu :thumbnail="collapsed">
                         <MenuOption name="1"/>
                         <MenuOption name="2"/>
@@ -46,9 +59,40 @@
                         </MenuSub>
                     </Menu>
                 </Sider>
-                <Content>Content</Content>
+                <Content>
+                    <div class="sider-bar" @click="collapsed = !collapsed">
+                        <Icon :iconname="collapsed ? 'arrow-forward' : 'arrow-back'"/>
+                    </div>
+                    Content
+                </Content>
             </Layout>
             <Footer>Footer</Footer>
+        </Layout>
+        <Layout class="container">
+            <Header></Header>
+            <Layout>
+                <Sider></Sider>
+                <Layout>
+                    <Content></Content>
+                    <Footer></Footer>
+                </Layout>
+            </Layout>
+        </Layout>
+        <Layout class="container">
+            <Sider></Sider>
+            <Layout>
+                <Header></Header>
+                <Content></Content>
+                <Footer></Footer>
+            </Layout>
+        </Layout>
+        <Layout class="container">
+            <Header></Header>
+            <Layout>
+                <Sider></Sider>
+                <Content></Content>
+            </Layout>
+            <Footer></Footer>
         </Layout>
     </div>
 </template>
@@ -58,6 +102,33 @@ export default {
         return {
             collapsed: false
         }
+    },
+    methods: {
+        collapse (f) {
+            console.log(f)
+        }
     }
 }
 </script>
+<style lang="scss" scoped>
+    .container{
+        height: 300px;
+        margin-top: 15px;
+    }
+    .sider-bar{
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        margin: 5px;
+        border-radius: 4px;
+        text-align: center;
+        background: #fff;
+    }
+    .container-demo{
+        .zov-layout-content{
+            margin: 10px;
+            padding: 10px;
+        }
+    }
+</style>
