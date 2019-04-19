@@ -160,6 +160,13 @@ let router = new Router({
                 sort: 'form'
             },
             component: () => import('./views/LayoutDemo.vue')
+        },
+        {
+            path: '/badge',
+            meta: {
+                sort: 'feedback'
+            },
+            component: () => import('./views/BadgeDemo.vue')
         }
     ]
 })
