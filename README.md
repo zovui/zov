@@ -224,3 +224,31 @@ husky > commit-msg (node v10.15.3)
 husky > commit-msg hook failed (add --no-verify to bypass)
 ```
 
+下面是一个提交的示例：
+
+```zsh
+➜  zov git:(dev) ✗ npm run commit
+
+> zov@0.1.5 commit /Users/zhangjun/workspace/zov
+> git-cz
+
+cz-cli@3.1.0, cz-conventional-changelog@2.1.0
+
+Line 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.
+
+? Select the type of change that you're committing: build:    Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+? What is the scope of this change (e.g. component or file name)? (press enter to skip)
+ package.json node_modules
+? Write a short, imperative tense description of the change:
+ 规范了commit msg
+? Provide a longer description of the change: (press enter to skip)
+ 规范了 commit msg ，增加了commit lint
+? Are there any breaking changes? No
+? Does this change affect any open issues? No
+husky > commit-msg (node v10.15.3)
+
+⧗   input: build(package.json node_modules): 规范了commit msg
+✔   found 0 problems, 0 warnings 
+    (Need help? -> https://github.com/conventional-changelog/commitlint#what-is-commitlint )
+```
+
