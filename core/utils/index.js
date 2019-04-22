@@ -1,4 +1,74 @@
 /**
+ * 查找组件的方法
+ **/
+// 向上查找目标组件
+export function findComponentUpward (context, componentName, componentNames) {
+    if (typeof componentName === 'string') {
+        componentNames = [componentName]
+    } else {
+        componentNames = componentName
+    }
+    let parent = context.$parent
+    let name = parent.$options.name
+    while (parent && (!name || componentNames.indexOf(name) < 0)) {
+        parent = parent.$parent
+        if (parent) name = parent.$options.name
+    }
+    return parent
+}
+
+// 向下查找目标组件
+export function findComponentDownward (context, componentName) {
+    const childrens = context.$children
+    let children = null
+
+    if (childrens.length) {
+        for (const child of childrens) {
+            const name = child.$options.name
+            if (name === componentName) {
+                children = child
+                break
+            } else {
+                children = findComponentDownward(child, componentName)
+                if (children) break
+            }
+        }
+    }
+    return children
+}
+
+// 向下查找所有目标组件，返回数组
+export function findComponentsDownward (context, componentName) {
+    return context.$children.reduce((components, child) => {
+        if (child.$options.name === componentName) components.push(child)
+        const foundChilds = findComponentsDownward(child, componentName)
+        return components.concat(foundChilds)
+    }, [])
+}
+
+// 向上查找所有目标组件，返回数组
+export function findComponentsUpward (context, componentName) {
+    let parents = []
+    const parent = context.$parent
+    if (parent) {
+        if (parent.$options.name === componentName) parents.push(parent)
+        return parents.concat(findComponentsUpward(parent, componentName))
+    } else {
+        return []
+    }
+}
+
+// 查找兄弟组件
+export function findBrothersComponents (context, componentName, exceptMe = true) {
+    let res = context.$parent.$children.filter(item => {
+        return item.$options.name === componentName
+    })
+    let index = res.findIndex(item => item._uid === context._uid)
+    if (exceptMe) res.splice(index, 1)
+    return res
+}
+
+/**
 * 深拷贝
 **/
 function typeOf (obj) {
@@ -72,63 +142,6 @@ export function scrollTop (el, from = 0, to, duration = 500) {
         window.requestAnimationFrame(() => scroll(d, end, step))
     }
     scroll(from, to, step)
-}
-
-// 向上查找目标组件
-export function findComponentUpward (context, componentName, componentNames) {
-    if (typeof componentName === 'string') {
-        componentNames = [componentName]
-    } else {
-        componentNames = componentName
-    }
-    let parent = context.$parent
-    let name = parent.$options.name
-    while (parent && (!name || componentNames.indexOf(name) < 0)) {
-        parent = parent.$parent
-        if (parent) name = parent.$options.name
-    }
-    return parent
-}
-
-// 向下查找目标组件
-export function findComponentDownward (context, componentName) {
-    const childrens = context.$children
-    let children = null
-
-    if (childrens.length) {
-        for (const child of childrens) {
-            const name = child.$options.name
-            if (name === componentName) {
-                children = child
-                break
-            } else {
-                children = findComponentDownward(child, componentName)
-                if (children) break
-            }
-        }
-    }
-    return children
-}
-
-// 向下查找所有目标组件，返回数组
-export function findComponentsDownward (context, componentName) {
-    return context.$children.reduce((components, child) => {
-        if (child.$options.name === componentName) components.push(child)
-        const foundChilds = findComponentsDownward(child, componentName)
-        return components.concat(foundChilds)
-    }, [])
-}
-
-// 向上查找所有目标组件，返回数组
-export function findComponentsUpward (context, componentName) {
-    let parents = []
-    const parent = context.$parent
-    if (parent) {
-        if (parent.$options.name === componentName) parents.push(parent)
-        return parents.concat(findComponentsUpward(parent, componentName))
-    } else {
-        return []
-    }
 }
 
 // 判断参数是否是其中之一

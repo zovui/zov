@@ -219,6 +219,9 @@ export default {
         transPopperEventListeners (val) {
             // 根据tooltip组件的显示状态，决定popper的自动更新 「#007」
             val ? this.$refs['zov-popper'].popper.enableEventListeners() : this.$refs['zov-popper'].popper.disableEventListeners()
+        },
+        updatePopper () {
+            this.$refs['zov-popper'].popper.update()
         }
     },
     mounted () {

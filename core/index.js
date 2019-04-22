@@ -20,6 +20,7 @@ import TimePicker from './components/time-picker'
 import ColorPicker from './components/color-picker'
 import { Menu, MenuSub, MenuGroup, MenuOption } from './components/menu'
 import { Layout, Header, Footer, Content, Sider } from './components/layout'
+import { Row, Col } from './components/grid'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -59,7 +60,9 @@ const components = {
     Header,
     Footer,
     Content,
-    Sider
+    Sider,
+    Row,
+    Col
 }
 Object.keys(components).forEach(key => {
     components['z' + key] = components[key]
@@ -116,7 +119,9 @@ export {
     Header,
     Footer,
     Content,
-    Sider
+    Sider,
+    Row,
+    Col
 }
 // 将整个zov暴露出去
 export default zov
