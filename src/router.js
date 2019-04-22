@@ -64,6 +64,20 @@ let router = new Router({
             component: () => import('./views/SpinDemo.vue')
         },
         {
+            path: '/anchor',
+            meta: {
+                sort: 'feedback'
+            },
+            component: () => import('./views/AnchorDemo.vue')
+        },
+        {
+            path: '/affix',
+            meta: {
+                sort: 'feedback'
+            },
+            component: () => import('./views/AffixDemo.vue')
+        },
+        {
             path: '/switch',
             meta: {
                 sort: 'form'

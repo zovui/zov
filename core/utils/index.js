@@ -257,3 +257,4 @@ export function animitionEnd (element, callback) {
         }
     }
 }
+export const sharpMatcherRegx = /#([^#]+)$/
