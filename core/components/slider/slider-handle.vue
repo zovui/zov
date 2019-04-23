@@ -2,7 +2,8 @@
     <div
         class="zov-slider-handle"
         tabindex="0"
-        :style="styles"
+        @focus="handleFocus"
+        @blur="handleBlur"
     ></div>
 </template>
 
@@ -10,18 +11,15 @@
 export default {
     name: 'zov-slider-handle',
     props: {
-        left: String,
-        top: String
-    },
-    computed: {
-        styles () {
-            return {
-                left: this.left,
-                top: this.top
-            }
-        }
+        id: String
     },
     methods: {
+        handleFocus () {
+            this.$emit('focus', this.id)
+        },
+        handleBlur () {
+            this.$emit('blur', this.id)
+        },
         focus () {
             this.$el.focus()
         },

@@ -1,10 +1,15 @@
-.#{$prefix-slider}-handle {
+.#{$prefix-slider}-handle-wrapper {
     position: absolute;
     top: 50%;
+    left: 0;
+    margin-top: (-1 * 14px / 2);
+    margin-left: (-1 * 14px / 2);
+}
+
+.#{$prefix-slider}-handle {
+    box-sizing: border-box;
     display: block;
     outline: none;
-    margin-top: -1 * (14px / 2);
-    margin-left: -1 * (14px / 2);
     border-radius: 50%;
     border: 2px solid $color-primary;
     width: 14px;
