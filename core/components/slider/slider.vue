@@ -15,7 +15,7 @@
                         left: handleData.left
                     }"
                     class="zov-slider-handle-wrapper"
-                    :text="'' + currentValue"
+                    :text="tipFormatter(currentValue)"
                     :trigger="[]"
                     never
                     high-color
@@ -73,12 +73,15 @@ export default {
                     state === 'always'
                 )
             }
+        },
+        tipFormatter: {
+            type: Function,
+            default: value => value.toString()
         }
     },
     data () {
         return {
             currentValue: this.value,
-            sliderBarMeta: null,
             showTooltip: false,
             isDragging: false
         }

@@ -12,13 +12,21 @@
             <Slider v-model="value2" :min="1" :max="10"/>
         </section>
         <section class="section">
-            <h2>tooltipVisible</h2>
+            <h2>tooltipVisible：是否展示tooltip</h2>
             <p class="props">当tooltipVisible = 'default'时，拖拽或者hover handle时会显示tooltip</p>
             <Slider tooltipVisible="default" />
             <p class="props">当tooltipVisible = 'hidden'时，总是隐藏tooltip</p>
             <Slider tooltipVisible="hidden" />
             <p class="props">当tooltipVisible = 'always'时，总是显示tooltip</p>
             <Slider tooltipVisible="always" />
+        </section>
+        <section class="section">
+            <h2>tipFormatter: tooltip文案格式化</h2>
+            <p class="props">tipFormatter = (value) => '当前值为: ' + value</p>
+            <Slider
+                tooltipVisible="always"
+                :tipFormatter="value => '当前值为: ' + value"
+            />
         </section>
     </article>
 </template>
