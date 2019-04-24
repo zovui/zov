@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="demo">
         <div style="border: 3px dashed; text-align: left; margin: 15px;padding: 15px">
             <h3>参数</h3>
             <h4>Sider props</h4>
@@ -14,9 +14,8 @@
                 </span>
             <p>@value                               非必传，Boolean，侧边栏是否收起，可使用 v-model 双向绑定数据。默认: false|展开</p>
             <p>@width                               非必传，[Number, String]但是只能为数字，宽度，默认：240</p>
-            <p>@collapsible                         非必传，Boolean，是否可以收起，设为false后，默认触发器会隐藏，但响应式布局会触发，默认：false</p>
             <p>@collapsed-width                     非必传，[Number, String]但是只能为数字，收起状态下的宽度，默认：64</p>
-            <p>@hide-trigger                        非必传，Boolean，隐藏默认触发器，默认：true</p>
+            <p>@collapsed-trigger                   非必传，Boolean，显示默认触发器，默认：false</p>
             <h4>Sider events</h4>
             <p>@on-collapse                         展开-收起时的回调，形参：Boolean</p>
 
@@ -111,8 +110,27 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+    .demo{
+        $color-primary: #2d8cf0;
+        $layout-header-background    : lighten($color-primary, 10%);
+        $layout-content-background   : lighten($color-primary, 25%);
+        $layout-footer-background    : $layout-header-background;
+        $layout-sider-background     : $color-primary;
+        .zov-layout-header{
+            background: $layout-header-background;
+        }
+        .zov-layout-content{
+            background: $layout-content-background;
+        }
+        .zov-layout-sider{
+            background: $layout-sider-background;
+        }
+        .zov-layout-footer{
+            background: $layout-footer-background;
+        }
+    }
     .container{
-        height: 300px;
+        height: 400px;
         margin-top: 15px;
     }
     .sider-bar{
@@ -124,11 +142,5 @@ export default {
         border-radius: 4px;
         text-align: center;
         background: #fff;
-    }
-    .container-demo{
-        .zov-layout-content{
-            margin: 10px;
-            padding: 10px;
-        }
     }
 </style>

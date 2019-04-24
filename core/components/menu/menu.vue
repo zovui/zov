@@ -62,7 +62,8 @@ export default {
         return {
             currentActiveName: this.activeName + '',
             currentOpenNames: this.openNames.join(',').split(','),
-            activeFullPath: []
+            activeFullPath: [],
+            timer: null
         }
     },
     computed: {
@@ -97,11 +98,15 @@ export default {
             this.$emit('on-change', val)
         },
         currentThumbnail (val) {
-            val && setInterval(() => {
-                this.currentThumbnail && findComponentsDownward(this, 'zov-popper').forEach(component => {
-                    component.popper.update()
-                })
-            }, 15)
+            if (val) {
+                clearInterval(this.timer)
+                this.timer = null
+                this.timer = setInterval(() => {
+                    this.currentThumbnail && findComponentsDownward(this, 'zov-popper').forEach(component => {
+                        component.popper.update()
+                    })
+                }, 15)
+            }
             this.$emit('on-collapse', val)
         }
     },
