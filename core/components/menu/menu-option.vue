@@ -4,22 +4,22 @@
         placement="right"
         :high-color="menuComponent.highColor"
         :class="classes"
-        @click.stop="clickHandle"
+        @click="clickHandle"
         :style="paddingStyle"
         :disabled="disabled"
     >
         <template #tooltip>
             <slot>option</slot>
         </template>
+        <Icon v-if="!hasThumbnailIcon" :iconname="thumbnailIcon" thumbnail-icon/>
         <span ref="title">
-            <Icon v-if="!hasThumbnailIcon" :iconname="thumbnailIcon" thumbnail-default-icon/>
             <slot></slot>
         </span>
     </ToolTip>
     <li
         v-else
         :class="classes"
-        @click.stop="clickHandle"
+        @click="clickHandle"
         :style="paddingStyle"
         :disabled="disabled"
     >
@@ -73,7 +73,8 @@ export default {
                 this.menuComponent.currentOpenNames.indexOf(name) === -1 && this.menuComponent.currentOpenNames.push(name)
             })
         },
-        clickHandle () {
+        clickHandle (e) {
+            this.$emit('click', e)
             if (this.disabled) return
             this.menuComponent.currentActiveName = this.name
             this.upwardUpdateActive()

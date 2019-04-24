@@ -1,182 +1,57 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Zov from '../core'
+import Home from './Home'
+import Menu from './Menu'
 Vue.use(Router)
-let router = new Router({
+let routerObject = {
     routes: [
         {
-            path: '/longlist',
-            // 路由级代码分裂
-            // 这会为此路由生成一个单独的块（[name].[hash].js）
-            // 访问路径时延迟加载。
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/LongListDemo.vue')
-        },
-        {
-            path: '/icon',
-            meta: {
-                sort: 'base'
-            },
-            component: () => import('./views/IconDemo.vue')
-        },
-        {
-            path: '/loadingbar',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/LoadingBarDemo.vue')
-        },
-        {
-            path: '/notice',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/NoticeDemo.vue')
-        },
-        {
-            path: '/message',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/MessageDemo.vue')
-        },
-        {
-            path: '/button',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/ButtonDemo.vue')
-        },
-        {
-            path: '/tag',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/TagDemo.vue')
-        },
-        {
-            path: '/spin',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/SpinDemo.vue')
-        },
-        {
-            path: '/anchor',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/AnchorDemo.vue')
-        },
-        {
-            path: '/affix',
-            meta: {
-                sort: 'feedback'
-            },
-            component: () => import('./views/AffixDemo.vue')
-        },
-        {
-            path: '/switch',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/SwitchDemo.vue')
-        },
-        {
-            path: '/input',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/InputDemo.vue')
-        },
-        {
-            path: '/popper',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/PopperDemo.vue')
-        },
-        {
-            path: '/drop',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/DropDemo.vue')
-        },
-        {
-            path: '/tooltip',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/ToolTipDemo.vue')
-        },
-        {
-            path: '/select',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/SelectDemo.vue')
-        },
-        {
-            path: '/bigdatalist',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/BigDataListDemo.vue')
-        },
-        {
-            path: '/cascader',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/CascaderDemo.vue')
-        },
-        {
-            path: '/datepicker',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/DatePickerDemo.vue')
-        },
-        {
-            path: '/timepicker',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/TimePickerDemo.vue')
-        },
-        {
-            path: '/modal',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/ModalDemo.vue')
-        },
-        {
-            path: '/colorpicker',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/ColorPickerDemo.vue')
+            path: '/',
+            component: Home
         },
         {
             path: '/menu',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/MenuDemo.vue')
+            component: Menu,
+            children: []
         },
         {
-            path: '/layout',
-            meta: {
-                sort: 'form'
-            },
-            component: () => import('./views/LayoutDemo.vue')
+            path: '/component',
+            component: Menu,
+            children: []
         }
     ]
+}
+
+const requireViews = require.context('./views', false, /\.vue/)
+let viewsRoutes = []
+requireViews.keys().forEach(fileName => {
+    let options = requireViews(fileName).default.routerOptions
+    console.log(options)
+    let componentName = fileName.substr(2, fileName.length - 10)
+    let o = {
+        path: '/' + componentName,
+        component: requireViews(fileName).default,
+        routerOptions: options
+    }
+    viewsRoutes.push(o)
 })
+viewsRoutes = viewsRoutes.sort((a, b) => {
+    console.log(a.routerOptions.order, b.routerOptions.order)
+    return a.routerOptions.order - b.routerOptions.order
+})
+routerObject.routes[1].children = routerObject.routes[1].children.concat(viewsRoutes)
+
+const requireComponents = require.context('./views/components', false, /\.vue/)
+requireComponents.keys().forEach(fileName => {
+    let componentName = fileName.substr(2, fileName.length - 10)
+    routerObject.routes[2].children.push({
+        path: '/' + componentName,
+        component: requireComponents(fileName).default
+    })
+})
+console.log(routerObject)
+let router = new Router(routerObject)
 router.beforeEach((to, from, next) => {
     Zov.LoadingBar.start()
     document.title = to.name || to.path.substr(1)

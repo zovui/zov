@@ -10,11 +10,11 @@ export default {
     },
     methods: {
         dropShowFocus () {
-            this.$refs['zov-select-head'].headFocus()
+            this.$refs['zov-select-head'] && this.$refs['zov-select-head'].headFocus()
             this.dropShow = true
         },
         dropHideBlur () {
-            this.$refs['zov-select-head'].headBlur()
+            this.$refs['zov-select-head'] && this.$refs['zov-select-head'].headBlur()
             this.dropShow = false
         },
         clear () {

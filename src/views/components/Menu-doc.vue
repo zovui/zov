@@ -16,6 +16,7 @@
                 :open-names="['2', '3']"
                 @on-change="change"
                 @on-open-change="open"
+                @on-collapse="collapse"
             >
                 <MenuOption name="1">
                     <Icon iconname="home" thumbnail-icon/>
@@ -79,6 +80,10 @@
             <p>@width                               非必传，[String, Number]，在'vertical'宽度，默认：240</p>
             <p>@indent                              非必传，[String, Number]，缩进，默认：15</p>
             <p>@thumbnail                           非必传，Boolean，在'vertical'模式下，缩略图模式，默认：false</p>
+            <h4>Menu events</h4>
+            <p>@on-change="change"                  选择菜单（MenuOption）时触发，形参：name</p>
+            <p>@on-open-change="open"               当 展开/收起 子菜单时触发，形参：当前展开的 Submenu 的 name 值数组</p>
+            <p>@on-collapse                         thumbnail模式下，展开-收起时的回调，形参：Boolean</p>
             <br>
             <h4>MenuSub props</h4>
             <p>@name                                必传，[String, Number]，当前组件的唯一标识，默认--</p>
@@ -136,10 +141,13 @@ export default {
     },
     methods: {
         change (name) {
-            // console.log(name)
+            console.log(name)
         },
         open (obj) {
-            // console.log(JSON.stringify(obj))
+            console.log(JSON.stringify(obj))
+        },
+        collapse (f) {
+            console.log(f)
         }
     }
 }

@@ -3,7 +3,9 @@ $prefix-layout: #{$prefix}layout;
     display: flex;
     flex-direction: column;
     flex: auto;
-    background: $layout-body-background;
+    @include get-color-bg();
+    @include get-color-text();
+    font-size: $font-size-base;
     &.#{$prefix-layout}-has-sider {
         flex-direction: row;
         & > .#{$prefix-layout},
@@ -15,37 +17,52 @@ $prefix-layout: #{$prefix}layout;
         flex: 0 0 auto;
     }
     &-header {
-        background: $layout-header-background;
+        @include get-color-bg();
+        position: relative;
+        z-index: 1;
         padding: $layout-header-padding;
         height: $layout-header-height;
         line-height: $layout-header-height;
-    }
-    &-footer {
-        background: $layout-footer-background;
-        padding: $layout-footer-padding;
-        color: $color-text;
-        font-size: $font-size-base;
+        border-bottom: 1px solid;
+        .#{$prefix}menu{
+            height: $layout-header-height;
+            line-height: $layout-header-height;
+            &>.#{$prefix}menu-option{
+                height: $layout-header-height;
+                line-height: $layout-header-height;
+            }
+            &>.#{$prefix}menu-sub{
+                .#{$prefix}menu-sub-title{
+                    height: $layout-header-height;
+                    line-height: $layout-header-height;
+                }
+            }
+        }
     }
     &-content {
         flex: auto;
+        padding: $gap-base;
+        @include get-color-bg();
+    }
+    &-footer{
+        @include get-color-divider(background-color);
+        border-top: 1px solid;
+        padding: $layout-footer-padding;
     }
     &-sider {
-        transition: all .2s ease-in-out;
+        transition: width $transition-time ease-in-out;
         position: relative;
-        background: $layout-sider-background;
-
+        @include get-color-bg();
         min-width: 0;
-
+        border-right: 1px solid;
         &-children {
             height: 100%;
             padding-top: 0.1px;
             margin-top: -0.1px;
         }
-
         &-has-trigger {
             padding-bottom: $layout-trigger-height;
         }
-
         &-trigger {
             position: fixed;
             bottom: 0;
@@ -53,18 +70,37 @@ $prefix-layout: #{$prefix}layout;
             cursor: pointer;
             height: $layout-trigger-height;
             line-height: $layout-trigger-height;
-            color: $layout-trigger-color;
-            background: $layout-sider-background;
             z-index: 1000;
-            transition: all .2s ease-in-out;
+            transition: width $transition-time ease-in-out;
+            border-right: 1px solid;
+            box-shadow: -5px 0 16px 0 rgba(0,0,0,0.15);
+            &:after{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                z-index: -1;
+                @include get-color-bg();
+            }
             >* {
-                transition: all .2s;
+                transition: transform $transition-time ease-in-out;;
             }
             &-collapsed {
                 .#{$prefix}icon {
+                    display: inline-block;
                     transform: rotate(-180deg);
                 }
             }
         }
+    }
+    &-sider, &-header{
+        .#{$prefix}menu{
+            border: none;
+        }
+    }
+    &-sider, &-footer, &-header, &-sider-trigger{
+        @include get-color-border();
     }
 }
