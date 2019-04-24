@@ -24,7 +24,6 @@ $prefix-layout: #{$prefix}layout;
         height: $layout-header-height;
         line-height: $layout-header-height;
         border-bottom: 1px solid;
-        @include get-color-border();
         .#{$prefix}menu{
             height: $layout-header-height;
             line-height: $layout-header-height;
@@ -48,16 +47,14 @@ $prefix-layout: #{$prefix}layout;
     &-footer{
         @include get-color-divider(background-color);
         border-top: 1px solid;
-        @include get-color-border();
         padding: $layout-footer-padding;
     }
     &-sider {
-        transition: all $transition-time ease-in-out;
+        transition: width $transition-time ease-in-out;
         position: relative;
         @include get-color-bg();
         min-width: 0;
         border-right: 1px solid;
-        @include get-color-border();
         &-children {
             height: 100%;
             padding-top: 0.1px;
@@ -76,7 +73,6 @@ $prefix-layout: #{$prefix}layout;
             z-index: 1000;
             transition: width $transition-time ease-in-out;
             border-right: 1px solid;
-            @include get-color-border();
             box-shadow: -5px 0 16px 0 rgba(0,0,0,0.15);
             &:after{
                 content: '';
@@ -103,5 +99,8 @@ $prefix-layout: #{$prefix}layout;
         .#{$prefix}menu{
             border: none;
         }
+    }
+    &-sider, &-footer, &-header, &-sider-trigger{
+        @include get-color-border();
     }
 }
