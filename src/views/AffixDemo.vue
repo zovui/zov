@@ -23,12 +23,12 @@ body {
       <div class="demo-affix">固定在最顶部</div>
     </Affix>
     <div v-for="(item,index) in arr"
-         :key="index">{{item}}</div>
+         :key="`arr${index}`">{{item}}</div>
     <Affix :offset-bottom="20">
       <div class="demo-affix">固定在最顶部</div>
     </Affix>
     <div v-for="(item,index) in arr1"
-         :key="index + 10000">{{item}}</div>
+         :key="`arr1${index}`">{{item}}</div>
   </div>
 
 </template>

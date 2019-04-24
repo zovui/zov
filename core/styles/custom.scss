@@ -15,6 +15,9 @@ $link-hover-color           :   $color-light-primary !default;
 $link-active-color          :   $color-dark-primary !default;
 $cursor-disabled            :   not-allowed !default;
 
+// Anchor
+$anchor-border-width: 2px;
+
 // border 圆角
 $border-radius-base         :   9px !default;
 $border-radius-button       :   4px !default;

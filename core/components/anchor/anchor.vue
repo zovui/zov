@@ -17,10 +17,30 @@
   </component>
 </template>
 <script>
-import sharpMatcherRegx from '../../utils'
-const prefix = 'zov-anchor'
+import { scrollTop, findComponentsDownward, sharpMatcherRegx } from '../../utils/index'
+import { on, off } from '../../utils/dom'
 export default {
-    name: prefix,
+    name: 'Anchor',
+    provide () {
+        return {
+            anchorCom: this
+        }
+    },
+    data () {
+        return {
+            prefix: 'zov-anchor',
+            isAffixed: false, // current affixed state
+            inkTop: 0,
+            animating: false, // if is scrolling now
+            currentLink: '', // current show link =>  #href -> currentLink = #href
+            currentId: '', // current show title id =>  #href -> currentId = href
+            scrollContainer: null,
+            scrollElement: null,
+            titlesOffsetArr: [],
+            wrapperTop: 0,
+            upperFirstTitle: true
+        }
+    },
     props: {
         affix: {
             type: Boolean,
@@ -35,23 +55,15 @@ export default {
             type: Number,
             default: 5
         },
-        scrollOffset: {
-            type: Number,
-            default: 0
-        },
+        //        container: [String, HTMLElement],  // HTMLElement 在 SSR 下不支持
         container: null,
         showInk: {
             type: Boolean,
             default: false
-        }
-    },
-    data () {
-        return {
-            prefix: prefix,
-            inkTop: 0,
-            isAffixed: false, // current affixed state
-            currentLink: '', // current show link =>  #href -> currentLink = #href
-            currentId: '' // current show title id =>  #href -> currentId = href
+        },
+        scrollOffset: {
+            type: Number,
+            default: 0
         }
     },
     computed: {
@@ -69,8 +81,14 @@ export default {
     },
     methods: {
         handleAffixStateChange (state) {
-            console.log(state, 'state')
             this.isAffixed = this.affix && state
+        },
+        handleScroll (e) {
+            this.upperFirstTitle = e.target.scrollTop < this.titlesOffsetArr[0].offset
+            if (this.animating) return
+            this.updateTitleOffset()
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop || e.target.scrollTop
+            this.getCurrentScrollAtTitleId(scrollTop)
         },
         handleHashChange () {
             const url = window.location.href
@@ -78,7 +96,112 @@ export default {
             if (!sharpLinkMatch) return
             this.currentLink = sharpLinkMatch[0]
             this.currentId = sharpLinkMatch[1]
+        },
+        handleScrollTo () {
+            const anchor = document.getElementById(this.currentId)
+            const currentLinkElementA = document.querySelector(`a[data-href="${this.currentLink}"]`)
+            let offset = this.scrollOffset
+            if (currentLinkElementA) {
+                offset = parseFloat(currentLinkElementA.getAttribute('data-scroll-offset'))
+            }
+            if (!anchor) return
+            const offsetTop = anchor.offsetTop - this.wrapperTop - offset
+            this.animating = true
+            scrollTop(this.scrollContainer, this.scrollElement.scrollTop, offsetTop, 600, () => {
+                this.animating = false
+            })
+            this.handleSetInkTop()
+        },
+        handleSetInkTop () {
+            const currentLinkElementA = document.querySelector(`a[data-href="${this.currentLink}"]`)
+            if (!currentLinkElementA) return
+            const elementATop = currentLinkElementA.offsetTop
+            const top = (elementATop < 0 ? this.offsetTop : elementATop)
+            this.inkTop = top
+        },
+        updateTitleOffset () {
+            const links = findComponentsDownward(this, 'AnchorLink').map(link => {
+                return link.href
+            })
+            console.log(findComponentsDownward(this, 'AnchorLink'), links)
+            const idArr = links.map(link => {
+                return link.split('#')[1]
+            })
+            let offsetArr = []
+            idArr.forEach(id => {
+                const titleEle = document.getElementById(id)
+                if (titleEle) {
+                    offsetArr.push({
+                        link: `#${id}`,
+                        offset: titleEle.offsetTop - this.scrollElement.offsetTop
+                    })
+                }
+            })
+            this.titlesOffsetArr = offsetArr
+        },
+        getCurrentScrollAtTitleId (scrollTop) {
+            let i = -1
+            let len = this.titlesOffsetArr.length
+            let titleItem = {
+                link: '#',
+                offset: 0
+            }
+            scrollTop += this.bounds
+            while (++i < len) {
+                let currentEle = this.titlesOffsetArr[i]
+                let nextEle = this.titlesOffsetArr[i + 1]
+                if (scrollTop >= currentEle.offset && scrollTop < ((nextEle && nextEle.offset) || Infinity)) {
+                    titleItem = this.titlesOffsetArr[i]
+                    break
+                }
+            }
+            this.currentLink = titleItem.link
+            this.handleSetInkTop()
+        },
+        getContainer () {
+            this.scrollContainer = this.container ? (typeof this.container === 'string' ? document.querySelector(this.container) : this.container) : window
+            this.scrollElement = this.container ? this.scrollContainer : (document.documentElement || document.body)
+            console.log(this.container)
+        },
+        removeListener () {
+            off(this.scrollContainer, 'scroll', this.handleScroll)
+            off(window, 'hashchange', this.handleHashChange)
+        },
+        init () {
+            // const anchorLink = findComponentDownward(this, 'AnchorLink');
+            this.handleHashChange()
+            this.$nextTick(() => {
+                this.removeListener()
+                this.getContainer()
+                this.wrapperTop = this.containerIsWindow ? 0 : this.scrollElement.offsetTop
+                this.handleScrollTo()
+                this.handleSetInkTop()
+                this.updateTitleOffset()
+                this.upperFirstTitle = this.scrollElement.scrollTop < this.titlesOffsetArr[0].offset
+                on(this.scrollContainer, 'scroll', this.handleScroll)
+                on(window, 'hashchange', this.handleHashChange)
+            })
         }
+    },
+    watch: {
+        '$route' () {
+            this.handleHashChange()
+            this.$nextTick(() => {
+                this.handleScrollTo()
+            })
+        },
+        container () {
+            this.init()
+        },
+        currentLink (newHref, oldHref) {
+            this.$emit('on-change', newHref, oldHref)
+        }
+    },
+    mounted () {
+        this.init()
+    },
+    beforeDestroy () {
+        this.removeListener()
     }
 }
 </script>

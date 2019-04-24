@@ -1,30 +1,38 @@
 <template>
   <div :class="anchorLinkClasses">
-    <a :href="href"
-       :title="title"
-       :class="linkTitleClasses"
-       @click.prevent="goAnchor">{{title}}</a>
+    <a :class="linkTitleClasses"
+       :href="href"
+       :data-scroll-offset="scrollOffset"
+       :data-href="href"
+       @click.prevent="goAnchor"
+       :title="title">{{ title }}</a>
     <slot></slot>
   </div>
 </template>
 <script>
-const prefix = 'zov-anchor-link'
 export default {
-    name: prefix,
-    components: {},
+    name: 'AnchorLink',
+    inject: ['anchorCom'],
     props: {
         href: String,
-        title: String
+        title: String,
+        scrollOffset: {
+            type: Number,
+            default () {
+                return this.anchorCom.scrollOffset
+            }
+        }
     },
     data () {
         return {
-            prefix: prefix
+            prefix: 'zov-anchor-link'
         }
     },
     computed: {
         anchorLinkClasses () {
             return [
-                this.prefix
+                this.prefix,
+                this.anchorCom.currentLink === this.href ? `${this.prefix}-active` : ''
             ]
         },
         linkTitleClasses () {
@@ -35,12 +43,22 @@ export default {
     },
     methods: {
         goAnchor () {
-            console.log(this.href)
-            document.getElementById(this.href).scrollIntoView({ behavior: 'smooth', inline: 'end' })
-            // this.anchorCom.handleHashChange();
-            // this.anchorCom.handleScrollTo();
-            // this.anchorCom.$emit('on-select', this.href);
+            this.currentLink = this.href
+            this.anchorCom.handleHashChange()
+            this.anchorCom.handleScrollTo()
+            this.anchorCom.$emit('on-select', this.href)
+            const isRoute = this.$router
+            if (isRoute) {
+                this.$router.push(this.href)
+            } else {
+                window.location.href = this.href
+            }
         }
+    },
+    mounted () {
+        this.$nextTick(() => {
+            this.anchorCom.init()
+        })
     }
 }
 </script>
