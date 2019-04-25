@@ -17,7 +17,7 @@
                 breakpoint="md"
                 collapsedTrigger
             >
-                <Menu :thumbnail="collapsed">
+                <Menu :thumbnail="collapsed" :active-name="menuActiveName">
                     <MenuOption
                         v-for="(item,index) in $router.options.routes[1].children"
                         :key="index"
@@ -51,7 +51,8 @@ export default {
     data () {
         return {
             collapsed: false,
-            isdark: false
+            isdark: false,
+            menuActiveName: ''
         }
     },
     watch: {
@@ -65,6 +66,7 @@ export default {
     },
     mounted () {
         this.isdark = (localStorage.getItem('zov-theme') === 'dark')
+        this.menuActiveName = this.$route.path
     }
 }
 </script>

@@ -61,7 +61,7 @@ export default {
     data () {
         return {
             currentActiveName: this.activeName + '',
-            currentOpenNames: this.openNames.join(',').split(','),
+            currentOpenNames: this.openNames.join('').split(''),
             activeFullPath: [],
             timer: null
         }
@@ -93,6 +93,9 @@ export default {
         }
     },
     watch: {
+        activeName (val) {
+            this.currentActiveName = val
+        },
         currentActiveName (val) {
             this.updateMenuSubActive()
             this.$emit('on-change', val)

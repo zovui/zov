@@ -52,7 +52,6 @@ requireComponents.keys().forEach(fileName => {
         component: requireComponents(fileName).default
     })
 })
-console.log(routerObject)
 let router = new Router(routerObject)
 router.beforeEach((to, from, next) => {
     Zov.LoadingBar.start()

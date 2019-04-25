@@ -143,15 +143,21 @@ export default {
         },
         upDateOpened () {
             this.opened = this.menuComponent.currentOpenNames.join(',').split(',').indexOf(String(this.name)) !== -1
+        },
+        init () {
+            this.tooltipUpward
+                ? this.tooltipUpward.$on('after-enter', () => {
+                    this.upDateOpened()
+                    this.tooltipUpward.$off('after-enter')
+                })
+                : this.upDateOpened()
         }
     },
     mounted () {
-        this.tooltipUpward
-            ? this.tooltipUpward.$on('after-enter', () => {
-                this.upDateOpened()
-                this.tooltipUpward.$off('after-enter')
-            })
-            : this.upDateOpened()
+        this.init()
+    },
+    updated () {
+        this.init()
     }
 }
 </script>

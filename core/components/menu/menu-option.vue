@@ -82,6 +82,9 @@ export default {
     },
     mounted () {
         this.menuComponent.currentActiveName + '' === this.name + '' && this.upwardUpdateActive()
+    },
+    updated () {
+        this.menuComponent.currentActiveName + '' === this.name + '' && this.upwardUpdateActive()
     }
 }
 </script>
