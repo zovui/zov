@@ -50,7 +50,9 @@ $prefix-layout: #{$prefix}layout;
         padding: $layout-footer-padding;
     }
     &-sider {
-        transition: width $transition-time ease-in-out;
+        transition: width $transition-time ease-in-out,
+        min-width $transition-time ease-in-out,
+        max-width $transition-time ease-in-out;
         position: relative;
         @include get-color-bg();
         min-width: 0;

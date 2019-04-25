@@ -210,6 +210,7 @@ $prefix-color-picker: #{$prefix}color-picker;
     &-values{
         width: $W;
         padding: 0 15px 10px 15px;
+        text-align: center;
         &-rgba{
             display: flex;
             justify-content: space-between;
@@ -217,9 +218,8 @@ $prefix-color-picker: #{$prefix}color-picker;
                 flex: 1;
                 &>.zov-input{
                     font-size: $font-size-small;
-                    & input{
+                    input{
                         height: 26px;
-                        text-align: center;
                     }
                     width: 90%;
                 }
@@ -232,9 +232,8 @@ $prefix-color-picker: #{$prefix}color-picker;
             &>.zov-input{
                 font-size: $font-size-small;
                 width: 100%;
-                & input{
+                input{
                     height: 26px;
-                    text-align: center;
                 }
             }
             &>div{
