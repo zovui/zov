@@ -26,6 +26,7 @@ let routerObject = {
 const requireViews = require.context('./views', false, /\.vue/)
 let viewsRoutes = []
 requireViews.keys().forEach(fileName => {
+    console.log(fileName)
     let options = requireViews(fileName).default.routerOptions
     console.log(options)
     let componentName = fileName.substr(2, fileName.length - 10)
@@ -40,7 +41,9 @@ viewsRoutes = viewsRoutes.sort((a, b) => {
     console.log(a.routerOptions.order, b.routerOptions.order)
     return a.routerOptions.order - b.routerOptions.order
 })
-routerObject.routes[1].children = routerObject.routes[1].children.concat(viewsRoutes)
+routerObject.routes[1].children = routerObject.routes[1].children.concat(
+    viewsRoutes
+)
 
 const requireComponents = require.context('./views/components', false, /\.vue/)
 requireComponents.keys().forEach(fileName => {

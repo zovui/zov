@@ -28,7 +28,7 @@ body {
       <div class="demo-affix">固定在最顶部</div>
     </Affix>
     <div v-for="(item,index) in arr1"
-         :key="`arr1${index}`">{{item}}</div>
+         :key="`1arr${index}`">{{item}}</div>
   </div>
 
 </template>

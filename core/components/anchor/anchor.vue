@@ -123,7 +123,6 @@ export default {
             const links = findComponentsDownward(this, 'AnchorLink').map(link => {
                 return link.href
             })
-            console.log(findComponentsDownward(this, 'AnchorLink'), links)
             const idArr = links.map(link => {
                 return link.split('#')[1]
             })
@@ -161,7 +160,6 @@ export default {
         getContainer () {
             this.scrollContainer = this.container ? (typeof this.container === 'string' ? document.querySelector(this.container) : this.container) : window
             this.scrollElement = this.container ? this.scrollContainer : (document.documentElement || document.body)
-            console.log(this.container)
         },
         removeListener () {
             off(this.scrollContainer, 'scroll', this.handleScroll)
