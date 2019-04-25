@@ -37,7 +37,7 @@
                             :name="item.path"
                             @click="$router.push({path: item.path})"
                         >
-                            {{ item.path.substr(1) }}
+                            {{ item.routerOptions.discEn }}
                         </MenuOption>
                     </MenuSub>
                 </Menu>

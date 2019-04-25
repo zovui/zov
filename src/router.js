@@ -27,7 +27,6 @@ const requireViews = require.context('./views', false, /\.vue/)
 let viewsRoutes = []
 requireViews.keys().forEach(fileName => {
     let options = requireViews(fileName).default.routerOptions
-    console.log(options)
     let componentName = fileName.substr(2, fileName.length - 10)
     let o = {
         path: '/' + componentName,
@@ -45,8 +44,11 @@ routerObject.routes[1].children = routerObject.routes[1].children.concat(viewsRo
 const requireComponents = require.context('./views/components', false, /\.vue/)
 requireComponents.keys().forEach(fileName => {
     let componentName = fileName.substr(2, fileName.length - 10)
+    let options = requireComponents(fileName).default.routerOptions || {}
+    options.discEn = componentName
     routerObject.routes[2].children.push({
-        path: '/' + componentName,
+        path: '/' + componentName.toLowerCase() + '-doc',
+        routerOptions: options,
         component: requireComponents(fileName).default
     })
 })
