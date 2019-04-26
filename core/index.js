@@ -1,6 +1,8 @@
 // 「#003」
 import './icons/index.css'
 // 【_c】全局注册式组件
+import Affix from './components/affix'
+import { Anchor, AnchorLink } from './components/anchor'
 import LongList from './components/long-list'
 import Icon from './components/icon'
 import Button from './components/button'
@@ -35,6 +37,9 @@ const components = {
     Notice,
     Message,
     // 【_f】
+    Affix,
+    Anchor,
+    AnchorLink,
     LongList,
     Icon,
     Button,
@@ -94,6 +99,9 @@ export {
     Notice,
     Message,
     // 【_f】
+    Affix,
+    Anchor,
+    AnchorLink,
     LongList,
     Icon,
     Button,
