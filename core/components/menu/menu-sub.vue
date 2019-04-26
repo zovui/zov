@@ -144,7 +144,7 @@ export default {
         upDateOpened () {
             this.opened = this.menuComponent.currentOpenNames.join(',').split(',').indexOf(String(this.name)) !== -1
         },
-        init () {
+        initFn () {
             this.tooltipUpward
                 ? this.tooltipUpward.$on('after-enter', () => {
                     this.upDateOpened()
@@ -154,10 +154,10 @@ export default {
         }
     },
     mounted () {
-        this.init()
+        this.initFn()
     },
     updated () {
-        this.init()
+        this.initFn()
     }
 }
 </script>

@@ -16,7 +16,7 @@ $prefix-badge : #{$prefix}badge;
         min-width: 20px;
         background: $color-error;
         border: 1px solid transparent;
-        color: #fff;
+        color: $color-background; // 不受主题影响的颜色，在引用是，尽量引用贴近应用的颜色
         line-height: 18px;
         text-align: center;
         padding: 0 6px;
@@ -24,11 +24,11 @@ $prefix-badge : #{$prefix}badge;
         white-space: nowrap;
         transform-origin: -10% center;
         z-index: 10;
-        box-shadow: 0 0 0 1px #fff;
+        box-shadow: 0 0 0 1px $color-background;
 
         a,
         a:hover {
-            color: #fff;
+            color: $color-background;
         }
 
         &-alone {
@@ -111,7 +111,7 @@ $prefix-badge : #{$prefix}badge;
         }
         &-text {
             display: inline-block;
-            color: $color-text ;
+            @include get-color-text();
             font-size: 12px;
             margin-left: 6px;
         }
@@ -128,4 +128,3 @@ $prefix-badge : #{$prefix}badge;
         opacity: 0;
     }
 }
-

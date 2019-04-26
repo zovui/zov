@@ -22,7 +22,7 @@
 }
 @mixin get-color-placeholder ($color:color) {
     #{$color}: $color-placeholder;
-    #{$color}: var(--color-placeholder);;
+    #{$color}: var(--color-placeholder);
 }
 @mixin get-color-disabled ($color:background-color) {
     #{$color}: $color-disabled;

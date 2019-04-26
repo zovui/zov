@@ -63,6 +63,11 @@ export default {
             return this.menuComponent.currentThumbnail && !this.parentsMenuSub.length && this.parentsMenuGroup.length < 2
         }
     },
+    watch: {
+        'menuComponent.currentActiveName' () {
+            this.initFn()
+        }
+    },
     methods: {
         upwardUpdateActive () {
             this.menuComponent.activeFullPath = []
@@ -78,13 +83,13 @@ export default {
             if (this.disabled) return
             this.menuComponent.currentActiveName = this.name
             this.upwardUpdateActive()
+        },
+        initFn () {
+            this.menuComponent.currentActiveName + '' === this.name + '' && this.upwardUpdateActive()
         }
     },
     mounted () {
-        this.menuComponent.currentActiveName + '' === this.name + '' && this.upwardUpdateActive()
-    },
-    updated () {
-        this.menuComponent.currentActiveName + '' === this.name + '' && this.upwardUpdateActive()
+        this.initFn()
     }
 }
 </script>
