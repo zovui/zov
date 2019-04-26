@@ -7,15 +7,15 @@
         />
         <SliderHandle
             v-if="range"
-            ref="leftHandle"
-            :style="leftHandleStyles"
-            :tooltip-text="tipFormatter(leftValue)"
+            ref="beginHandle"
+            :style="beginHandleStyles"
+            :tooltip-text="tipFormatter(beginValue)"
             :tooltip-visible="tooltipVisible"
         />
         <SliderHandle
-            ref="rightHandle"
-            :style="rightHandleStyles"
-            :tooltip-text="tipFormatter(rightValue)"
+            ref="endHandle"
+            :style="endHandleStyles"
+            :tooltip-text="tipFormatter(endValue)"
             :tooltip-visible="tooltipVisible"
         />
     </div>
@@ -56,6 +56,7 @@ export default {
         event: 'on-change'
     },
     props: {
+        // 值
         value: {
             type: [Number, Array],
             default: 0,
@@ -66,14 +67,17 @@ export default {
                 return true
             }
         },
+        // 最小值
         min: {
             type: Number,
             default: 0
         },
+        // 最大值
         max: {
             type: Number,
             default: 100
         },
+        // tooltip展示模式
         tooltipVisible: {
             type: String,
             default: 'default',
@@ -88,13 +92,20 @@ export default {
                 )
             }
         },
+        // tooltip内容格式化
         tipFormatter: {
             type: Function,
             default: value => value.toString()
         },
+        // 是否启用范围选择模式
         range: {
             type: Boolean,
             default: false
+        },
+        // 步长
+        step: {
+            type: Number,
+            default: 1
         }
     },
     mounted () {
@@ -108,8 +119,8 @@ export default {
     },
     data () {
         return {
-            leftValue: this.min,
-            rightValue: this.min,
+            beginValue: this.min,
+            endValue: this.min,
             draggable: null,
             sliderRectData: null
         }
@@ -119,24 +130,24 @@ export default {
             return this.max - this.min
         },
         // 左边控制按钮样式
-        leftHandleStyles () {
-            let { leftValue, min, size } = this
+        beginHandleStyles () {
+            let { beginValue, min, size } = this
             return {
-                left: Math.round((leftValue - min) / size * 100) + '%'
+                left: Math.round((beginValue - min) / size * 100) + '%'
             }
         },
         // 右边控制按钮样式
-        rightHandleStyles () {
-            let { rightValue, min, size } = this
+        endHandleStyles () {
+            let { endValue, min, size } = this
             return {
-                left: Math.round((rightValue - min) / size * 100) + '%'
+                left: Math.round((endValue - min) / size * 100) + '%'
             }
         },
         sliderTrackerStyles () {
-            let { leftHandleStyles, leftValue, rightValue, size } = this
+            let { beginHandleStyles, beginValue, endValue, size } = this
             return {
-                left: leftHandleStyles.left,
-                width: Math.round((rightValue - leftValue) / size * 100) + '%'
+                left: beginHandleStyles.left,
+                width: Math.round((endValue - beginValue) / size * 100) + '%'
             }
         }
     },
@@ -155,83 +166,89 @@ export default {
             return normalizeValue(min, max, value)
         },
         focus () {
-            this.$refs.rightHandle.focus()
+            this.$refs.endHandle.focus()
         },
         blur () {
-            this.$refs.rightHandle.blur()
+            this.$refs.endHandle.blur()
         },
+        /**
+         * 设置一个值
+         * 非range模式时,value为Number类型
+         * 当range模式时，value为Number[]
+         * @param {Array<Number>|Number} value
+         */
         setValue (value) {
             const { min, max } = this
-            let oldLeftValue = this.leftValue
-            let oldRightValue = this.rightValue
-            let leftValue = min
-            let rightValue = min
+            let oldbeginValue = this.beginValue
+            let oldendValue = this.endValue
+            let beginValue = min
+            let endValue = min
             if (this.range) {
-                leftValue = normalizeValue(min, max, value[0])
-                rightValue = normalizeValue(min, max, value[1])
+                beginValue = normalizeValue(min, max, value[0])
+                endValue = normalizeValue(min, max, value[1])
             } else {
-                rightValue = normalizeValue(min, max, value)
+                endValue = normalizeValue(min, max, value)
             }
-            if (leftValue === oldLeftValue && rightValue === oldRightValue) {
+            if (beginValue === oldbeginValue && endValue === oldendValue) {
                 return
             }
             if (this.range) {
-                value = [leftValue, rightValue]
+                value = [beginValue, endValue]
             } else {
-                value = rightValue
+                value = endValue
             }
-            this.leftValue = leftValue
-            this.rightValue = rightValue
+            this.beginValue = beginValue
+            this.endValue = endValue
             this.$emit('on-change', value)
         },
         onDragstart ({ currentX }) {
             let sliderRectData = this.sliderRectData = this.$el.getBoundingClientRect()
-            let { leftValue, rightValue } = this
             let value = this.percent2Value((currentX - sliderRectData.left) / sliderRectData.width)
+            let { beginValue, endValue } = this
             if (this.range) {
-                const midValue = (rightValue + leftValue) / 2
+                const midValue = (endValue + beginValue) / 2
                 if (value <= midValue) {
-                    leftValue = value
-                    this.$refs.leftHandle.dragstart()
+                    beginValue = value
+                    this.$refs.beginHandle.dragstart()
                 } else {
-                    rightValue = value
-                    this.$refs.rightHandle.dragstart()
+                    endValue = value
+                    this.$refs.endHandle.dragstart()
                 }
-                value = [leftValue, rightValue]
+                value = [beginValue, endValue]
             } else {
-                this.$refs.rightHandle.dragstart()
+                this.$refs.endHandle.dragstart()
             }
             this.setValue(value)
         },
         onDragging ({ currentX }) {
-            let { leftValue, rightValue, sliderRectData } = this
+            let { beginValue, endValue, sliderRectData } = this
             let value = this.percent2Value((currentX - sliderRectData.left) / sliderRectData.width)
             if (this.range) {
                 // 如果正在拖拽右边的handle时
-                if (this.$refs.leftHandle.isDragging) {
+                if (this.$refs.beginHandle.isDragging) {
                     // 当拖拽的值大于或等于右边handle所对应的值时
                     // 切换正在拖拽的handle
                     // 否则继续改变左侧区间的值
-                    if (value >= rightValue) {
-                        this.$refs.leftHandle.dragend()
-                        this.$refs.rightHandle.dragstart()
-                        this.setValue([rightValue, value])
+                    if (value >= endValue) {
+                        this.$refs.beginHandle.dragend()
+                        this.$refs.endHandle.dragstart()
+                        this.setValue([endValue, value])
                     } else {
-                        this.setValue([value, rightValue])
+                        this.setValue([value, endValue])
                     }
                     return
                 }
                 // 如果正在拖拽右边的handle时
-                if (this.$refs.rightHandle.isDragging) {
+                if (this.$refs.endHandle.isDragging) {
                     // 当拖拽的值大于或等于handle所对应的值时
                     // 切换正在拖拽的handle
                     // 否则继续改变左侧区间的值
-                    if (value <= leftValue) {
-                        this.$refs.rightHandle.dragend()
-                        this.$refs.leftHandle.dragstart()
-                        this.setValue([value, leftValue])
+                    if (value <= beginValue) {
+                        this.$refs.endHandle.dragend()
+                        this.$refs.beginHandle.dragstart()
+                        this.setValue([value, beginValue])
                     } else {
-                        this.setValue([leftValue, value])
+                        this.setValue([beginValue, value])
                     }
                     return
                 }
@@ -241,10 +258,10 @@ export default {
         },
         onDragend () {
             if (this.range) {
-                this.$refs.leftHandle.dragend()
-                this.$refs.rightHandle.dragend()
+                this.$refs.beginHandle.dragend()
+                this.$refs.endHandle.dragend()
             } else {
-                this.$refs.rightHandle.dragend()
+                this.$refs.endHandle.dragend()
             }
         }
     }
