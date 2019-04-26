@@ -1,0 +1,66 @@
+$prefix-row: #{$prefix}row;
+$prefix-col: #{$prefix}col;
+
+@mixin make-row ($gutter: $grid-gutter-width) {
+    position: relative;
+    margin-left: ($gutter / -2);
+    margin-right: ($gutter / -2);
+    height: auto;
+    @include clearfix();
+}
+
+@mixin col ($index, $list, $class) {
+    $item: ".#{$prefix-col}-span#{$class}-#{$index}";
+    @if $index > $grid-columns{
+        #{$list} {
+            float: left;
+            flex: 0 0 auto;
+        }
+    }
+    @else if $index <= $grid-columns{
+        @include col($index + 1, #{#{$item}, #{$list}}, $class)
+    }
+}
+
+@mixin float-grid-columns($class) {
+    @include col(1, "", $class)
+}
+
+@mixin loop-grid-columns ($index, $class) {
+    @if $index > 0 {
+        .#{$prefix-col}-span#{$class}-#{$index} {
+            display: block;
+            width: percentage(($index / $grid-columns));
+        }
+        .#{$prefix-col}#{$class}-push-#{$index} {
+            left: percentage(($index / $grid-columns));
+        }
+        .#{$prefix-col}#{$class}-pull-#{$index} {
+            right: percentage(($index / $grid-columns));
+        }
+        .#{$prefix-col}#{$class}-offset-#{$index} {
+            margin-left: percentage(($index / $grid-columns));
+        }
+        .#{$prefix-col}#{$class}-order-#{$index} {
+            order: $index;
+        }
+        @include loop-grid-columns(($index - 1), $class);
+    }
+    @else if $index = 0 {
+        .#{$prefix-col}-span#{$class}-#{$index} {
+            display: none;
+        }
+        .#{$prefix-col}#{$class}-push-#{$index} {
+            left: auto;
+        }
+        .#{$prefix-col}#{$class}-pull-#{$index} {
+            right: auto;
+        }
+    }
+}
+
+
+@mixin make-grid($class: '') {
+    @include float-grid-columns($class);
+    @include loop-grid-columns($grid-columns, $class);
+}

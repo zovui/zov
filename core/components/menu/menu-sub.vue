@@ -6,9 +6,7 @@
                 :style="paddingStyle"
                 @click="clickHandle"
             >
-                <slot name="title">
-                    menu sub title
-                </slot>
+                <span><slot name="title">menu sub title</slot></span>
                 <Icon
                     class="zov-menu-sub-title-arrow"
                     iconname="arrow-down"
@@ -40,12 +38,9 @@
                 <div
                     :class="classes"
                     :style="paddingStyle"
-                    ref="title"
                 >
-                    <Icon v-if="hasDefaultThumbnailIcon" :iconname="thumbnailIcon" thumbnail-default-icon/>
-                    <slot name="title">
-                        menu sub title
-                    </slot>
+                    <Icon v-if="hasDefaultThumbnailIcon" :iconname="thumbnailIcon" thumbnail-icon/>
+                    <span ref="title"><slot name="title">menu sub title</slot></span>
                     <Icon
                         class="zov-menu-sub-title-arrow"
                         iconname="arrow-down"
@@ -148,15 +143,21 @@ export default {
         },
         upDateOpened () {
             this.opened = this.menuComponent.currentOpenNames.join(',').split(',').indexOf(String(this.name)) !== -1
+        },
+        init () {
+            this.tooltipUpward
+                ? this.tooltipUpward.$on('after-enter', () => {
+                    this.upDateOpened()
+                    this.tooltipUpward.$off('after-enter')
+                })
+                : this.upDateOpened()
         }
     },
     mounted () {
-        this.tooltipUpward
-            ? this.tooltipUpward.$on('after-enter', () => {
-                this.upDateOpened()
-                this.tooltipUpward.$off('after-enter')
-            })
-            : this.upDateOpened()
+        this.init()
+    },
+    updated () {
+        this.init()
     }
 }
 </script>

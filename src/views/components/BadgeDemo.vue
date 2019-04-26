@@ -171,7 +171,7 @@
     </div>
 </template>
 <script>
-import Icon from '../../core/components/icon'
+import Icon from '../../../core/components/icon'
 export default {
     components: {
         Icon

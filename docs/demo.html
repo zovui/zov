@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=utf-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <link rel=icon href=favicon.ico>
+    <title>zov</title>
+    <link href=zov.min.css rel=stylesheet>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id=app>
+    <z-input v-model="input" autofocus placeholder="这是一个自定获取焦点的input"></z-input>
+    <z-drop
+        v-model="open"
+        trigger="hover"
+        no-arrow
+    >
+        <z-input placeholder="hover" slot="drop-head"></z-input>
+        <div style="height: 200px;border: 2px solid">
+            内容
+        </div>
+    </z-drop>
+    <Switcher v-model="open">
+        <span slot="open">开</span>
+        <span slot="close">关</span>
+    </Switcher>
+    <z-button loading iconname="download">自定义icon</z-button>
+    <p>
+        无配置
+        <z-button @click="$Message.open()">open</z-button> |
+        <z-button looks="info" @click="$Message.info()">info</z-button> |
+        <z-button looks="success" @click="$Message.success()">success</z-button> |
+        <z-button looks="error" @click="$Message.error()">error</z-button> |
+        <z-button looks="warning" @click="$Message.warning()">waring</z-button>
+    </p>
+    <z-select
+        :data="[{
+                value: 1,
+                label: 'item#1',
+                disabled: true
+            }, {
+                value: 2,
+                label: 'item#2'
+            }]"
+        placeholder="单选，某项disabled"
+    >
+        <div slot-scope="{props}">
+            {{ props.item.label }}
+        </div>
+    </z-select>
+    <z-time-picker
+        format="H时m分"
+        :steps="[2, 10, 15]"
+    ></z-time-picker>
+    <z-cascader
+        placeholder="可搜索【0, 1】"
+        :data="list"
+        v-model="value5"
+        label-name="text"
+        value-name="id"
+        child-name="children1"
+        :which-column-optional="[0, 1]"
+        multiple
+        filterable
+    ></z-cascader>
+    <z-big-data-list
+        placeholder="单选"
+        :data="list"
+        value-name="id"
+        label-name="text"
+    >
+    </z-big-data-list>
+    <z-long-list style="max-height: 220px" :data="list1">
+        <div slot-scope="{props}" :index="props.item.id">
+            下标：{{ props.index }}内容：{{ props.item.text }}
+        </div>
+    </z-long-list>
+</div>
+</body>
+</html>
+<script src=zov.min.js></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            input: '777',
+            msg: '123',
+            open: true,
+            list: (() => {
+                let d = []
+                for (let i = 0; i < 3; i++) {
+                    let x = {
+                        text: '第' + i + '连',
+                        id: i,
+                        children1: []
+                    }
+                    for (let j = 0; j < 5; j++) {
+                        let z = {
+                            id: j,
+                            text: '第' + j + '排',
+                            children1: []
+                        }
+                        for (let k = 0; k < 4; k++) {
+                            let l = {
+                                id: k,
+                                text: '第' + k + '班',
+                                children1: []
+                            }
+                            z.children1.push(l)
+                        }
+                        x.children1.push(z)
+                    }
+                    d.push(x)
+                }
+                return d
+            })(),
+            value5: [],
+            list1: (() => {
+                let d = []
+                for (var i = 0; i < 10000; i++) {
+                    d.push({
+                        id: i,
+                        text: 'item #' + (i + 1),
+                        img: 'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=dc7e87bdfb03738dc14a0a22831ab073/08f790529822720e698c1ae776cb0a46f21fab69.jpg'
+                    })
+                }
+                return d
+            })()
+        },
+        mounted () {
+            this.$LoadingBar.finish();
+        }
+    })
+</script>

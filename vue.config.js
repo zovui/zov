@@ -1,6 +1,6 @@
 module.exports = {
     publicPath: './',
-    outputDir: process.env.CORE_MIN === 'lib' ? 'lib' : 'dist',
+    outputDir: 'docs',
     filenameHashing: true,
     chainWebpack (config) {
         if (process.env.NODE_ENV === 'production' && process.env.CORE_MIN === 'lib') {
@@ -28,6 +28,7 @@ module.exports = {
                 }])
         }
     },
+
     configureWebpack: webpackConfig => {
         if (process.env.NODE_ENV === 'production' && process.env.CORE_MIN === 'lib') {
             webpackConfig.entry = {
@@ -42,5 +43,11 @@ module.exports = {
             webpackConfig.optimization.splitChunks = {}
             webpackConfig.output.filename = '[name].min.js'
         }
-    }
+    },
+
+    assetsDir: undefined,
+    runtimeCompiler: undefined,
+    productionSourceMap: undefined,
+    parallel: undefined,
+    css: undefined
 }

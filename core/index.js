@@ -20,6 +20,7 @@ import TimePicker from './components/time-picker'
 import ColorPicker from './components/color-picker'
 import { Menu, MenuSub, MenuGroup, MenuOption } from './components/menu'
 import { Layout, Header, Footer, Content, Sider } from './components/layout'
+import { Row, Col } from './components/grid'
 import Badge from './components/badge'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
@@ -61,6 +62,8 @@ const components = {
     Footer,
     Content,
     Sider,
+    Row,
+    Col,
     Badge
 }
 Object.keys(components).forEach(key => {
@@ -119,6 +122,8 @@ export {
     Footer,
     Content,
     Sider,
+    Row,
+    Col,
     Badge
 }
 // 将整个zov暴露出去

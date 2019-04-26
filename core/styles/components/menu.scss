@@ -1,6 +1,11 @@
 $prefix-menu: #{$prefix}menu;
 .#{$prefix-menu}{
-    $itemH: 48px;
+    $itemH: 48px !default;
+    @mixin nowrap () {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     @mixin disabled () {
         [disabled]{
             position: relative;
@@ -55,7 +60,7 @@ $prefix-menu: #{$prefix}menu;
     }
     &-sub{
         .#{$prefix}tooltip{
-            width: 100%;
+            display: block;
             &-body{
                 min-width: 220px;
                 max-width: 350px;
@@ -68,12 +73,20 @@ $prefix-menu: #{$prefix}menu;
             cursor: pointer;
             user-select: none;
             transition: color $transition-time;
+            @include nowrap();
             &-arrow{
                 float: right;
+                height: 100%;
                 margin-left: $gap-base;
-                line-height: $itemH;
                 transform-origin: center;
                 transition: transform $transition-time;
+                &:after{
+                    content: '';
+                    display: inline-block;
+                    width: 0;
+                    height: 100%;
+                    vertical-align: middle;
+                }
             }
         }
         &-body{
@@ -86,9 +99,7 @@ $prefix-menu: #{$prefix}menu;
             @include get-color-placeholder();
             height: $itemH - 15px;
             line-height: $itemH - 15px;
-        }
-        &-body{
-
+            @include nowrap();
         }
     }
     &-option{
@@ -98,6 +109,7 @@ $prefix-menu: #{$prefix}menu;
         user-select: none;
         transition: background-color $transition-hover-time,
                     color $transition-hover-time;
+        @include nowrap();
         &.#{$prefix}tooltip{
             display: block;
             line-height: 1.6;
@@ -110,17 +122,22 @@ $prefix-menu: #{$prefix}menu;
         border-right: none;
         border-bottom: 1px solid;
         @include get-color-border();
+        height: $itemH;
         &>*{
-            display: inline-block;
+            float: left;
         }
         &>.#{$prefix-menu}-sub{
             padding: 0;
         }
         &>.#{$prefix-menu}-group{
+            .#{$prefix-menu}-group-title{
+                height: $itemH;
+                line-height: $itemH;
+            }
             &>*{
-                display: inline-block;
+                float: left;
                 &>*{
-                    display: inline-block;
+                    float: left;
                 }
             }
         }
@@ -185,7 +202,6 @@ $prefix-menu: #{$prefix}menu;
         }
     }
     &-thumbnail{
-        display: inline-block;
         &>.#{$prefix-menu}-option,
         &>.#{$prefix-menu}-group>.#{$prefix-menu}-group-body>.#{$prefix-menu}-option,
         &>.#{$prefix-menu}-sub>.#{$prefix}tooltip>.#{$prefix-menu}-sub-title{
@@ -198,7 +214,7 @@ $prefix-menu: #{$prefix}menu;
                 height: 100%;
                 vertical-align: middle;
             }
-            [thumbnail-icon], [thumbnail-default-icon] {
+            [thumbnail-icon] {
                 display: inline-block;
                 font-size: $font-size-large;
                 vertical-align: middle;
@@ -209,7 +225,7 @@ $prefix-menu: #{$prefix}menu;
             }
             .#{$prefix}tooltip-body{
                 font-size: $font-size-base;
-                [thumbnail-icon], [thumbnail-default-icon]{
+                [thumbnail-icon] {
                     font-size: 0;
                 }
             }

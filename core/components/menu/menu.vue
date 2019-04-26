@@ -61,8 +61,9 @@ export default {
     data () {
         return {
             currentActiveName: this.activeName + '',
-            currentOpenNames: this.openNames.join(',').split(','),
-            activeFullPath: []
+            currentOpenNames: this.openNames.join('').split(''),
+            activeFullPath: [],
+            timer: null
         }
     },
     computed: {
@@ -92,16 +93,24 @@ export default {
         }
     },
     watch: {
+        activeName (val) {
+            this.currentActiveName = val
+        },
         currentActiveName (val) {
             this.updateMenuSubActive()
             this.$emit('on-change', val)
         },
         currentThumbnail (val) {
-            val && setInterval(() => {
-                this.currentThumbnail && findComponentsDownward(this, 'zov-popper').forEach(component => {
-                    component.popper.update()
-                })
-            }, 15)
+            if (val) {
+                clearInterval(this.timer)
+                this.timer = null
+                this.timer = setInterval(() => {
+                    this.currentThumbnail && findComponentsDownward(this, 'zov-popper').forEach(component => {
+                        component.popper.update()
+                    })
+                }, 15)
+            }
+            this.$emit('on-collapse', val)
         }
     },
     methods: {
