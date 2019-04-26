@@ -31,17 +31,13 @@ function isNumber (value) {
     return typeof value === 'number' && !isNaN(value)
 }
 
-function normalizeValue (min, max, value) {
-    if (!isNumber(value)) {
-        value = min
-        return value
-    }
-    if (value < min) {
-        value = min
-    } else if (value > max) {
-        value = max
-    }
-    return value
+/**
+ * 获取小数部分长度
+ * @param value
+ */
+function getDecimalLength (value) {
+    value = value.toString().split('.')
+    return value[1] ? value[1].length : 0
 }
 
 export default {
@@ -126,6 +122,10 @@ export default {
         }
     },
     computed: {
+        // 值的精度
+        precision () {
+            return getDecimalLength(this.step)
+        },
         size () {
             return this.max - this.min
         },
@@ -133,21 +133,21 @@ export default {
         beginHandleStyles () {
             let { beginValue, min, size } = this
             return {
-                left: Math.round((beginValue - min) / size * 100) + '%'
+                left: ((beginValue - min) / size * 100).toFixed(this.precision) + '%'
             }
         },
         // 右边控制按钮样式
         endHandleStyles () {
             let { endValue, min, size } = this
             return {
-                left: Math.round((endValue - min) / size * 100) + '%'
+                left: ((endValue - min) / size * 100).toFixed(this.precision) + '%'
             }
         },
         sliderTrackerStyles () {
             let { beginHandleStyles, beginValue, endValue, size } = this
             return {
                 left: beginHandleStyles.left,
-                width: Math.round((endValue - beginValue) / size * 100) + '%'
+                width: ((endValue - beginValue) / size * 100).toFixed(this.precision) + '%'
             }
         }
     },
@@ -157,13 +157,38 @@ export default {
                 this.setValue(value)
             },
             immediate: true
+        },
+        step () {
+            this.refresh()
         }
     },
     methods: {
-        percent2Value (percent) {
-            let { min, max, size } = this
-            let value = min + Math.round(percent * size)
-            return normalizeValue(min, max, value)
+        normalizeValue (value) {
+            let { min, max, step, precision } = this
+            if (!isNumber(value)) {
+                value = min
+                return value
+            }
+            // 根据step去计算数值
+            value = Math.round(value / step) * step
+            // 如果值存在小数，会导致精度丢失问题，所以根据step精度转换数字
+            value = Number(value.toFixed(precision))
+            if (value < min) {
+                value = min
+            } else if (value > max) {
+                value = max
+            }
+            return value
+        },
+        updateSliderRectData () {
+            this.sliderRectData = this.$el.getBoundingClientRect()
+        },
+        // 将位置信息转换成值
+        translatePositionToValue ({ currentX }) {
+            let { min, size, sliderRectData } = this
+            let percent = (currentX - sliderRectData.left) / sliderRectData.width
+            let value = min + percent * size
+            return this.normalizeValue(value)
         },
         focus () {
             this.$refs.endHandle.focus()
@@ -178,18 +203,18 @@ export default {
          * @param {Array<Number>|Number} value
          */
         setValue (value) {
-            const { min, max } = this
-            let oldbeginValue = this.beginValue
-            let oldendValue = this.endValue
+            const { min } = this
+            let oldBeginValue = this.beginValue
+            let oldEndValue = this.endValue
             let beginValue = min
             let endValue = min
             if (this.range) {
-                beginValue = normalizeValue(min, max, value[0])
-                endValue = normalizeValue(min, max, value[1])
+                beginValue = this.normalizeValue(value[0])
+                endValue = this.normalizeValue(value[1])
             } else {
-                endValue = normalizeValue(min, max, value)
+                endValue = this.normalizeValue(value)
             }
-            if (beginValue === oldbeginValue && endValue === oldendValue) {
+            if (beginValue === oldBeginValue && endValue === oldEndValue) {
                 return
             }
             if (this.range) {
@@ -201,9 +226,9 @@ export default {
             this.endValue = endValue
             this.$emit('on-change', value)
         },
-        onDragstart ({ currentX }) {
-            let sliderRectData = this.sliderRectData = this.$el.getBoundingClientRect()
-            let value = this.percent2Value((currentX - sliderRectData.left) / sliderRectData.width)
+        onDragstart (position) {
+            this.updateSliderRectData()
+            let value = this.translatePositionToValue(position)
             let { beginValue, endValue } = this
             if (this.range) {
                 const midValue = (endValue + beginValue) / 2
@@ -220,9 +245,9 @@ export default {
             }
             this.setValue(value)
         },
-        onDragging ({ currentX }) {
-            let { beginValue, endValue, sliderRectData } = this
-            let value = this.percent2Value((currentX - sliderRectData.left) / sliderRectData.width)
+        onDragging (position) {
+            let { beginValue, endValue } = this
+            let value = this.translatePositionToValue(position)
             if (this.range) {
                 // 如果正在拖拽右边的handle时
                 if (this.$refs.beginHandle.isDragging) {
@@ -262,6 +287,14 @@ export default {
                 this.$refs.endHandle.dragend()
             } else {
                 this.$refs.endHandle.dragend()
+            }
+        },
+        refresh () {
+            let { beginValue, endValue } = this
+            if (this.range) {
+                this.setValue([beginValue, endValue])
+            } else {
+                this.setValue(endValue)
             }
         }
     }

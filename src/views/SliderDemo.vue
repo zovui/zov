@@ -37,6 +37,19 @@
                 range
             />
         </section>
+        <section class="section">
+            <h2>step, 设置步长</h2>
+            <p class="props">step = 5, 当前值: {{ stepTestValue }}</p>
+            <Slider v-model="stepTestValue" :step="5" />
+            <p class="props">step = 0.001, 当前值: {{ stepTestValue2 }}</p>
+            <Slider v-model="stepTestValue2" :step="0.001" />
+            <p class="props">step = 0.00001, 当前值: {{ stepTestValue3 }}</p>
+            <Slider v-model="stepTestValue3" :step="0.00001" />
+            <p class="props">step = 50, 当前值: {{ stepTestValue4 }}</p>
+            <Slider v-model="stepTestValue4" :step="50" />
+            <p class="props">step = 80, 当前值: {{ stepTestValue5 }}</p>
+            <Slider v-model="stepTestValue5" :step="80" />
+        </section>
     </article>
 </template>
 
@@ -63,7 +76,12 @@ export default {
         return {
             value1: 0,
             value2: 2,
-            rangeValue: [20, 30]
+            rangeValue: [20, 30],
+            stepTestValue: 0,
+            stepTestValue2: 0,
+            stepTestValue3: 0,
+            stepTestValue4: 30,
+            stepTestValue5: 10
         }
     }
 }
