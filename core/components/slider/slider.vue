@@ -118,7 +118,8 @@ export default {
             beginValue: this.min,
             endValue: this.min,
             draggable: null,
-            sliderRectData: null
+            sliderRectData: null,
+            defaultValue: this.value
         }
     },
     computed: {
@@ -296,6 +297,9 @@ export default {
             } else {
                 this.setValue(endValue)
             }
+        },
+        reset () {
+            this.setValue(this.defaultValue)
         }
     }
 }
