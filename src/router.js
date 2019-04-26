@@ -36,7 +36,6 @@ requireViews.keys().forEach(fileName => {
     viewsRoutes.push(o)
 })
 viewsRoutes = viewsRoutes.sort((a, b) => {
-    console.log(a.routerOptions.order, b.routerOptions.order)
     return a.routerOptions.order - b.routerOptions.order
 })
 routerObject.routes[1].children = routerObject.routes[1].children.concat(viewsRoutes)
