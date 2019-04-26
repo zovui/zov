@@ -28,6 +28,15 @@
                 :tipFormatter="value => '当前值为: ' + value"
             />
         </section>
+        <section class="section">
+            <h2>range，范围选择</h2>
+            <p class="props">当前值{{ rangeValue }}</p>
+            <Slider
+                v-model="rangeValue"
+                tooltipVisible="always"
+                range
+            />
+        </section>
     </article>
 </template>
 
@@ -53,7 +62,8 @@ export default {
     data () {
         return {
             value1: 0,
-            value2: 2
+            value2: 2,
+            rangeValue: [20, 30]
         }
     }
 }
