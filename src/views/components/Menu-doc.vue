@@ -12,7 +12,7 @@
                 :accordion="accordion"
                 :trigger="trigger"
                 :thumbnail="thumbnail"
-                active-name="4-3-3-1"
+                :active-name="activeName"
                 :open-names="['2', '3']"
                 @on-change="change"
                 @on-open-change="open"
@@ -112,6 +112,7 @@ export default {
             accordion: false,
             trigger: 'hover',
             thumbnail: true,
+            activeName: '',
             menu: [{
                 title: '首页',
                 group: [
@@ -149,6 +150,11 @@ export default {
         collapse (f) {
             console.log(f)
         }
+    },
+    mounted () {
+        setTimeout(() => {
+            this.activeName = '4-3-3-1'
+        })
     }
 }
 </script>

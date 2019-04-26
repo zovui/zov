@@ -26,7 +26,6 @@ let routerObject = {
 const requireViews = require.context('./views', false, /\.vue/)
 let viewsRoutes = []
 requireViews.keys().forEach(fileName => {
-    console.log(fileName)
     let options = requireViews(fileName).default.routerOptions
     let componentName = fileName.substr(2, fileName.length - 10)
     let o = {

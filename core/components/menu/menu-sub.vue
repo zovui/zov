@@ -130,6 +130,9 @@ export default {
                 current: name,
                 openNames: menu.currentOpenNames
             })
+        },
+        'menuComponent.currentOpenNames' (val) {
+            this.initFn()
         }
     },
     methods: {
@@ -154,9 +157,6 @@ export default {
         }
     },
     mounted () {
-        this.initFn()
-    },
-    updated () {
         this.initFn()
     }
 }
