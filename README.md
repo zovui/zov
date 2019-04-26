@@ -72,6 +72,7 @@ yarn run commit
 │   ├── worker
 │   ├── index.js                                    // npm引用js入口
 │   └── index.scss                                  // npm引用css入口
+├── docs                                            // 【zov文档网站在github-page上的暴露目录，是npm run build的结果】
 ├── lib                                             // 【zov lib打包，提供给browser端引用】
 │   ├── fonts
 │   │   ├── zov_iconfont.woff2
