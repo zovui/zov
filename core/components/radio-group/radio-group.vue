@@ -24,38 +24,42 @@
                 type: Boolean,
                 default: false
             },
-            size: {
-                type: String,
-                validator (value) {
-                    return ['small', 'default', 'large'].indexOf(value) !== -1
-                },
-                default () {
-                    return 'default'
-                }
+            border: { // 是否显示边框
+                type: Boolean,
+                default: false
             },
-            // default、outline、solid
-            buttonStyle: {
-                type: String,
-                validator (value) {
-                    return ['default', 'outline', 'solid'].indexOf(value) !== -1
-                },
-                default: 'default'
+            connected: { // 是否组合
+                type: Boolean,
+                default: false
             },
-            accessibleArea: {
+            buttonStyle: { // 按钮样式，在border为true或group为true时生效
                 type: String,
                 validator (value) {
-                    return ['normal', 'whole'].indexOf(value) !== -1
+                    return ['outline', 'solid'].indexOf(value) !== -1
                 },
-                default: 'whole'
+                default: 'outline'
             },
             vertical: {
                 type: Boolean,
                 default: false
             }
         },
+        data () {
+            return {
+                stylePrefix: prefix
+            }
+        },
         computed: {
             groupClasses () {
-                return []
+                return [
+                    this.stylePrefix,
+                    {
+                        [this.sizeClasses]: this.size !== 'default' && (this.border || this.connected),
+                        [this.stylePrefix + '-connected']: !!this.connected,
+                        [this.stylePrefix + '-disabled']: !!this.disabled,
+                        [this.stylePrefix + '-vertical']: !!this.vertical
+                    }
+                ]
             }
         }
     }

@@ -5,7 +5,7 @@
             <input
                 type="radio"
                 :class="inputClasses"
-                :disabled="disabled"
+                :disabled="isDisabled"
                 :name="groupName"
                 v-model="currentValue"
                 :value="label">
@@ -20,53 +20,21 @@
     const prefix = 'zov-radio'
     const parentName = prefix + '-group'
 
-    import FormDomSizeMixin from '../../mixins/form-dom-size-mixin'
     import { findComponentUpward } from '../../utils'
 
     export default {
         name: prefix,
-        mixins: [ FormDomSizeMixin ],
         props: {
             name: String,
-            value: {},
-            label: {
-                type: [String, Number]
+            value: { // 选中的值
+                type: [String, Number, Boolean, Object]
             },
-            disabled: {
+            label: { // 当前项的值
+                type: [String, Number, Boolean, Object]
+            },
+            disabled: { // 是否禁用
                 type: Boolean,
                 default: false
-            },
-            size: {
-                type: String,
-                validator (value) {
-                    return ['small', 'default', 'large'].indexOf(value) !== -1
-                },
-                default () {
-                    return 'default'
-                }
-            },
-            trueValue: {
-                type: [Boolean, String, Number],
-                default: true
-            },
-            falseValue: {
-                type: [Boolean, String, Number],
-                default: false
-            },
-            // default、outline、solid
-            buttonStyle: {
-                type: String,
-                validator (value) {
-                    return ['default', 'outline', 'solid'].indexOf(value) !== -1
-                },
-                default: 'default'
-            },
-            accessibleArea: {
-                type: String,
-                validator (value) {
-                    return ['normal', 'whole'].indexOf(value) !== -1
-                },
-                default: 'whole'
             }
         },
         data () {
@@ -74,17 +42,22 @@
                 stylePrefix: prefix,
                 parent: findComponentUpward(this, parentName),
                 groupName: this.name,
-                // groupDisabled: this.disabled,
+                border: false,
+                connected: false,
+                buttonStyle: '',
+                isDisabled: this.disabled,
+                size: 'default'
             }
         },
         computed: {
             classes () {
                 return [
                     this.stylePrefix + '-wrapper',
-                    this.sizeClasses,
                     {
-                        [this.stylePrefix + '-button-' + this.buttonStyle]: this.buttonStyle && this.buttonStyle !== 'default',
-                        [this.stylePrefix + '-disabled']: this.disabled,
+                        [this.stylePrefix + '-size-' + this.size]: this.size !== 'default' && (this.border || this.connected),
+                        [this.stylePrefix + '-button']: this.border || this.connected,
+                        [this.stylePrefix + '-button-' + this.buttonStyle]: this.buttonStyle && (this.border || this.connected),
+                        [this.stylePrefix + '-disabled']: this.isDisabled,
                         [this.stylePrefix + '-checked']: this.currentValue === this.label
                     }
                 ];
@@ -125,7 +98,13 @@
         },
         mounted () {
             if (this.parent) {
-                this.groupName = this.parent.name;
+                let parent = this.parent;
+                this.groupName = parent.name;
+                this.border = parent.border;
+                this.connected = parent.connected;
+                this.buttonStyle =  parent.buttonStyle;
+                this.isDisabled = parent.disabled || this.disabled;
+                this.size = parent.size;
             }
         }
     }

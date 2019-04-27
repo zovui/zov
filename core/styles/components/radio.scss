@@ -1,11 +1,14 @@
 $prefix-radio : #{$prefix}radio;
 
+// 正常状态
 .#{$prefix-radio}-wrapper{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     position: relative;
     display: inline-block;
+    margin-right: 8px;
+    //@include form-dom-size();
 }
 
 .#{$prefix-radio}{
@@ -32,6 +35,9 @@ $prefix-radio : #{$prefix}radio;
     transition: all .3s;
     @include get-color-bg();
     @include get-color-border();
+    &:hover{
+        border-color: $color-primary;
+    }
 }
 .#{$prefix-radio}-input{
     position: absolute;
@@ -41,7 +47,7 @@ $prefix-radio : #{$prefix}radio;
     right: 0;
     z-index: 1;
 }
-
+// 选中状态
 .#{$prefix-radio}-checked{
     .#{$prefix-radio}-inner{
         &:after {
@@ -62,13 +68,11 @@ $prefix-radio : #{$prefix}radio;
             background-color: $color-primary;
         }
         &:active{
-            @include get-color-background-coloured();
-            border-color: darken($color-primary, $toning-ratio);
-            background-color: darken($color-primary, $toning-ratio);
+            @include outline($color-primary);
         }
     }
 }
-
+// 不可选状态
 .#{$prefix-radio}-disabled{
     cursor: $cursor-disabled;
     @include get-color-sub();
@@ -80,5 +84,60 @@ $prefix-radio : #{$prefix}radio;
             background-color: var(--color-sub);
         }
     }
+    &.#{$prefix-radio}-button{
+        cursor: $cursor-disabled;
+        @include get-color-disabled();
+        @include get-color-disabled(border-color);
+        &.#{$prefix-radio}-checked{
+            background-color: var(--color-sub);
+            @include get-color-disabled(border-color);
+        }
+    }
+}
 
+// 按钮状态
+.#{$prefix-radio}-button{
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    transition: color $transition-hover-time $bezier,
+    background-color $transition-hover-time $bezier,
+    border $transition-hover-time $bezier,
+    opacity $transition-hover-time $bezier,
+    box-shadow $transition-hover-time $bezier;
+    border-radius: $border-radius-button;
+    padding: $btn-padding;
+    margin: $outline-width;
+    border: 1px solid;
+    @include get-color-border();
+    @include outline();
+    // size对应的样式分类
+    @include form-dom-size();
+    .#{$prefix-radio}{
+        margin: 0;
+        padding: 0;
+    }
+    .#{$prefix-radio}-inner{
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    &.#{$prefix-radio}-checked{
+        &:active {
+            @include outline($color-primary);
+        }
+    }
+}
+.#{$prefix-radio}-button-outline{
+    &.#{$prefix-radio}-checked{
+        border-color: $color-primary;
+        color: $color-primary;
+    }
+}
+.#{$prefix-radio}-button-solid{
+    &.#{$prefix-radio}-checked{
+        border-color: $color-primary;
+        background-color: $color-primary;
+        color: #FFF;
+    }
 }
