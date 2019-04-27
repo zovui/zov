@@ -11,15 +11,14 @@
 </template>
 
 <script>
-    export default {
-        name: "RadioDemo",
-        data () {
-            return {
-                radio1: '1',
-                radio2: '3'
-            }
+export default {
+    data () {
+        return {
+            radio1: '1',
+            radio2: '3'
         }
     }
+}
 </script>
 
 <style scoped>
