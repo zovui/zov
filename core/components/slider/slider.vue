@@ -1,10 +1,18 @@
 <template>
     <div class="zov-slider">
-        <SliderBar />
-        <SliderTracker
-            ref="sliderBar"
-            :style="sliderTrackerStyles"
-        />
+        <div class="zov-slider-bar"></div>
+        <div class="zov-slider-tracker" :style="sliderTrackerStyles"></div>
+        <div class="zov-slider-marks" v-if="formattedMarks.length">
+            <SliderDot
+                v-for="mark of formattedMarks"
+                :key="'sliderDot-' + mark.value"
+                :value="mark.value"
+                :label="mark.label"
+                :style="mark.style"
+                :position="mark.position"
+                :is-active="mark.isActive"
+            />
+        </div>
         <SliderHandle
             v-if="range"
             ref="beginHandle"
@@ -22,14 +30,10 @@
 </template>
 
 <script>
-import SliderBar from './slider-bar'
-import SliderTracker from './slider-tracker'
 import SliderHandle from './slider-handle'
 import Draggable from '../../utils/draggable'
-
-function isNumber (value) {
-    return typeof value === 'number' && !isNaN(value)
-}
+import { isNumber, isString, isDef, isObject } from '../../utils'
+import SliderDot from './slider-dot'
 
 /**
  * 获取小数部分长度
@@ -43,9 +47,8 @@ function getDecimalLength (value) {
 export default {
     name: 'zov-slider',
     components: {
-        SliderBar,
-        SliderTracker,
-        SliderHandle
+        SliderHandle,
+        SliderDot
     },
     model: {
         prop: 'value',
@@ -102,6 +105,28 @@ export default {
         step: {
             type: Number,
             default: 1
+        },
+        marks: {
+            type: Object,
+            validator (marks) {
+                return Object.keys(marks).every(value => {
+                    const config = marks[value]
+                    if (isString(config)) {
+                        return true
+                    }
+                    if (isObject(config)) {
+                        let result = true
+                        if (isDef(config.style)) {
+                            result = result && isObject(config.style)
+                        }
+                        if (isDef(config.label)) {
+                            result = result && isString(config.label)
+                        }
+                        return result
+                    }
+                    return false
+                })
+            }
         }
     },
     mounted () {
@@ -132,16 +157,14 @@ export default {
         },
         // 左边控制按钮样式
         beginHandleStyles () {
-            let { beginValue, min, size } = this
             return {
-                left: ((beginValue - min) / size * 100).toFixed(this.precision) + '%'
+                left: this.translateValueToPosition(this.beginValue)
             }
         },
         // 右边控制按钮样式
         endHandleStyles () {
-            let { endValue, min, size } = this
             return {
-                left: ((endValue - min) / size * 100).toFixed(this.precision) + '%'
+                left: this.translateValueToPosition(this.endValue)
             }
         },
         sliderTrackerStyles () {
@@ -150,6 +173,42 @@ export default {
                 left: beginHandleStyles.left,
                 width: ((endValue - beginValue) / size * 100).toFixed(this.precision) + '%'
             }
+        },
+        formattedMarks () {
+            let { min, max, range, beginValue, endValue } = this
+            let marks = []
+            if (isDef(this.marks)) {
+                Object.keys(this.marks).forEach(value => {
+                    value = Number(value)
+                    if (
+                        isNaN(value) ||
+                        value < min ||
+                        value > max
+                    ) {
+                        return
+                    }
+                    let originalConfig = this.marks[value]
+                    let config = {
+                        value,
+                        style: null,
+                        position: {
+                            left: 0
+                        },
+                        label: value,
+                        isActive: false
+                    }
+                    config.style = originalConfig.style
+                    config.position.left = this.translateValueToPosition(value)
+                    config.label = isString(originalConfig) ? originalConfig : (originalConfig.label || value)
+                    if (range) {
+                        config.isActive = beginValue <= value && value <= endValue
+                    } else {
+                        config.isActive = value <= endValue
+                    }
+                    marks.push(config)
+                })
+            }
+            return marks
         }
     },
     watch: {
@@ -190,6 +249,11 @@ export default {
             let percent = (currentX - sliderRectData.left) / sliderRectData.width
             let value = min + percent * size
             return this.normalizeValue(value)
+        },
+        // 将值转换为位置信息
+        translateValueToPosition (value) {
+            let { min, size, precision } = this
+            return ((value - min) / size * 100).toFixed(precision) + '%'
         },
         focus () {
             this.$refs.endHandle.focus()

@@ -4,21 +4,21 @@
         <section class="section">
             <h2>默认状态</h2>
             <p class="props">当前值: {{ value1 }}</p>
-            <Slider v-model="value1" />
+            <Slider v-model="value1"/>
         </section>
         <section class="section">
             <h2>指定最大最小值</h2>
-            <p class="props">min = 1; max = 10;  当前值: {{ value2 }}</p>
+            <p class="props">min = 1; max = 10; 当前值: {{ value2 }}</p>
             <Slider v-model="value2" :min="1" :max="10"/>
         </section>
         <section class="section">
             <h2>tooltipVisible：是否展示tooltip</h2>
             <p class="props">当tooltipVisible = 'default'时，拖拽或者hover handle时会显示tooltip</p>
-            <Slider tooltipVisible="default" />
+            <Slider tooltipVisible="default"/>
             <p class="props">当tooltipVisible = 'hidden'时，总是隐藏tooltip</p>
-            <Slider tooltipVisible="hidden" />
+            <Slider tooltipVisible="hidden"/>
             <p class="props">当tooltipVisible = 'always'时，总是显示tooltip</p>
-            <Slider tooltipVisible="always" />
+            <Slider tooltipVisible="always"/>
         </section>
         <section class="section">
             <h2>tipFormatter: tooltip文案格式化</h2>
@@ -40,15 +40,24 @@
         <section class="section">
             <h2>step, 设置步长</h2>
             <p class="props">step = 5, 当前值: {{ stepTestValue }}</p>
-            <Slider v-model="stepTestValue" :step="5" />
+            <Slider v-model="stepTestValue" :step="5"/>
             <p class="props">step = 0.001, 当前值: {{ stepTestValue2 }}</p>
-            <Slider v-model="stepTestValue2" :step="0.001" />
+            <Slider v-model="stepTestValue2" :step="0.001"/>
             <p class="props">step = 0.00001, 当前值: {{ stepTestValue3 }}</p>
-            <Slider v-model="stepTestValue3" :step="0.00001" />
+            <Slider v-model="stepTestValue3" :step="0.00001"/>
             <p class="props">step = 50, 当前值: {{ stepTestValue4 }}</p>
-            <Slider v-model="stepTestValue4" :step="50" />
+            <Slider v-model="stepTestValue4" :step="50"/>
             <p class="props">step = 80, 当前值: {{ stepTestValue5 }}</p>
-            <Slider v-model="stepTestValue5" :step="80" />
+            <Slider v-model="stepTestValue5" :step="80"/>
+            <p class="props">step = 0.1, 当前值: {{ stepTestValue6 }}</p>
+            <Slider v-model="stepTestValue6" :step="0.1" range/>
+        </section>
+        <section class="section">
+            <h2>marks，打标记</h2>
+            <p class="props">当前值: {{ marksTestValue1 }}</p>
+            <Slider v-model="marksTestValue1" :marks="marks"/>
+            <p class="props">当前值: {{ marksTestValue2 }}</p>
+            <Slider v-model="marksTestValue2" range :marks="marks"/>
         </section>
     </article>
 </template>
@@ -58,6 +67,7 @@
         width: 1000px;
         margin: 0 auto;
     }
+
     .section {
         box-sizing: border-box;
         margin: 20px 0;
@@ -65,6 +75,7 @@
         padding: 20px 30px;
         box-shadow: 0 0 5px 0 #7f7f7f;
     }
+
     .props {
         margin: 20px 0;
     }
@@ -81,7 +92,21 @@ export default {
             stepTestValue2: 0,
             stepTestValue3: 0,
             stepTestValue4: 30,
-            stepTestValue5: 10
+            stepTestValue5: 10,
+            stepTestValue6: [60, 100],
+            marks: {
+                0: '0°C',
+                26: '26°C',
+                37: '37°C',
+                100: {
+                    style: {
+                        color: '#ff5500'
+                    },
+                    label: '<strong>100°C</strong>'
+                }
+            },
+            marksTestValue1: 0,
+            marksTestValue2: [40, 50]
         }
     }
 }

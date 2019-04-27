@@ -93,6 +93,7 @@ export default {
                 this.showTooltip = true
             }
         },
+        // TODO 当拖拽结束时，若鼠标还悬停在上，不隐藏tooltip
         dragend () {
             this.isDragging = false
             if (this.tooltipVisible === 'default') {

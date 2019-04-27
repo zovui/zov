@@ -271,3 +271,19 @@ export function animitionEnd (element, callback) {
     }
 }
 export const sharpMatcherRegx = /#([^#]+)$/
+
+export function isNumber (value) {
+    return typeof value === 'number' && !isNaN(value)
+}
+
+export function isString (value) {
+    return typeof value === 'string'
+}
+
+export function isObject (value) {
+    return typeof value === 'object'
+}
+
+export function isDef (value) {
+    return typeof value !== 'undefined'
+}
