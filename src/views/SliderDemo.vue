@@ -59,6 +59,13 @@
             <p class="props">当前值: {{ marksTestValue2 }}</p>
             <Slider v-model="marksTestValue2" range :marks="marks"/>
         </section>
+        <section class="section">
+            <h2>marks & onlyMarks，打标记并且只能拖拽至标记上</h2>
+            <p class="props">当前值: {{ marksAndOnlyMarksValue1 }}</p>
+            <Slider v-model="marksAndOnlyMarksValue1" :marks="marks" only-marks />
+            <p class="props">当前值: {{ marksAndOnlyMarksValue2 }}</p>
+            <Slider v-model="marksAndOnlyMarksValue2" range :marks="marks" only-marks />
+        </section>
     </article>
 </template>
 
@@ -106,7 +113,9 @@ export default {
                 }
             },
             marksTestValue1: 0,
-            marksTestValue2: [40, 50]
+            marksTestValue2: [40, 50],
+            marksAndOnlyMarksValue1: 0,
+            marksAndOnlyMarksValue2: [0, 20]
         }
     }
 }

@@ -127,6 +127,11 @@ export default {
                     return false
                 })
             }
+        },
+        // 是否只能拖拽到marks上
+        onlyMarks: {
+            type: Boolean,
+            default: false
         }
     },
     mounted () {
@@ -174,6 +179,7 @@ export default {
                 width: ((endValue - beginValue) / size * 100).toFixed(this.precision) + '%'
             }
         },
+        // TODO 性能优化
         formattedMarks () {
             let { min, max, range, beginValue, endValue } = this
             let marks = []
@@ -208,6 +214,9 @@ export default {
                     marks.push(config)
                 })
             }
+            marks.sort((mark1, mark2) => {
+                return mark1.value < mark2.value ? -1 : 1
+            })
             return marks
         }
     },
@@ -224,7 +233,7 @@ export default {
     },
     methods: {
         normalizeValue (value) {
-            let { min, max, step, precision } = this
+            let { min, max, step, precision, onlyMarks } = this
             if (!isNumber(value)) {
                 value = min
                 return value
@@ -237,6 +246,10 @@ export default {
                 value = min
             } else if (value > max) {
                 value = max
+            }
+            // 如果只能拖拽到marks上，则转换成marks中的某一个值
+            if (onlyMarks) {
+                value = this.translateValueToMarkValue(value)
             }
             return value
         },
@@ -254,6 +267,52 @@ export default {
         translateValueToPosition (value) {
             let { min, size, precision } = this
             return ((value - min) / size * 100).toFixed(precision) + '%'
+        },
+        // 将值转换成mark上的值
+        // TODO 性能优化，因为dragging时可能一直在某个区间内，所以不需要每次都查找，只需要到边界值时再查找
+        translateValueToMarkValue (value) {
+            // 如果marks为空，则不作处理
+            if (this.formattedMarks.length === 0) {
+                return value
+            }
+            const markValues = this.formattedMarks.map(mark => mark.value)
+            let beginIndex = 0
+            let endIndex = markValues.length - 1
+            // 如果查找的值小于区间最小值，则返回区间最小值
+            if (value <= markValues[beginIndex]) {
+                return markValues[beginIndex]
+            }
+            // 如果查找的值大于区间最大值，则返回区间最大值
+            if (value >= markValues[endIndex]) {
+                return markValues[endIndex]
+            }
+            // 区间中间的索引值
+            let midIndex
+            // 区间中间的mark值
+            let midValue
+            // 运用二分查找，查找指定mark区间
+            // 查找区间，当查找到区间大小为1时，循环停止，找到value对应的mark区间
+            while ((endIndex - beginIndex) > 1) {
+                midIndex = Math.floor((beginIndex + endIndex) / 2)
+                midValue = markValues[midIndex]
+                // 如果value为mark上的值，则返回
+                if (value === midValue) {
+                    return value
+                }
+                // 继续查找
+                // 如果value大于中间值，则向右找，否则向左
+                if (value > midValue) {
+                    beginIndex = midIndex
+                } else {
+                    endIndex = midIndex
+                }
+            }
+            midValue = (markValues[beginIndex] + markValues[endIndex]) / 2
+            if (value >= midValue) {
+                return markValues[endIndex]
+            } else {
+                return markValues[beginIndex]
+            }
         },
         focus () {
             this.$refs.endHandle.focus()
