@@ -1,0 +1,84 @@
+$prefix-radio : #{$prefix}radio;
+
+.#{$prefix-radio}-wrapper{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+}
+
+.#{$prefix-radio}{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,0.65);
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: pointer;
+    vertical-align: sub;
+    margin-right: 4px;
+}
+
+.#{$prefix-radio}-inner{
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 50%;
+    transition: all .3s;
+    @include get-color-bg();
+    @include get-color-border();
+}
+.#{$prefix-radio}-input{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.#{$prefix-radio}-checked{
+    .#{$prefix-radio}-inner{
+        &:after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+    }
+}
+.#{$prefix-radio}-checked:not(.#{$prefix-radio}-disabled){
+    .#{$prefix-radio}-inner{
+        border-color: $color-primary;
+        &:after {
+            background-color: $color-primary;
+        }
+        &:active{
+            @include get-color-background-coloured();
+            border-color: darken($color-primary, $toning-ratio);
+            background-color: darken($color-primary, $toning-ratio);
+        }
+    }
+}
+
+.#{$prefix-radio}-disabled{
+    cursor: $cursor-disabled;
+    @include get-color-sub();
+    .#{$prefix-radio}-inner{
+        cursor: $cursor-disabled;
+        @include get-color-disabled();
+        @include get-color-disabled(border-color);
+        &:after {
+            background-color: var(--color-sub);
+        }
+    }
+
+}
