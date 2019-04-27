@@ -35,7 +35,8 @@ export default {
     data () {
         return {
             showTooltip: false,
-            isDragging: false
+            isDragging: false,
+            isHover: false
         }
     },
     watch: {
@@ -67,12 +68,14 @@ export default {
             this.$emit('blur')
         },
         onMouseEnter () {
+            this.isHover = true
             if (this.tooltipVisible !== 'default') {
                 return
             }
             this.showTooltip = true
         },
         onMouseleave () {
+            this.isHover = false
             // 如果拖拽过程中鼠标离开handle，则不作处理
             if (this.isDragging) {
                 return
@@ -93,10 +96,13 @@ export default {
                 this.showTooltip = true
             }
         },
-        // TODO 当拖拽结束时，若鼠标还悬停在上，不隐藏tooltip
         dragend () {
             this.isDragging = false
             if (this.tooltipVisible === 'default') {
+                // 如果拖拽结束后handle仍处于hover状态，则不隐藏tooltip
+                if (this.isHover) {
+                    return
+                }
                 this.showTooltip = false
             }
         }
