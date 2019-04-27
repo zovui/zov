@@ -60,6 +60,13 @@
             <Slider v-model="marksTestValue2" range :marks="marks"/>
         </section>
         <section class="section">
+            <h2>marks & step，打标记并且设置step，能拖拽到marks上和根据step拖拽</h2>
+            <p class="props">step = 10; 当前值: {{ marksAndStep }}</p>
+            <Slider v-model="marksAndStep" :marks="marks" :step="10" />
+            <p class="props">step = 10; 当前值: {{ marksAndStep1 }}</p>
+            <Slider v-model="marksAndStep1" :min="-100" :max="200" :marks="marks2" :step="10" />
+        </section>
+        <section class="section">
             <h2>marks & onlyMarks，打标记并且只能拖拽至标记上</h2>
             <p class="props">当前值: {{ marksAndOnlyMarksValue1 }}</p>
             <Slider v-model="marksAndOnlyMarksValue1" :marks="marks" only-marks />
@@ -112,10 +119,25 @@ export default {
                     label: '<strong>100°C</strong>'
                 }
             },
+            marks2: {
+                '-78': '-78°C',
+                '-15': '-15°C',
+                0: '0°C',
+                26: '26°C',
+                37: '37°C',
+                100: {
+                    style: {
+                        color: '#ff5500'
+                    },
+                    label: '<strong>100°C</strong>'
+                }
+            },
             marksTestValue1: 0,
             marksTestValue2: [40, 50],
             marksAndOnlyMarksValue1: 0,
-            marksAndOnlyMarksValue2: [0, 20]
+            marksAndOnlyMarksValue2: [0, 20],
+            marksAndStep: 0,
+            marksAndStep1: -30
         }
     }
 }

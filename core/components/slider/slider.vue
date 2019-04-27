@@ -32,7 +32,7 @@
 <script>
 import SliderHandle from './slider-handle'
 import Draggable from '../../utils/draggable'
-import { isNumber, isString, isDef, isObject } from '../../utils'
+import { isNumber, isString, isDef, isObject, includes } from '../../utils'
 import SliderDot from './slider-dot'
 
 /**
@@ -232,16 +232,39 @@ export default {
         }
     },
     methods: {
+        isMarksValue (value) {
+            return includes(
+                this.formattedMarks.map(mark => mark.value),
+                value
+            )
+        },
+        // 使值正常化
         normalizeValue (value) {
-            let { min, max, step, precision, onlyMarks } = this
+            let { min, max, step, precision, onlyMarks, marks } = this
             if (!isNumber(value)) {
                 value = min
                 return value
             }
-            // 根据step去计算数值
-            value = Math.round(value / step) * step
-            // 如果值存在小数，会导致精度丢失问题，所以根据step精度转换数字
-            value = Number(value.toFixed(precision))
+            // 如果使用了marks
+            // TODO 变得更加清晰
+            if (isDef(marks)) {
+                // 获取新值对应的邻居marks值
+                const neighborMarkValue = this.translateValueToMarkValue(value)
+                // 根据step算出下一个位置
+                const nextValue = Math.round(value / step) * step
+                // 哪个距离近，选哪个
+                // 若距离相等，则取后面的值
+                if (Math.abs(value - nextValue) < Math.abs(value - neighborMarkValue)) {
+                    value = nextValue
+                } else {
+                    value = neighborMarkValue
+                }
+                value = Number(value.toFixed(precision))
+            } else {
+                // 根据step去计算数值
+                value = Math.round(value / step) * step
+                value = Number(value.toFixed(precision))
+            }
             if (value < min) {
                 value = min
             } else if (value > max) {
@@ -260,8 +283,7 @@ export default {
         translatePositionToValue ({ currentX }) {
             let { min, size, sliderRectData } = this
             let percent = (currentX - sliderRectData.left) / sliderRectData.width
-            let value = min + percent * size
-            return this.normalizeValue(value)
+            return min + percent * size
         },
         // 将值转换为位置信息
         translateValueToPosition (value) {
