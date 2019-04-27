@@ -4,7 +4,7 @@
         placement="right"
         :high-color="menuComponent.highColor"
         :class="classes"
-        @click.stop="clickHandle"
+        @click="clickHandle"
         :style="paddingStyle"
         :disabled="disabled"
     >
@@ -19,7 +19,7 @@
     <li
         v-else
         :class="classes"
-        @click.stop="clickHandle"
+        @click="clickHandle"
         :style="paddingStyle"
         :disabled="disabled"
     >
@@ -63,8 +63,14 @@ export default {
             return this.menuComponent.currentThumbnail && !this.parentsMenuSub.length && this.parentsMenuGroup.length < 2
         }
     },
+    watch: {
+        'menuComponent.currentActiveName' () {
+            this.initFn()
+        }
+    },
     methods: {
         upwardUpdateActive () {
+            console.log(123)
             this.menuComponent.activeFullPath = []
             this.parentsMenuSub.forEach(component => {
                 component.active = true
@@ -73,14 +79,15 @@ export default {
                 this.menuComponent.currentOpenNames.indexOf(name) === -1 && this.menuComponent.currentOpenNames.push(name)
             })
         },
-        clickHandle () {
+        clickHandle (e) {
+            this.$emit('click', e)
             if (this.disabled) return
             this.menuComponent.currentActiveName = this.name
             this.upwardUpdateActive()
+        },
+        initFn () {
+            this.menuComponent.currentActiveName + '' === this.name + '' && this.upwardUpdateActive()
         }
-    },
-    mounted () {
-        this.menuComponent.currentActiveName + '' === this.name + '' && this.upwardUpdateActive()
     }
 }
 </script>

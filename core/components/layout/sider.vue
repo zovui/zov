@@ -6,7 +6,7 @@
             <slot>Sider</slot>
         </div>
         <slot name="trigger">
-            <div v-show="showBottomTrigger" :class="triggerClasses" @click="toggleCollapse" :style="{width: siderWidth + 'px'}">
+            <div v-show="collapsedTrigger" :class="triggerClasses" @click="toggleCollapse" :style="{width: siderWidth + 'px'}">
                 <Icon iconname="arrow-back"/>
             </div>
         </slot>
@@ -36,23 +36,15 @@ export default {
             type: [Number, String],
             default: 64
         },
-        hideTrigger: {
+        collapsedTrigger: {
             type: Boolean,
-            default: true
+            default: false
         },
         breakpoint: {
             type: String,
             validator (val) {
                 return ['xs', 'sm', 'md', 'lg', 'xl'].indexOf(val) !== -1
             }
-        },
-        collapsible: {
-            type: Boolean,
-            default: true
-        },
-        defaultCollapsed: {
-            type: Boolean,
-            default: false
         }
     },
     data () {
@@ -65,7 +57,7 @@ export default {
         wrapClasses () {
             return [
                 `${prefix}`,
-                this.showBottomTrigger && `${prefix}-has-trigger`,
+                this.collapsedTrigger && `${prefix}-has-trigger`,
                 this.value && `${prefix}-collapsed`
             ]
         },
@@ -87,19 +79,12 @@ export default {
             return `${this.prefix}-children`
         },
         siderWidth () {
-            return this.collapsible || !this.mediaMatched
-                ? this.value
-                    ? parseInt(this.collapsedWidth)
-                    : parseInt(this.width)
-                : this.width
-        },
-        showBottomTrigger () {
-            return this.collapsible ? !this.hideTrigger : false
+            return this.value ? parseInt(this.collapsedWidth) : parseInt(this.width)
         }
     },
     methods: {
         toggleCollapse () {
-            let value = this.collapsible ? !this.value : false
+            let value = !this.value
             this.$emit('input', value)
         },
         matchMedia () {
@@ -123,9 +108,6 @@ export default {
         }
     },
     mounted () {
-        if (this.defaultCollapsed) {
-            this.$emit('input', this.defaultCollapsed)
-        }
         if (this.breakpoint !== undefined) {
             on(window, 'resize', this.onWindowResize)
             this.matchMedia()

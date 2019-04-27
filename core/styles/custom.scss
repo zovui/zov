@@ -15,6 +15,9 @@ $link-hover-color           :   $color-light-primary !default;
 $link-active-color          :   $color-dark-primary !default;
 $cursor-disabled            :   not-allowed !default;
 
+// Anchor
+$anchor-border-width: 2px;
+
 // border 圆角
 $border-radius-base         :   9px !default;
 $border-radius-button       :   4px !default;
@@ -64,17 +67,10 @@ $btn-line-height            :   2.2 !default;
 // Layout and Grid
 $grid-columns                : 24 !default;
 $grid-gutter-width           : 0 !default;
-$layout-header-background    : lighten($color-primary, 10%) !default;
 $layout-header-height        : 64px !default;
 $layout-header-padding       : 0 0 !default;
-$layout-content-background   : lighten($color-primary, 25%) !default;
 $layout-footer-padding       : 24px 50px !default;
-$layout-footer-background    : $layout-header-background !default;
-$layout-sider-background     : $color-primary !default;
 $layout-trigger-height       : 48px !default;
-$layout-trigger-color        : #fff !default;
-$layout-zero-trigger-width   : 36px !default;
-$layout-zero-trigger-height  : 42px !default;
 
 // 媒体查询的 breakpoints
 // 小屏 / phone

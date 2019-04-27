@@ -130,6 +130,9 @@ export default {
                 current: name,
                 openNames: menu.currentOpenNames
             })
+        },
+        'menuComponent.currentOpenNames' (val) {
+            this.initFn()
         }
     },
     methods: {
@@ -143,15 +146,18 @@ export default {
         },
         upDateOpened () {
             this.opened = this.menuComponent.currentOpenNames.join(',').split(',').indexOf(String(this.name)) !== -1
+        },
+        initFn () {
+            this.tooltipUpward
+                ? this.tooltipUpward.$on('after-enter', () => {
+                    this.upDateOpened()
+                    this.tooltipUpward.$off('after-enter')
+                })
+                : this.upDateOpened()
         }
     },
     mounted () {
-        this.tooltipUpward
-            ? this.tooltipUpward.$on('after-enter', () => {
-                this.upDateOpened()
-                this.tooltipUpward.$off('after-enter')
-            })
-            : this.upDateOpened()
+        this.initFn()
     }
 }
 </script>

@@ -14,8 +14,6 @@ body {
     line-height: $line-height-base;
     @include get-color-text();
     @include get-color-bg();
-    transition: background-color $transition-time $bezier,
-                color $transition-time $bezier;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

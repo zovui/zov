@@ -38,7 +38,7 @@ export default {
         }
     },
     watch: {
-        size (val) {
+        size () {
             this.popper.update()
         },
         placement (val) {
@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         // 为了配合css变形动画，所以在popper更新后重设origin
-        resetTransfromOrigin (origin) {
+        resetTransformOrigin (origin) {
             let transObj = {
                 'right': 'left',
                 'left': 'right',
@@ -68,10 +68,10 @@ export default {
                     // eventsEnabled: true, // 是否启用事件，默认【true】
                     // removeOnDestroy: false, // 在销毁（调用destroy）时，是否移除popper节点，默认【false】
                     onCreate: (data) => {
-                        this.resetTransfromOrigin(data.placement)
+                        this.resetTransformOrigin(data.placement)
                     },
                     onUpdate: (data) => {
-                        this.resetTransfromOrigin(data.placement)
+                        this.resetTransformOrigin(data.placement)
                     },
                     // 自定义修饰
                     modifiers: {

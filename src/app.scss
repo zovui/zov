@@ -5,3 +5,43 @@ $outline-width              :   3px;
 //$border-radius-base         :   0px !default;
 //$border-radius-button       :   0px !default;
 @import '../core/index';
+/*
+* 以下是org站点样式表
+* ！可以用zov中的变量，如：$gap-base
+*/
+$pre: org;
+.#{$pre}{
+    &-home{
+
+    }
+    &-layout{
+        min-height: 100vh;
+        &-header{
+            border-color: transparent;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            padding: 0 $gap-base;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            &-logo{
+                width: 140px;
+                height: 32px;
+                img{
+                    height: 100%;
+                }
+            }
+            &-nav{
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            &-theme-btn{
+
+            }
+        }
+        &-main{
+            padding-top: 40px;
+        }
+    }
+}

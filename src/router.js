@@ -1,15 +1,56 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Zov from '../core'
+import Home from './Home'
+import Menu from './Menu'
 Vue.use(Router)
-let routerObject = { routes: [] }
-const requireComponent = require.context('./views', false, /\.vue/)
-requireComponent.keys().forEach(fileName => {
-    let componentName = fileName.substr(2, fileName.length - 6)
-    fileName = fileName.substr(0, 1) + '/views' + fileName.substr(1)
-    routerObject.routes.push({
+let routerObject = {
+    routes: [
+        {
+            path: '/',
+            component: Home
+        },
+        {
+            path: '/menu',
+            component: Menu,
+            children: []
+        },
+        {
+            path: '/component',
+            component: Menu,
+            children: []
+        }
+    ]
+}
+
+const requireViews = require.context('./views', false, /\.vue/)
+let viewsRoutes = []
+requireViews.keys().forEach(fileName => {
+    let options = requireViews(fileName).default.routerOptions
+    let componentName = fileName.substr(2, fileName.length - 10)
+    let o = {
         path: '/' + componentName,
-        component: () => import(fileName + '')
+        component: requireViews(fileName).default,
+        routerOptions: options
+    }
+    viewsRoutes.push(o)
+})
+viewsRoutes = viewsRoutes.sort((a, b) => {
+    return a.routerOptions.order - b.routerOptions.order
+})
+routerObject.routes[1].children = routerObject.routes[1].children.concat(
+    viewsRoutes
+)
+
+const requireComponents = require.context('./views/components', false, /\.vue/)
+requireComponents.keys().forEach(fileName => {
+    let componentName = fileName.substr(2, fileName.length - 10)
+    let options = requireComponents(fileName).default.routerOptions || {}
+    options.discEn = componentName
+    routerObject.routes[2].children.push({
+        path: '/' + componentName.toLowerCase() + '-doc',
+        routerOptions: options,
+        component: requireComponents(fileName).default
     })
 })
 let router = new Router(routerObject)

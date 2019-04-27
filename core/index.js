@@ -1,6 +1,8 @@
 // 「#003」
 import './icons/index.css'
 // 【_c】全局注册式组件
+import Affix from './components/affix'
+import { Anchor, AnchorLink } from './components/anchor'
 import LongList from './components/long-list'
 import Icon from './components/icon'
 import Button from './components/button'
@@ -21,6 +23,7 @@ import ColorPicker from './components/color-picker'
 import { Menu, MenuSub, MenuGroup, MenuOption } from './components/menu'
 import { Layout, Header, Footer, Content, Sider } from './components/layout'
 import { Row, Col } from './components/grid'
+import Badge from './components/badge'
 import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 // 【_f】全局方法式组件
@@ -37,6 +40,9 @@ const components = {
     Notice,
     Message,
     // 【_f】
+    Affix,
+    Anchor,
+    AnchorLink,
     LongList,
     Icon,
     Button,
@@ -65,6 +71,7 @@ const components = {
     Sider,
     Row,
     Col,
+    Badge,
     Radio,
     RadioGroup,
 }
@@ -126,6 +133,7 @@ export {
     Sider,
     Row,
     Col,
+    Badge,
     Radio,
     RadioGroup
 }
