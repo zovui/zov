@@ -32,7 +32,7 @@
 <script>
 import SliderHandle from './slider-handle'
 import Draggable from '../../utils/draggable'
-import { isNumber, isString, isDef, isObject, includes } from '../../utils'
+import { isNumber, isString, isDef, isObject } from '../../utils'
 import SliderDot from './slider-dot'
 
 /**
@@ -232,49 +232,37 @@ export default {
         }
     },
     methods: {
-        isMarksValue (value) {
-            return includes(
-                this.formattedMarks.map(mark => mark.value),
-                value
-            )
-        },
         // 使值正常化
         normalizeValue (value) {
             let { min, max, step, precision, onlyMarks, marks } = this
             if (!isNumber(value)) {
-                value = min
-                return value
+                return min
             }
+            // 根据step去计算数值
+            let nextValue = Math.round(value / step) * step
             // 如果使用了marks
-            // TODO 变得更加清晰
             if (isDef(marks)) {
                 // 获取新值对应的邻居marks值
                 const neighborMarkValue = this.translateValueToMarkValue(value)
-                // 根据step算出下一个位置
-                const nextValue = Math.round(value / step) * step
-                // 哪个距离近，选哪个
-                // 若距离相等，则取后面的值
-                if (Math.abs(value - nextValue) < Math.abs(value - neighborMarkValue)) {
-                    value = nextValue
+                // 如果只能拖拽到marks上，则只取markValue
+                if (onlyMarks) {
+                    nextValue = neighborMarkValue
                 } else {
-                    value = neighborMarkValue
+                    const distanceMarkValue = Math.abs(value - neighborMarkValue)
+                    const distanceNextValue = Math.abs(value - nextValue)
+                    // 如果与最近的markValue距离小于step算出的值，则吸附至markValue
+                    if (distanceMarkValue <= distanceNextValue) {
+                        nextValue = neighborMarkValue
+                    }
                 }
-                value = Number(value.toFixed(precision))
-            } else {
-                // 根据step去计算数值
-                value = Math.round(value / step) * step
-                value = Number(value.toFixed(precision))
             }
-            if (value < min) {
-                value = min
+            nextValue = Number(nextValue.toFixed(precision))
+            if (nextValue < min) {
+                nextValue = min
             } else if (value > max) {
-                value = max
+                nextValue = max
             }
-            // 如果只能拖拽到marks上，则转换成marks中的某一个值
-            if (onlyMarks) {
-                value = this.translateValueToMarkValue(value)
-            }
-            return value
+            return nextValue
         },
         updateSliderRectData () {
             this.sliderRectData = this.$el.getBoundingClientRect()
