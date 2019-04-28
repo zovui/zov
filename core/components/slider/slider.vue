@@ -35,6 +35,22 @@ import Draggable from '../../utils/draggable'
 import { isNumber, isString, isDef, isObject } from '../../utils'
 import SliderDot from './slider-dot'
 
+/**
+ * 获取离value最近的值
+ * @param value
+ * @param compareValue1
+ * @param compareValue2
+ * @return {*}
+ */
+function getClosetValue (value, compareValue1, compareValue2) {
+    // value1的距离
+    const distanceValue1 = Math.abs(value - compareValue1)
+    // value2的距离
+    const distanceValue2 = Math.abs(value - compareValue2)
+    // 如果value1的距离小于value2的距离，则返回value1，否则返回value2
+    return distanceValue1 < distanceValue2 ? compareValue1 : compareValue2
+}
+
 export default {
     name: 'zov-slider',
     components: {
@@ -230,17 +246,12 @@ export default {
             // 如果使用了marks
             if (isDef(marks)) {
                 // 获取新值对应的邻居marks值
-                const neighborMarkValue = this.translateValueToMarkValue(value)
+                const closestMarkValue = this.findClosestMarkValue(value)
                 // 如果只能拖拽到marks上，则只取markValue
                 if (onlyMarks) {
-                    nextValue = neighborMarkValue
+                    nextValue = closestMarkValue
                 } else {
-                    const distanceMarkValue = Math.abs(value - neighborMarkValue)
-                    const distanceNextValue = Math.abs(value - nextValue)
-                    // 如果与最近的markValue距离小于step算出的值，则吸附至markValue
-                    if (distanceMarkValue <= distanceNextValue) {
-                        nextValue = neighborMarkValue
-                    }
+                    nextValue = getClosetValue(value, nextValue, closestMarkValue)
                 }
             }
             nextValue = Number(nextValue.toFixed(precision))
@@ -269,9 +280,9 @@ export default {
                 left: percent
             }
         },
-        // 将值转换成mark上的值
+        // 查找对应值最近的markValue
         // TODO 性能优化，因为dragging时可能一直在某个区间内，所以不需要每次都查找，只需要到边界值时再查找
-        translateValueToMarkValue (value) {
+        findClosestMarkValue (value) {
             const marks = this.formattedMarks
             // 如果marks为空，则不作处理
             if (marks.length === 0) {
@@ -310,12 +321,7 @@ export default {
                     endIndex = midIndex
                 }
             }
-            midValue = (marks[beginIndex].value + marks[endIndex].value) / 2
-            if (value >= midValue) {
-                return marks[endIndex].value
-            } else {
-                return marks[beginIndex].value
-            }
+            return getClosetValue(value, marks[beginIndex].value, marks[endIndex].value)
         },
         focus () {
             this.$refs.endHandle.focus()
