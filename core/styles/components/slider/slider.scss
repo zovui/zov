@@ -68,13 +68,14 @@ $prefix-slider: $prefix + 'slider';
     box-sizing: border-box;
     position: absolute;
     border-radius: 50%;
-    border: 2px solid #e8e8e8;
+    border: 2px solid transparent;
     width: 10px;
     height: 10px;
+    @include get-color-border(border-color);
     @include get-color-bg('background');
     @include get-color-text();
     &--active {
-        border-color: $color-primary;
+        @include get-color-primary-active(border-color);
     }
 }
 
