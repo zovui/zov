@@ -1,5 +1,5 @@
 <template>
-    <div class="zov-slider">
+    <div class="zov-slider" :class="classList">
         <div class="zov-slider-bar"></div>
         <div class="zov-slider-tracker" :style="sliderTrackerStyles"></div>
         <div class="zov-slider-marks" v-if="formattedMarks.length">
@@ -35,6 +35,8 @@ import Draggable from '../../utils/draggable'
 import { isNumber, isString, isDef, isObject } from '../../utils'
 import SliderDot from './slider-dot'
 
+const COMPONENT_NAME = 'zov-slider'
+
 /**
  * 获取离value最近的值
  * @param value
@@ -52,7 +54,7 @@ function getClosetValue (value, compareValue1, compareValue2) {
 }
 
 export default {
-    name: 'zov-slider',
+    name: COMPONENT_NAME,
     components: {
         SliderHandle,
         SliderDot
@@ -139,6 +141,11 @@ export default {
         onlyMarks: {
             type: Boolean,
             default: false
+        },
+        // 垂直模式
+        vertical: {
+            type: Boolean,
+            default: false
         }
     },
     mounted () {
@@ -185,7 +192,13 @@ export default {
         },
         // 区间追踪器的样式
         sliderTrackerStyles () {
-            let { beginHandleStyles, beginValue, endValue, size } = this
+            let { beginHandleStyles, beginValue, endValue, size, vertical } = this
+            if (vertical) {
+                return {
+                    top: beginHandleStyles.top,
+                    height: ((endValue - beginValue) / size * 100).toFixed(this.precision) + '%'
+                }
+            }
             return {
                 left: beginHandleStyles.left,
                 width: ((endValue - beginValue) / size * 100).toFixed(this.precision) + '%'
@@ -216,6 +229,15 @@ export default {
                 return mark1.value < mark2.value ? -1 : 1
             })
             return formattedMarks
+        },
+        classList () {
+            const classList = []
+            if (this.vertical) {
+                classList.push(`${COMPONENT_NAME}--vertical`)
+            } else {
+                classList.push(`${COMPONENT_NAME}--horizontal`)
+            }
+            return classList
         }
     },
     watch: {
@@ -267,17 +289,28 @@ export default {
             this.sliderRectData = this.$el.getBoundingClientRect()
         },
         // 将位置信息转换成值
-        translatePositionToValue ({ currentX }) {
-            let { min, size, sliderRectData } = this
-            let percent = (currentX - sliderRectData.left) / sliderRectData.width
+        translatePositionToValue ({ currentX, currentY }) {
+            let { min, size, sliderRectData, vertical } = this
+            let percent = 0
+            if (vertical) {
+                percent = (currentY - sliderRectData.top) / sliderRectData.height
+            } else {
+                percent = (currentX - sliderRectData.left) / sliderRectData.width
+            }
             return min + percent * size
         },
         // 将值转换为位置信息
         translateValueToPosition (value) {
-            let { min, size, precision } = this
+            let { min, size, precision, vertical } = this
             const percent = ((value - min) / size * 100).toFixed(precision) + '%'
-            return {
-                left: percent
+            if (vertical) {
+                return {
+                    top: percent
+                }
+            } else {
+                return {
+                    left: percent
+                }
             }
         },
         // 查找对应值最近的markValue

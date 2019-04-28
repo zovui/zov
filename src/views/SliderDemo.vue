@@ -73,6 +73,30 @@
             <p class="props">当前值: {{ marksAndOnlyMarksValue2 }}</p>
             <Slider v-model="marksAndOnlyMarksValue2" range :marks="marks" only-marks />
         </section>
+        <section class="section">
+            <h2>vertical垂直模式</h2>
+            <p class="props">当前值: {{ vertical.value1 }}</p>
+            <div class="vertical-demo">
+                <Slider v-model="vertical.value1" vertical/>
+            </div>
+            <p class="props">当前值{{ vertical.value2 }}</p>
+            <div class="vertical-demo">
+                <Slider
+                    v-model="vertical.value2"
+                    tooltipVisible="always"
+                    range
+                    vertical
+                />
+            </div>
+            <p class="props">当前值: {{ vertical.value3 }}</p>
+            <div class="vertical-demo">
+                <Slider v-model="vertical.value3"  vertical :marks="marks" only-marks />
+            </div>
+            <p class="props">当前值: {{ vertical.value4 }}</p>
+            <div class="vertical-demo">
+                <Slider v-model="vertical.value4" vertical range :marks="marks" only-marks />
+            </div>
+        </section>
     </article>
 </template>
 
@@ -92,6 +116,10 @@
 
     .props {
         margin: 20px 0;
+    }
+
+    .vertical-demo {
+        height: 300px;
     }
 </style>
 
@@ -137,7 +165,13 @@ export default {
             marksAndOnlyMarksValue1: 0,
             marksAndOnlyMarksValue2: [0, 20],
             marksAndStep: 0,
-            marksAndStep1: -30
+            marksAndStep1: -30,
+            vertical: {
+                value1: 0,
+                value2: [18, 54],
+                value3: 15,
+                value4: [10, 80]
+            }
         }
     }
 }
