@@ -9,8 +9,8 @@
                 :value="mark.value"
                 :label="mark.label"
                 :style="mark.style"
-                :position="mark.position"
-                :is-active="mark.isActive"
+                :position="translateValueToPosition(mark.value)"
+                :is-active="isActiveMark(mark.value)"
             />
         </div>
         <SliderHandle
@@ -34,15 +34,6 @@ import SliderHandle from './slider-handle'
 import Draggable from '../../utils/draggable'
 import { isNumber, isString, isDef, isObject } from '../../utils'
 import SliderDot from './slider-dot'
-
-/**
- * 获取小数部分长度
- * @param value
- */
-function getDecimalLength (value) {
-    value = value.toString().split('.')
-    return value[1] ? value[1].length : 0
-}
 
 export default {
     name: 'zov-slider',
@@ -145,33 +136,38 @@ export default {
     },
     data () {
         return {
+            // 区间左侧值
             beginValue: this.min,
+            // 区间右侧值
             endValue: this.min,
+            // 拖拽管理器
             draggable: null,
+            // slider盒子模型数据
             sliderRectData: null,
+            // 默认值, reset用
             defaultValue: this.value
         }
     },
     computed: {
         // 值的精度
         precision () {
-            return getDecimalLength(this.step)
+            let value = this.step
+            value = value.toString().split('.')
+            return value[1] ? value[1].length : 0
         },
+        // 区间大小
         size () {
             return this.max - this.min
         },
         // 左边控制按钮样式
         beginHandleStyles () {
-            return {
-                left: this.translateValueToPosition(this.beginValue)
-            }
+            return this.translateValueToPosition(this.beginValue)
         },
         // 右边控制按钮样式
         endHandleStyles () {
-            return {
-                left: this.translateValueToPosition(this.endValue)
-            }
+            return this.translateValueToPosition(this.endValue)
         },
+        // 区间追踪器的样式
         sliderTrackerStyles () {
             let { beginHandleStyles, beginValue, endValue, size } = this
             return {
@@ -179,12 +175,11 @@ export default {
                 width: ((endValue - beginValue) / size * 100).toFixed(this.precision) + '%'
             }
         },
-        // TODO 性能优化
         formattedMarks () {
-            let { min, max, range, beginValue, endValue } = this
-            let marks = []
-            if (isDef(this.marks)) {
-                Object.keys(this.marks).forEach(value => {
+            let { min, max, marks } = this
+            let formattedMarks = []
+            if (isDef(marks)) {
+                Object.keys(marks).forEach(value => {
                     value = Number(value)
                     if (
                         isNaN(value) ||
@@ -193,31 +188,18 @@ export default {
                     ) {
                         return
                     }
-                    let originalConfig = this.marks[value]
-                    let config = {
+                    let config = this.marks[value]
+                    formattedMarks.push({
                         value,
-                        style: null,
-                        position: {
-                            left: 0
-                        },
-                        label: value,
-                        isActive: false
-                    }
-                    config.style = originalConfig.style
-                    config.position.left = this.translateValueToPosition(value)
-                    config.label = isString(originalConfig) ? originalConfig : (originalConfig.label || value)
-                    if (range) {
-                        config.isActive = beginValue <= value && value <= endValue
-                    } else {
-                        config.isActive = value <= endValue
-                    }
-                    marks.push(config)
+                        style: config.style,
+                        label: isString(config) ? config : (config.label || value)
+                    })
                 })
             }
-            marks.sort((mark1, mark2) => {
+            formattedMarks.sort((mark1, mark2) => {
                 return mark1.value < mark2.value ? -1 : 1
             })
-            return marks
+            return formattedMarks
         }
     },
     watch: {
@@ -227,7 +209,12 @@ export default {
             },
             immediate: true
         },
+        // 当step突变时，刷新组件状态
         step () {
+            this.refresh()
+        },
+        // 当marks变化时，刷新组件状态
+        marks () {
             this.refresh()
         }
     },
@@ -264,6 +251,7 @@ export default {
             }
             return nextValue
         },
+        // 更新slider盒子模型数据
         updateSliderRectData () {
             this.sliderRectData = this.$el.getBoundingClientRect()
         },
@@ -276,25 +264,30 @@ export default {
         // 将值转换为位置信息
         translateValueToPosition (value) {
             let { min, size, precision } = this
-            return ((value - min) / size * 100).toFixed(precision) + '%'
+            const percent = ((value - min) / size * 100).toFixed(precision) + '%'
+            return {
+                left: percent
+            }
         },
         // 将值转换成mark上的值
         // TODO 性能优化，因为dragging时可能一直在某个区间内，所以不需要每次都查找，只需要到边界值时再查找
         translateValueToMarkValue (value) {
+            const marks = this.formattedMarks
             // 如果marks为空，则不作处理
-            if (this.formattedMarks.length === 0) {
+            if (marks.length === 0) {
                 return value
             }
-            const markValues = this.formattedMarks.map(mark => mark.value)
+            // 区间左侧索引值
             let beginIndex = 0
-            let endIndex = markValues.length - 1
+            // 区间右侧索引值
+            let endIndex = marks.length - 1
             // 如果查找的值小于区间最小值，则返回区间最小值
-            if (value <= markValues[beginIndex]) {
-                return markValues[beginIndex]
+            if (value <= marks[beginIndex].value) {
+                return marks[beginIndex].value
             }
             // 如果查找的值大于区间最大值，则返回区间最大值
-            if (value >= markValues[endIndex]) {
-                return markValues[endIndex]
+            if (value >= marks[endIndex].value) {
+                return marks[endIndex].value
             }
             // 区间中间的索引值
             let midIndex
@@ -304,7 +297,7 @@ export default {
             // 查找区间，当查找到区间大小为1时，循环停止，找到value对应的mark区间
             while ((endIndex - beginIndex) > 1) {
                 midIndex = Math.floor((beginIndex + endIndex) / 2)
-                midValue = markValues[midIndex]
+                midValue = marks[midIndex].value
                 // 如果value为mark上的值，则返回
                 if (value === midValue) {
                     return value
@@ -317,11 +310,11 @@ export default {
                     endIndex = midIndex
                 }
             }
-            midValue = (markValues[beginIndex] + markValues[endIndex]) / 2
+            midValue = (marks[beginIndex].value + marks[endIndex].value) / 2
             if (value >= midValue) {
-                return markValues[endIndex]
+                return marks[endIndex].value
             } else {
-                return markValues[beginIndex]
+                return marks[beginIndex].value
             }
         },
         focus () {
@@ -433,6 +426,14 @@ export default {
         },
         reset () {
             this.setValue(this.defaultValue)
+        },
+        isActiveMark (value) {
+            const { range, beginValue, endValue } = this
+            if (range) {
+                return beginValue <= value && value <= endValue
+            } else {
+                return value <= endValue
+            }
         }
     }
 }
