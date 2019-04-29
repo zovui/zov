@@ -264,7 +264,7 @@ export default {
             let { beginHandleStyles, beginValue, endValue, size, vertical } = this
             if (vertical) {
                 return {
-                    top: beginHandleStyles.top,
+                    bottom: beginHandleStyles.bottom,
                     height: ((endValue - beginValue) / size * 100).toFixed(this.precision) + '%'
                 }
             }
@@ -430,7 +430,7 @@ export default {
             let { min, size, sliderRectData, vertical } = this
             let percent = 0
             if (vertical) {
-                percent = (currentY - sliderRectData.top) / sliderRectData.height
+                percent = (sliderRectData.bottom - currentY) / sliderRectData.height
             } else {
                 percent = (currentX - sliderRectData.left) / sliderRectData.width
             }
@@ -442,7 +442,7 @@ export default {
             const percent = ((value - min) / size * 100).toFixed(precision) + '%'
             if (vertical) {
                 return {
-                    top: percent
+                    bottom: percent
                 }
             } else {
                 return {
