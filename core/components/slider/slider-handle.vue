@@ -16,6 +16,7 @@
             @blur="onBlur"
             @mouseenter="onMouseEnter"
             @mouseleave="onMouseleave"
+            @keydown="onKeyDown"
         ></div>
     </Tooltip>
 </template>
@@ -23,12 +24,20 @@
 <script>
 import Tooltip from '../tooltip'
 
+const KeyboardCodeMap = {
+    40: 'ArrowDown',
+    38: 'ArrowUp',
+    37: 'ArrowLeft',
+    39: 'ArrowRight'
+}
+
 export default {
     name: 'zov-slider-handle',
     components: {
         Tooltip
     },
     props: {
+        id: String,
         tooltipText: String,
         tooltipVisible: String
     },
@@ -56,10 +65,10 @@ export default {
     },
     methods: {
         focus () {
-            this.$el.focus()
+            this.$refs.handle.focus()
         },
         blur () {
-            this.$el.blur()
+            this.$refs.handle.blur()
         },
         onFocus () {
             this.$emit('focus')
@@ -92,6 +101,7 @@ export default {
         },
         dragstart () {
             this.isDragging = true
+            this.focus()
             if (this.tooltipVisible === 'default') {
                 this.showTooltip = true
             }
@@ -104,6 +114,23 @@ export default {
                     return
                 }
                 this.showTooltip = false
+            }
+        },
+        onKeyDown (e) {
+            const action = KeyboardCodeMap[e.keyCode]
+            if (!action) {
+                return
+            }
+            e.preventDefault()
+            switch (action) {
+            case 'ArrowDown':
+            case 'ArrowLeft':
+                this.$emit('reduce', this.id)
+                break
+            case 'ArrowUp':
+            case 'ArrowRight':
+                this.$emit('increase', this.id)
+                break
             }
         }
     }

@@ -15,16 +15,22 @@
         </div>
         <SliderHandle
             v-if="range"
+            id="begin"
             ref="beginHandle"
             :style="beginHandleStyles"
             :tooltip-text="tipFormatter(beginValue)"
             :tooltip-visible="tooltipVisible"
+            @increase="increase"
+            @reduce="reduce"
         />
         <SliderHandle
             ref="endHandle"
+            id="end"
             :style="endHandleStyles"
             :tooltip-text="tipFormatter(endValue)"
             :tooltip-visible="tooltipVisible"
+            @increase="increase"
+            @reduce="reduce"
         />
     </div>
 </template>
@@ -40,17 +46,80 @@ const COMPONENT_NAME = 'zov-slider'
 /**
  * 获取离value最近的值
  * @param value
- * @param compareValue1
- * @param compareValue2
+ * @param compareValues
  * @return {*}
  */
-function getClosetValue (value, compareValue1, compareValue2) {
-    // value1的距离
-    const distanceValue1 = Math.abs(value - compareValue1)
-    // value2的距离
-    const distanceValue2 = Math.abs(value - compareValue2)
-    // 如果value1的距离小于value2的距离，则返回value1，否则返回value2
-    return distanceValue1 < distanceValue2 ? compareValue1 : compareValue2
+function getClosestValue (value, ...compareValues) {
+    let prevDistance = Number.POSITIVE_INFINITY
+    let distance = 0
+    let resultValue = value
+    for (let compareValue of compareValues) {
+        if (!isNumber(compareValue)) {
+            continue
+        }
+        distance = Math.abs(value - compareValue)
+        if (prevDistance > distance) {
+            prevDistance = distance
+            resultValue = compareValue
+        }
+    }
+    return resultValue
+}
+
+/**
+ * 查找值对应的mark分组
+ * @param marks 有序的marks列表
+ * @param value 对应的值
+ * @param isForward
+ * 是否是向后查找, 当value为marks值时，会存在mark同时存在两个group的情况;
+ * isForward = true时，取较大的group
+ * isForward = false时，取较小的group
+ */
+function findMarkGroup (marks, value, isForward = true) {
+    // 区间左侧索引值
+    let beginIndex = 0
+    // 区间右侧索引值
+    let endIndex = marks.length - 1
+    if (
+        marks.length === 0 || // 如果marks为空，则不存在组
+        value < marks[beginIndex].value || // 如果查找的值小于区间最小值，则不存在组
+        value > marks[endIndex].value // 如果查找的值大于区间最大值，则不存在组
+    ) {
+        return null
+    }
+    // 区间中间的索引值
+    let midIndex
+    // 区间中间的mark值
+    let midValue
+    // 运用二分查找，查找指定mark区间
+    // 查找区间，当查找到区间大小为1时，循环停止，找到value对应的mark区间
+    while ((endIndex - beginIndex) > 1) {
+        midIndex = Math.floor((beginIndex + endIndex) / 2)
+        midValue = marks[midIndex].value
+        // 如果value为mark上的值，此时存在两个分组
+        // 例如marks为[0, 26, 37], value = 26, 存在[0, 26]和[26, 37]
+        if (value === midValue) {
+            // 取向后的组
+            if (isForward) {
+                // group = [26, 37]
+                beginIndex = midIndex
+                endIndex = midIndex + 1
+                break
+            } else {
+                // group = [0, 26]
+                beginIndex = midIndex - 1
+                endIndex = midIndex
+                break
+            }
+        }
+        // 否则继续查找
+        if (value > midValue) {
+            beginIndex = midIndex
+        } else {
+            endIndex = midIndex
+        }
+    }
+    return [marks[beginIndex], marks[endIndex]]
 }
 
 export default {
@@ -273,7 +342,7 @@ export default {
                 if (onlyMarks) {
                     nextValue = closestMarkValue
                 } else {
-                    nextValue = getClosetValue(value, nextValue, closestMarkValue)
+                    nextValue = getClosestValue(value, nextValue, closestMarkValue)
                 }
             }
             nextValue = Number(nextValue.toFixed(precision))
@@ -281,6 +350,52 @@ export default {
                 nextValue = min
             } else if (value > max) {
                 nextValue = max
+            }
+            return nextValue
+        },
+        // 计算下一个值
+        calculateNextValue (value, isForward = true) {
+            let { step, onlyMarks, formattedMarks } = this
+            // 计算倍数
+            let times = value / step
+            let nextValue = value
+            // 倍数取整，如果向后取数，则向上取整，否则向下取整
+            times = isForward ? Math.floor(times) : Math.ceil(times)
+            nextValue = (times * step) + (isForward ? step : (-1 * step))
+            // 如果使用了marks
+            if (formattedMarks.length) {
+                // 最小的mark值
+                let minMarkValue = formattedMarks[0].value
+                // 最大的mark值
+                let maxMarkValue = formattedMarks[formattedMarks.length - 1].value
+                // 计算后的mark值
+                let computedMarkValue = Number.NaN
+                if (onlyMarks) {
+                    let markGroup = findMarkGroup(formattedMarks, value, isForward)
+                    // 如果找到了mark组
+                    if (markGroup) {
+                        // 按照方向去决定可能的mark值，向后取后，向前去前
+                        computedMarkValue = isForward ? markGroup[1].value : markGroup[0].value
+                    }
+                    nextValue = isNaN(computedMarkValue) ? nextValue : computedMarkValue
+                } else {
+                    if (value > minMarkValue && value < maxMarkValue) {
+                        // 查找当前值所定义的mark组
+                        let markGroup = findMarkGroup(formattedMarks, value, isForward)
+                        // 如果找到了mark组
+                        if (markGroup) {
+                            // 按照方向去决定可能的mark值，向后取后，向前去前
+                            computedMarkValue = isForward ? markGroup[1].value : markGroup[0].value
+                        }
+                    }
+                    if (isForward && value < minMarkValue) {
+                        computedMarkValue = minMarkValue
+                    }
+                    if (!isForward && value > maxMarkValue) {
+                        computedMarkValue = maxMarkValue
+                    }
+                    nextValue = getClosestValue(value, nextValue, computedMarkValue)
+                }
             }
             return nextValue
         },
@@ -354,7 +469,7 @@ export default {
                     endIndex = midIndex
                 }
             }
-            return getClosetValue(value, marks[beginIndex].value, marks[endIndex].value)
+            return getClosestValue(value, marks[beginIndex].value, marks[endIndex].value)
         },
         focus () {
             this.$refs.endHandle.focus()
@@ -375,8 +490,10 @@ export default {
             let beginValue = min
             let endValue = min
             if (this.range) {
-                beginValue = this.normalizeValue(value[0])
-                endValue = this.normalizeValue(value[1])
+                let normalizeBeginValue = this.normalizeValue(value[0])
+                let normalizeEndValue = this.normalizeValue(value[1])
+                beginValue = Math.min(normalizeBeginValue, normalizeEndValue)
+                endValue = Math.max(normalizeBeginValue, normalizeEndValue)
             } else {
                 endValue = this.normalizeValue(value)
             }
@@ -423,10 +540,8 @@ export default {
                     if (value >= endValue) {
                         this.$refs.beginHandle.dragend()
                         this.$refs.endHandle.dragstart()
-                        this.setValue([endValue, value])
-                    } else {
-                        this.setValue([value, endValue])
                     }
+                    this.setValue([value, endValue])
                     return
                 }
                 // 如果正在拖拽右边的handle时
@@ -437,10 +552,8 @@ export default {
                     if (value <= beginValue) {
                         this.$refs.endHandle.dragend()
                         this.$refs.beginHandle.dragstart()
-                        this.setValue([value, beginValue])
-                    } else {
-                        this.setValue([beginValue, value])
                     }
+                    this.setValue([beginValue, value])
                     return
                 }
                 return
@@ -473,6 +586,50 @@ export default {
             } else {
                 return value <= endValue
             }
+        },
+        increase (handleId) {
+            const { beginValue, endValue, range } = this
+            let nextValue
+            if (range) {
+                if (handleId === 'begin') {
+                    nextValue = this.calculateNextValue(beginValue)
+                    nextValue = [
+                        nextValue,
+                        endValue
+                    ]
+                } else {
+                    nextValue = this.calculateNextValue(endValue)
+                    nextValue = [
+                        beginValue,
+                        nextValue
+                    ]
+                }
+            } else {
+                nextValue = this.calculateNextValue(endValue)
+            }
+            this.setValue(nextValue)
+        },
+        reduce (handleId) {
+            const { beginValue, endValue, range } = this
+            let nextValue
+            if (range) {
+                if (handleId === 'begin') {
+                    nextValue = this.calculateNextValue(beginValue, false)
+                    nextValue = [
+                        nextValue,
+                        endValue
+                    ]
+                } else {
+                    nextValue = this.calculateNextValue(endValue, false)
+                    nextValue = [
+                        beginValue,
+                        nextValue
+                    ]
+                }
+            } else {
+                nextValue = this.calculateNextValue(endValue, false)
+            }
+            this.setValue(nextValue)
         }
     }
 }
