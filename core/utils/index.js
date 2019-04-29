@@ -271,3 +271,68 @@ export function animitionEnd (element, callback) {
     }
 }
 export const sharpMatcherRegx = /#([^#]+)$/
+
+/**
+ * 判断是否是一个数字
+ * @param value
+ * @return {boolean}
+ */
+export function isNumber (value) {
+    return typeof value === 'number' && !isNaN(value)
+}
+
+/**
+ * 判断是否是字符串
+ * @param value
+ * @return {boolean}
+ */
+export function isString (value) {
+    return typeof value === 'string'
+}
+
+/**
+ * 判断是否是一个对象
+ * @param value
+ * @return {boolean}
+ */
+export function isObject (value) {
+    return typeof value === 'object'
+}
+
+/**
+ * 判断是否为null
+ * @param value
+ * @return {boolean}
+ */
+export function isNull (value) {
+    return value === null
+}
+
+export function isUndefined (value) {
+    return typeof value === typeof void 0
+}
+
+/**
+ * 判断是否是空
+ * @param value
+ * @return {boolean}
+ */
+export function isDef (value) {
+    return !isUndefined(value) && !isNull(value) && (typeof value === 'number' ? !isNaN(value) : true)
+}
+
+/**
+ * 判断一个集合是否包含某值
+ * @param {Array|String} collection
+ * @param value
+ * @return {boolean}
+ */
+export function includes (collection, value) {
+    if (Array.isArray(collection)) {
+        return collection.indexOf(value) !== -1
+    }
+    if (isString(collection)) {
+        return new RegExp(value).test(collection)
+    }
+    return false
+}

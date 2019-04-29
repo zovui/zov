@@ -1,0 +1,38 @@
+.#{$prefix-slider}.#{$prefix-slider}--vertical {
+    margin: 7px 15px;
+    padding: 0 4px;
+    width: 12px;
+    height: 100%;
+
+    .#{$prefix-slider}-tracker {
+        left: 4px;
+        width: 4px;
+        height: 100%;
+    }
+
+    .#{$prefix-slider}-marks {
+        top: 0;
+        left: 4px;
+        width: 4px;
+        height: 100%;
+    }
+
+    .#{$prefix-slider}-handle-wrapper {
+        left: 50%;
+        margin-top: (-1 * 14px / 2);
+        margin-left: (-1 * 14px / 2);
+    }
+
+    .#{$prefix-slider}-dot {
+        left: 50%;
+        margin-left: -1 * (10px / 2);
+        margin-top: -1 * (10px / 2);
+    }
+
+    .#{$prefix-slider}-dot-label {
+        top: 50%;
+        left: 100%;
+        margin-left: 8px;
+        transform: translateY(-50%);
+    }
+}
