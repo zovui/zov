@@ -20,6 +20,7 @@
             :style="beginHandleStyles"
             :tooltip-text="tipFormatter(beginValue)"
             :tooltip-visible="tooltipVisible"
+            :vertical="vertical"
             @increase="increase"
             @reduce="reduce"
         />
@@ -29,6 +30,7 @@
             :style="endHandleStyles"
             :tooltip-text="tipFormatter(endValue)"
             :tooltip-visible="tooltipVisible"
+            :vertical="vertical"
             @increase="increase"
             @reduce="reduce"
         />

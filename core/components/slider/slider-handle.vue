@@ -39,7 +39,8 @@ export default {
     props: {
         id: String,
         tooltipText: String,
-        tooltipVisible: String
+        tooltipVisible: String,
+        vertical: Boolean
     },
     data () {
         return {
@@ -122,13 +123,13 @@ export default {
                 return
             }
             e.preventDefault()
+            const reduceKey = this.vertical ? 'ArrowDown' : 'ArrowLeft'
+            const increaseKey = this.vertical ? 'ArrowUp' : 'ArrowRight'
             switch (action) {
-            case 'ArrowDown':
-            case 'ArrowLeft':
+            case reduceKey:
                 this.$emit('reduce', this.id)
                 break
-            case 'ArrowUp':
-            case 'ArrowRight':
+            case increaseKey:
                 this.$emit('increase', this.id)
                 break
             }
