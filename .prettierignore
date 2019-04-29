@@ -2,3 +2,5 @@
 /node_modules/
 /lib/
 /docs/
+/package.json
+/package-lock.json

@@ -9,7 +9,7 @@
 		"release": "standard-version",
 		"lint": "vue-cli-service lint",
 		"test:unit": "vue-cli-service test:unit",
-		"prettier": "prettier"
+		"prettier": "prettier --write \"**/*.{js,vue,json}\""
 	},
 	"dependencies": {
 		"dayjs": "^1.8.6",
@@ -61,7 +61,7 @@
 		}
 	},
 	"lint-staged": {
-		"**/*.{js,vue,json,css,md}": [
+		"**/*.{js,vue,json}": [
 			"prettier --write",
 			"git add"
 		]
