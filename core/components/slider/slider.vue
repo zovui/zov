@@ -399,6 +399,28 @@ export default {
             }
             return nextValue
         },
+        // 查找对应值最近的markValue
+        // TODO 性能优化，因为dragging时可能一直在某个区间内，所以不需要每次都查找，只需要到边界值时再查找
+        findClosestMarkValue (value) {
+            const marks = this.formattedMarks
+            // 如果marks为空，则不作处理
+            if (marks.length === 0) {
+                return value
+            }
+            // 最小mark值
+            let minMarkValue = marks[0].value
+            // 最大的mark值
+            let maxMarkValue = marks[marks.length - 1].value
+            if (value <= minMarkValue) {
+                return minMarkValue
+            }
+            // 如果查找的值大于区间最大值，则返回区间最大值
+            if (value >= maxMarkValue) {
+                return maxMarkValue
+            }
+            const markGroup = findMarkGroup(marks, value)
+            return getClosestValue(value, markGroup[0].value, markGroup[1].value)
+        },
         // 更新slider盒子模型数据
         updateSliderRectData () {
             this.sliderRectData = this.$el.getBoundingClientRect()
@@ -427,49 +449,6 @@ export default {
                     left: percent
                 }
             }
-        },
-        // 查找对应值最近的markValue
-        // TODO 性能优化，因为dragging时可能一直在某个区间内，所以不需要每次都查找，只需要到边界值时再查找
-        findClosestMarkValue (value) {
-            const marks = this.formattedMarks
-            // 如果marks为空，则不作处理
-            if (marks.length === 0) {
-                return value
-            }
-            // 区间左侧索引值
-            let beginIndex = 0
-            // 区间右侧索引值
-            let endIndex = marks.length - 1
-            // 如果查找的值小于区间最小值，则返回区间最小值
-            if (value <= marks[beginIndex].value) {
-                return marks[beginIndex].value
-            }
-            // 如果查找的值大于区间最大值，则返回区间最大值
-            if (value >= marks[endIndex].value) {
-                return marks[endIndex].value
-            }
-            // 区间中间的索引值
-            let midIndex
-            // 区间中间的mark值
-            let midValue
-            // 运用二分查找，查找指定mark区间
-            // 查找区间，当查找到区间大小为1时，循环停止，找到value对应的mark区间
-            while ((endIndex - beginIndex) > 1) {
-                midIndex = Math.floor((beginIndex + endIndex) / 2)
-                midValue = marks[midIndex].value
-                // 如果value为mark上的值，则返回
-                if (value === midValue) {
-                    return value
-                }
-                // 继续查找
-                // 如果value大于中间值，则向右找，否则向左
-                if (value > midValue) {
-                    beginIndex = midIndex
-                } else {
-                    endIndex = midIndex
-                }
-            }
-            return getClosestValue(value, marks[beginIndex].value, marks[endIndex].value)
         },
         focus () {
             this.$refs.endHandle.focus()
