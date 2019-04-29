@@ -32,7 +32,6 @@ $prefix-slider: $prefix + 'slider';
 
 .#{$prefix-slider}-tracker {
     position: absolute;
-    cursor: pointer;
     z-index: 0;
     transition: background-color $transition-time;
     @include get-color-primary-hover(background-color);
@@ -56,7 +55,6 @@ $prefix-slider: $prefix + 'slider';
     border: 2px solid transparent;
     width: 14px;
     height: 14px;
-    cursor: pointer;
     transition: border-color $transition-time,
                 box-shadow $transition-time;
     @include get-color-bg('background');
@@ -81,4 +79,31 @@ $prefix-slider: $prefix + 'slider';
 
 .#{$prefix-slider}-dot-label {
     position: absolute;
+}
+
+.#{$prefix-slider}--disabled {
+    cursor: not-allowed;
+    .#{$prefix-slider}-tracker {
+        @include get-color-border(background-color);
+    }
+    .#{$prefix-slider}-handle {
+        outline: none;
+        &:active,&:focus{
+            box-shadow: none;
+        }
+        @include get-color-border(border-color);
+    }
+    .#{$prefix-slider}-dot {
+        &--active {
+            @include get-color-disabled(border-color);
+        }
+    }
+    &:hover {
+        .#{$prefix-slider}-tracker {
+            @include get-color-disabled(background-color);
+        }
+        .#{$prefix-slider}-handle {
+            @include get-color-disabled(border-color);
+        }
+    }
 }

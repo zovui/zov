@@ -21,6 +21,7 @@
             :tooltip-text="tipFormatter(beginValue)"
             :tooltip-visible="tooltipVisible"
             :vertical="vertical"
+            :disabled="disabled"
             @increase="increase"
             @reduce="reduce"
         />
@@ -31,6 +32,7 @@
             :tooltip-text="tipFormatter(endValue)"
             :tooltip-visible="tooltipVisible"
             :vertical="vertical"
+            :disabled="disabled"
             @increase="increase"
             @reduce="reduce"
         />
@@ -217,6 +219,10 @@ export default {
         vertical: {
             type: Boolean,
             default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     mounted () {
@@ -308,6 +314,9 @@ export default {
             } else {
                 classList.push(`${COMPONENT_NAME}--horizontal`)
             }
+            if (this.disabled) {
+                classList.push(`${COMPONENT_NAME}--disabled`)
+            }
             return classList
         }
     },
@@ -325,6 +334,16 @@ export default {
         // 当marks变化时，刷新组件状态
         marks () {
             this.refresh()
+        },
+        disabled (disabled) {
+            if (disabled) {
+                if (this.range) {
+                    this.$refs.beginHandle.blur()
+                    this.$refs.endHandle.blur()
+                } else {
+                    this.$refs.endHanle.blur()
+                }
+            }
         }
     },
     methods: {
@@ -453,9 +472,15 @@ export default {
             }
         },
         focus () {
+            if (this.disabled) {
+                return
+            }
             this.$refs.endHandle.focus()
         },
         blur () {
+            if (this.disabled) {
+                return
+            }
             this.$refs.endHandle.blur()
         },
         /**
@@ -491,6 +516,9 @@ export default {
             this.$emit('on-change', value)
         },
         onDragstart (position) {
+            if (this.disabled) {
+                return
+            }
             this.updateSliderRectData()
             let value = this.translatePositionToValue(position)
             let { beginValue, endValue } = this
@@ -510,6 +538,9 @@ export default {
             this.setValue(value)
         },
         onDragging (position) {
+            if (this.disabled) {
+                return
+            }
             let { beginValue, endValue } = this
             let value = this.translatePositionToValue(position)
             if (this.range) {
@@ -542,6 +573,9 @@ export default {
             this.setValue(value)
         },
         onDragend () {
+            if (this.disabled) {
+                return
+            }
             if (this.range) {
                 this.$refs.beginHandle.dragend()
                 this.$refs.endHandle.dragend()
@@ -569,6 +603,9 @@ export default {
             }
         },
         increase (handleId) {
+            if (this.disabled) {
+                return
+            }
             const { beginValue, endValue, range } = this
             let nextValue
             if (range) {
@@ -591,6 +628,9 @@ export default {
             this.setValue(nextValue)
         },
         reduce (handleId) {
+            if (this.disabled) {
+                return
+            }
             const { beginValue, endValue, range } = this
             let nextValue
             if (range) {

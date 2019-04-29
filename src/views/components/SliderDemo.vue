@@ -97,6 +97,20 @@
                 <Slider v-model="vertical.value4" vertical range :marks="marks" only-marks />
             </div>
         </section>
+        <section class="section">
+            <h2>disabled状态</h2>
+            <p class="props">当前值: {{ disabledValue }}</p>
+            <Slider v-model="disabledValue" disabled />
+            <p class="props">step = 10; 当前值: {{ marksAndStep1 }}</p>
+            <Slider v-model="marksAndStep1" :min="-100" :max="200" :marks="marks2" :step="10" disabled />
+            <p class="props">当前值{{ rangeValue }}</p>
+            <Slider
+                v-model="rangeValue"
+                tooltipVisible="always"
+                range
+                disabled
+            />
+        </section>
     </article>
 </template>
 
@@ -171,7 +185,8 @@ export default {
                 value2: [18, 54],
                 value3: 15,
                 value4: [10, 80]
-            }
+            },
+            disabledValue: 20
         }
     }
 }

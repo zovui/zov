@@ -40,7 +40,8 @@ export default {
         id: String,
         tooltipText: String,
         tooltipVisible: String,
-        vertical: Boolean
+        vertical: Boolean,
+        disabled: Boolean
     },
     data () {
         return {
@@ -66,15 +67,27 @@ export default {
     },
     methods: {
         focus () {
+            if (this.disabled) {
+                return
+            }
             this.$refs.handle.focus()
         },
         blur () {
+            if (this.disabled) {
+                return
+            }
             this.$refs.handle.blur()
         },
         onFocus () {
+            if (this.disabled) {
+                return
+            }
             this.$emit('focus')
         },
         onBlur () {
+            if (this.disabled) {
+                return
+            }
             this.$emit('blur')
         },
         onMouseEnter () {
@@ -118,6 +131,9 @@ export default {
             }
         },
         onKeyDown (e) {
+            if (this.disabled) {
+                return
+            }
             const action = KeyboardCodeMap[e.keyCode]
             if (!action) {
                 return
