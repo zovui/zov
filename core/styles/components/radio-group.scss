@@ -11,33 +11,18 @@ $prefix-radio-group : #{$prefix}radio-group;
         border-radius: 0;
         margin-left: -1px;
         &:first-of-type{
-            border-top-left-radius: 4px;
-            border-bottom-left-radius: 4px;
+            border-top-left-radius: $border-radius-button;
+            border-bottom-left-radius: $border-radius-button;
         }
         &:last-of-type{
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
+            border-top-right-radius: $border-radius-button;
+            border-bottom-right-radius: $border-radius-button;
         }
     }
     .#{$prefix}radio-checked{
         z-index: 2;
     }
 }
-// 不可用状态
-.#{$prefix-radio-group}-disabled{
-    .#{$prefix}radio-button{
-        cursor: $cursor-disabled;
-        @include get-color-disabled();
-        @include get-color-sub();
-        @include get-color-disabled(border-color);
-        &.#{$prefix-radio}-checked{
-            background-color: var(--color-sub);
-            @include get-color-disabled(border-color);
-            color: #FFF;
-        }
-    }
-}
-
 
 // 纵向排列
 .#{$prefix-radio-group}-vertical {
@@ -53,12 +38,12 @@ $prefix-radio-group : #{$prefix}radio-group;
             margin-top: -1px;
             border-radius: 0;
             &:first-of-type{
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
+                border-top-left-radius: $border-radius-button;
+                border-top-right-radius: $border-radius-button;
             }
             &:last-of-type{
-                border-bottom-left-radius: 4px;
-                border-bottom-right-radius: 4px;
+                border-bottom-left-radius: $border-radius-button;
+                border-bottom-right-radius: $border-radius-button;
             }
         }
     }

@@ -49,7 +49,7 @@
             <h2>连接在一起的组合按钮样式</h2>
             <p class="props">当前值: {{ radio4 }}</p>
             <div>
-                <RadioGroup connected v-model="radio4">
+                <RadioGroup class="mg-10" connected v-model="radio4">
                     <Radio label="A"></Radio>
                     <Radio label="B"></Radio>
                     <Radio label="C"></Radio>
@@ -66,13 +66,13 @@
         <section class="section">
             <h2>不可用状态</h2>
             <div>
-                <RadioGroup disabled v-model="radio5">
+                <RadioGroup class="mg-10" disabled v-model="radio5">
                     <Radio label="A"></Radio>
                     <Radio label="B"></Radio>
                     <Radio label="C"></Radio>
                     <Radio label="D"></Radio>
                 </RadioGroup>
-                <RadioGroup connected disabled v-model="radio6">
+                <RadioGroup class="mg-10" connected disabled v-model="radio6">
                     <Radio label="A"></Radio>
                     <Radio label="B"></Radio>
                     <Radio label="C"></Radio>
@@ -89,19 +89,19 @@
         <section class="section">
             <h2>不同尺寸（size只在为按钮样式时有效）</h2>
             <div>
-                <RadioGroup connected size="large" v-model="radio4">
+                <RadioGroup class="mg-10" connected size="large" v-model="radio4">
                     <Radio label="A"></Radio>
                     <Radio label="B"></Radio>
                     <Radio label="C"></Radio>
                     <Radio label="D"></Radio>
                 </RadioGroup>
-                <RadioGroup border size="large" v-model="radio4">
+                <RadioGroup class="mg-10" border size="large" v-model="radio4">
                     <Radio label="A"></Radio>
                     <Radio label="B"></Radio>
                     <Radio label="C"></Radio>
                     <Radio label="D"></Radio>
                 </RadioGroup>
-                <RadioGroup connected size="small" buttonStyle="solid" v-model="radio4">
+                <RadioGroup class="mg-10" connected size="small" buttonStyle="solid" v-model="radio4">
                     <Radio label="A"></Radio>
                     <Radio label="B"></Radio>
                     <Radio label="C"></Radio>
@@ -180,5 +180,8 @@ export default {
     }
     .props {
         margin: 20px 0;
+    }
+    .mg-10 {
+        margin-bottom: 10px;
     }
 </style>
