@@ -23,6 +23,7 @@ import ColorPicker from './components/color-picker'
 import { Menu, MenuSub, MenuGroup, MenuOption } from './components/menu'
 import { Layout, Header, Footer, Content, Sider } from './components/layout'
 import { Row, Col } from './components/grid'
+import Slider from './components/slider'
 import Badge from './components/badge'
 import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
@@ -34,108 +35,113 @@ import Message from './components/message'
 // 全局指令
 import './directives'
 const components = {
-    // 【_c】
-    Dark,
-    LoadingBar,
-    Notice,
-    Message,
-    // 【_f】
-    Affix,
-    Anchor,
-    AnchorLink,
-    LongList,
-    Icon,
-    Button,
-    ButtonGroup,
-    Tag,
-    Spin,
-    Switcher,
-    Input,
-    Popper,
-    ToolTip,
-    Drop,
-    Select,
-    BigDataList,
-    Cascader,
-    DatePicker,
-    TimePicker,
-    ColorPicker,
-    Menu,
-    MenuSub,
-    MenuGroup,
-    MenuOption,
-    Layout,
-    Header,
-    Footer,
-    Content,
-    Sider,
-    Row,
-    Col,
-    Badge,
-    Radio,
-    RadioGroup,
+	// 【_c】
+	Dark,
+	LoadingBar,
+	Notice,
+	Message,
+	// 【_f】
+	Affix,
+	Anchor,
+	AnchorLink,
+	LongList,
+	Icon,
+	Button,
+	ButtonGroup,
+	Tag,
+	Spin,
+	Switcher,
+	Input,
+	Popper,
+	ToolTip,
+	Drop,
+	Select,
+	BigDataList,
+	Cascader,
+	DatePicker,
+	TimePicker,
+	ColorPicker,
+	Menu,
+	MenuSub,
+	MenuGroup,
+	MenuOption,
+	Layout,
+	Header,
+	Footer,
+	Content,
+	Sider,
+	Row,
+	Col,
+	Badge,
+	Slider,
+	Radio,
+	RadioGroup
 }
 Object.keys(components).forEach(key => {
-    components['z' + key] = components[key]
+	components['z' + key] = components[key]
 })
 const install = (Vue, option = {}) => {
-    if (install.installed) return // 防止多次安装
-    for (let key in components) {
-        Vue.component(key, components[key])
-    }
-    // 下面是全局安装的方法
-    Vue.prototype.$Dark = Dark
-    Vue.prototype.$LoadingBar = LoadingBar
-    Vue.prototype.$Notice = Notice
-    Vue.prototype.$Message = Message
+	if (install.installed) return // 防止多次安装
+	for (let key in components) {
+		Vue.component(key, components[key])
+	}
+	// 下面是全局安装的方法
+	Vue.prototype.$Dark = Dark
+	Vue.prototype.$LoadingBar = LoadingBar
+	Vue.prototype.$Notice = Notice
+	Vue.prototype.$Message = Message
 }
 // 自动安装【browser端引用的时候可以省去Vue.use】
 if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue) // 调用 `MyPlugin.install(Vue)`
+	install(window.Vue) // 调用 `MyPlugin.install(Vue)`
 }
 const zov = {
-    install,
-    ...components
+	install,
+	...components
 }
 // 按需暴露全局组件
 export {
-    // 【_c】
-    Dark,
-    LoadingBar,
-    Notice,
-    Message,
-    // 【_f】
-    LongList,
-    Icon,
-    Button,
-    ButtonGroup,
-    Tag,
-    Spin,
-    Switcher,
-    Input,
-    Popper,
-    ToolTip,
-    Drop,
-    Select,
-    BigDataList,
-    Cascader,
-    DatePicker,
-    TimePicker,
-    ColorPicker,
-    Menu,
-    MenuSub,
-    MenuGroup,
-    MenuOption,
-    Layout,
-    Header,
-    Footer,
-    Content,
-    Sider,
-    Row,
-    Col,
-    Badge,
-    Radio,
-    RadioGroup
+	// 【_c】
+	Dark,
+	LoadingBar,
+	Notice,
+	Message,
+	// 【_f】
+	Affix,
+	Anchor,
+	AnchorLink,
+	LongList,
+	Icon,
+	Button,
+	ButtonGroup,
+	Tag,
+	Spin,
+	Switcher,
+	Input,
+	Popper,
+	ToolTip,
+	Drop,
+	Select,
+	BigDataList,
+	Cascader,
+	DatePicker,
+	TimePicker,
+	ColorPicker,
+	Menu,
+	MenuSub,
+	MenuGroup,
+	MenuOption,
+	Layout,
+	Header,
+	Footer,
+	Content,
+	Sider,
+	Row,
+	Col,
+	Badge,
+	Slider,
+	Radio,
+	RadioGroup
 }
 // 将整个zov暴露出去
 export default zov

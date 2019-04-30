@@ -3,14 +3,14 @@
  **/
 import { findComponentDownward } from '../utils'
 export default {
-    computed: {
-        popperComponent () {
-            return findComponentDownward(this, 'zov-popper')
-        }
-    },
-    methods: {
-        dropUpdate () {
-            this.popperComponent.popper.update()
-        }
-    }
+	computed: {
+		popperComponent() {
+			return findComponentDownward(this, 'zov-popper')
+		}
+	},
+	methods: {
+		dropUpdate() {
+			this.popperComponent.popper.update()
+		}
+	}
 }

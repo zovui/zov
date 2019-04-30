@@ -1,12 +1,12 @@
 <template>
-    <div>
-        modal
-    </div>
+	<div>
+		modal
+	</div>
 </template>
 <script>
 export default {
-    data () {
-        return {}
-    }
+	data() {
+		return {}
+	}
 }
 </script>

@@ -17,16 +17,16 @@
  * }
  **/
 
-export default function (option) {
-    let blob = new Blob([
-        `
+export default function(option) {
+	let blob = new Blob([
+		`
             addEventListener('message', function (e) {
                 let callback = new Function('e', e.data.callback)
                 callback(e)
                 self.close()
             }, false)
         `
-    ])
-    let url = window.URL.createObjectURL(blob)
-    return new Worker(url, option)
+	])
+	let url = window.URL.createObjectURL(blob)
+	return new Worker(url, option)
 }
