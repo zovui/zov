@@ -1,0 +1,50 @@
+$prefix-radio-group : #{$prefix}radio-group;
+
+.#{$prefix-radio-group}{
+    // size对应的样式分类
+    @include form-dom-size(0, yes, '.#{$prefix}radio-wrapper');
+}
+// 组合在一起的按钮样式
+.#{$prefix-radio-group}-connected{
+    .#{$prefix}radio-wrapper{
+        margin: 0;
+        border-radius: 0;
+        margin-left: -1px;
+        &:first-of-type{
+            border-top-left-radius: $border-radius-button;
+            border-bottom-left-radius: $border-radius-button;
+        }
+        &:last-of-type{
+            border-top-right-radius: $border-radius-button;
+            border-bottom-right-radius: $border-radius-button;
+        }
+    }
+    .#{$prefix}radio-checked{
+        z-index: 2;
+    }
+}
+
+// 纵向排列
+.#{$prefix-radio-group}-vertical {
+    display: inline-block;
+    .#{$prefix}radio-wrapper{
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    &.#{$prefix-radio-group}-connected{
+        .#{$prefix}radio-wrapper{
+            margin: 0;
+            margin-top: -1px;
+            border-radius: 0;
+            &:first-of-type{
+                border-top-left-radius: $border-radius-button;
+                border-top-right-radius: $border-radius-button;
+            }
+            &:last-of-type{
+                border-bottom-left-radius: $border-radius-button;
+                border-bottom-right-radius: $border-radius-button;
+            }
+        }
+    }
+}

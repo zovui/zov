@@ -25,6 +25,8 @@ import { Layout, Header, Footer, Content, Sider } from './components/layout'
 import { Row, Col } from './components/grid'
 import Slider from './components/slider'
 import Badge from './components/badge'
+import Radio from './components/radio'
+import RadioGroup from './components/radio-group'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -71,7 +73,9 @@ const components = {
 	Row,
 	Col,
 	Badge,
-	Slider
+	Slider,
+	Radio,
+	RadioGroup
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -135,7 +139,9 @@ export {
 	Row,
 	Col,
 	Badge,
-	Slider
+	Slider,
+	Radio,
+	RadioGroup
 }
 // 将整个zov暴露出去
 export default zov

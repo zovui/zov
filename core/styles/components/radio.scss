@@ -1,0 +1,199 @@
+$prefix-radio : #{$prefix}radio;
+
+@keyframes radioEffect {
+    0% {
+        transform: scale(1);
+        opacity: .5
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0
+    }
+}
+
+// 正常状态
+.#{$prefix-radio}-wrapper{
+    box-sizing: border-box;
+    margin: 0 8px 0 0;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+
+    .#{$prefix-radio}-input{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    // 不可选状态
+    &.#{$prefix-radio}-disabled{
+        cursor: $cursor-disabled;
+        @include get-color-disabled(color);
+        //@include get-color-disabled(border-color);
+        .#{$prefix-radio}-inner{
+            cursor: $cursor-disabled;
+            @include get-color-disabled();
+        }
+    }
+    // 可选样式
+    &:not(.#{$prefix-radio}-disabled){
+        .#{$prefix-radio}-inner{
+            &:hover {
+                @include get-color-primary-hover(border-color);
+            }
+        }
+        &.#{$prefix-radio}-button{
+            &:hover {
+                @include get-color-primary-hover(border-color);
+                z-index: 2;
+            }
+        }
+    }
+
+    // 非按钮样式
+    &:not(.#{$prefix-radio}-button){
+        .#{$prefix-radio}{
+            box-sizing: border-box;
+            margin: 0 4px 0 0;
+            padding: 0;
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: sub;
+        }
+        .#{$prefix-radio}-inner{
+            position: relative;
+            display: block;
+            width: 16px;
+            height: 16px;
+            border: {
+                style: solid;
+                width: 1px;
+                radius: 50%;
+            }
+            @include get-color-bg();
+            @include get-color-border();
+            transition: border-color .3s;
+            &:after {
+                content: '';
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                transform: scale(0);
+            }
+        }
+
+        // 非按钮选中样式
+        &.#{$prefix-radio}-checked{
+            .#{$prefix-radio}-inner{
+                &:after {
+                    transform: scale(1);
+                }
+            }
+            // 非按钮选中样式
+            &:not(.#{$prefix-radio}-disabled){
+                .#{$prefix-radio}{
+                    &:after{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        border: {
+                            style: solid;
+                            width: 1px;
+                        };
+                        @include get-color-primary-hover(border-color);
+                        border-radius: 50%;
+                        animation: radioEffect .4s ease-in-out;
+                    }
+                }
+                .#{$prefix-radio}-inner{
+                    border-color: $color-primary;
+                    @include outline();
+                    &:after {
+                        background-color: $color-primary;
+                        transition:
+                            transform .3s ease-in-out,
+                            background-color .3s;
+                    }
+                }
+            }
+            &.#{$prefix-radio}-disabled{
+                .#{$prefix-radio}-inner{
+                    &:after {
+                        @include get-color-disabled(background-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 按钮状态
+.#{$prefix-radio}-button{
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    transition: color $transition-hover-time $bezier,
+    background-color $transition-hover-time $bezier,
+    border $transition-hover-time $bezier,
+    opacity $transition-hover-time $bezier,
+    box-shadow $transition-hover-time $bezier;
+    border-radius: $border-radius-button;
+    padding: $btn-padding;
+    margin: $outline-width;
+    border: 1px solid;
+    @include get-color-border();
+    // size对应的样式分类
+    @include form-dom-size();
+    .#{$prefix-radio}{
+        margin: 0;
+        padding: 0;
+    }
+    .#{$prefix-radio}-inner{
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    &.#{$prefix-radio}-disabled{
+        @include get-color-disabled(color);
+        @include get-color-divider(background-color);
+        &.#{$prefix-radio}-checked{
+            @include get-color-disabled(background-color);
+            @include get-color-border();
+            @include get-color-bg(color);
+        }
+    }
+    &:not(.#{$prefix-radio}-disabled){
+        @include outline();
+        &.#{$prefix-radio}-checked{
+            @include outline();
+        }
+    }
+}
+
+// 边框式按钮样式
+.#{$prefix-radio}-button-outline{
+    &.#{$prefix-radio}-checked{
+        border-color: $color-primary;
+        color: $color-primary;
+    }
+}
+
+.#{$prefix-radio}-button-solid{
+    &.#{$prefix-radio}-checked{
+        border-color: $color-primary;
+        background-color: $color-primary;
+        @include get-color-bg(color);
+    }
+}
