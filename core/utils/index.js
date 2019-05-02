@@ -347,6 +347,14 @@ export function includes(collection, value) {
 }
 
 /**
+ * 判断是否是函数
+ * @param value
+ * @return {boolean}
+ */
+export function isFunction(value) {
+	return typeOf(value) === 'function'
+}
+/**
  * 查找数组里的某值
  * @param array
  * @param condition 判断函数
@@ -362,4 +370,20 @@ export function find(array, condition, returnAll = false) {
 		return null
 	}
 	return returnAll ? matched : matched[0]
+}
+
+/**
+ * 查找元素下标
+ * @param array
+ * @param condition
+ */
+export function findIndex(array, condition) {
+	if (isFunction(Array.prototype.findIndex)) {
+		return array.findIndex(condition)
+	}
+	let i = 0
+	while (!condition[i]) {
+		i++
+	}
+	return i === array.length ? -1 : i
 }

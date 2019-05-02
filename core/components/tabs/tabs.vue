@@ -2,7 +2,7 @@
 import TabsNav from './tabs-nav'
 import TabsTab from './tabs-tab'
 import TabsContent from './tabs-content'
-import { find } from '../../utils'
+import { find, findIndex } from '../../utils'
 
 const COMPONENT_NAME = 'zov-tabs'
 
@@ -50,7 +50,7 @@ export default {
 			this.tabs.push(tabPane)
 		},
 		removeTab(id) {
-			const index = this.tabs.findIndex(tabPane => tabPane.id === id)
+			const index = findIndex(this.tabs, pane => pane.id === id)
 			if (index === -1) {
 				return
 			}
