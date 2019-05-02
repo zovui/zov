@@ -1,0 +1,85 @@
+@import "../mixins/get-color";
+@import "../custom";
+
+$component-name: $prefix + 'tabs';
+
+.#{$component-name}-nav {
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-bottom: 1px solid transparent;
+    @include get-color-border(border-color);
+    &-action {
+        display: none;
+        width: 32px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+        &-prev {
+            left: 0;
+        }
+        &-next {
+            right: 0;
+        }
+        &-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            @include get-color-sub-hover(color);
+            &:hover {
+                @include get-color-sub(color);
+            }
+        }
+    }
+    &-scroll-wrap {
+        margin: 0;
+        overflow: hidden;
+    }
+    &-scroll {
+        display: inline-block;
+        position: relative;
+        white-space: nowrap;
+    }
+    &-slider {
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        transition: $transition-time width $bezier,
+                    $transition-time left $bezier;
+        @include get-color-primary-active(background-color)
+    }
+    &--scrollable {
+        .#{$component-name}-nav-action {
+            display: block;
+        }
+        .#{$component-name}-scroll-wrap {
+            margin: 0 32px;
+        }
+    }
+}
+
+.#{$component-name}-tab {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-right: 32px;
+    padding: 12px 16px;
+    cursor: pointer;
+    &:last-child {
+        margin-right: 0;
+    }
+    &:hover {
+        @include get-color-primary-hover(color)
+    }
+    &--active {
+        font-weight: 500;
+        @include get-color-primary-active(color)
+    }
+}
+
+.#{$component-name}-hidden {
+    display: none;
+}

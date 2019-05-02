@@ -345,3 +345,21 @@ export function includes(collection, value) {
 	}
 	return false
 }
+
+/**
+ * 查找数组里的某值
+ * @param array
+ * @param condition 判断函数
+ * @param returnAll 是否返回所有匹配结果
+ * @return {null|*}
+ */
+export function find(array, condition, returnAll = false) {
+	if (!Array.isArray(array)) {
+		return null
+	}
+	const matched = array.filter(condition)
+	if (matched.length === 0) {
+		return null
+	}
+	return returnAll ? matched : matched[0]
+}
