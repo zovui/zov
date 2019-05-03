@@ -26,13 +26,11 @@ export default {
 	},
 	data() {
 		return {
-			computedLabel: '',
-			content: ''
+			computedLabel: ''
 		}
 	},
 	render() {
 		this.computedLabel = this.$slots.label || this.label
-		this.content = this.$slots.default
 		return <span class="zov-tab-pane" />
 	}
 }
