@@ -179,20 +179,18 @@ export default {
 				const tabBoundingLeft = rect.offsetLeft
 				// tab的右边缘
 				const tabBoundingRight = tabBoundingLeft + rect.scrollWidth
-				let scrollX = 0
+				let scrollX = Math.abs(this.scrollX)
 				// 如果激活的tab在左边界外
 				if (viewportBoundingLeft > tabBoundingLeft) {
-					scrollX =
-						viewportBoundingLeft -
-						Math.abs(viewportBoundingLeft - tabBoundingLeft)
+					scrollX -= Math.abs(viewportBoundingLeft - tabBoundingLeft)
 					this.scrollX = this.normalizeScrollPosition(scrollX * -1)
 					return
 				}
 				// 如果激活的tab在右边界外
 				if (viewportBoundingRight < tabBoundingRight) {
-					scrollX =
-						viewportBoundingRight +
-						Math.abs(viewportBoundingRight - tabBoundingRight)
+					scrollX += Math.abs(
+						viewportBoundingRight - tabBoundingRight
+					)
 					this.scrollX = this.normalizeScrollPosition(scrollX * -1)
 				}
 			}
