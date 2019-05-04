@@ -12,7 +12,7 @@ export default {
 		if (activeTabPane) {
 			content = activeTabPane.$slots.default
 		}
-		return <div class="zov-tab-content">{content}</div>
+		return <div class="zov-tabs-content">{content}</div>
 	}
 }
 </script>

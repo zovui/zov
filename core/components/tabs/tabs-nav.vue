@@ -15,7 +15,8 @@ export default {
 	},
 	props: {
 		tabs: Array,
-		activeId: String
+		activeId: String,
+		direction: String
 	},
 	created() {
 		this.resizeHandler = this.onResize.bind(this)
@@ -41,7 +42,10 @@ export default {
 	},
 	computed: {
 		isScrollable() {
-			return this.tabWrapWidth > this.navWidth
+			if (this.direction === 'horizontal') {
+				return this.tabWrapWidth > this.navWidth
+			}
+			return this.tabWrapHeight > this.navHeight
 		},
 		sliderStyles() {
 			const rect = find(
@@ -49,9 +53,16 @@ export default {
 				rect => rect.id === this.activeId
 			)
 			if (rect) {
-				return {
-					left: rect.offsetLeft + 'px',
-					width: rect.scrollWidth + 'px'
+				if (this.direction === 'horizontal') {
+					return {
+						left: rect.offsetLeft + 'px',
+						width: rect.scrollWidth + 'px'
+					}
+				} else {
+					return {
+						top: rect.offsetTop + 'px',
+						height: rect.scrollHeight + 'px'
+					}
 				}
 			}
 			return null
@@ -103,6 +114,11 @@ export default {
 						(this.tabWrapHeight - this.viewportSize.vertical.height)
 				}
 			}
+		},
+		actionIcon() {
+			return this.direction === 'horizontal'
+				? ['arrow-back', 'arrow-forward']
+				: ['arrow-up', 'arrow-down']
 		}
 	},
 	watch: {
@@ -111,6 +127,19 @@ export default {
 				this.scrollActiveTabToViewport()
 			},
 			immediate: true
+		},
+		// 监听方向变化
+		direction(direction) {
+			this.recalculateNavRect()
+			this.recalculateScrollableRect()
+			this.scrollActiveTabToViewport()
+			this.$nextTick(() => {
+				if (direction === 'horizontal') {
+					this.scrollY = 0
+				} else {
+					this.scrollX = 0
+				}
+			})
 		}
 	},
 	methods: {
@@ -125,10 +154,9 @@ export default {
 		// 重新计算所有tab的盒子信息
 		recalculateScrollableRect() {
 			this.$nextTick(() => {
-				const tabWrapRect = this.$refs.tabWrap.getBoundingClientRect()
 				const children = findComponentsDownward(this, TabsTab.name)
-				this.tabWrapWidth = tabWrapRect.width
-				this.tabWrapHeight = tabWrapRect.height
+				this.tabWrapWidth = this.$refs.tabWrap.offsetWidth
+				this.tabWrapHeight = this.$refs.tabWrap.offsetHeight
 				this.tabRectList = children.map(vm => {
 					const rect = vm.$el.getBoundingClientRect()
 					return {
@@ -149,70 +177,112 @@ export default {
 			if (!this.isScrollable) {
 				return
 			}
-			this.scrollX = this.normalizeScrollPosition(
-				(Math.abs(this.scrollX) - this.viewportSize.horizontal.width) *
-					-1
-			)
+			if (this.direction === 'horizontal') {
+				this.scrollX = this.normalizeScrollPosition(
+					(Math.abs(this.scrollX) -
+						this.viewportSize.horizontal.width) *
+						-1
+				)
+			} else {
+				this.scrollY = this.normalizeScrollPosition(
+					(Math.abs(this.scrollY) -
+						this.viewportSize.vertical.height) *
+						-1
+				)
+			}
 		},
 		scrollToNext() {
 			if (!this.isScrollable) {
 				return
 			}
-			this.scrollX = this.normalizeScrollPosition(
-				(Math.abs(this.scrollX) + this.viewportSize.horizontal.width) *
-					-1
-			)
+			if (this.direction === 'horizontal') {
+				this.scrollX = this.normalizeScrollPosition(
+					(Math.abs(this.scrollX) +
+						this.viewportSize.horizontal.width) *
+						-1
+				)
+			} else {
+				this.scrollY = this.normalizeScrollPosition(
+					(Math.abs(this.scrollY) +
+						this.viewportSize.vertical.height) *
+						-1
+				)
+			}
 		},
 		// 滚动活动tab至viewport范围内
 		scrollActiveTabToViewport() {
-			const rect = find(
-				this.tabRectList,
-				rect => rect.id === this.activeId
-			)
-			if (rect) {
-				// 可视范围的左边缘
-				const viewportBoundingLeft = Math.abs(this.scrollX)
-				// 可视范围的右边缘
-				const viewportBoundingRight =
-					viewportBoundingLeft + this.viewportSize.horizontal.width
-				// tab的左边缘
-				const tabBoundingLeft = rect.offsetLeft
-				// tab的右边缘
-				const tabBoundingRight = tabBoundingLeft + rect.scrollWidth
-				let scrollX = Math.abs(this.scrollX)
-				// 如果激活的tab在左边界外
-				if (viewportBoundingLeft > tabBoundingLeft) {
-					scrollX -= Math.abs(viewportBoundingLeft - tabBoundingLeft)
-					this.scrollX = this.normalizeScrollPosition(scrollX * -1)
-					return
-				}
-				// 如果激活的tab在右边界外
-				if (viewportBoundingRight < tabBoundingRight) {
-					scrollX += Math.abs(
-						viewportBoundingRight - tabBoundingRight
+			this.$nextTick(() => {
+				const rect = find(
+					this.tabRectList,
+					rect => rect.id === this.activeId
+				)
+				if (rect) {
+					// 可视范围的左边缘
+					const viewportBoundingLeft = Math.abs(
+						this.direction === 'horizontal'
+							? this.scrollX
+							: this.scrollY
 					)
-					this.scrollX = this.normalizeScrollPosition(scrollX * -1)
+					// 可视范围的右边缘
+					const viewportBoundingRight =
+						viewportBoundingLeft +
+						(this.direction === 'horizontal'
+							? this.viewportSize.horizontal.width
+							: this.viewportSize.vertical.height)
+					// tab的左边缘
+					const tabBoundingLeft =
+						this.direction === 'horizontal'
+							? rect.offsetLeft
+							: rect.offsetTop
+					// tab的右边缘
+					const tabBoundingRight =
+						tabBoundingLeft +
+						(this.direction === 'horizontal'
+							? rect.scrollWidth
+							: rect.scrollHeight)
+					// 此时为正数，仅为了方便计算
+					let position = Math.abs(
+						this.direction === 'horizontal'
+							? this.scrollX
+							: this.scrollY
+					)
+					// 如果激活的tab在左边界外
+					if (viewportBoundingLeft > tabBoundingLeft) {
+						position -= Math.abs(
+							viewportBoundingLeft - tabBoundingLeft
+						)
+						position = this.normalizeScrollPosition(position * -1)
+					} else if (viewportBoundingRight < tabBoundingRight) {
+						// 如果激活的tab在右边界外
+						position += Math.abs(
+							viewportBoundingRight - tabBoundingRight
+						)
+						position = this.normalizeScrollPosition(position * -1)
+					}
+
+					if (this.direction === 'horizontal') {
+						this.scrollX = Math.abs(position) * -1
+					} else {
+						this.scrollY = Math.abs(position) * -1
+					}
 				}
-			}
+			})
 		},
 		// 计算正常的滚动位置信息
-		normalizeScrollPosition(positionX) {
-			if (positionX > this.scrollBounding.horizontal.min) {
-				return this.scrollBounding.horizontal.min
+		normalizeScrollPosition(position) {
+			const min = this.scrollBounding[this.direction].min
+			const max = this.scrollBounding[this.direction].max
+			if (position > min) {
+				return min
 			}
-			if (
-				Math.abs(positionX) >
-				Math.abs(this.scrollBounding.horizontal.max)
-			) {
-				return this.scrollBounding.horizontal.max
+			if (Math.abs(position) > Math.abs(max)) {
+				return max
 			}
-			return positionX
+			return position
 		},
 		onResize() {
 			this.recalculateNavRect()
-			this.$nextTick(() => {
-				this.scrollActiveTabToViewport()
-			})
+			this.scrollActiveTabToViewport()
 		}
 	},
 	render() {
@@ -223,7 +293,7 @@ export default {
 					onClick={this.scrollToPrev}>
 					<Icon
 						class="zov-tabs-nav-action-icon"
-						iconname="arrow-back"
+						iconname={this.actionIcon[0]}
 					/>
 				</span>
 				<div class="zov-tabs-nav-scroll-wrap">
@@ -256,7 +326,7 @@ export default {
 					onClick={this.scrollToNext}>
 					<Icon
 						class="zov-tabs-nav-action-icon"
-						iconname="arrow-forward"
+						iconname={this.actionIcon[1]}
 					/>
 				</span>
 			</div>

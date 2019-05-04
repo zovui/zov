@@ -39,10 +39,47 @@
 			<section class="demo">
 				<h2 class="demo-header">默认使用</h2>
 				<div class="demo-content">
-					<Tabs :active-id="activeKey">
+					<Tabs v-model="activeKey">
 						<TabPane :label="bindingLabel" id="1"
 							>Content of tab 1</TabPane
 						>
+						<TabPane label="Tab 2" id="2">Content of tab 2</TabPane>
+						<TabPane label="Tab 3" id="3">Content of tab 3</TabPane>
+						<TabPane label="Tab 4" id="4">Content of tab 4</TabPane>
+						<TabPane label="Tab 5" id="5">Content of tab 5</TabPane>
+						<TabPane label="Tab 6" id="6">Content of tab 6</TabPane>
+						<TabPane label="Tab 7" id="7">Content of tab 7</TabPane>
+						<TabPane label="Tab 8" id="8">Content of tab 8</TabPane>
+						<TabPane label="Tab 9" id="9">Content of tab 9</TabPane>
+						<TabPane label="Tab 10" id="10"
+							>Content of tab 10</TabPane
+						>
+						<TabPane label="Tab 11" id="11"
+							>Content of tab 11</TabPane
+						>
+					</Tabs>
+				</div>
+			</section>
+			<section class="demo">
+				<h2 class="demo-header">tabPosition</h2>
+				<div class="demo-content">
+					<label
+						v-for="pos of ['top', 'bottom', 'left', 'right']"
+						:key="pos"
+					>
+						<input
+							class="radio"
+							type="radio"
+							:value="pos"
+							name="tabPosition"
+							v-model="tabPosition"
+						/>
+						{{ pos }}
+					</label>
+				</div>
+				<div class="demo-content" :style="{ height: '300px' }">
+					<Tabs activeId="1" :tabPosition="tabPosition">
+						<TabPane label="Tab 1" id="1">Content of tab 1</TabPane>
 						<TabPane label="Tab 2" id="2">Content of tab 2</TabPane>
 						<TabPane label="Tab 3" id="3">Content of tab 3</TabPane>
 						<TabPane label="Tab 4" id="4">Content of tab 4</TabPane>
@@ -114,6 +151,10 @@
 		margin: 10px 0;
 	}
 }
+
+.radio {
+	appearance: radio !important;
+}
 </style>
 
 <script>
@@ -138,7 +179,8 @@ export default {
 				}
 			],
 			bindingLabel: 'bindingLabel',
-			activeKey: '1'
+			activeKey: '1',
+			tabPosition: 'top'
 		}
 	}
 }

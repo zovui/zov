@@ -2,7 +2,7 @@
 import TabsNav from './tabs-nav'
 import TabsTab from './tabs-tab'
 import TabsContent from './tabs-content'
-import { find, findIndex } from '../../utils'
+import { find, findIndex, includes } from '../../utils'
 
 const COMPONENT_NAME = 'zov-tabs'
 
@@ -20,6 +20,13 @@ export default {
 	props: {
 		activeId: {
 			type: String
+		},
+		tabPosition: {
+			type: String,
+			default: 'top',
+			validator(pos) {
+				return includes(['top', 'bottom', 'left', 'right'], pos)
+			}
 		}
 	},
 	provide() {
@@ -35,6 +42,25 @@ export default {
 		return {
 			tabs: [],
 			currentActiveId: this.activeId
+		}
+	},
+	computed: {
+		direction() {
+			switch (this.tabPosition) {
+				case 'top':
+				case 'bottom':
+					return 'horizontal'
+				case 'left':
+				case 'right':
+					return 'vertical'
+			}
+			return 'horizontal'
+		},
+		classList() {
+			const classList = [COMPONENT_NAME]
+			classList.push(`${COMPONENT_NAME}--${this.direction}`)
+			classList.push(`${COMPONENT_NAME}--${this.tabPosition}`)
+			return classList
 		}
 	},
 	watch: {
@@ -65,8 +91,12 @@ export default {
 	},
 	render() {
 		return (
-			<div class="zov-tabs">
-				<TabsNav tabs={this.tabs} activeId={this.currentActiveId} />
+			<div class={this.classList}>
+				<TabsNav
+					tabs={this.tabs}
+					activeId={this.currentActiveId}
+					direction={this.direction}
+				/>
 				<TabsContent tabs={this.tabs} activeId={this.currentActiveId} />
 				<div class="zov-tabs-hidden">{this.$slots.default}</div>
 			</div>

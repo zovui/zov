@@ -1,0 +1,61 @@
+@import "../../mixins/get-color";
+@import "../../custom";
+
+$component-name: $prefix + 'tabs';
+
+.#{$component-name}-nav {
+    position: relative;
+    box-sizing: border-box;
+
+    .#{$component-name}-nav-action {
+        display: none;
+        cursor: pointer;
+        position: relative;
+        .#{$component-name}-nav-action-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            @include get-color-sub-hover(color);
+        }
+        &:hover {
+            .#{$component-name}-nav-action-icon {
+                @include get-color-sub(color);
+            }
+        }
+    }
+    .#{$component-name}-nav-scroll-wrap {
+        overflow: hidden;
+    }
+    .#{$component-name}-nav-tabs-wrap {
+        position: relative;
+        transition: $transition-time transform $bezier;
+    }
+    .#{$component-name}-nav-slider {
+        box-sizing: border-box;
+        position: absolute;
+        @include get-color-primary-active(background-color)
+    }
+    // tab样式
+    .#{$component-name}-tab {
+        box-sizing: border-box;
+        cursor: pointer;
+        font-weight: 500;
+        &:hover {
+            @include get-color-primary-hover(color)
+        }
+        &--active {
+            @include get-color-primary-active(color)
+        }
+    }
+    // 可滚动时的样式变化
+    &--scrollable {
+        .#{$component-name}-nav-action {
+            display: block;
+        }
+    }
+}
+
+.#{$component-name}-hidden {
+    display: none;
+}
