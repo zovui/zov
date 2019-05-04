@@ -119,6 +119,38 @@ export default {
 			return this.direction === 'horizontal'
 				? ['arrow-back', 'arrow-forward']
 				: ['arrow-up', 'arrow-down']
+		},
+		isDisabledPrevAction() {
+			const position =
+				this.direction === 'horizontal' ? this.scrollX : this.scrollY
+			const minPosition = this.scrollBounding[this.direction].min
+			return position >= minPosition
+		},
+		isDisabledNextAction() {
+			const position =
+				this.direction === 'horizontal' ? this.scrollX : this.scrollY
+			const maxPosition = this.scrollBounding[this.direction].max
+			return position <= maxPosition
+		},
+		prevActionClassList() {
+			const classList = [
+				'zov-tabs-nav-action',
+				'zov-tabs-nav-action-prev'
+			]
+			if (this.isDisabledPrevAction) {
+				classList.push(`zov-tabs-nav-action--disabled`)
+			}
+			return classList
+		},
+		nextActionClassList() {
+			const classList = [
+				'zov-tabs-nav-action',
+				'zov-tabs-nav-action-next'
+			]
+			if (this.isDisabledNextAction) {
+				classList.push(`zov-tabs-nav-action--disabled`)
+			}
+			return classList
 		}
 	},
 	watch: {
@@ -289,7 +321,7 @@ export default {
 		return (
 			<div class={this.classList}>
 				<span
-					class="zov-tabs-nav-action zov-tabs-nav-action-prev"
+					class={this.prevActionClassList}
 					onClick={this.scrollToPrev}>
 					<Icon
 						class="zov-tabs-nav-action-icon"
@@ -322,7 +354,7 @@ export default {
 					</div>
 				</div>
 				<span
-					class="zov-tabs-nav-action zov-tabs-nav-action-next"
+					class={this.nextActionClassList}
 					onClick={this.scrollToNext}>
 					<Icon
 						class="zov-tabs-nav-action-icon"

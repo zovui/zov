@@ -11,16 +11,21 @@ $component-name: $prefix + 'tabs';
         display: none;
         cursor: pointer;
         position: relative;
+        @include get-color-sub-hover(color);
         .#{$component-name}-nav-action-icon {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            @include get-color-sub-hover(color);
         }
         &:hover {
-            .#{$component-name}-nav-action-icon {
-                @include get-color-sub(color);
+            @include get-color-sub(color);
+        }
+        &--disabled {
+            cursor: not-allowed;
+            @include get-color-disabled(color);
+            &:hover {
+                @include get-color-disabled(color);
             }
         }
     }
