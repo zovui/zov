@@ -27,6 +27,9 @@ import Slider from './components/slider'
 import Badge from './components/badge'
 import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
+import Checkbox from './components/checkbox'
+import CheckboxGroup from './components/checkbox-group'
+
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -75,7 +78,9 @@ const components = {
 	Badge,
 	Slider,
 	Radio,
-	RadioGroup
+	RadioGroup,
+	Checkbox,
+	CheckboxGroup
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -141,7 +146,9 @@ export {
 	Badge,
 	Slider,
 	Radio,
-	RadioGroup
+	RadioGroup,
+	Checkbox,
+	CheckboxGroup
 }
 // 将整个zov暴露出去
 export default zov
