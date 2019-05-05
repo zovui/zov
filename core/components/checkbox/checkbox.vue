@@ -18,10 +18,10 @@
 </template>
 
 <script>
+import { findComponentUpward } from '../../utils'
+
 const prefix = 'zov-checkbox'
 const parentName = prefix + '-group'
-
-import { findComponentUpward } from '../../utils'
 
 export default {
 	name: prefix,

@@ -18,10 +18,10 @@
 </template>
 
 <script>
+import { findComponentUpward } from '../../utils'
+
 const prefix = 'zov-radio'
 const parentName = prefix + '-group'
-
-import { findComponentUpward } from '../../utils'
 
 export default {
 	name: prefix,
@@ -90,8 +90,10 @@ export default {
 			set(val) {
 				if (this.parent) {
 					this.parent.$emit('input', val)
+					this.parent.$emit('on-change', val)
 				} else {
 					this.$emit('input', val)
+					this.parent.$emit('on-change', val)
 				}
 			}
 		}
