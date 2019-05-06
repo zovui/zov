@@ -1,0 +1,170 @@
+$prefix-checkbox : #{$prefix}checkbox;
+
+@keyframes checkboxEffect {
+    0% {
+        transform: scale(1);
+        opacity: .5
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0
+    }
+}
+
+// 正常状态
+.#{$prefix-checkbox}-wrapper{
+    box-sizing: border-box;
+    margin: 0 8px 0 0;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+
+    .#{$prefix-checkbox}-input{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    // 不可选状态
+    &.#{$prefix-checkbox}-disabled{
+        cursor: $cursor-disabled;
+        @include get-color-disabled(color);
+        .#{$prefix-checkbox}-inner{
+            cursor: $cursor-disabled;
+            @include get-color-divider(background-color);
+        }
+    }
+    // 可选样式
+    &:not(.#{$prefix-checkbox}-disabled){
+        .#{$prefix-checkbox}-inner{
+            &:hover {
+                @include get-color-primary-hover(border-color);
+            }
+        }
+    }
+
+    .#{$prefix-checkbox}{
+        box-sizing: border-box;
+        margin: 0 4px 0 0;
+        padding: 0;
+        position: relative;
+        display: inline-block;
+        white-space: nowrap;
+        cursor: pointer;
+        vertical-align: sub;
+    }
+    .#{$prefix-checkbox}-inner{
+        position: relative;
+        display: block;
+        width: 16px;
+        height: 16px;
+        border: {
+            style: solid;
+            width: 1px;
+            radius: $border-radius-button;
+        }
+        @include get-color-bg();
+        @include get-color-border();
+        transition: border-color .3s;
+        &:after {
+            content: '';
+            width: 6px;
+            height: 10px;
+            position: absolute;
+            top: 1px;
+            left: 4px;
+            transform: rotate(0) scale(0);
+            border: {
+                style: solid;
+                top-width: 0;
+                left-width: 0;
+                right-width: 2px;
+                bottom-width: 2px;
+            };
+            @include get-color-bg(border-right-color);
+            @include get-color-bg(border-bottom-color);
+
+        }
+    }
+
+    // 选中样式
+    &.#{$prefix-checkbox}-checked{
+        .#{$prefix-checkbox}-inner{
+            background-color: $color-primary;
+            &:after {
+                transform: rotate(45deg) scale(1);
+            }
+        }
+        // 选中样式
+        &:not(.#{$prefix-checkbox}-disabled){
+            .#{$prefix-checkbox}{
+                &:after{
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    border: {
+                        style: solid;
+                        width: 1px;
+                    };
+                    @include get-color-primary-hover(border-color);
+                    border-radius: $border-radius-button;
+                    animation: checkboxEffect $transition-time $bezier;
+                }
+            }
+            .#{$prefix-checkbox}-inner{
+                border-color: $color-primary;
+                @include outline();
+                &:after {
+                    background-color: $color-primary;
+                    transition:
+                        transform $transition-time $bezier,
+                        background-color $transition-time $bezier,
+                        border-width $transition-time $bezier;
+                }
+            }
+        }
+        &.#{$prefix-checkbox}-disabled{
+            .#{$prefix-checkbox}-inner{
+                @include get-color-divider(background-color);
+                &:after {
+                    @include get-color-divider(background-color);
+                }
+            }
+        }
+    }
+}
+// 半选中状态
+&.#{$prefix-checkbox}-indeterminate{
+    .#{$prefix-checkbox}-inner{
+        position: relative;
+        &:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            top: 7px;
+            left: 7px;
+            @include get-color-bg();
+            transform: scale(1) translateY(-50%) translateX(-50%);
+            transition:
+                background-color $transition-time $bezier,
+                width $transition-time $bezier;
+        }
+    }
+    &:not(.#{$prefix-checkbox}-disabled){
+        .#{$prefix-checkbox}-inner{
+            @include outline();
+            border-color: $color-primary;
+            background-color: $color-primary;
+        }
+    }
+
+}
+

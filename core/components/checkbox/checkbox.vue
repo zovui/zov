@@ -1,9 +1,9 @@
 <template>
 	<label :class="classes">
-		<span :class="radioClasses">
+		<span :class="checkboxClasses">
 			<span :class="innerClasses"></span>
 			<input
-				type="radio"
+				type="checkbox"
 				:class="inputClasses"
 				:disabled="isDisabled"
 				:name="groupName"
@@ -20,7 +20,7 @@
 <script>
 import { findComponentUpward } from '../../utils'
 
-const prefix = 'zov-radio'
+const prefix = 'zov-checkbox'
 const parentName = prefix + '-group'
 
 export default {
@@ -39,6 +39,11 @@ export default {
 			// 是否禁用
 			type: Boolean,
 			default: false
+		},
+		indeterminate: {
+			// 是否半选中
+			type: Boolean,
+			default: false
 		}
 	},
 	data() {
@@ -46,11 +51,7 @@ export default {
 			stylePrefix: prefix,
 			parent: findComponentUpward(this, parentName),
 			groupName: this.name,
-			border: false,
-			connected: false,
-			buttonStyle: '',
-			isDisabled: this.disabled,
-			size: 'default'
+			isDisabled: this.disabled
 		}
 	},
 	computed: {
@@ -58,20 +59,23 @@ export default {
 			return [
 				this.stylePrefix + '-wrapper',
 				{
-					[this.stylePrefix + '-size-' + this.size]:
-						this.size !== 'default' &&
-						(this.border || this.connected),
-					[this.stylePrefix + '-button']:
-						this.border || this.connected,
-					[this.stylePrefix + '-button-' + this.buttonStyle]:
-						this.buttonStyle && (this.border || this.connected),
-					[this.stylePrefix + '-disabled']: this.isDisabled,
-					[this.stylePrefix + '-checked']:
-						this.currentValue === this.label
-				}
+					[this.stylePrefix + '-disabled']: this.isDisabled
+				},
+				this.parent
+					? this.currentValue.length &&
+					  ~this.currentValue.indexOf(this.label)
+						? this.stylePrefix + '-checked'
+						: this.indeterminate
+						? this.stylePrefix + '-indeterminate'
+						: ''
+					: this.currentValue
+					? this.stylePrefix + '-checked'
+					: this.indeterminate
+					? this.stylePrefix + '-indeterminate'
+					: ''
 			]
 		},
-		radioClasses() {
+		checkboxClasses() {
 			return [this.stylePrefix]
 		},
 		innerClasses() {
@@ -93,7 +97,7 @@ export default {
 					this.parent.$emit('on-change', val)
 				} else {
 					this.$emit('input', val)
-					this.parent.$emit('on-change', val)
+					this.$emit('on-change', val)
 				}
 			}
 		}
@@ -102,11 +106,7 @@ export default {
 		if (this.parent) {
 			let parent = this.parent
 			this.groupName = parent.name
-			this.border = parent.border
-			this.connected = parent.connected
-			this.buttonStyle = parent.buttonStyle
 			this.isDisabled = parent.disabled || this.disabled
-			this.size = parent.size
 		}
 	}
 }
