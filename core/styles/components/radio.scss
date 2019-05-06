@@ -78,7 +78,7 @@ $prefix-radio : #{$prefix}radio;
             }
             @include get-color-bg();
             @include get-color-border();
-            transition: border-color .3s;
+            transition: border-color $transition-time $bezier;
             &:after {
                 content: '';
                 width: 8px;
@@ -123,8 +123,8 @@ $prefix-radio : #{$prefix}radio;
                     &:after {
                         background-color: $color-primary;
                         transition:
-                            transform .3s ease-in-out,
-                            background-color .3s;
+                            transform $transition-time $bezier,
+                            background-color $transition-time $bezier;
                     }
                 }
             }

@@ -115,7 +115,7 @@ $prefix-checkbox : #{$prefix}checkbox;
                     };
                     @include get-color-primary-hover(border-color);
                     border-radius: $border-radius-button;
-                    animation: checkboxEffect .4s ease-in-out;
+                    animation: checkboxEffect $transition-time $bezier;
                 }
             }
             .#{$prefix-checkbox}-inner{
@@ -124,8 +124,9 @@ $prefix-checkbox : #{$prefix}checkbox;
                 &:after {
                     background-color: $color-primary;
                     transition:
-                        transform .3s ease-in-out,
-                        background-color .3s;
+                        transform $transition-time $bezier,
+                        background-color $transition-time $bezier,
+                        border-width $transition-time $bezier;
                 }
             }
         }
@@ -142,19 +143,19 @@ $prefix-checkbox : #{$prefix}checkbox;
 // 半选中状态
 &.#{$prefix-checkbox}-indeterminate{
     .#{$prefix-checkbox}-inner{
+        position: relative;
         &:after {
             content: '';
             position: absolute;
-            top: 5px;
-            left: 2px;
             width: 10px;
             height: 2px;
+            top: 7px;
+            left: 7px;
             @include get-color-bg();
-            transform: scale(1);
+            transform: scale(1) translateY(-50%) translateX(-50%);
             transition:
-                transform .3s ease-in-out,
-                width .3s,
-                background-color .3s;
+                background-color $transition-time $bezier,
+                width $transition-time $bezier;
         }
     }
     &:not(.#{$prefix-checkbox}-disabled){
