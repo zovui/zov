@@ -138,14 +138,12 @@ export function scrollTop(el, from = 0, to, duration = 500, endCallback) {
 		if (start > end) {
 			d = start - step < end ? end : start - step
 		}
-		console.log('d', d, document.documentElement.scrollTop)
 		if (el === window) {
 			window.scrollTo(d, d)
 		} else {
 			el.scrollTop = d
 		}
 		window.requestAnimationFrame(() => scroll(d, end, step))
-		console.log('from', from, to, step)
 	}
 	scroll(from, to, step)
 }
