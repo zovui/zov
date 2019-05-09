@@ -21,7 +21,7 @@ $prefix-anchor: #{$prefix}anchor;
                 width: $anchor-border-width;
                 height: 100%;
                 display: block;
-                background-color: $border-color-split;
+                @include get-color-divider(background-color);
                 margin: 0 auto;
             }
             &-ball {
@@ -31,7 +31,7 @@ $prefix-anchor: #{$prefix}anchor;
                 height: 8px;
                 border-radius: 50%;
                 border: 2px solid $color-primary;
-                background-color: $color-default-background;
+                @include get-color-bg(background-color);
                 left: 50%;
                 transition: top $transition-time $bezier;
                 transform: translate(-50%, 2px);
@@ -51,7 +51,7 @@ $prefix-anchor: #{$prefix}anchor;
             display: block;
             position: relative;
             transition: all 0.3s;
-            color: $color-text;
+            @include get-color-text();
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
