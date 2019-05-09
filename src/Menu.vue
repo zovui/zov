@@ -6,8 +6,12 @@
 			</div>
 			<div class="org-layout-header-nav">
 				<Switcher class="org-layout-header-theme-btn" v-model="isdark">
-					<span slot="open"><Icon iconname="moon"></Icon></span>
-					<span slot="close"><Icon iconname="sunny"></Icon></span>
+					<span slot="open">
+						<Icon iconname="moon"></Icon>
+					</span>
+					<span slot="close">
+						<Icon iconname="sunny"></Icon>
+					</span>
 				</Switcher>
 			</div>
 		</Header>
@@ -43,7 +47,9 @@
 					</MenuSub>
 				</Menu>
 			</Sider>
-			<Content><router-view /></Content>
+			<Content>
+				<router-view />
+			</Content>
 		</Layout>
 	</Layout>
 </template>

@@ -3,7 +3,7 @@
 		<div ref="point" :class="classes" :style="styles">
 			<slot></slot>
 		</div>
-		<div v-show="slot" :style="slotStyle"></div>
+		<div v-show="slot && placeholder" :style="slotStyle"></div>
 	</div>
 </template>
 <script>
@@ -13,26 +13,20 @@ const prefix = 'zov-affix'
 function getScroll(target, top) {
 	const prop = top ? 'pageYOffset' : 'pageXOffset'
 	const method = top ? 'scrollTop' : 'scrollLeft'
-
 	let ret = target[prop]
-
 	if (typeof ret !== 'number') {
 		ret = window.document.documentElement[method]
 	}
-
 	return ret
 }
 // 获取dom节点的offset属性,返回top&left
 function getOffset(element) {
 	const rect = element.getBoundingClientRect()
-
 	const scrollTop = getScroll(window, true)
 	const scrollLeft = getScroll(window)
-
 	const docEl = window.document.body
 	const clientTop = docEl.clientTop || 0
 	const clientLeft = docEl.clientLeft || 0
-
 	return {
 		top: rect.top + scrollTop - clientTop,
 		left: rect.left + scrollLeft - clientLeft
@@ -48,6 +42,10 @@ export default {
 		},
 		offsetBottom: {
 			type: Number
+		},
+		placeholder: {
+			type: Boolean,
+			default: true
 		}
 	},
 	data() {
@@ -138,6 +136,11 @@ export default {
 				!affix
 			) {
 				this.affix = true
+				this.slotStyle = {
+					width: this.$refs.point.clientWidth + 'px',
+					height: this.$refs.point.clientHeight + 'px'
+				}
+				this.slot = true
 				this.styles = {
 					bottom: `${this.offsetBottom}px`,
 					left: `${elOffset.left}px`,
@@ -151,6 +154,8 @@ export default {
 				this.offsetType === 'bottom' &&
 				affix
 			) {
+				this.slot = false
+				this.slotStyle = {}
 				this.affix = false
 				this.styles = null
 

@@ -123,8 +123,6 @@
 				<p v-for="i in 100" :key="`chinese-${i}`">
 					这是信息司大是大非胜多负少的{{ i }}
 				</p>
-				<!-- <h1 id="new-link">这是新添加的哦哦哦哦哦 哦 </h1>
-            <p v-for="i in 50" :key="`new-${i}`">这是信息司大是大非胜多负少的{{i}}</p> -->
 			</div>
 			<div v-else>
 				<template v-for="i in 300">
