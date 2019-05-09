@@ -79,7 +79,6 @@ export default {
 	},
 	methods: {
 		upwardUpdateActive() {
-			console.log(123)
 			this.menuComponent.activeFullPath = []
 			this.parentsMenuSub.forEach(component => {
 				component.active = true
