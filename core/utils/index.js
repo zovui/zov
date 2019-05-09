@@ -116,7 +116,7 @@ export function deepCopy(data) {
 }
 
 // scrollTop 动画
-export function scrollTop(el, from = 0, to, duration = 500) {
+export function scrollTop(el, from = 0, to, duration = 500, endCallback) {
 	if (!window.requestAnimationFrame) {
 		window.requestAnimationFrame =
 			window.webkitRequestAnimationFrame ||
@@ -130,13 +130,14 @@ export function scrollTop(el, from = 0, to, duration = 500) {
 	const step = Math.ceil((difference / duration) * 50)
 
 	function scroll(start, end, step) {
-		if (start === end) return
-
+		if (start === end) {
+			endCallback && endCallback()
+			return
+		}
 		let d = start + step > end ? end : start + step
 		if (start > end) {
 			d = start - step < end ? end : start - step
 		}
-
 		if (el === window) {
 			window.scrollTo(d, d)
 		} else {
