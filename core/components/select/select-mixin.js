@@ -129,11 +129,10 @@ export default {
 			this.$emit('input', value)
 			this.$emit('on-change', item)
 			// 单选query值设置
-			this.query =
-				item[
-					(isCascaderC && !this.filterable ? '__' : '') +
-						this.currentQueryName
-				]
+			let queryName =
+				(isCascaderC && !this.filterable ? '__' : '') +
+				this.currentQueryName
+			this.query = item[queryName]
 			// 收起下拉
 			!isDefault &&
 				(isCascaderC

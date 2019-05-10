@@ -62,7 +62,6 @@ export default {
 			type: Number,
 			default: 5
 		},
-		//        container: [String, HTMLElement],  // HTMLElement 在 SSR 下不支持
 		container: null,
 		showInk: {
 			type: Boolean,
@@ -98,9 +97,9 @@ export default {
 			if (this.animating) return
 			this.updateTitleOffset()
 			const scrollTop =
+				e.target.scrollTop ||
 				document.documentElement.scrollTop ||
-				document.body.scrollTop ||
-				e.target.scrollTop
+				document.body.scrollTop
 			this.getCurrentScrollAtTitleId(scrollTop)
 		},
 		handleHashChange() {
@@ -214,9 +213,11 @@ export default {
 				this.handleScrollTo()
 				this.handleSetInkTop()
 				this.updateTitleOffset()
-				this.upperFirstTitle =
-					this.scrollElement.scrollTop <
-					this.titlesOffsetArr[0].offset
+				if (this.titlesOffsetArr[0]) {
+					this.upperFirstTitle =
+						this.scrollElement.scrollTop <
+						this.titlesOffsetArr[0].offset
+				}
 				on(this.scrollContainer, 'scroll', this.handleScroll)
 				on(window, 'hashchange', this.handleHashChange)
 			})

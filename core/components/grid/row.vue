@@ -71,7 +71,6 @@ export default {
 			// 这里会嵌套寻找，把 Col 里的 Row 里的 Col 也找到，所以用 兄弟找
 			const Col = findComponentDownward(this, 'zov-col')
 			const Cols = findBrothersComponents(Col, 'zov-col', false)
-			console.log(Cols)
 			if (Cols.length) {
 				Cols.forEach(child => {
 					if (val !== 0) {

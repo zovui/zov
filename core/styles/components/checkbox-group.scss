@@ -1,0 +1,11 @@
+$prefix-checkbox-group : #{$prefix}checkbox-group;
+
+// 纵向排列
+.#{$prefix-checkbox-group}-vertical {
+    display: inline-block;
+    .#{$prefix}checkbox-wrapper{
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}

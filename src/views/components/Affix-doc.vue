@@ -24,6 +24,10 @@ body {
 				@offset-bottom
 				非必传，Number，距离窗口顶部达到指定偏移量后触发，default：-
 			</p>
+			<p>
+				@placeholder
+				非必传，Boolean，浮动后原位置的占位块，default：true
+			</p>
 			<h4>Affix events</h4>
 			<p>@on-change，在固定状态发生改变时触发，返回值：true | false</p>
 		</div>
@@ -31,7 +35,7 @@ body {
 			<div class="demo-affix">固定在最顶部</div>
 		</Affix>
 		<div v-for="(item, index) in arr" :key="`arr${index}`">{{ item }}</div>
-		<Affix :offset-bottom="20">
+		<Affix :offset-bottom="20" :placeholder="false">
 			<div class="demo-affix">固定在最顶部</div>
 		</Affix>
 		<div v-for="(item, index) in arr1" :key="`1arr${index}`">
