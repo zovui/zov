@@ -93,7 +93,7 @@ export default {
 					this.parent.$emit('on-change', val)
 				} else {
 					this.$emit('input', val)
-					this.parent.$emit('on-change', val)
+					this.$emit('on-change', val)
 				}
 			}
 		}
