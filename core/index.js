@@ -3,6 +3,7 @@ import './icons/index.css'
 // 【_c】全局注册式组件
 import Affix from './components/affix'
 import { Anchor, AnchorLink } from './components/anchor'
+import BackTop from './components/back-top'
 import LongList from './components/long-list'
 import Icon from './components/icon'
 import Button from './components/button'
@@ -47,6 +48,7 @@ const components = {
 	Affix,
 	Anchor,
 	AnchorLink,
+	BackTop,
 	LongList,
 	Icon,
 	Button,
@@ -115,6 +117,7 @@ export {
 	Affix,
 	Anchor,
 	AnchorLink,
+	BackTop,
 	LongList,
 	Icon,
 	Button,
