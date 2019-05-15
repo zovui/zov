@@ -195,6 +195,9 @@ export default {
 				this.scrollActiveTabToViewport()
 				this.resetPosition()
 			})
+		},
+		tabPaneList() {
+			this.redraw()
 		}
 	},
 	methods: {
@@ -314,6 +317,8 @@ export default {
 				} else {
 					this.scrollY = Math.abs(position) * -1
 				}
+			} else {
+				this.resetPosition()
 			}
 		},
 		// 计算正常的滚动位置信息
@@ -342,9 +347,9 @@ export default {
 		resetPosition() {
 			const { min } = this.scrollBounding[this.direction]
 			if (isHorizontal(this.direction)) {
-				this.scrollY = min
-			} else {
 				this.scrollX = min
+			} else {
+				this.scrollY = min
 			}
 		}
 	},

@@ -89,6 +89,26 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					给TabPane指定order，可让渲染出来的tabs进行排序
+				</h2>
+				<div class="demo-content">
+					TabPane的order配合v-if使用时非常有用
+				</div>
+				<div class="demo-content" :style="{ height: '300px' }">
+					<Tabs>
+						<TabPane
+							v-for="i in 3"
+							:label="'Tab' + i"
+							:id="'' + i"
+							:key="i"
+							:order="3 - i"
+							>Content of tab {{ i }}</TabPane
+						>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>

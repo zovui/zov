@@ -8,7 +8,11 @@ export default {
 			required: true
 		},
 		// tab的名字
-		label: String
+		label: String,
+		order: {
+			type: Number,
+			default: 0
+		}
 	},
 	created() {
 		if (this.Tabs === null) {

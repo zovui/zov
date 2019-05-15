@@ -79,6 +79,9 @@ export default {
 	methods: {
 		addTab(tabPane) {
 			this.tabPaneList.push(tabPane)
+			this.tabPaneList.sort((pane1, pane2) => {
+				return pane1.order < pane2.order ? -1 : 1
+			})
 		},
 		removeTab(id) {
 			const index = findIndex(this.tabPaneList, pane => pane.id === id)
@@ -86,6 +89,9 @@ export default {
 				return
 			}
 			this.tabPaneList.splice(index, 1)
+			this.tabPaneList.sort((pane1, pane2) => {
+				return pane1.order < pane2.order ? -1 : 1
+			})
 		},
 		changeTo(id) {
 			const targetTab = find(this.tabPaneList, vm => vm.id === id)
