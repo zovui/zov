@@ -2,7 +2,8 @@
 import Icon from '../icon'
 import TabsTab from './tabs-tab'
 import { find, findComponentsDownward } from '../../utils'
-import { on, off } from '../../utils/dom'
+import ResizeObserver from 'resize-observer-polyfill'
+import debounce from 'lodash.debounce'
 
 // 向前、向后按钮大小
 const ACTION_BUTTON_SIZE = 32
@@ -18,15 +19,15 @@ export default {
 		activeId: String,
 		direction: String
 	},
-	created() {
-		this.resizeHandler = this.onResize.bind(this)
-		on(window, 'resize', this.resizeHandler)
-	},
 	mounted() {
+		this.resizeObserver = new ResizeObserver(
+			debounce(this.handleResize.bind(this), 300)
+		)
+		this.resizeObserver.observe(this.$el)
 		this.redraw()
 	},
 	destroyed() {
-		off(window, 'resize', this.resizeHandler)
+		this.resizeObserver.disconnect()
 	},
 	data() {
 		return {
@@ -37,7 +38,7 @@ export default {
 			tabWrapHeight: 0,
 			scrollX: 0,
 			scrollY: 0,
-			resizeHandler: null
+			resizeObserver: null
 		}
 	},
 	computed: {
@@ -201,10 +202,12 @@ export default {
 				})
 			})
 		},
+		// 重绘
 		redraw() {
 			this.recalculateNavRect()
 			this.recalculateScrollableRect()
 		},
+		// 滚动至上一页
 		scrollToPrev() {
 			if (!this.isScrollable) {
 				return
@@ -223,6 +226,7 @@ export default {
 				)
 			}
 		},
+		// 滚动至下一页
 		scrollToNext() {
 			if (!this.isScrollable) {
 				return
@@ -312,9 +316,16 @@ export default {
 			}
 			return position
 		},
-		onResize() {
+		handleResize() {
 			this.recalculateNavRect()
 			this.scrollActiveTabToViewport()
+			this.$nextTick(() => {
+				if (this.direction === 'horizontal') {
+					this.scrollX = this.normalizeScrollPosition(this.scrollX)
+				} else {
+					this.scrollY = this.normalizeScrollPosition(this.scrollY)
+				}
+			})
 		}
 	},
 	render() {
