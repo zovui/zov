@@ -29,6 +29,11 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		if (!this.activeId && this.tabs.length) {
+			this.changeTo(this.tabs[0].id)
+		}
+	},
 	provide() {
 		return {
 			Tabs: {
