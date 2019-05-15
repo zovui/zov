@@ -19,7 +19,7 @@ export default {
 		TabsTab
 	},
 	props: {
-		tabs: Array,
+		tabPaneList: Array,
 		activeId: String,
 		direction: String
 	},
@@ -364,7 +364,7 @@ export default {
 						class="zov-tabs-nav-tabs-wrap"
 						style={this.scrollableStyles}>
 						<div class="zov-tabs-nav-tabs" ref="tabWrap">
-							{this.tabs.map(pane => {
+							{this.tabPaneList.map(pane => {
 								return (
 									<TabsTab
 										id={pane.id}

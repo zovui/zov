@@ -30,8 +30,8 @@ export default {
 		}
 	},
 	mounted() {
-		if (!this.activeId && this.tabs.length) {
-			this.changeTo(this.tabs[0].id)
+		if (!this.activeId && this.tabPaneList.length) {
+			this.changeTo(this.tabPaneList[0].id)
 		}
 	},
 	provide() {
@@ -45,7 +45,7 @@ export default {
 	},
 	data() {
 		return {
-			tabs: [],
+			tabPaneList: [],
 			currentActiveId: this.activeId
 		}
 	},
@@ -78,17 +78,17 @@ export default {
 	},
 	methods: {
 		addTab(tabPane) {
-			this.tabs.push(tabPane)
+			this.tabPaneList.push(tabPane)
 		},
 		removeTab(id) {
-			const index = findIndex(this.tabs, pane => pane.id === id)
+			const index = findIndex(this.tabPaneList, pane => pane.id === id)
 			if (index === -1) {
 				return
 			}
-			this.tabs.splice(index, 1)
+			this.tabPaneList.splice(index, 1)
 		},
 		changeTo(id) {
-			const targetTab = find(this.tabs, vm => vm.id === id)
+			const targetTab = find(this.tabPaneList, vm => vm.id === id)
 			if (targetTab) {
 				this.currentActiveId = targetTab.id
 			}
@@ -98,12 +98,15 @@ export default {
 		return (
 			<div class={this.classList}>
 				<TabsNav
-					tabs={this.tabs}
+					tabPaneList={this.tabPaneList}
 					activeId={this.currentActiveId}
 					direction={this.direction}
 				/>
-				<TabsContent tabs={this.tabs} activeId={this.currentActiveId} />
-				<div class="zov-tabs-hidden">{this.$slots.default}</div>
+				<TabsContent
+					tabPaneList={this.tabPaneList}
+					activeId={this.currentActiveId}
+				/>
+				<div class="zov-tabPaneList-hidden">{this.$slots.default}</div>
 			</div>
 		)
 	}

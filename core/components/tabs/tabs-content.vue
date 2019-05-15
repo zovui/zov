@@ -3,11 +3,14 @@ import { find } from '../../utils'
 export default {
 	name: 'zov-tab-content',
 	props: {
-		tabs: Array,
+		tabPaneList: Array,
 		activeId: String
 	},
 	render() {
-		const activeTabPane = find(this.tabs, vm => vm.id === this.activeId)
+		const activeTabPane = find(
+			this.tabPaneList,
+			vm => vm.id === this.activeId
+		)
 		let content = ''
 		if (activeTabPane) {
 			content = activeTabPane.$slots.default
