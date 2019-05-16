@@ -29,6 +29,7 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
+import Steps from './components/steps'
 
 // 【_f】全局方法式组件
 import Dark from './components/dark'
@@ -80,7 +81,9 @@ const components = {
 	Radio,
 	RadioGroup,
 	Checkbox,
-	CheckboxGroup
+	CheckboxGroup,
+	Step: Steps.Step,
+	Steps
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
