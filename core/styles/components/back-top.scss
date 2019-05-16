@@ -1,31 +1,31 @@
 $prefix-backtop: #{$prefix}back-top;
 
 .#{$prefix-backtop} {
-    z-index: $zindex-back-top;
-    position: fixed;
-    cursor: pointer;
-    display: none;
-
-    &.#{$prefix-backtop}-show {
-        display: block;
-    }
-
-    &-inner {
-        height:24px;
-        width:24px;
-        background-color: rgba(0,0,0,.6);
-        // @include get-color-sub(background-color);
-        border-radius: 12px;
-        box-shadow: 0 1px 3px rgba(0,0,0,.2);
-        transition: all $transition-time ease-in-out;
-
-        &:hover {
-            background-color: rgba(0,0,0,.7);
-        }
-    }
-
-    i{
-        @include get-color-background-coloured;
+	$size: 40px;
+	display: none;
+	width: $size;
+	height: $size;
+	line-height: $size;
+	font-size: $font-size-large;
+	text-align: center;
+	position: fixed;
+	z-index: $zindex-back-top;
+	color: $color-background;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 50%;
+	@include get-color-shadow();
+	transition: all $transition-time ease-in-out;
+	opacity: 0.85;
+	&:hover {
+		opacity: 1;
+	}
+	&.#{$prefix-backtop}-show {
+		display: block;
+	}
+	.#{$prefix}icon {
         font-size: 24px;
-    }
+        line-height: $size;
+        @include get-color-background-coloured;
+	}
 }

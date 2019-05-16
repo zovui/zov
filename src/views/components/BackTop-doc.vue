@@ -24,7 +24,7 @@
 			<p>@on-click，点击按钮时触发，返回值：无</p>
 		</div>
 		<div style="height: 2000px"></div>
-		<BackTop> </BackTop>
+		<BackTop></BackTop>
 	</div>
 </template>
 <script>
