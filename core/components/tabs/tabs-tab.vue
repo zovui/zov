@@ -5,7 +5,8 @@ export default {
 		id: String,
 		index: Number,
 		isActive: Boolean,
-		label: [Array, String]
+		label: [Array, String],
+		disabled: Boolean
 	},
 	inject: {
 		Tabs: {
@@ -18,6 +19,9 @@ export default {
 			if (this.isActive) {
 				classList.push('zov-tabs-tab--active')
 			}
+			if (this.disabled) {
+				classList.push('zov-tabs-tab--disabled')
+			}
 			return classList
 		}
 	},
@@ -28,6 +32,9 @@ export default {
 	},
 	methods: {
 		handleClick() {
+			if (this.disabled) {
+				return
+			}
 			this.Tabs.changeTo(this.id)
 		}
 	},

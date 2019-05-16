@@ -376,6 +376,7 @@ export default {
 										key={pane.id}
 										isActive={pane.id === this.activeId}
 										label={pane.computedLabel}
+										disabled={pane.disabled}
 										onChangeLabel={
 											this.recalculateScrollableRect
 										}

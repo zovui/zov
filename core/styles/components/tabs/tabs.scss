@@ -46,11 +46,17 @@ $component-name: $prefix + 'tabs';
         box-sizing: border-box;
         cursor: pointer;
         font-weight: 500;
-        &:hover {
-            @include get-color-primary-hover(color)
+        &:not(.#{$component-name}-tab--disabled) {
+            &:hover {
+                @include get-color-primary-hover(color);
+            }
         }
         &--active {
-            @include get-color-primary-active(color)
+            @include get-color-primary-active(color);
+        }
+        &--disabled {
+            @include get-color-disabled(color);
+            cursor: not-allowed;
         }
     }
     // 可滚动时的样式变化

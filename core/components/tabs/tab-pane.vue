@@ -12,6 +12,10 @@ export default {
 		order: {
 			type: Number,
 			default: 0
+		},
+		disabled: {
+			type: Boolean,
+			default: false
 		}
 	},
 	created() {

@@ -109,6 +109,23 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					给TabPane指定disabled，禁用某tab
+				</h2>
+				<div class="demo-content">
+					<Tabs>
+						<TabPane
+							v-for="i in 3"
+							:label="'Tab' + i"
+							:id="'' + i"
+							:disabled="i === 2"
+							:key="i"
+							>Content of tab {{ i }}</TabPane
+						>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>
