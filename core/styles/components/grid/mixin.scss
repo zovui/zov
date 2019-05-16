@@ -46,7 +46,7 @@ $prefix-col: #{$prefix}col;
         }
         @include loop-grid-columns(($index - 1), $class);
     }
-    @else if $index = 0 {
+    @else if $index == 0 {
         .#{$prefix-col}-span#{$class}-#{$index} {
             display: none;
         }
