@@ -95,7 +95,7 @@ export default {
 		},
 		changeTo(id) {
 			const targetTab = find(this.tabPaneList, vm => vm.id === id)
-			if (targetTab) {
+			if (targetTab && !targetTab.disabled) {
 				this.currentActiveId = targetTab.id
 			}
 		}

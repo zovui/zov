@@ -217,6 +217,54 @@ export default {
 							}
 						]
 					}
+				},
+				{
+					header: 'TabPane props',
+					content: {
+						headers: ['props', '说明', '类型', '默认值'],
+						data: [
+							{
+								props: 'id',
+								introduction: 'tab的id',
+								type: 'string',
+								default: '无'
+							},
+							{
+								props: 'label',
+								introduction: 'tab的label',
+								type: 'string',
+								default: "''"
+							},
+							{
+								props: 'order',
+								introduction: 'tab展示顺序',
+								type: 'number',
+								default: '0'
+							},
+							{
+								props: 'disabled',
+								introduction: '是否禁用某tab',
+								type: 'boolean',
+								default: 'false'
+							}
+						]
+					}
+				},
+				{
+					header: 'TabPane slots',
+					content: {
+						headers: ['slot名', '说明'],
+						data: [
+							{
+								props: 'label',
+								introduction: '自定义label内容'
+							},
+							{
+								props: 'default',
+								introduction: 'tab对应的内容'
+							}
+						]
+					}
 				}
 			],
 			bindingLabel: 'bindingLabel',

@@ -32,9 +32,6 @@ export default {
 	},
 	methods: {
 		handleClick() {
-			if (this.disabled) {
-				return
-			}
 			this.Tabs.changeTo(this.id)
 		}
 	},
