@@ -29,6 +29,8 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
+import Breadcrumb from './components/breadcrumb'
+import BreadcrumbItem from './components/breadcrumb-item'
 
 // 【_f】全局方法式组件
 import Dark from './components/dark'
@@ -80,7 +82,9 @@ const components = {
 	Radio,
 	RadioGroup,
 	Checkbox,
-	CheckboxGroup
+	CheckboxGroup,
+	Breadcrumb,
+	BreadcrumbItem
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -148,7 +152,9 @@ export {
 	Radio,
 	RadioGroup,
 	Checkbox,
-	CheckboxGroup
+	CheckboxGroup,
+	Breadcrumb,
+	BreadcrumbItem
 }
 // 将整个zov暴露出去
 export default zov
