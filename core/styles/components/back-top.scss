@@ -11,9 +11,11 @@ $prefix-backtop: #{$prefix}back-top;
     }
 
     &-inner {
+        height:24px;
+        width:24px;
         background-color: rgba(0,0,0,.6);
         // @include get-color-sub(background-color);
-        border-radius: 2px;
+        border-radius: 12px;
         box-shadow: 0 1px 3px rgba(0,0,0,.2);
         transition: all $transition-time ease-in-out;
 
@@ -25,6 +27,5 @@ $prefix-backtop: #{$prefix}back-top;
     i{
         @include get-color-background-coloured;
         font-size: 24px;
-        padding: 8px 12px;
     }
 }

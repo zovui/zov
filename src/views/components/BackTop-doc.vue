@@ -1,8 +1,4 @@
-<style>
-body {
-	height: 2000px;
-}
-</style>
+<style></style>
 <template>
 	<div>
 		<div
@@ -27,6 +23,7 @@ body {
 			<h4>BackTop events</h4>
 			<p>@on-click，点击按钮时触发，返回值：无</p>
 		</div>
+		<div style="height: 2000px"></div>
 		<BackTop> </BackTop>
 	</div>
 </template>

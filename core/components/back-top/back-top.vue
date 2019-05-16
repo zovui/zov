@@ -2,7 +2,7 @@
 	<div :class="classes" :style="styles" @click="back">
 		<slot>
 			<div :class="innerClasses">
-				<i class="zov-icon zov-iconfont zi-arrow-up"></i>
+				<i class="zov-icon zov-iconfont zi-arrow-round-up"></i>
 			</div>
 		</slot>
 	</div>
@@ -10,9 +10,9 @@
 <script>
 import { scrollTop } from '../../utils/index'
 import { on, off } from '../../utils/dom'
-const prefixCls = 'zov-back-top'
+const prefix = 'zov-back-top'
 export default {
-	name: 'BackTop',
+	name: prefix,
 	props: {
 		height: {
 			type: Number,
@@ -47,9 +47,9 @@ export default {
 	computed: {
 		classes() {
 			return [
-				`${prefixCls}`,
+				`${prefix}`,
 				{
-					[`${prefixCls}-show`]: this.backTop
+					[`${prefix}-show`]: this.backTop
 				}
 			]
 		},
@@ -60,7 +60,7 @@ export default {
 			}
 		},
 		innerClasses() {
-			return `${prefixCls}-inner`
+			return `${prefix}-inner`
 		}
 	},
 	methods: {
