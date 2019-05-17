@@ -126,6 +126,34 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					给TabPane指定lazy, 是否懒加载
+				</h2>
+				<div class="demo-content">
+					<p>
+						给TabPane指定lazy = true，在tabs渲染时，只有当activeId
+						===
+						TabPane.id时才会被挂载，当切换至别的tab时，其内容会被销毁
+					</p>
+					<p>
+						给TabPane指定lazy = false，在tabs渲染时，预渲染其内容
+					</p>
+				</div>
+				<div class="demo-content">
+					<Tabs>
+						<TabPane label="tab1" id="1" :lazy="false">
+							<StaticTestComponent />
+						</TabPane>
+						<TabPane label="tab2" id="2" :lazy="false">
+							<StaticTestComponent />
+						</TabPane>
+						<TabPane label="tab3" id="3">
+							<LazyTestComponent />
+						</TabPane>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>
@@ -189,6 +217,30 @@
 <script>
 export default {
 	name: 'TabsDemo',
+	components: {
+		StaticTestComponent: {
+			mounted() {
+				console.log('static component is mounted!')
+			},
+			destroyed() {
+				console.log('static component is destroyed!')
+			},
+			render(h) {
+				return h('p', "I'm static component!")
+			}
+		},
+		LazyTestComponent: {
+			mounted() {
+				console.log('lazy component is mounted!')
+			},
+			destroyed() {
+				console.log('lazy component is destroyed!')
+			},
+			render(h) {
+				return h('p', "I'm lazy component!")
+			}
+		}
+	},
 	data() {
 		return {
 			componentIntroduction: [
@@ -246,6 +298,12 @@ export default {
 								introduction: '是否禁用某tab',
 								type: 'boolean',
 								default: 'false'
+							},
+							{
+								props: 'lazy',
+								introduction: '是否懒加载',
+								type: 'boolean',
+								default: 'true'
 							}
 						]
 					}

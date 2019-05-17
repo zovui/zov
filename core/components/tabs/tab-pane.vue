@@ -9,13 +9,20 @@ export default {
 		},
 		// tab的名字
 		label: String,
+		// tab的顺序
 		order: {
 			type: Number,
 			default: 0
 		},
+		// 是否禁用该tab
 		disabled: {
 			type: Boolean,
 			default: false
+		},
+		// 是否懒加载
+		lazy: {
+			type: Boolean,
+			default: true
 		}
 	},
 	created() {
