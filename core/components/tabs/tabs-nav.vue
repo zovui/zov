@@ -1,22 +1,19 @@
 <script>
-import Icon from '../icon'
 import TabsTab from './tabs-tab'
 import { find, findComponentsDownward } from '../../utils'
 import ResizeObserver from 'resize-observer-polyfill'
 import debounce from 'lodash.debounce'
+import { isHorizontal } from './helper'
+import TabsNavAction from './tabs-nav-action'
 
 // 向前、向后按钮大小
 const ACTION_BUTTON_SIZE = 32
 
-function isHorizontal(direction) {
-	return direction === 'horizontal'
-}
-
 export default {
 	name: 'zov-tabs-nav',
 	components: {
-		Icon,
-		TabsTab
+		TabsTab,
+		TabsNavAction
 	},
 	props: {
 		tabPaneList: Array,
@@ -136,11 +133,6 @@ export default {
 				}
 			}
 		},
-		actionIcon() {
-			return isHorizontal(this.direction)
-				? ['arrow-back', 'arrow-forward']
-				: ['arrow-up', 'arrow-down']
-		},
 		// 是否禁用上一页
 		isDisabledPrevAction() {
 			const position = isHorizontal(this.direction)
@@ -156,28 +148,6 @@ export default {
 				: this.scrollY
 			const maxPosition = this.scrollBounding[this.direction].max
 			return position <= maxPosition
-		},
-		// 上一页按钮class
-		prevActionClassList() {
-			const classList = [
-				'zov-tabs-nav-action',
-				'zov-tabs-nav-action-prev'
-			]
-			if (this.isDisabledPrevAction) {
-				classList.push(`zov-tabs-nav-action--disabled`)
-			}
-			return classList
-		},
-		// 下一页按钮class
-		nextActionClassList() {
-			const classList = [
-				'zov-tabs-nav-action',
-				'zov-tabs-nav-action-next'
-			]
-			if (this.isDisabledNextAction) {
-				classList.push(`zov-tabs-nav-action--disabled`)
-			}
-			return classList
 		}
 	},
 	watch: {
@@ -356,14 +326,12 @@ export default {
 	render() {
 		return (
 			<div class={this.classList}>
-				<span
-					class={this.prevActionClassList}
-					onClick={this.scrollToPrev}>
-					<Icon
-						class="zov-tabs-nav-action-icon"
-						iconname={this.actionIcon[0]}
-					/>
-				</span>
+				<TabsNavAction
+					isPrev={true}
+					direction={this.direction}
+					disabled={this.isDisabledPrevAction}
+					onClick={this.scrollToPrev}
+				/>
 				<div class="zov-tabs-nav-scroll-wrap">
 					<div
 						class="zov-tabs-nav-tabs-wrap"
@@ -390,14 +358,12 @@ export default {
 						/>
 					</div>
 				</div>
-				<span
-					class={this.nextActionClassList}
-					onClick={this.scrollToNext}>
-					<Icon
-						class="zov-tabs-nav-action-icon"
-						iconname={this.actionIcon[1]}
-					/>
-				</span>
+				<TabsNavAction
+					isNext={true}
+					direction={this.direction}
+					disabled={this.isDisabledNextAction}
+					onClick={this.scrollToNext}
+				/>
 			</div>
 		)
 	}

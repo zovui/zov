@@ -142,13 +142,13 @@
 				</div>
 				<div class="demo-content">
 					<Tabs>
-						<TabPane label="tab1" id="1" :lazy="false">
+						<TabPane label="static" id="1" :lazy="false">
 							<StaticTestComponent />
 						</TabPane>
-						<TabPane label="tab2" id="2" :lazy="false">
+						<TabPane label="static" id="2" :lazy="false">
 							<StaticTestComponent />
 						</TabPane>
-						<TabPane label="tab3" id="3">
+						<TabPane label="lazy" id="3">
 							<LazyTestComponent />
 						</TabPane>
 					</Tabs>

@@ -27,6 +27,13 @@ export default {
 			validator(pos) {
 				return includes(['top', 'bottom', 'left', 'right'], pos)
 			}
+		},
+		type: {
+			type: String,
+			default: 'border-card',
+			validator(type) {
+				return includes(['border-card', 'card'], type)
+			}
 		}
 	},
 	mounted() {
