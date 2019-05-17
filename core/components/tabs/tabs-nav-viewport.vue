@@ -8,11 +8,10 @@
 
 <script>
 export default {
-	name: 'zov-tabs-nav-roller',
+	name: 'zov-tabs-nav-viewport',
 	props: {
-		scrollX: 0,
-		scrollY: 0,
-		tabRectList: Array
+		scrollX: Number,
+		scrollY: Number
 	},
 	computed: {
 		styles() {

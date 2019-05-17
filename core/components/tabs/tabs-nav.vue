@@ -5,7 +5,7 @@ import ResizeObserver from 'resize-observer-polyfill'
 import debounce from 'lodash.debounce'
 import { isHorizontal } from './helper'
 import TabsNavAction from './tabs-nav-action'
-
+import TabsNavViewport from './tabs-nav-viewport'
 // 向前、向后按钮大小
 const ACTION_BUTTON_SIZE = 32
 
@@ -13,7 +13,8 @@ export default {
 	name: 'zov-tabs-nav',
 	components: {
 		TabsTab,
-		TabsNavAction
+		TabsNavAction,
+		TabsNavViewport
 	},
 	props: {
 		tabPaneList: Array,
@@ -81,13 +82,6 @@ export default {
 				classList.push('zov-tabs-nav--scrollable')
 			}
 			return classList
-		},
-		scrollableStyles() {
-			return {
-				transform: `translate3d(${this.scrollX}px, ${
-					this.scrollY
-				}px, 0)`
-			}
 		},
 		// 可视范围大小
 		viewportSize() {
@@ -163,7 +157,6 @@ export default {
 				this.recalculateNavRect()
 				this.recalculateScrollableRect()
 				this.scrollActiveTabToViewport()
-				this.resetPosition()
 			})
 		},
 		tabPaneList() {
@@ -284,8 +277,10 @@ export default {
 
 				if (isHorizontal(this.direction)) {
 					this.scrollX = Math.abs(position) * -1
+					this.scrollY = 0
 				} else {
 					this.scrollY = Math.abs(position) * -1
+					this.scrollX = 0
 				}
 			} else {
 				this.resetPosition()
@@ -318,8 +313,10 @@ export default {
 			const { min } = this.scrollBounding[this.direction]
 			if (isHorizontal(this.direction)) {
 				this.scrollX = min
+				this.scrollY = 0
 			} else {
 				this.scrollY = min
+				this.scrollX = 0
 			}
 		}
 	},
@@ -332,32 +329,28 @@ export default {
 					disabled={this.isDisabledPrevAction}
 					onClick={this.scrollToPrev}
 				/>
-				<div class="zov-tabs-nav-scroll-wrap">
-					<div
-						class="zov-tabs-nav-tabs-wrap"
-						style={this.scrollableStyles}>
-						<div class="zov-tabs-nav-tabs" ref="tabWrap">
-							{this.tabPaneList.map(pane => {
-								return (
-									<TabsTab
-										id={pane.id}
-										key={pane.id}
-										isActive={pane.id === this.activeId}
-										label={pane.computedLabel}
-										disabled={pane.disabled}
-										onChangeLabel={
-											this.recalculateScrollableRect
-										}
-									/>
-								)
-							})}
-						</div>
-						<div
-							class="zov-tabs-nav-slider"
-							style={this.sliderStyles}
-						/>
+				<TabsNavViewport scrollX={this.scrollX} scrollY={this.scrollY}>
+					<div class="zov-tabs-nav-tabs" ref="tabWrap">
+						{this.tabPaneList.map(pane => {
+							return (
+								<TabsTab
+									id={pane.id}
+									key={pane.id}
+									isActive={pane.id === this.activeId}
+									label={pane.computedLabel}
+									disabled={pane.disabled}
+									onChangeLabel={
+										this.recalculateScrollableRect
+									}
+								/>
+							)
+						})}
 					</div>
-				</div>
+					<div
+						class="zov-tabs-nav-slider"
+						style={this.sliderStyles}
+					/>
+				</TabsNavViewport>
 				<TabsNavAction
 					isNext={true}
 					direction={this.direction}

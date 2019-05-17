@@ -1,0 +1,19 @@
+@import "../../mixins/get-color";
+@import "../../custom";
+
+.#{$component-name} {
+    .#{$component-name}-nav-viewport {
+        flex: 1 1 auto;
+        overflow: hidden;
+    }
+    .#{$component-name}-nav-roller {
+        position: relative;
+        transition: $transition-time transform $bezier;
+    }
+}
+
+.#{$component-name}--horizontal {
+    .#{$component-name}-nav-roller {
+        display: inline-block;
+    }
+}
