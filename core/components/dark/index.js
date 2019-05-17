@@ -30,7 +30,7 @@ let dark = {
 				_style.getPropertyValue('--dark-' + item)
 			)
 		})
-		callback()
+		callback && callback()
 	},
 	close(callback) {
 		colorsName.forEach(item => {
@@ -39,7 +39,7 @@ let dark = {
 				_style.getPropertyValue('--light-' + item)
 			)
 		})
-		callback()
+		callback && callback()
 	}
 }
 export default dark
