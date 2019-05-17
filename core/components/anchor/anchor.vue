@@ -26,8 +26,9 @@ import {
 	sharpMatcherRegx
 } from '../../utils/index'
 import { on, off } from '../../utils/dom'
+const prefix = 'zov-anchor'
 export default {
-	name: 'Anchor',
+	name: prefix,
 	provide() {
 		return {
 			anchorCom: this
