@@ -1,6 +1,6 @@
 module.exports = {
 	publicPath: './',
-	outputDir: 'docs',
+	outputDir: process.env.CORE_MIN === 'lib' ? 'lib' : 'docs',
 	filenameHashing: true,
 	chainWebpack(config) {
 		if (
