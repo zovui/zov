@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.3.0](https://github.com/zovui/zov/compare/v0.2.0...v0.3.0) (2019-05-17)
+
+
+### Bug Fixes
+
+* **checkbox grid:** 修改scss书写不规范 ([e8756e0](https://github.com/zovui/zov/commit/e8756e0))
+* 规范组件命名，优化back-top组件样式 ([b037383](https://github.com/zovui/zov/commit/b037383))
+* **vue.config:** 环境判断 ([ec5e30b](https://github.com/zovui/zov/commit/ec5e30b))
+
+
+### Features
+
+* 新增组件back-top ([1c62e93](https://github.com/zovui/zov/commit/1c62e93))
+* **breadcrumb:** 新增breadcrumb ([f21fab9](https://github.com/zovui/zov/commit/f21fab9))
+
+
+
 # [0.2.0](https://github.com/zovui/zov/compare/v0.1.5...v0.2.0) (2019-05-10)
 
 
