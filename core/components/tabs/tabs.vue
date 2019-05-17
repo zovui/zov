@@ -111,6 +111,7 @@ export default {
 		return (
 			<div class={this.classList}>
 				<TabsNav
+					type={this.type}
 					tabPaneList={this.tabPaneList}
 					activeId={this.currentActiveId}
 					direction={this.direction}

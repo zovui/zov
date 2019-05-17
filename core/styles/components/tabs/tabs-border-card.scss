@@ -1,0 +1,58 @@
+@import "../../mixins/get-color";
+@import "../../custom";
+
+.#{$component-name}-border-card-roller {
+    display: inline-block;
+    position: relative;
+}
+
+.#{$component-name}-border-card-wrap {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.#{$component-name}-border-card-slider {
+    box-sizing: border-box;
+    position: absolute;
+    @include get-color-primary-active(background-color)
+}
+
+
+.#{$component-name}--horizontal {
+    // 滑块
+    .#{$component-name}-border-card-slider {
+        width: 0;
+        height: 2px;
+        transition: $transition-time width $bezier,
+        $transition-time left $bezier
+    }
+    &.#{$component-name}--top {
+        .#{$component-name}-border-card-slider {
+            bottom: 0;
+        }
+    }
+    &.#{$component-name}--bottom {
+        .#{$component-name}-border-card-slider {
+            top: 0;
+        }
+    }
+}
+
+.#{$component-name}--vertical {
+    .#{$component-name}-border-card-slider {
+        width: 2px;
+        height: 0;
+        transition: $transition-time height $bezier,
+                    $transition-time top $bezier
+    }
+    &.#{$component-name}--left {
+        .#{$component-name}-border-card-slider {
+            right: 0;
+        }
+    }
+    &.#{$component-name}--right {
+        .#{$component-name}-border-card-slider {
+            left: 0;
+        }
+    }
+}

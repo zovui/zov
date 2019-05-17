@@ -19,12 +19,6 @@
                 transform: translate(-50%, -50%);
             }
         }
-        .#{$component-name}-nav-slider {
-            width: 2px;
-            height: 0;
-            transition: $transition-time height $bezier,
-            $transition-time top $bezier
-        }
         .#{$component-name}-tab {
             display: block;
             margin-bottom: 16px;
@@ -40,9 +34,6 @@
             margin-right: 20px;
             border-right: 1px solid transparent;
             @include get-color-border(border-color);
-            .#{$component-name}-nav-slider {
-                right: 0;
-            }
             .#{$component-name}-tab {
                 text-align: right;
             }
@@ -57,9 +48,6 @@
             margin-left: 20px;
             border-left: 1px solid transparent;
             @include get-color-border(border-color);
-            .#{$component-name}-nav-slider {
-                left: 0;
-            }
             .#{$component-name}-tab {
                 text-align: left;
             }

@@ -6,18 +6,23 @@ import debounce from 'lodash.debounce'
 import { isHorizontal } from './helper'
 import TabsNavAction from './tabs-nav-action'
 import TabsNavViewport from './tabs-nav-viewport'
+import { TabsBorderCardRoller, TabsBorderCardTab } from './border-card'
+import { TabsCardRoller, TabsCardTab } from './card'
 
 export default {
 	name: 'zov-tabs-nav',
 	components: {
 		TabsTab,
 		TabsNavAction,
-		TabsNavViewport
+		TabsNavViewport,
+		TabsBorderCardRoller,
+		TabsBorderCardTab
 	},
 	props: {
 		tabPaneList: Array,
 		activeId: String,
-		direction: String
+		direction: String,
+		type: String
 	},
 	mounted() {
 		// 设置resize观察者
@@ -156,7 +161,18 @@ export default {
 			}
 		},
 		updateTabRectList() {
-			const children = findComponentsDownward(this, TabsTab.name)
+			let tabComponentName
+			switch (this.type) {
+				case 'border-card':
+					tabComponentName = TabsBorderCardTab.name
+					break
+				case 'card':
+					tabComponentName = TabsCardTab.name
+					break
+				default:
+					tabComponentName = ''
+			}
+			const children = findComponentsDownward(this, tabComponentName)
 			this.tabRectList = children.map(vm => {
 				const rect = vm.$el.getBoundingClientRect()
 				return {
@@ -306,6 +322,46 @@ export default {
 		}
 	},
 	render() {
+		let roller = ''
+		switch (this.type) {
+			case 'border-card':
+				roller = (
+					<TabsBorderCardRoller
+						activeId={this.activeId}
+						direction={this.direction}
+						tabRectList={this.tabRectList}>
+						{this.tabPaneList.map(pane => {
+							return (
+								<TabsBorderCardTab
+									id={pane.id}
+									key={pane.id}
+									isActive={pane.id === this.activeId}
+									label={pane.computedLabel}
+									disabled={pane.disabled}
+								/>
+							)
+						})}
+					</TabsBorderCardRoller>
+				)
+				break
+			case 'card':
+				roller = (
+					<TabsCardRoller>
+						{this.tabPaneList.map(pane => {
+							return (
+								<TabsCardTab
+									id={pane.id}
+									key={pane.id}
+									isActive={pane.id === this.activeId}
+									label={pane.computedLabel}
+									disabled={pane.disabled}
+								/>
+							)
+						})}
+					</TabsCardRoller>
+				)
+				break
+		}
 		return (
 			<div class={this.classList}>
 				<TabsNavAction
@@ -318,23 +374,7 @@ export default {
 					scrollX={this.scrollX}
 					scrollY={this.scrollY}
 					ref="viewport">
-					<div class="zov-tabs-nav-tabs" ref="tabWrap">
-						{this.tabPaneList.map(pane => {
-							return (
-								<TabsTab
-									id={pane.id}
-									key={pane.id}
-									isActive={pane.id === this.activeId}
-									label={pane.computedLabel}
-									disabled={pane.disabled}
-								/>
-							)
-						})}
-					</div>
-					<div
-						class="zov-tabs-nav-slider"
-						style={this.sliderStyles}
-					/>
+					{roller}
 				</TabsNavViewport>
 				<TabsNavAction
 					isNext={true}

@@ -25,22 +25,10 @@ export default {
 			return classList
 		}
 	},
-	watch: {
-		label() {
-			this.$emit('changeLabel')
-		}
-	},
 	methods: {
 		handleClick() {
 			this.Tabs.changeTo(this.id)
 		}
-	},
-	render() {
-		return (
-			<div class={this.classList} onClick={this.handleClick}>
-				{this.label}
-			</div>
-		)
 	}
 }
 </script>

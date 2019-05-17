@@ -11,17 +11,6 @@
             align-self: stretch;
             width: 32px;
         }
-        &-scroll-wrap {
-            flex: 1 1 auto;
-        }
-        &-tabs-wrap {
-            display: inline-block;
-        }
-        // tab容器
-        &-tabs {
-            display: inline-block;
-            white-space: nowrap;
-        }
         // tab样式
         .#{$component-name}-tab {
             display: inline-block;
@@ -31,13 +20,6 @@
                 margin-right: 0;
             }
         }
-        // 滑块
-        &-slider {
-            width: 0;
-            height: 2px;
-            transition: $transition-time width $bezier,
-                        $transition-time left $bezier
-        }
     }
     // nav在顶部时
     &.#{$component-name}--top {
@@ -46,9 +28,6 @@
             margin-bottom: 16px;
             border-bottom: 1px solid transparent;
             @include get-color-border(border-color);
-            &-slider {
-                bottom: 0;
-            }
         }
         .#{$component-name}-content {
             order: 1
@@ -61,9 +40,6 @@
             margin-top: 16px;
             border-top: 1px solid transparent;
             @include get-color-border(border-color);
-            &-slider {
-                top: 0;
-            }
         }
         .#{$component-name}-content {
             order: 0

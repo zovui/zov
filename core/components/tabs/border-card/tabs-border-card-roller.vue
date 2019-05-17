@@ -1,57 +1,27 @@
 <template>
-	<div class="zov-tabs-nav-tabs-wrap" :style="scrollableStyles">
-		<div class="zov-tabs-nav-tabs">
+	<div class="zov-tabs-border-card-roller">
+		<div class="zov-tabs-border-card-wrap">
 			<slot />
 		</div>
-		<div class="zov-tabs-nav-slider" :style="sliderStyles"></div>
+		<TabsBorderCardSlider
+			:active-id="activeId"
+			:direction="direction"
+			:tab-rect-list="tabRectList"
+		/>
 	</div>
 </template>
 
 <script>
-import { find } from '../../../utils'
-import TabsBorderCardTab from './tabs-border-card-tab'
-import { isHorizontal } from '../helper'
-
+import TabsBorderCardSlider from './tabs-border-card-slider'
 export default {
 	name: 'zov-tabs-border-card-roller',
 	props: {
 		activeId: String,
-		scrollX: Number,
-		scrollY: Number,
 		direction: String,
 		tabRectList: Array
 	},
 	components: {
-		TabsBorderCardTab
-	},
-	computed: {
-		scrollableStyles() {
-			return {
-				transform: `translate3d(${this.scrollX}px, ${
-					this.scrollY
-				}px, 0)`
-			}
-		},
-		sliderStyles() {
-			const rect = find(
-				this.tabRectList,
-				rect => rect.id === this.activeId
-			)
-			if (rect) {
-				if (isHorizontal(this.direction)) {
-					return {
-						left: rect.offsetLeft + 'px',
-						width: rect.scrollWidth + 'px'
-					}
-				} else {
-					return {
-						top: rect.offsetTop + 'px',
-						height: rect.scrollHeight + 'px'
-					}
-				}
-			}
-			return null
-		}
+		TabsBorderCardSlider
 	}
 }
 </script>
