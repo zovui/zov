@@ -6,8 +6,6 @@ import debounce from 'lodash.debounce'
 import { isHorizontal } from './helper'
 import TabsNavAction from './tabs-nav-action'
 import TabsNavViewport from './tabs-nav-viewport'
-// 向前、向后按钮大小
-const ACTION_BUTTON_SIZE = 32
 
 export default {
 	name: 'zov-tabs-nav',
@@ -40,7 +38,11 @@ export default {
 				width: 0,
 				height: 0
 			},
-			tabsWrapRect: {
+			viewportRect: {
+				width: 0,
+				height: 0
+			},
+			rollerRect: {
 				width: 0,
 				height: 0
 			},
@@ -52,9 +54,9 @@ export default {
 	computed: {
 		isScrollable() {
 			if (isHorizontal(this.direction)) {
-				return this.tabsWrapRect.width > this.navRect.width
+				return this.rollerRect.width > this.navRect.width
 			}
-			return this.tabsWrapRect.height > this.navRect.height
+			return this.rollerRect.height > this.navRect.height
 		},
 		sliderStyles() {
 			const rect = find(
@@ -83,65 +85,37 @@ export default {
 			}
 			return classList
 		},
-		// 可视范围大小
-		viewportSize() {
-			return {
-				horizontal: {
-					width: this.isScrollable
-						? this.navRect.width - ACTION_BUTTON_SIZE * 2
-						: this.navRect.width,
-					height: this.navRect.height
-				},
-				vertical: {
-					width: this.navRect.width,
-					height: this.isScrollable
-						? this.navRect.height - ACTION_BUTTON_SIZE * 2
-						: this.navRect.height
-				}
-			}
-		},
 		// 滚动边界
 		scrollBounding() {
 			let max = 0
 			if (this.isScrollable) {
 				if (isHorizontal(this.direction)) {
-					max =
-						-1 *
-						(this.tabsWrapRect.width -
-							this.viewportSize.horizontal.width)
+					max = -1 * (this.rollerRect.width - this.viewportRect.width)
 				} else {
 					max =
-						-1 *
-						(this.tabsWrapRect.height -
-							this.viewportSize.vertical.height)
+						-1 * (this.rollerRect.height - this.viewportRect.height)
 				}
 			}
 			return {
-				horizontal: {
-					min: 0,
-					max
-				},
-				vertical: {
-					min: 0,
-					max
-				}
+				min: 0,
+				max
 			}
 		},
 		// 是否禁用上一页
 		isDisabledPrevAction() {
+			const { min } = this.scrollBounding
 			const position = isHorizontal(this.direction)
 				? this.scrollX
 				: this.scrollY
-			const minPosition = this.scrollBounding[this.direction].min
-			return position >= minPosition
+			return position >= min
 		},
 		// 是否禁用下一页
 		isDisabledNextAction() {
+			const { max } = this.scrollBounding
 			const position = isHorizontal(this.direction)
 				? this.scrollX
 				: this.scrollY
-			const maxPosition = this.scrollBounding[this.direction].max
-			return position <= maxPosition
+			return position <= max
 		}
 	},
 	watch: {
@@ -153,28 +127,36 @@ export default {
 		},
 		// 监听方向变化
 		direction() {
-			this.$nextTick(() => {
-				this.recalculateNavRect()
-				this.recalculateScrollableRect()
-				this.scrollActiveTabToViewport()
-			})
+			this.redraw()
 		},
 		tabPaneList() {
 			this.redraw()
 		}
 	},
 	methods: {
-		// 重新计算nav的盒子模型
-		recalculateNavRect() {
-			const navRect = this.$el.getBoundingClientRect()
-			this.navRect.width = navRect.width
-			this.navRect.height = navRect.height
+		updateNavRect() {
+			const { width, height } = this.$el.getBoundingClientRect()
+			this.navRect = {
+				width,
+				height
+			}
 		},
-		// 重新计算所有tab的盒子信息
-		recalculateScrollableRect() {
+		updateViewportRect() {
+			const { width, height } = this.$refs.viewport.getViewportRect()
+			this.viewportRect = {
+				width,
+				height
+			}
+		},
+		updateRollerRect() {
+			const { width, height } = this.$refs.viewport.getRollerRect()
+			this.rollerRect = {
+				width,
+				height
+			}
+		},
+		updateTabRectList() {
 			const children = findComponentsDownward(this, TabsTab.name)
-			this.tabsWrapRect.width = this.$refs.tabWrap.offsetWidth
-			this.tabsWrapRect.height = this.$refs.tabWrap.offsetHeight
 			this.tabRectList = children.map(vm => {
 				const rect = vm.$el.getBoundingClientRect()
 				return {
@@ -189,9 +171,13 @@ export default {
 		// 重绘
 		redraw() {
 			this.$nextTick(() => {
-				this.recalculateNavRect()
-				this.recalculateScrollableRect()
-				this.scrollActiveTabToViewport()
+				this.updateNavRect()
+				this.updateRollerRect()
+				this.updateTabRectList()
+				this.$nextTick(() => {
+					this.updateViewportRect()
+					this.scrollActiveTabToViewport()
+				})
 			})
 		},
 		// 滚动至上一页
@@ -201,15 +187,11 @@ export default {
 			}
 			if (isHorizontal(this.direction)) {
 				this.scrollX = this.normalizeScrollPosition(
-					(Math.abs(this.scrollX) -
-						this.viewportSize.horizontal.width) *
-						-1
+					(Math.abs(this.scrollX) - this.viewportRect.width) * -1
 				)
 			} else {
 				this.scrollY = this.normalizeScrollPosition(
-					(Math.abs(this.scrollY) -
-						this.viewportSize.vertical.height) *
-						-1
+					(Math.abs(this.scrollY) - this.viewportRect.height) * -1
 				)
 			}
 		},
@@ -220,15 +202,11 @@ export default {
 			}
 			if (isHorizontal(this.direction)) {
 				this.scrollX = this.normalizeScrollPosition(
-					(Math.abs(this.scrollX) +
-						this.viewportSize.horizontal.width) *
-						-1
+					(Math.abs(this.scrollX) + this.viewportRect.width) * -1
 				)
 			} else {
 				this.scrollY = this.normalizeScrollPosition(
-					(Math.abs(this.scrollY) +
-						this.viewportSize.vertical.height) *
-						-1
+					(Math.abs(this.scrollY) + this.viewportRect.height) * -1
 				)
 			}
 		},
@@ -247,8 +225,8 @@ export default {
 				const viewportBoundingRight =
 					viewportBoundingLeft +
 					(isHorizontal(this.direction)
-						? this.viewportSize.horizontal.width
-						: this.viewportSize.vertical.height)
+						? this.viewportRect.width
+						: this.viewportRect.height)
 				// tab的左边缘
 				const tabBoundingLeft = isHorizontal(this.direction)
 					? rect.offsetLeft
@@ -288,8 +266,8 @@ export default {
 		},
 		// 计算正常的滚动位置信息
 		normalizeScrollPosition(position) {
-			const min = this.scrollBounding[this.direction].min
-			const max = this.scrollBounding[this.direction].max
+			const min = this.scrollBounding.min
+			const max = this.scrollBounding.max
 			if (position > min) {
 				return min
 			}
@@ -300,17 +278,24 @@ export default {
 		},
 		handleResize() {
 			this.$nextTick(() => {
-				this.recalculateNavRect()
-				this.scrollActiveTabToViewport()
-				if (isHorizontal(this.direction)) {
-					this.scrollX = this.normalizeScrollPosition(this.scrollX)
-				} else {
-					this.scrollY = this.normalizeScrollPosition(this.scrollY)
-				}
+				this.updateNavRect()
+				this.updateViewportRect()
+				this.$nextTick(() => {
+					this.scrollActiveTabToViewport()
+					if (isHorizontal(this.direction)) {
+						this.scrollX = this.normalizeScrollPosition(
+							this.scrollX
+						)
+					} else {
+						this.scrollY = this.normalizeScrollPosition(
+							this.scrollY
+						)
+					}
+				})
 			})
 		},
 		resetPosition() {
-			const { min } = this.scrollBounding[this.direction]
+			const { min } = this.scrollBounding
 			if (isHorizontal(this.direction)) {
 				this.scrollX = min
 				this.scrollY = 0
@@ -329,7 +314,10 @@ export default {
 					disabled={this.isDisabledPrevAction}
 					onClick={this.scrollToPrev}
 				/>
-				<TabsNavViewport scrollX={this.scrollX} scrollY={this.scrollY}>
+				<TabsNavViewport
+					scrollX={this.scrollX}
+					scrollY={this.scrollY}
+					ref="viewport">
 					<div class="zov-tabs-nav-tabs" ref="tabWrap">
 						{this.tabPaneList.map(pane => {
 							return (
@@ -339,9 +327,6 @@ export default {
 									isActive={pane.id === this.activeId}
 									label={pane.computedLabel}
 									disabled={pane.disabled}
-									onChangeLabel={
-										this.recalculateScrollableRect
-									}
 								/>
 							)
 						})}
