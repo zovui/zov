@@ -78,7 +78,7 @@
 					</label>
 				</div>
 				<div class="demo-content" :style="{ height: '300px' }">
-					<Tabs :tabPosition="tabPosition">
+					<Tabs :tab-position="tabPosition">
 						<TabPane
 							v-for="i in 40"
 							:label="'Tab' + i"
@@ -151,6 +151,37 @@
 						<TabPane label="lazy" id="3">
 							<LazyTestComponent />
 						</TabPane>
+					</Tabs>
+				</div>
+			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					卡片化Tabs，指定Tabs的type = card, 默认为border-card
+				</h2>
+				<div class="demo-content">
+					<label
+						v-for="pos of ['top', 'bottom', 'left', 'right']"
+						:key="pos"
+					>
+						<input
+							class="radio"
+							type="radio"
+							:value="pos"
+							name="tabPosition"
+							v-model="cardTabPosition"
+						/>
+						{{ pos }}
+					</label>
+				</div>
+				<div class="demo-content">
+					<Tabs type="card" :tab-position="cardTabPosition">
+						<TabPane
+							v-for="i in 3"
+							:label="'Tab' + i"
+							:id="'' + i"
+							:key="i"
+							>Content of tab {{ i }}</TabPane
+						>
 					</Tabs>
 				</div>
 			</section>
@@ -327,7 +358,8 @@ export default {
 			],
 			bindingLabel: 'bindingLabel',
 			activeKey: '1',
-			tabPosition: 'top'
+			tabPosition: 'top',
+			cardTabPosition: 'top'
 		}
 	}
 }

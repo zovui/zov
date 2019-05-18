@@ -121,7 +121,7 @@ export default {
 					tabPaneList={this.tabPaneList}
 					activeId={this.currentActiveId}
 				/>
-				<div class="zov-tabPaneList-hidden">{this.$slots.default}</div>
+				<div class="zov-tabs-hidden">{this.$slots.default}</div>
 			</div>
 		)
 	}

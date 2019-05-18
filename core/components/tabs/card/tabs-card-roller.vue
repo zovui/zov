@@ -1,5 +1,5 @@
 <template>
-	<div class="tabs-card-roller">
+	<div class="zov-tabs-card-roller">
 		<slot />
 	</div>
 </template>

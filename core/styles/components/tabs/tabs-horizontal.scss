@@ -1,3 +1,4 @@
+@import "../../mixins/get-color";
 // 水平模式下布局
 .#{$component-name}--horizontal {
     flex-direction: column;
