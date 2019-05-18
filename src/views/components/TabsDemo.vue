@@ -185,6 +185,24 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					可关闭的TabPane
+				</h2>
+				<div class="demo-content">
+					<Tabs type="card">
+						<TabPane label="Tab1" id="1" closable
+							>Content of tab 1</TabPane
+						>
+						<TabPane label="Tab 2" id="2" closable
+							>Content of tab 2</TabPane
+						>
+						<TabPane label="Tab 3" id="3" closable
+							>Content of tab 3</TabPane
+						>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>
@@ -288,9 +306,10 @@ export default {
 							},
 							{
 								props: 'type',
-								introduction: 'tabs类型',
+								introduction:
+									'tabs类型, 可选border-card | card',
 								type: 'string',
-								default: 'line'
+								default: 'border-card'
 							},
 							{
 								props: 'tabPosition',
@@ -335,6 +354,12 @@ export default {
 								introduction: '是否懒加载',
 								type: 'boolean',
 								default: 'true'
+							},
+							{
+								props: 'closable',
+								introduction: '是否可关闭',
+								type: 'boolean',
+								default: 'false'
 							}
 						]
 					}

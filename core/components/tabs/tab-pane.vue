@@ -23,6 +23,10 @@ export default {
 		lazy: {
 			type: Boolean,
 			default: true
+		},
+		closable: {
+			type: Boolean,
+			default: false
 		}
 	},
 	created() {

@@ -6,7 +6,8 @@ export default {
 		index: Number,
 		isActive: Boolean,
 		label: [Array, String],
-		disabled: Boolean
+		disabled: Boolean,
+		closable: Boolean
 	},
 	inject: {
 		Tabs: {
@@ -28,6 +29,9 @@ export default {
 	methods: {
 		handleClick() {
 			this.Tabs.changeTo(this.id)
+		},
+		handleClose() {
+			this.Tabs.removeTab(this.id)
 		}
 	}
 }

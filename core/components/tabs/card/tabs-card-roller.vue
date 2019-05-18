@@ -6,6 +6,6 @@
 
 <script>
 export default {
-	name: 'tabs-card-roller'
+	name: 'zov-tabs-card-roller'
 }
 </script>

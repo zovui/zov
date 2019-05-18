@@ -96,6 +96,18 @@ export default {
 			if (index === -1) {
 				return
 			}
+			const isActive = this.currentActiveId === id
+			let nextTabId = this.currentActiveId
+			if (isActive && this.tabPaneList.length > 1) {
+				if (this.tabPaneList[0].id === id) {
+					nextTabId = this.tabPaneList[index + 1].id
+				} else if (
+					this.tabPaneList[this.tabPaneList.length - 1].id === id
+				) {
+					nextTabId = this.tabPaneList[index - 1].id
+				}
+			}
+			this.changeTo(nextTabId)
 			this.tabPaneList.splice(index, 1)
 			this.tabPaneList.sort((pane1, pane2) => {
 				return pane1.order < pane2.order ? -1 : 1

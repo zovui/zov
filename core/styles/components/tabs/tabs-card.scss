@@ -32,6 +32,18 @@
             cursor: not-allowed;
         }
     }
+    .#{$component-name}-closer {
+        display: inline-block;
+        margin-right: -0.5em;
+        margin-left: 3px;
+        font-size: 20px;
+        vertical-align: middle;
+        @include get-color-sub(color);
+        transition: $transition-time color $bezier;
+        &:hover {
+            @include get-color-sub-hover(color);
+        }
+    }
 }
 
 

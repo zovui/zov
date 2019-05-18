@@ -355,6 +355,7 @@ export default {
 									isActive={pane.id === this.activeId}
 									label={pane.computedLabel}
 									disabled={pane.disabled}
+									closable={pane.closable}
 								/>
 							)
 						})}
