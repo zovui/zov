@@ -3,33 +3,8 @@
 
 $component-name: $prefix + 'tabs';
 
-.#{$component-name}-nav {
-    position: relative;
-    box-sizing: border-box;
-
-    .#{$component-name}-nav-slider {
-        box-sizing: border-box;
-        position: absolute;
-        @include get-color-primary-active(background-color)
-    }
-    // tab样式
-    .#{$component-name}-tab {
-        box-sizing: border-box;
-        cursor: pointer;
-        font-weight: 500;
-        &:not(.#{$component-name}-tab--disabled) {
-            &:hover {
-                @include get-color-primary-hover(color);
-            }
-        }
-        &--active {
-            @include get-color-primary-active(color);
-        }
-        &--disabled {
-            @include get-color-disabled(color);
-            cursor: not-allowed;
-        }
-    }
+.#{$component-name} {
+    display: flex;
 }
 
 .#{$component-name}-hidden {

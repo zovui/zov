@@ -1,48 +1,42 @@
 // 水平模式下布局
 .#{$component-name}--horizontal {
-    display: flex;
     flex-direction: column;
-    // 导航部分
+    width: 100%;
     .#{$component-name}-nav {
-        display: flex;
-        // 向前向后按钮
-        &-action {
-            flex: 0 0 auto;
-            align-self: stretch;
-            width: 32px;
-        }
-        // tab样式
-        .#{$component-name}-tab {
-            display: inline-block;
-            margin-right: 32px;
-            padding: 12px 16px;
-            &:last-child {
-                margin-right: 0;
-            }
-        }
+        flex-direction: row;
+        width: 100%;
     }
-    // nav在顶部时
-    &.#{$component-name}--top {
-        .#{$component-name}-nav {
-            order: 0;
-            margin-bottom: 16px;
-            border-bottom: 1px solid transparent;
-            @include get-color-border(border-color);
-        }
-        .#{$component-name}-content {
-            order: 1
-        }
+    // 导航部分
+    .#{$component-name}-nav-action {
+        align-self: stretch;
+        width: 32px;
     }
-    // nav在底部时
-    &.#{$component-name}--bottom {
-        .#{$component-name}-nav {
-            order: 1;
-            margin-top: 16px;
-            border-top: 1px solid transparent;
-            @include get-color-border(border-color);
-        }
-        .#{$component-name}-content {
-            order: 0
-        }
+    .#{$component-name}-nav-roller {
+        display: inline-block;
+    }
+}
+
+// nav在顶部时
+.#{$component-name}--horizontal.#{$component-name}--top {
+    .#{$component-name}-nav {
+        order: 0;
+        margin-bottom: 16px;
+        border-bottom: 1px solid transparent;
+        @include get-color-border(border-color);
+    }
+    .#{$component-name}-content {
+        order: 1
+    }
+}
+// nav在底部时
+.#{$component-name}--horizontal.#{$component-name}--bottom {
+    .#{$component-name}-nav {
+        order: 1;
+        margin-top: 16px;
+        border-top: 1px solid transparent;
+        @include get-color-border(border-color);
+    }
+    .#{$component-name}-content {
+        order: 0
     }
 }

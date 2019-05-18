@@ -17,8 +17,40 @@
     @include get-color-primary-active(background-color)
 }
 
+.#{$component-name}--border-card {
+    // tab样式
+    .#{$component-name}-tab {
+        box-sizing: border-box;
+        cursor: pointer;
+        font-weight: 500;
+        &:not(.#{$component-name}-tab--disabled) {
+            &:hover {
+                @include get-color-primary-hover(color);
+            }
+        }
+        &--active {
+            @include get-color-primary-active(color);
+        }
+        &--disabled {
+            @include get-color-disabled(color);
+            cursor: not-allowed;
+        }
+    }
+}
+
 
 .#{$component-name}--horizontal {
+    &.#{$component-name}--border-card {
+        // tab样式
+        .#{$component-name}-tab {
+            display: inline-block;
+            margin-right: 32px;
+            padding: 12px 16px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
     // 滑块
     .#{$component-name}-border-card-slider {
         width: 0;
@@ -39,6 +71,13 @@
 }
 
 .#{$component-name}--vertical {
+    &.#{$component-name}--border-card {
+        .#{$component-name}-tab {
+            display: block;
+            margin-bottom: 16px;
+            padding: 8px 24px;
+        }
+    }
     .#{$component-name}-border-card-slider {
         width: 2px;
         height: 0;

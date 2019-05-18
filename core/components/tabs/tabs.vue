@@ -72,6 +72,7 @@ export default {
 			const classList = [COMPONENT_NAME]
 			classList.push(`${COMPONENT_NAME}--${this.direction}`)
 			classList.push(`${COMPONENT_NAME}--${this.tabPosition}`)
+			classList.push(`${COMPONENT_NAME}--${this.type}`)
 			return classList
 		}
 	},
