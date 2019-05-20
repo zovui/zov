@@ -306,6 +306,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import '../../../core/styles/colors';
+@import '../../../core/styles/mixins/get-color';
 .container {
 	min-width: 600px;
 	margin: 0 auto;
@@ -327,7 +329,7 @@
 		width: 100%;
 		border: 1px solid #dddddd;
 		thead {
-			background: #eeeeee;
+			@include get-color-border(background-color);
 		}
 		th,
 		td {
