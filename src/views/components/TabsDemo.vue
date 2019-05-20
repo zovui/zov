@@ -258,6 +258,49 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					Tabs的beforeChange钩子
+				</h2>
+				<div class="demo-content">
+					<p>beforeChange需要返回值</p>
+					<p>
+						若返回值为Promise,
+						需要返回已经resolved的Promise，并且在resolved时传入true或false来指定是否跳转
+					</p>
+					<p>
+						若返回值为boolean类型，则通过true | false来选择是否跳转
+					</p>
+				</div>
+				<div class="demo-content">
+					<h3>返回boolean值</h3>
+					<Tabs type="card" :before-change="beforeChange">
+						<TabPane label="Tab1" id="1" closable
+							>Content of tab 1</TabPane
+						>
+						<TabPane label="Tab 2" id="2" closable
+							>Content of tab 2</TabPane
+						>
+						<TabPane label="Tab 3" id="3" closable
+							>Content of tab 3</TabPane
+						>
+					</Tabs>
+				</div>
+				<div class="demo-content">
+					<h3>返回Promise值</h3>
+					<Tabs type="card" :before-change="beforeChangeByPromise">
+						<TabPane label="Tab1" id="1" closable
+							>Content of tab 1</TabPane
+						>
+						<TabPane label="Tab 2" id="2" closable
+							>Content of tab 2</TabPane
+						>
+						<TabPane label="Tab 3" id="3" closable
+							>Content of tab 3</TabPane
+						>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>
@@ -450,6 +493,18 @@ export default {
 			return new Promise(resolve => {
 				setTimeout(function() {
 					resolve(window.confirm('是否要关闭Tab: ' + id))
+				}, 3000)
+			})
+		},
+		beforeChange(from, to) {
+			return window.confirm(`是否要从Tab: ${from} 跳转到 Tab: ${to}`)
+		},
+		beforeChangeByPromise(from, to) {
+			return new Promise(resolve => {
+				setTimeout(function() {
+					resolve(
+						window.confirm(`是否要从Tab: ${from} 跳转到 Tab: ${to}`)
+					)
 				}, 3000)
 			})
 		}

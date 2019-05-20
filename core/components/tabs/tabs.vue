@@ -2,7 +2,7 @@
 import TabsNav from './tabs-nav'
 import TabsTab from './tabs-tab'
 import TabsContent from './tabs-content'
-import { find, findIndex, includes } from '../../utils'
+import { find, findIndex, includes, isFunction } from '../../utils'
 
 const COMPONENT_NAME = 'zov-tabs'
 
@@ -35,11 +35,12 @@ export default {
 				return includes(['border-card', 'card'], type)
 			}
 		},
-		beforeClose: Function
+		beforeClose: Function,
+		beforeChange: Function
 	},
 	mounted() {
 		if (!this.activeId && this.tabPaneList.length) {
-			this.changeTo(this.tabPaneList[0].id)
+			this.changeTo(this.tabPaneList[0].id, true)
 		}
 	},
 	provide() {
@@ -132,10 +133,30 @@ export default {
 			this.$emit('on-remove')
 			this.changeTo(nextTabId)
 		},
-		changeTo(id) {
-			const targetTab = find(this.tabPaneList, vm => vm.id === id)
-			if (targetTab && !targetTab.disabled) {
-				this.currentActiveId = targetTab.id
+		changeTo(id, disabledHook = false) {
+			const handle = () => {
+				const targetTab = find(this.tabPaneList, vm => vm.id === id)
+				if (targetTab && !targetTab.disabled) {
+					this.currentActiveId = targetTab.id
+				}
+			}
+			if (!disabledHook && isFunction(this.beforeChange)) {
+				let from = this.currentActiveId
+				let to = id
+				const returnValue = this.beforeChange(from, to)
+				if (returnValue instanceof Promise) {
+					returnValue.then(isChange => {
+						if (isChange) {
+							handle()
+						}
+					})
+				} else if (typeof returnValue === 'boolean') {
+					if (returnValue) {
+						handle()
+					}
+				}
+			} else {
+				handle()
 			}
 		}
 	},
