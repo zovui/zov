@@ -85,11 +85,19 @@ export default {
 		}
 	},
 	methods: {
+		hasTab(id) {
+			const index = findIndex(this.tabPaneList, pane => pane.id === id)
+			return index !== -1
+		},
 		addTab(tabPane) {
+			if (this.hasTab(tabPane.id)) {
+				this.removeTab(tabPane.id)
+			}
 			this.tabPaneList.push(tabPane)
 			this.tabPaneList.sort((pane1, pane2) => {
 				return pane1.order < pane2.order ? -1 : 1
 			})
+			this.$emit('on-add', tabPane.id)
 		},
 		removeTab(id) {
 			const index = findIndex(this.tabPaneList, pane => pane.id === id)
@@ -107,11 +115,12 @@ export default {
 					nextTabId = this.tabPaneList[index - 1].id
 				}
 			}
-			this.changeTo(nextTabId)
 			this.tabPaneList.splice(index, 1)
 			this.tabPaneList.sort((pane1, pane2) => {
 				return pane1.order < pane2.order ? -1 : 1
 			})
+			this.$emit('on-remove')
+			this.changeTo(nextTabId)
 		},
 		changeTo(id) {
 			const targetTab = find(this.tabPaneList, vm => vm.id === id)
@@ -128,8 +137,8 @@ export default {
 					tabPaneList={this.tabPaneList}
 					activeId={this.currentActiveId}
 					direction={this.direction}
-					onNext={() => this.$emit('next')}
-					onPrev={() => this.$emit('prev')}
+					onNext={() => this.$emit('on-next')}
+					onPrev={() => this.$emit('on-prev')}
 				/>
 				<TabsContent
 					tabPaneList={this.tabPaneList}
