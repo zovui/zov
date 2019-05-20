@@ -1,6 +1,26 @@
 <script>
 import { isFunction } from '../../utils'
 
+function callAsyncHook({ context, hookName, data, callback }) {
+	const hook = context[hookName]
+	if (isFunction(hook)) {
+		const returnValue = hook(...data)
+		if (returnValue instanceof Promise) {
+			returnValue.then(is => {
+				if (is) {
+					callback()
+				}
+			})
+		} else if (typeof returnValue === 'boolean') {
+			if (returnValue) {
+				callback()
+			}
+		}
+	} else {
+		callback()
+	}
+}
+
 export default {
 	name: 'zov-tabs-tab',
 	props: {
@@ -30,25 +50,26 @@ export default {
 	},
 	methods: {
 		handleClick() {
-			this.Tabs.changeTo(this.id)
+			let from = this.Tabs.activeId
+			let to = this.id
+			callAsyncHook({
+				context: this.Tabs,
+				hookName: 'beforeChange',
+				data: [from, to],
+				callback: () => {
+					this.Tabs.changeTo(to)
+				}
+			})
 		},
 		handleClose() {
-			if (isFunction(this.Tabs.beforeClose)) {
-				const returnValue = this.Tabs.beforeClose(this.id)
-				if (returnValue instanceof Promise) {
-					returnValue.then(isJump => {
-						if (isJump) {
-							this.Tabs.removeTab(this.id)
-						}
-					})
-				} else if (typeof returnValue === 'boolean') {
-					if (returnValue) {
-						this.Tabs.removeTab(this.id)
-					}
+			callAsyncHook({
+				context: this.Tabs,
+				hookName: 'beforeClose',
+				data: [this.id],
+				callback: () => {
+					this.Tabs.removeTab(this.id)
 				}
-			} else {
-				this.Tabs.removeTab(this.id)
-			}
+			})
 		}
 	},
 	render() {

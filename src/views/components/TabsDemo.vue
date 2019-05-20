@@ -414,6 +414,25 @@ export default {
 								introduction: 'tab展示的位置',
 								type: 'string',
 								default: 'top'
+							},
+							{
+								props: 'beforeClose',
+								introduction: 'tab关闭时的钩子，可阻止关闭行为',
+								type: 'Function',
+								default: 'undefined'
+							},
+							{
+								props: 'beforeChange',
+								introduction:
+									'tab切换时的钩子，可阻止切换tab的行为',
+								type: 'Function',
+								default: 'undefined'
+							},
+							{
+								props: 'preventDefaultRemove',
+								introduction: '可阻止默认的删除行为',
+								type: 'boolean',
+								default: 'false'
 							}
 						]
 					}

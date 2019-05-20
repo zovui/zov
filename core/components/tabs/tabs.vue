@@ -2,7 +2,7 @@
 import TabsNav from './tabs-nav'
 import TabsTab from './tabs-tab'
 import TabsContent from './tabs-content'
-import { find, findIndex, includes, isFunction } from '../../utils'
+import { find, findIndex, includes } from '../../utils'
 
 const COMPONENT_NAME = 'zov-tabs'
 
@@ -50,10 +50,22 @@ export default {
 			removeTab: id => this.removeTab(id),
 			changeTo: id => this.changeTo(id)
 		}
-		Object.defineProperty(proxy, 'beforeClose', {
-			configurable: false,
-			enumerable: true,
-			get: () => this.beforeClose
+		Object.defineProperties(proxy, {
+			activeId: {
+				configurable: false,
+				enumerable: true,
+				get: () => this.currentActiveId
+			},
+			beforeClose: {
+				configurable: false,
+				enumerable: true,
+				get: () => this.beforeClose
+			},
+			beforeChange: {
+				configurable: false,
+				enumerable: true,
+				get: () => this.beforeChange
+			}
 		})
 		return {
 			Tabs: proxy
@@ -138,30 +150,10 @@ export default {
 			this.$emit('on-remove', id)
 			this.changeTo(nextTabId)
 		},
-		changeTo(id, disabledHook = false) {
-			const handle = () => {
-				const targetTab = find(this.tabPaneList, vm => vm.id === id)
-				if (targetTab && !targetTab.disabled) {
-					this.currentActiveId = targetTab.id
-				}
-			}
-			if (!disabledHook && isFunction(this.beforeChange)) {
-				let from = this.currentActiveId
-				let to = id
-				const returnValue = this.beforeChange(from, to)
-				if (returnValue instanceof Promise) {
-					returnValue.then(isChange => {
-						if (isChange) {
-							handle()
-						}
-					})
-				} else if (typeof returnValue === 'boolean') {
-					if (returnValue) {
-						handle()
-					}
-				}
-			} else {
-				handle()
+		changeTo(id) {
+			const targetTab = find(this.tabPaneList, vm => vm.id === id)
+			if (targetTab && !targetTab.disabled) {
+				this.currentActiveId = targetTab.id
 			}
 		}
 	},
