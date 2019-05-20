@@ -30,6 +30,13 @@
         &--disabled {
             @include get-color-disabled(color);
             cursor: not-allowed;
+            .#{$component-name}-closer {
+                @include get-color-disabled(color);
+                transition: none;
+                &:hover {
+                    @include get-color-disabled(color);
+                }
+            }
         }
     }
     .#{$component-name}-closer {

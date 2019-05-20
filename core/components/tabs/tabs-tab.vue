@@ -50,6 +50,9 @@ export default {
 	},
 	methods: {
 		handleClick() {
+			if (this.disabled) {
+				return
+			}
 			let from = this.Tabs.activeId
 			let to = this.id
 			callAsyncHook({
@@ -62,6 +65,9 @@ export default {
 			})
 		},
 		handleClose() {
+			if (this.disabled) {
+				return
+			}
 			callAsyncHook({
 				context: this.Tabs,
 				hookName: 'beforeClose',

@@ -284,6 +284,9 @@
 						<TabPane label="Tab 3" id="3" closable
 							>Content of tab 3</TabPane
 						>
+						<TabPane label="Tab 4" id="4" closable disabled
+							>Content of tab 4</TabPane
+						>
 					</Tabs>
 				</div>
 				<div class="demo-content">
@@ -295,8 +298,8 @@
 						<TabPane label="Tab 2" id="2" closable
 							>Content of tab 2</TabPane
 						>
-						<TabPane label="Tab 3" id="3" closable
-							>Content of tab 3</TabPane
+						<TabPane label="Tab 4" id="4" closable disabled
+							>Content of tab 4</TabPane
 						>
 					</Tabs>
 				</div>
