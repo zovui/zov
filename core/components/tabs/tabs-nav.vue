@@ -63,26 +63,6 @@ export default {
 			}
 			return this.rollerRect.height > this.navRect.height
 		},
-		sliderStyles() {
-			const rect = find(
-				this.tabRectList,
-				rect => rect.id === this.activeId
-			)
-			if (rect) {
-				if (isHorizontal(this.direction)) {
-					return {
-						left: rect.offsetLeft + 'px',
-						width: rect.scrollWidth + 'px'
-					}
-				} else {
-					return {
-						top: rect.offsetTop + 'px',
-						height: rect.scrollHeight + 'px'
-					}
-				}
-			}
-			return null
-		},
 		classList() {
 			const classList = ['zov-tabs-nav']
 			if (this.isScrollable) {

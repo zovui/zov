@@ -1,4 +1,6 @@
 <script>
+import { isFunction } from '../../utils'
+
 export default {
 	name: 'zov-tabs-tab',
 	props: {
@@ -31,8 +33,26 @@ export default {
 			this.Tabs.changeTo(this.id)
 		},
 		handleClose() {
-			this.Tabs.removeTab(this.id)
+			if (isFunction(this.Tabs.beforeClose)) {
+				const returnValue = this.Tabs.beforeClose(this.id)
+				if (returnValue instanceof Promise) {
+					returnValue.then(isJump => {
+						if (isJump) {
+							this.Tabs.removeTab(this.id)
+						}
+					})
+				} else if (typeof returnValue === 'boolean') {
+					if (returnValue) {
+						this.Tabs.removeTab(this.id)
+					}
+				}
+			} else {
+				this.Tabs.removeTab(this.id)
+			}
 		}
+	},
+	render() {
+		return <span />
 	}
 }
 </script>

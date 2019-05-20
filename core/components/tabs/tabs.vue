@@ -34,7 +34,8 @@ export default {
 			validator(type) {
 				return includes(['border-card', 'card'], type)
 			}
-		}
+		},
+		beforeClose: Function
 	},
 	mounted() {
 		if (!this.activeId && this.tabPaneList.length) {
@@ -42,12 +43,18 @@ export default {
 		}
 	},
 	provide() {
+		const proxy = {
+			addTab: tabPane => this.addTab(tabPane),
+			removeTab: id => this.removeTab(id),
+			changeTo: id => this.changeTo(id)
+		}
+		Object.defineProperty(proxy, 'beforeClose', {
+			configurable: false,
+			enumerable: true,
+			get: () => this.beforeClose
+		})
 		return {
-			Tabs: {
-				addTab: tabPane => this.addTab(tabPane),
-				removeTab: id => this.removeTab(id),
-				changeTo: id => this.changeTo(id)
-			}
+			Tabs: proxy
 		}
 	},
 	data() {
@@ -107,12 +114,15 @@ export default {
 			const isActive = this.currentActiveId === id
 			let nextTabId = this.currentActiveId
 			if (isActive && this.tabPaneList.length > 1) {
-				if (this.tabPaneList[0].id === id) {
-					nextTabId = this.tabPaneList[index + 1].id
-				} else if (
-					this.tabPaneList[this.tabPaneList.length - 1].id === id
-				) {
-					nextTabId = this.tabPaneList[index - 1].id
+				switch (id) {
+					case this.tabPaneList[0].id:
+						nextTabId = this.tabPaneList[index + 1].id
+						break
+					case this.tabPaneList[this.tabPaneList.length - 1].id:
+						nextTabId = this.tabPaneList[index - 1].id
+						break
+					default:
+						nextTabId = this.tabPaneList[index + 1].id
 				}
 			}
 			this.tabPaneList.splice(index, 1)
