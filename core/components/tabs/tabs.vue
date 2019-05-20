@@ -36,7 +36,8 @@ export default {
 			}
 		},
 		beforeClose: Function,
-		beforeChange: Function
+		beforeChange: Function,
+		preventDefaultRemove: Boolean
 	},
 	mounted() {
 		if (!this.activeId && this.tabPaneList.length) {
@@ -108,6 +109,10 @@ export default {
 			this.$emit('on-add', tabPane.id)
 		},
 		removeTab(id) {
+			if (this.preventDefaultRemove) {
+				this.$emit('on-remove', id)
+				return
+			}
 			const index = findIndex(this.tabPaneList, pane => pane.id === id)
 			if (index === -1) {
 				return
@@ -130,7 +135,7 @@ export default {
 			this.tabPaneList.sort((pane1, pane2) => {
 				return pane1.order < pane2.order ? -1 : 1
 			})
-			this.$emit('on-remove')
+			this.$emit('on-remove', id)
 			this.changeTo(nextTabId)
 		},
 		changeTo(id, disabledHook = false) {
