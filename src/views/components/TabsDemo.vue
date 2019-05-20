@@ -184,6 +184,17 @@
 						>
 					</Tabs>
 				</div>
+				<div class="demo-content" :style="{ height: '300px' }">
+					<Tabs type="card" :tab-position="cardTabPosition">
+						<TabPane
+							v-for="i in 40"
+							:label="'Tab' + i"
+							:id="'' + i"
+							:key="i"
+							>Content of tab {{ i }}</TabPane
+						>
+					</Tabs>
+				</div>
 			</section>
 			<section class="demo">
 				<h2 class="demo-header">
