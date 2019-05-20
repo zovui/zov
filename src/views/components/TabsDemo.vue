@@ -484,6 +484,41 @@ export default {
 					}
 				},
 				{
+					header: 'Tabs events',
+					content: {
+						headers: ['事件名', '说明', '回调参数'],
+						data: [
+							{
+								props: 'on-change',
+								introduction: '当tabs切换时触发',
+								type: 'id值，当前tabs的id值'
+							},
+							{
+								props: 'on-add',
+								introduction: '当添加tab时触发',
+								type: '添加pane的id值'
+							},
+							{
+								props: 'on-remove',
+								introduction: '当删除tab时触发',
+								type: '删除pane的id值'
+							},
+							{
+								props: 'on-prev',
+								introduction:
+									'当tabs的nav可滚动时，点击上一页时触发',
+								type: '无'
+							},
+							{
+								props: 'on-next',
+								introduction:
+									'当tabs的nav可滚动时，点击下一页时触发',
+								type: '无'
+							}
+						]
+					}
+				},
+				{
 					header: 'TabPane slots',
 					content: {
 						headers: ['slot名', '说明'],
