@@ -210,6 +210,7 @@ export default {
 					(Math.abs(this.scrollY) - this.viewportRect.height) * -1
 				)
 			}
+			this.$emit('prev')
 		},
 		// 滚动至下一页
 		scrollToNext() {
@@ -225,6 +226,7 @@ export default {
 					(Math.abs(this.scrollY) + this.viewportRect.height) * -1
 				)
 			}
+			this.$emit('next')
 		},
 		// 滚动活动tab至viewport范围内
 		scrollActiveTabToViewport() {

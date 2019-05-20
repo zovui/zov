@@ -128,6 +128,8 @@ export default {
 					tabPaneList={this.tabPaneList}
 					activeId={this.currentActiveId}
 					direction={this.direction}
+					onNext={() => this.$emit('next')}
+					onPrev={() => this.$emit('prev')}
 				/>
 				<TabsContent
 					tabPaneList={this.tabPaneList}
