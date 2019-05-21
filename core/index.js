@@ -32,7 +32,7 @@ import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
-
+import { Tabs, TabPane } from './components/tabs'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -86,7 +86,9 @@ const components = {
 	Checkbox,
 	CheckboxGroup,
 	Breadcrumb,
-	BreadcrumbItem
+	BreadcrumbItem,
+	Tabs,
+	TabPane
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -157,7 +159,9 @@ export {
 	Checkbox,
 	CheckboxGroup,
 	Breadcrumb,
-	BreadcrumbItem
+	BreadcrumbItem,
+	Tabs,
+	TabPane
 }
 // 将整个zov暴露出去
 export default zov

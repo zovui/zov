@@ -1,0 +1,43 @@
+@import "../../mixins/get-color";
+// 水平模式下布局
+.#{$component-name}--horizontal {
+    flex-direction: column;
+    width: 100%;
+    .#{$component-name}-nav {
+        flex-direction: row;
+        width: 100%;
+    }
+    // 导航部分
+    .#{$component-name}-nav-action {
+        align-self: stretch;
+        width: 32px;
+    }
+    .#{$component-name}-nav-roller {
+        display: inline-block;
+    }
+}
+
+// nav在顶部时
+.#{$component-name}--horizontal.#{$component-name}--top {
+    .#{$component-name}-nav {
+        order: 0;
+        margin-bottom: 16px;
+        border-bottom: 1px solid transparent;
+        @include get-color-border(border-color);
+    }
+    .#{$component-name}-content {
+        order: 1
+    }
+}
+// nav在底部时
+.#{$component-name}--horizontal.#{$component-name}--bottom {
+    .#{$component-name}-nav {
+        order: 1;
+        margin-top: 16px;
+        border-top: 1px solid transparent;
+        @include get-color-border(border-color);
+    }
+    .#{$component-name}-content {
+        order: 0
+    }
+}
