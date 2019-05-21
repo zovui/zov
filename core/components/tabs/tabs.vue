@@ -158,6 +158,7 @@ export default {
 		}
 	},
 	render() {
+		console.log(this.$slots.extra)
 		return (
 			<div class={this.classList}>
 				<TabsNav
@@ -166,8 +167,9 @@ export default {
 					activeId={this.currentActiveId}
 					direction={this.direction}
 					onNext={() => this.$emit('on-next')}
-					onPrev={() => this.$emit('on-prev')}
-				/>
+					onPrev={() => this.$emit('on-prev')}>
+					{this.$slots.extra}
+				</TabsNav>
 				<TabsContent
 					tabPaneList={this.tabPaneList}
 					activeId={this.currentActiveId}

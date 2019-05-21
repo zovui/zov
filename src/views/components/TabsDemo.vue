@@ -304,6 +304,52 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">使用slot: extra，添加按钮</h2>
+				<div class="demo-content">
+					<label
+						v-for="pos of ['top', 'bottom', 'left', 'right']"
+						:key="pos"
+					>
+						<input
+							class="radio"
+							type="radio"
+							:value="pos"
+							name="tabPosition"
+							v-model="extraTabPosition"
+						/>
+						{{ pos }}
+					</label>
+				</div>
+				<div class="demo-content" :style="{ height: '300px' }">
+					<Tabs :tab-position="extraTabPosition">
+						<TabPane
+							v-for="i in 10"
+							:label="'Tab' + i"
+							:id="'' + i"
+							:key="i"
+							>Content of tab {{ i }}</TabPane
+						>
+						<template v-slot:extra
+							><Button>Extra Button</Button></template
+						>
+					</Tabs>
+				</div>
+				<div class="demo-content" :style="{ height: '300px' }">
+					<Tabs :tab-position="extraTabPosition" type="card">
+						<TabPane
+							v-for="i in 10"
+							:label="'Tab' + i"
+							:id="'' + i"
+							:key="i"
+							>Content of tab {{ i }}</TabPane
+						>
+						<template v-slot:extra
+							><Button>Extra Button</Button></template
+						>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>
@@ -541,7 +587,8 @@ export default {
 			bindingLabel: 'bindingLabel',
 			activeKey: '1',
 			tabPosition: 'top',
-			cardTabPosition: 'top'
+			cardTabPosition: 'top',
+			extraTabPosition: 'top'
 		}
 	},
 	methods: {

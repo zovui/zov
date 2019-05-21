@@ -2,13 +2,7 @@
 @import "../../custom";
 
 .#{$component-name}-border-card-roller {
-    display: inline-block;
     position: relative;
-}
-
-.#{$component-name}-border-card-wrap {
-    display: inline-block;
-    white-space: nowrap;
 }
 
 .#{$component-name}-border-card-slider {
@@ -51,6 +45,13 @@
             }
         }
     }
+    .#{$component-name}-border-card-roller {
+        display: inline-block;
+    }
+    .#{$component-name}-border-card-wrap {
+        display: inline-block;
+        white-space: nowrap;
+    }
     // 滑块
     .#{$component-name}-border-card-slider {
         width: 0;
@@ -77,6 +78,14 @@
             margin-bottom: 16px;
             padding: 8px 24px;
         }
+    }
+    .#{$component-name}-border-card-roller {
+        display: block;
+        width: 100%;
+    }
+    .#{$component-name}-border-card-wrap {
+        display: block;
+        width: 100%;
     }
     .#{$component-name}-border-card-slider {
         width: 2px;

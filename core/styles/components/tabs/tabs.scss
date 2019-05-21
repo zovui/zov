@@ -7,6 +7,14 @@ $component-name: $prefix + 'tabs';
     display: flex;
 }
 
+.#{$component-name}-extra {
+    flex: 0 0 auto;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .#{$component-name}-hidden {
     display: none;
 }

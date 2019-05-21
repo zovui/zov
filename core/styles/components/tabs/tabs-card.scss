@@ -1,11 +1,6 @@
 @import "../../mixins/get-color";
 @import "../../custom";
 
-.#{$component-name}-card-roller {
-    display: inline-block;
-    white-space: nowrap;
-}
-
 .#{$component-name}--card {
     // tab样式
     .#{$component-name}-tab {
@@ -64,6 +59,10 @@
                 margin-right: 0;
             }
         }
+    }
+    .#{$component-name}-card-roller {
+        display: inline-block;
+        white-space: nowrap;
     }
     &.#{$component-name}--top {
         .#{$component-name}-nav-viewport {

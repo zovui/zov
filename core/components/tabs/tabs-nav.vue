@@ -29,8 +29,8 @@ export default {
 		this.resizeObserver = new ResizeObserver(
 			debounce(this.handleResize.bind(this), 300)
 		)
-		// 观察nav整个dom的大小变化
-		this.resizeObserver.observe(this.$el)
+		// 观察viewport变化
+		this.resizeObserver.observe(this.$refs.viewport.$el)
 		this.redraw()
 	},
 	destroyed() {
@@ -59,9 +59,9 @@ export default {
 	computed: {
 		isScrollable() {
 			if (isHorizontal(this.direction)) {
-				return this.rollerRect.width > this.navRect.width
+				return this.rollerRect.width > this.viewportRect.width
 			}
-			return this.rollerRect.height > this.navRect.height
+			return this.rollerRect.height > this.viewportRect.height
 		},
 		classList() {
 			const classList = ['zov-tabs-nav']
@@ -365,6 +365,7 @@ export default {
 					disabled={this.isDisabledNextAction}
 					onClick={this.scrollToNext}
 				/>
+				<div class="zov-tabs-extra">{this.$slots.default}</div>
 			</div>
 		)
 	}
