@@ -145,7 +145,7 @@ export default {
 			this.inkTop = top
 		},
 		updateTitleOffset() {
-			const links = findComponentsDownward(this, 'AnchorLink').map(
+			const links = findComponentsDownward(this, 'zov-anchor-link').map(
 				link => {
 					return link.href
 				}
