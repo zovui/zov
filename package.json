@@ -13,7 +13,6 @@
 	},
 	"dependencies": {
 		"dayjs": "^1.8.6",
-		"lodash": "^4.17.11",
 		"lodash.debounce": "^4.0.8",
 		"popper.js": "^1.14.5",
 		"resize-observer-polyfill": "^1.5.1",
@@ -51,8 +50,8 @@
 		"lib",
 		"core"
 	],
-  "unpkg": "lib/zov.min.js",
-  "style": "lib/zov.min.css",
+	"unpkg": "lib/zov.min.js",
+	"style": "lib/zov.min.css",
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
