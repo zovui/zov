@@ -431,7 +431,8 @@ export default {
 						data: [
 							{
 								props: 'activeId',
-								introduction: '激活的tab对应的id',
+								introduction:
+									'v-model对应的prop，激活的tab对应的id',
 								type: 'string',
 								default: '第一个tabs的id'
 							},
@@ -466,6 +467,58 @@ export default {
 								introduction: '可阻止默认的删除行为',
 								type: 'boolean',
 								default: 'false'
+							}
+						]
+					}
+				},
+				{
+					header: 'Tabs events',
+					content: {
+						headers: ['事件名', '说明', '回调参数'],
+						data: [
+							{
+								props: 'on-change',
+								introduction:
+									'当tabs切换时触发, v-model对应的事件',
+								type: 'id值，当前tabs的id值'
+							},
+							{
+								props: 'on-add',
+								introduction: '当添加tab时触发',
+								type: '添加pane的id值'
+							},
+							{
+								props: 'on-remove',
+								introduction: '当删除tab时触发',
+								type: '删除pane的id值'
+							},
+							{
+								props: 'on-prev',
+								introduction:
+									'当tabs的nav可滚动时，点击上一页时触发',
+								type: '无'
+							},
+							{
+								props: 'on-next',
+								introduction:
+									'当tabs的nav可滚动时，点击下一页时触发',
+								type: '无'
+							}
+						]
+					}
+				},
+				{
+					header: 'Tabs slots',
+					content: {
+						headers: ['slot名', '说明'],
+						data: [
+							{
+								props: 'default',
+								introduction: 'TabPane的占位'
+							},
+							{
+								props: 'extra',
+								introduction: '额外的内容'
 							}
 						]
 					}
@@ -510,41 +563,6 @@ export default {
 								introduction: '是否可关闭',
 								type: 'boolean',
 								default: 'false'
-							}
-						]
-					}
-				},
-				{
-					header: 'Tabs events',
-					content: {
-						headers: ['事件名', '说明', '回调参数'],
-						data: [
-							{
-								props: 'on-change',
-								introduction: '当tabs切换时触发',
-								type: 'id值，当前tabs的id值'
-							},
-							{
-								props: 'on-add',
-								introduction: '当添加tab时触发',
-								type: '添加pane的id值'
-							},
-							{
-								props: 'on-remove',
-								introduction: '当删除tab时触发',
-								type: '删除pane的id值'
-							},
-							{
-								props: 'on-prev',
-								introduction:
-									'当tabs的nav可滚动时，点击上一页时触发',
-								type: '无'
-							},
-							{
-								props: 'on-next',
-								introduction:
-									'当tabs的nav可滚动时，点击下一页时触发',
-								type: '无'
 							}
 						]
 					}
