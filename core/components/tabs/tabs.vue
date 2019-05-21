@@ -158,7 +158,6 @@ export default {
 		}
 	},
 	render() {
-		console.log(this.$slots.extra)
 		return (
 			<div class={this.classList}>
 				<TabsNav
