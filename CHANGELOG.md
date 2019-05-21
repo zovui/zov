@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.4.0](https://github.com/zovui/zov/compare/v0.3.0...v0.4.0) (2019-05-21)
+
+
+### Bug Fixes
+
+* 优化backtop组件，修复anchor-link组件名称 ([c3af6e5](https://github.com/zovui/zov/commit/c3af6e5))
+
+
+### Features
+
+* **tabs:** tab-pane新增closable选项 ([49f3420](https://github.com/zovui/zov/commit/49f3420))
+* **tabs:** tab-pane新增disabled，可以禁用某tab ([c7258f8](https://github.com/zovui/zov/commit/c7258f8))
+* **tabs:** tab-pane新增lazy模式 ([5d47b99](https://github.com/zovui/zov/commit/5d47b99))
+* **tabs:** tab-pane新增order选项，可对tabs进行排序 ([c24db05](https://github.com/zovui/zov/commit/c24db05))
+* **tabs:** 修改demo表头颜色 ([eff37c4](https://github.com/zovui/zov/commit/eff37c4))
+* **tabs:** 垂直方向展示时，tab文字变为居中 ([315c2f5](https://github.com/zovui/zov/commit/315c2f5))
+* **tabs:** 完善nav滚动边界计算逻辑 ([86a3e6b](https://github.com/zovui/zov/commit/86a3e6b))
+* **tabs:** 完善可滚动tab时，滚动激活tab进入可视范围的算法 ([4b238ce](https://github.com/zovui/zov/commit/4b238ce))
+* **tabs:** 新增action disabled状态 ([a9b048a](https://github.com/zovui/zov/commit/a9b048a))
+* **tabs:** 新增add、remove事件回调 ([26fcb7d](https://github.com/zovui/zov/commit/26fcb7d))
+* **tabs:** 新增beforeChange钩子 ([e3e053f](https://github.com/zovui/zov/commit/e3e053f))
+* **tabs:** 新增beforeClose钩子 ([62e170c](https://github.com/zovui/zov/commit/62e170c))
+* **tabs:** 新增extra slots 可自定义内容 ([fde62f2](https://github.com/zovui/zov/commit/fde62f2))
+* **tabs:** 新增next、prev按钮的事件回调 ([cd507b9](https://github.com/zovui/zov/commit/cd507b9))
+* **tabs:** 新增preventDefaultRemove，用于阻止默认的删除行为 ([39b9d0c](https://github.com/zovui/zov/commit/39b9d0c))
+* **tabs:** 新增ResizeObserver和debounce处理tabs宽度高度变化时的TabNav状态变化 ([02b7187](https://github.com/zovui/zov/commit/02b7187))
+* **tabs:** 新增tabPosition配置，可以配置tabs导航位置 ([d497df2](https://github.com/zovui/zov/commit/d497df2))
+* **tabs:** 新增tabs-nav-action组件，简化tabs-nav状态 ([f82f234](https://github.com/zovui/zov/commit/f82f234))
+* **tabs:** 新增tabs-nav-viewport，简化tabs-nav逻辑 ([82958c1](https://github.com/zovui/zov/commit/82958c1))
+* **tabs:** 新增tabs、tab-pane组件 ([3e0bc2d](https://github.com/zovui/zov/commit/3e0bc2d))
+* **tabs:** 新增type = card且nav溢出时的demo ([b4eae5a](https://github.com/zovui/zov/commit/b4eae5a))
+* **tabs:** 新增type: card ([38f813b](https://github.com/zovui/zov/commit/38f813b))
+* **tabs:** 新增type属性，用于指定tabs渲染类型 ([64a73b5](https://github.com/zovui/zov/commit/64a73b5))
+* **tabs:** 新增文档 ([60515e3](https://github.com/zovui/zov/commit/60515e3))
+* **tabs:** 新增滚动处理逻辑 ([fca8081](https://github.com/zovui/zov/commit/fca8081))
+* **tabs:** 更新demo，并且新增未传activeId时的默认逻辑 ([4350727](https://github.com/zovui/zov/commit/4350727))
+* **tabs:** 更新demo中的原生radio为Radio组件 ([7b11e8c](https://github.com/zovui/zov/commit/7b11e8c))
+* **tabs:** 更新文档，变更tab disabled切换判断的位置 ([07fb016](https://github.com/zovui/zov/commit/07fb016))
+* **tabs:** 订正type = card, tab disabled时，beforeClose、beforeChange的行为 ([ba38eed](https://github.com/zovui/zov/commit/ba38eed))
+
+
+
 # [0.3.0](https://github.com/zovui/zov/compare/v0.2.0...v0.3.0) (2019-05-17)
 
 
