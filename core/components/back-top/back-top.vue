@@ -1,7 +1,9 @@
 <template>
 	<div :class="classes" :style="styles" @click="back">
 		<slot>
-			<i class="zov-icon zov-iconfont zi-arrow-round-up"></i>
+			<div :class="innerClasses">
+				<i class="zov-icon zov-iconfont zi-arrow-round-up"></i>
+			</div>
 		</slot>
 	</div>
 </template>
@@ -56,6 +58,9 @@ export default {
 				bottom: `${this.bottom}px`,
 				right: `${this.right}px`
 			}
+		},
+		innerClasses() {
+			return `${prefix}-inner`
 		}
 	},
 	methods: {
