@@ -9,6 +9,9 @@
             height: 32px;
         }
     }
+    .#{$component-name}-tab {
+        text-align: center;
+    }
     .#{$component-name}-content {
         flex: 1 1 auto;
     }
@@ -20,9 +23,6 @@
         margin-right: 20px;
         border-right: 1px solid transparent;
         @include get-color-border(border-color);
-        .#{$component-name}-tab {
-            text-align: right;
-        }
     }
     .#{$component-name}-content {
         order: 1
@@ -34,9 +34,6 @@
         margin-left: 20px;
         border-left: 1px solid transparent;
         @include get-color-border(border-color);
-        .#{$component-name}-tab {
-            text-align: left;
-        }
     }
     .#{$component-name}-content {
         order: 0
