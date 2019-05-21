@@ -63,19 +63,13 @@
 			<section class="demo">
 				<h2 class="demo-header">tabPosition</h2>
 				<div class="demo-content">
-					<label
-						v-for="pos of ['top', 'bottom', 'left', 'right']"
-						:key="pos"
-					>
-						<input
-							class="radio"
-							type="radio"
-							:value="pos"
-							name="tabPosition"
-							v-model="tabPosition"
-						/>
-						{{ pos }}
-					</label>
+					<RadioGroup connected v-model="tabPosition">
+						<Radio
+							v-for="pos of ['top', 'bottom', 'left', 'right']"
+							:label="pos"
+							:key="pos"
+						></Radio>
+					</RadioGroup>
 				</div>
 				<div class="demo-content" :style="{ height: '300px' }">
 					<Tabs :tab-position="tabPosition">
@@ -159,19 +153,13 @@
 					卡片化Tabs，指定Tabs的type = card, 默认为border-card
 				</h2>
 				<div class="demo-content">
-					<label
-						v-for="pos of ['top', 'bottom', 'left', 'right']"
-						:key="pos"
-					>
-						<input
-							class="radio"
-							type="radio"
-							:value="pos"
-							name="tabPosition"
-							v-model="cardTabPosition"
-						/>
-						{{ pos }}
-					</label>
+					<RadioGroup connected v-model="cardTabPosition">
+						<Radio
+							v-for="pos of ['top', 'bottom', 'left', 'right']"
+							:label="pos"
+							:key="pos"
+						></Radio>
+					</RadioGroup>
 				</div>
 				<div class="demo-content">
 					<Tabs type="card" :tab-position="cardTabPosition">
@@ -307,19 +295,13 @@
 			<section class="demo">
 				<h2 class="demo-header">使用slot: extra，添加按钮</h2>
 				<div class="demo-content">
-					<label
-						v-for="pos of ['top', 'bottom', 'left', 'right']"
-						:key="pos"
-					>
-						<input
-							class="radio"
-							type="radio"
-							:value="pos"
-							name="tabPosition"
-							v-model="extraTabPosition"
-						/>
-						{{ pos }}
-					</label>
+					<RadioGroup connected v-model="extraTabPosition">
+						<Radio
+							v-for="pos of ['top', 'bottom', 'left', 'right']"
+							:label="pos"
+							:key="pos"
+						></Radio>
+					</RadioGroup>
 				</div>
 				<div class="demo-content" :style="{ height: '300px' }">
 					<Tabs :tab-position="extraTabPosition">
