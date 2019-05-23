@@ -29,6 +29,7 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
+import Divider from './components/divider'
 
 // 【_f】全局方法式组件
 import Dark from './components/dark'
@@ -80,7 +81,8 @@ const components = {
 	Radio,
 	RadioGroup,
 	Checkbox,
-	CheckboxGroup
+	CheckboxGroup,
+    Divider
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -148,7 +150,8 @@ export {
 	Radio,
 	RadioGroup,
 	Checkbox,
-	CheckboxGroup
+	CheckboxGroup,
+    Divider
 }
 // 将整个zov暴露出去
 export default zov
