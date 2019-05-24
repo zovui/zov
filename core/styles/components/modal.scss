@@ -1,0 +1,136 @@
+$prefix-modal : #{$prefix}modal;
+.#{$prefix-modal}{
+
+    &-vertical-center{
+        .#{$prefix-modal}-wrapper{
+            transform: translateY(-50%);
+            top: 50%;
+        }
+    }
+
+    &-mask{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &-wrapper{
+        position: fixed;
+        margin: 0 auto;
+        top: 100px;
+        left: 0;
+        right: 0;
+        width: 420px;
+        @include get-color-bg();
+        border: $border-width-base solid;
+        @include get-color-divider();
+        border-radius: $border-radius-base;
+        @include get-color-shadow();
+        &-fullscreen{
+            top: 0;
+            bottom: 0;
+            border-radius: 0;
+            width: 100%;
+            .#{$prefix-modal}-footer{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+            }
+        }
+    }
+
+    &-close{
+        position: absolute;
+        font-size: 30px;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        @include get-color-sub-hover();
+        &:hover {
+            @include get-color-sub();
+        }
+    }
+
+    &-header{
+        padding: $gap-base;
+    }
+
+    &-title{
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    &-content{
+        position: relative;
+    }
+
+    &-body{
+        padding: 0 $gap-base;
+        font-size: 14px;
+        &-instance {
+            position: relative;
+            padding-top: 20px;
+            &-icon {
+                position: absolute;
+                font-size: 30px;
+                margin-left: 10px;
+                @include get-color-primary-active();
+            }
+            &-main {
+                margin-left: 50px;
+            }
+            &-title {
+                font-size: 16px;
+                margin-bottom: 8px;
+                line-height: 30px;
+            }
+            &-text {
+                font-size: 14px;
+                line-height: 26px;
+                white-space: pre-line;
+            }
+        }
+        &-confirm {
+            .#{$prefix-modal}-body-instance-icon{
+                color: $color-warning;
+            }
+        }
+        &-info {
+            .#{$prefix-modal}-body-instance-icon{
+                color: $color-info;
+            }
+        }
+        &-success {
+            .#{$prefix-modal}-body-instance-icon{
+                color: $color-success;
+            }
+        }
+        &-warning {
+            .#{$prefix-modal}-body-instance-icon{
+                color: $color-warning;
+            }
+        }
+        &-error {
+            .#{$prefix-modal}-body-instance-icon{
+                color: $color-error;
+            }
+        }
+    }
+
+    &-footer{
+        padding: $gap-base;
+        &-center{
+            text-align: center;
+        }
+        &-left{
+            text-align: left;
+        }
+        &-right{
+            text-align: right;
+        }
+    }
+}
+
