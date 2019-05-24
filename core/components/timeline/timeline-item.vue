@@ -21,16 +21,16 @@ export default {
 		}
 	},
 	computed: {
-		isLast() {
+		nextIsGhost() {
 			if (this.Timeline) {
-				return this.Timeline.isLastItem(this)
+				return this.Timeline.nextIsGhost(this)
 			}
 			return false
 		},
 		classList() {
 			const classList = []
-			if (this.isLast) {
-				classList.push('zov-timeline-item--last')
+			if (this.nextIsGhost) {
+				classList.push('zov-timeline-item--next-ghost')
 			}
 			return classList
 		}

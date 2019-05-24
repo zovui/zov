@@ -57,6 +57,33 @@
 					</Timeline>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">pending</h2>
+				<div class="demo-content">
+					<Timeline pending>
+						<TimelineItem
+							>Create a services site 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Solve initial network problems
+							2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Technical testing 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Network problems being solved
+							2015-09-01</TimelineItem
+						>
+						<template #ghost-dot>
+							<Spin />
+						</template>
+						<template #ghost-content>
+							Recoding...
+						</template>
+					</Timeline>
+				</div>
+			</section>
 		</article>
 	</main>
 </template>

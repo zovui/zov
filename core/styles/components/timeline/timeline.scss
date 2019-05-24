@@ -24,11 +24,13 @@ $component-name: $prefix + 'timeline';
             left: 0;
             z-index: 1;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            font-size: 12px;
         }
         .#{$component-name}-dot {
             display: block;
             box-sizing: border-box;
-            margin: 0 auto;
             border-radius: 50%;
             border: 1px solid transparent;
             width: 12px;
@@ -54,9 +56,20 @@ $component-name: $prefix + 'timeline';
         top: -4px;
         margin-left: 24px;
     }
-    &--last {
+    &:last-child {
         .#{$component-name}-line {
             display: none;
+        }
+    }
+    &--next-ghost {
+        .#{$component-name}-indicator {
+            .#{$component-name}-line {
+                border: 1px dashed transparent;
+                @include get-color-border(border-color);
+            }
+        }
+        .#{$component-name}-item-content {
+            min-height: 48px;
         }
     }
 }
