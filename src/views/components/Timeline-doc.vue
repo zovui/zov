@@ -1,5 +1,5 @@
 <template>
-	<article class="container">
+	<main class="container">
 		<h1>Timeline</h1>
 		<article class="article">
 			<section
@@ -35,8 +35,30 @@
 				</table>
 			</section>
 		</article>
-		<article class="article"></article>
-	</article>
+		<article class="article">
+			<section class="demo">
+				<h2 class="demo-header">默认</h2>
+				<div class="demo-content">
+					<Timeline>
+						<TimelineItem
+							>Create a services site 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Solve initial network problems
+							2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Technical testing 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Network problems being solved
+							2015-09-01</TimelineItem
+						>
+					</Timeline>
+				</div>
+			</section>
+		</article>
+	</main>
 </template>
 
 <style lang="scss" scoped>

@@ -1,0 +1,62 @@
+@import "../../mixins/get-color";
+@import "../../custom";
+$component-name: $prefix + 'timeline';
+
+.#{$component-name} {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.#{$component-name}-item {
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 20px;
+    .#{$component-name}-indicator {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+        height: 100%;
+        .#{$component-name}-dot-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+        }
+        .#{$component-name}-dot {
+            display: block;
+            box-sizing: border-box;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            width: 12px;
+            height: 12px;
+            @include get-color-bg(background-color);
+            @include get-color-primary-hover(border-color);
+        }
+        .#{$component-name}-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            border: 1px solid transparent;
+            width: 0;
+            height: 100%;
+            @include get-color-border(border-color);
+        }
+    }
+    .#{$component-name}-item-content {
+        position: relative;
+        font-size: 14px;
+        top: -4px;
+        margin-left: 24px;
+    }
+    &--last {
+        .#{$component-name}-line {
+            display: none;
+        }
+    }
+}
