@@ -1,5 +1,5 @@
 <template>
-	<ul class="zov-timeline">
+	<ul class="zov-timeline" :class="classList">
 		<slot />
 		<TimelineGhostItem v-if="pending">
 			<template #dot>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { findIndex } from '../../utils'
+import { findIndex, includes } from '../../utils'
 import TimelineGhostItem from './timeline-ghost-item'
 export default {
 	name: 'zov-timeline',
@@ -19,7 +19,17 @@ export default {
 		TimelineGhostItem
 	},
 	props: {
-		pending: Boolean
+		pending: Boolean,
+		mode: {
+			type: String,
+			default: 'left',
+			validator(mode) {
+				return includes(
+					['left', 'right', 'alternate-left', 'alternate-right'],
+					mode
+				)
+			}
+		}
 	},
 	provide() {
 		const proxy = {
@@ -34,6 +44,13 @@ export default {
 	data() {
 		return {
 			items: []
+		}
+	},
+	computed: {
+		classList() {
+			const classList = []
+			classList.push(`zov-timeline--${this.mode}`)
+			return classList
 		}
 	},
 	methods: {

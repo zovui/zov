@@ -14,7 +14,6 @@ $component-name: $prefix + 'timeline';
     padding-bottom: 20px;
     .#{$component-name}-indicator {
         position: absolute;
-        left: 0;
         top: 0;
         width: 24px;
         height: 100%;
@@ -54,7 +53,6 @@ $component-name: $prefix + 'timeline';
         position: relative;
         font-size: 14px;
         top: -4px;
-        margin-left: 24px;
     }
     &:last-child {
         .#{$component-name}-line {

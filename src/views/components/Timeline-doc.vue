@@ -84,6 +84,47 @@
 					</Timeline>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">可指定Mode</h2>
+				<div class="demo-content">
+					<RadioGroup v-model="mode" connected>
+						<Radio
+							v-for="mode of [
+								'left',
+								'right',
+								'alternate-left',
+								'alternate-right'
+							]"
+							:label="mode"
+							:key="mode"
+						/>
+					</RadioGroup>
+				</div>
+				<div class="demo-content">
+					<Timeline pending :mode="mode">
+						<TimelineItem
+							>Create a services site 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Solve initial network problems
+							2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Technical testing 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Network problems being solved
+							2015-09-01</TimelineItem
+						>
+						<template #ghost-dot>
+							<Spin />
+						</template>
+						<template #ghost-content>
+							Recoding...
+						</template>
+					</Timeline>
+				</div>
+			</section>
 		</article>
 	</main>
 </template>
@@ -147,7 +188,8 @@ export default {
 	name: 'TimelineDemo',
 	data() {
 		return {
-			componentIntroduction: []
+			componentIntroduction: [],
+			mode: 'left'
 		}
 	}
 }

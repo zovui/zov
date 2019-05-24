@@ -1,0 +1,9 @@
+.#{$component-name}--right {
+    .#{$component-name}-indicator {
+        right: 0;
+    }
+    .#{$component-name}-item-content {
+        margin-right: 24px;
+        text-align: right;
+    }
+}
