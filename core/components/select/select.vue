@@ -1,6 +1,7 @@
 <template>
 	<div class="zov-select">
 		<Drop
+			zov-internal-reference
 			:no-arrow="noArrow"
 			:trigger="trigger"
 			:never="disabled"

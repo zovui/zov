@@ -48,12 +48,20 @@
 </template>
 
 <script>
+import Icon from '../icon'
+import Spin from '../spin'
+import Button from '../button'
 import { index, addIndex } from './zIndex'
 import { scrollLock, scrollUnlock } from '../../utils/set-scroll'
 
 const prefix = 'zov-modal'
 export default {
 	name: prefix,
+	components: {
+		Spin,
+		Icon,
+		Button
+	},
 	props: {
 		closable: {
 			// 显示关闭按钮

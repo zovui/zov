@@ -4,6 +4,7 @@
 			<div :class="classes" :style="paddingStyle" @click="clickHandle">
 				<span><slot name="title">menu sub title</slot></span>
 				<Icon
+					zov-internal-reference
 					class="zov-menu-sub-title-arrow"
 					iconname="arrow-down"
 					:style="iconStyles"
@@ -22,6 +23,7 @@
 			</collapse-transition>
 		</template>
 		<Drop
+			zov-internal-reference
 			v-else
 			v-model="opened"
 			:no-arrow="menuComponent.noArrow"
@@ -33,6 +35,7 @@
 			<template #drop-head>
 				<div :class="classes" :style="paddingStyle">
 					<Icon
+						zov-internal-reference
 						v-if="hasDefaultThumbnailIcon"
 						:iconname="thumbnailIcon"
 						thumbnail-icon
@@ -41,6 +44,7 @@
 						><slot name="title">menu sub title</slot></span
 					>
 					<Icon
+						zov-internal-reference
 						class="zov-menu-sub-title-arrow"
 						iconname="arrow-down"
 						:style="iconStyles"

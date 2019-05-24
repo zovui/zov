@@ -1,6 +1,7 @@
 <template>
 	<div class="zov-select">
 		<Drop
+			zov-internal-reference
 			:no-arrow="noArrow"
 			trigger="focus"
 			:never="disabled"
@@ -51,6 +52,7 @@
 							{{ props.item[labelName] }}
 						</slot>
 						<Icon
+							zov-internal-reference
 							v-if="
 								currentValueArr.indexOf(
 									props.item[valueName]

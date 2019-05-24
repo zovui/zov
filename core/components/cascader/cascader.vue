@@ -1,6 +1,7 @@
 <template>
 	<div class="zov-select zov-cascader">
 		<Drop
+			zov-internal-reference
 			:no-arrow="noArrow"
 			:trigger="trigger"
 			placement="bottom-start"

@@ -26,7 +26,11 @@
 						"
 						iconname="checkmark"
 					/>
-					<Icon v-if="hasChildren(item)" iconname="arrow-forward" />
+					<Icon
+						zov-internal-reference
+						v-if="hasChildren(item)"
+						iconname="arrow-forward"
+					/>
 				</div>
 			</div>
 		</div>
