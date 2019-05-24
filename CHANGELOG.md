@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.5.0](https://github.com/zovui/zov/compare/v0.4.0...v0.5.0) (2019-05-24)
+
+
+### Bug Fixes
+
+* **all:** 组件样式内部化 ([7f8c23e](https://github.com/zovui/zov/commit/7f8c23e))
+* **menu:** join split ([0aed39c](https://github.com/zovui/zov/commit/0aed39c))
+
+
+### Features
+
+* **modal:** 新增modal组件 ([f38056d](https://github.com/zovui/zov/commit/f38056d))
+* **module:** hebing ([ec4bcf5](https://github.com/zovui/zov/commit/ec4bcf5))
+
+
+### Performance Improvements
+
+* **input:** 增加slot ([f72aec0](https://github.com/zovui/zov/commit/f72aec0))
+
+
+
 # [0.4.0](https://github.com/zovui/zov/compare/v0.3.0...v0.4.0) (2019-05-21)
 
 
