@@ -35,6 +35,8 @@ import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
 import Notice from './components/notice'
 import Message from './components/message'
+import Modal from './components/modal'
+
 // 全局指令
 import './directives'
 const components = {
@@ -43,6 +45,7 @@ const components = {
 	LoadingBar,
 	Notice,
 	Message,
+	Modal,
 	// 【_f】
 	Affix,
 	Anchor,
@@ -95,6 +98,7 @@ const install = (Vue, option = {}) => {
 	Vue.prototype.$LoadingBar = LoadingBar
 	Vue.prototype.$Notice = Notice
 	Vue.prototype.$Message = Message
+	Vue.prototype.$Modal = Modal
 }
 // 自动安装【browser端引用的时候可以省去Vue.use】
 if (typeof window !== 'undefined' && window.Vue) {
@@ -111,6 +115,7 @@ export {
 	LoadingBar,
 	Notice,
 	Message,
+	Modal,
 	// 【_f】
 	Affix,
 	Anchor,
