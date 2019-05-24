@@ -5,7 +5,11 @@ module.exports = {
 	},
 	extends: ['plugin:vue/essential', '@vue/standard', '@vue/prettier'],
 	rules: {
-		'no-console': 'off',
+		'no-console':
+			process.env.NODE_ENV === 'production' &&
+			process.env.CORE_MIN === 'lib'
+				? 'error'
+				: 'off',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 		'no-useless-return': 'off',
 		'vue/no-parsing-error': 'off'
