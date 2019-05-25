@@ -59,7 +59,7 @@ $prefix-menu: #{$prefix}menu;
         }
     }
     &-sub{
-        .#{$prefix}tooltip[zov-internal-reference]{
+        .#{$prefix}tooltip[zov-internal-reference-menu-sub]{
             display: block;
             .#{$prefix}tooltip-body{
                 min-width: 220px;
@@ -110,7 +110,7 @@ $prefix-menu: #{$prefix}menu;
         transition: background-color $transition-hover-time,
                     color $transition-hover-time;
         @include nowrap();
-        &.#{$prefix}tooltip[zov-internal-reference]{
+        &.#{$prefix}tooltip[zov-internal-reference-menu-option]{
             display: block;
             line-height: 1.6;
             .#{$prefix}tooltip-body{
@@ -204,7 +204,7 @@ $prefix-menu: #{$prefix}menu;
     &-thumbnail{
         &>.#{$prefix-menu}-option,
         &>.#{$prefix-menu}-group>.#{$prefix-menu}-group-body>.#{$prefix-menu}-option,
-        &>.#{$prefix-menu}-sub>.#{$prefix}tooltip[zov-internal-reference]>.#{$prefix-menu}-sub-title{
+        &>.#{$prefix-menu}-sub>.#{$prefix}tooltip[zov-internal-reference-menu-sub]>.#{$prefix-menu}-sub-title{
             text-align: center;
             font-size: 0;
             &:before{

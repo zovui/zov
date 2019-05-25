@@ -5,7 +5,7 @@ $prefix-select: #{$prefix}select;
     text-align: left;
     border-radius: $border-radius-button;
     user-select: none;
-    &>.#{$prefix}tooltip[zov-internal-reference]{
+    &>.#{$prefix}tooltip[zov-internal-reference-select]{
         width: 100%;
         & .#{$prefix}tooltip-body{
             padding-left: 0;
@@ -39,7 +39,7 @@ $prefix-select: #{$prefix}select;
         }
         &-selected{
             color: $color-primary;
-            &>.zov-icon[zov-internal-reference]{
+            &>.zov-icon[zov-internal-reference-select]{
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);

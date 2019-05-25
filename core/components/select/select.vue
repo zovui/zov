@@ -1,7 +1,7 @@
 <template>
 	<div class="zov-select">
 		<Drop
-			zov-internal-reference
+			zov-internal-reference-select
 			:no-arrow="noArrow"
 			:trigger="trigger"
 			:never="disabled"
@@ -18,6 +18,7 @@
 					:multiple="multiple"
 					:clearable="clearable"
 					:label-name="labelName"
+					:value-name="valueName"
 					v-model="query"
 					:dropShow="dropShow"
 					@on-remove-tag="select"
@@ -42,7 +43,10 @@
 							v-slot="{ props }"
 						>
 							<slot :props="props">
-								{{ props.item[labelName] }}
+								{{
+									props.item[labelName] ||
+										props.item[valueName]
+								}}
 							</slot>
 						</Option>
 					</template>
@@ -52,7 +56,9 @@
 							:key="index + ''"
 						>
 							<div class="zov-select-option-group-title">
-								{{ item[labelName] }}
+								{{
+									item[labelName] || '第' + (index + 1) + '组'
+								}}
 							</div>
 							<Option
 								:data="item[childName]"
@@ -62,7 +68,10 @@
 								v-slot="{ props }"
 							>
 								<slot :props="props">
-									{{ props.item[labelName] }}
+									{{
+										props.item[labelName] ||
+											props.item[valueName]
+									}}
 								</slot>
 							</Option>
 						</div>
@@ -78,7 +87,7 @@
 						v-slot="{ props }"
 					>
 						<slot :props="props">
-							{{ props.item[labelName] }}
+							{{ props.item[labelName] || props.item[valueName] }}
 						</slot>
 					</Option>
 				</template>
@@ -143,7 +152,10 @@ export default {
 						group[this.childName].forEach(item => {
 							if (
 								new RegExp(val).test(
-									item[this.currentQueryName].toString()
+									(
+										item[this.currentQueryName] ||
+										item[this.valueName]
+									).toString()
 								)
 							) {
 								this.queryResult.push(item)
@@ -154,7 +166,10 @@ export default {
 					this.currentData.forEach(item => {
 						if (
 							new RegExp(val).test(
-								item[this.currentQueryName].toString()
+								(
+									item[this.currentQueryName] ||
+									item[this.valueName]
+								).toString()
 							)
 						) {
 							this.queryResult.push(item)

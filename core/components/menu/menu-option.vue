@@ -1,6 +1,6 @@
 <template>
 	<ToolTip
-		zov-internal-reference
+		zov-internal-reference-menu-option
 		v-if="isThumbnailMode"
 		placement="right"
 		:high-color="menuComponent.highColor"
@@ -13,7 +13,7 @@
 			<slot>option</slot>
 		</template>
 		<Icon
-			zov-internal-reference
+			zov-internal-reference-menu-option
 			v-if="!hasThumbnailIcon"
 			:iconname="thumbnailIcon"
 			thumbnail-icon

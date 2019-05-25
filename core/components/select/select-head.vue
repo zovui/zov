@@ -14,10 +14,10 @@
 						:size="size"
 						v-if="data.length"
 						v-for="item in data"
-						:key="item[labelName]"
+						:key="item[valueName] + 'key'"
 						@on-close="$emit('on-remove-tag', item)"
 					>
-						{{ item[labelName] }}
+						{{ item[labelName] || item[valueName] }}
 					</Tag>
 				</transition-group>
 				<Input
@@ -94,6 +94,10 @@ export default {
 		labelName: {
 			type: String,
 			default: 'label'
+		},
+		valueName: {
+			type: String,
+			default: 'value'
 		},
 		placeholder: {
 			type: String,

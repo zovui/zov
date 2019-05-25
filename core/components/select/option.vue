@@ -15,7 +15,7 @@
 		>
 			<slot :props="{ item, index }"></slot>
 			<Icon
-				zov-internal-reference
+				zov-internal-reference-select
 				v-if="selectedValues.indexOf(item[valueName]) !== -1"
 				iconname="checkmark"
 			/>

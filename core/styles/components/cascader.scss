@@ -1,7 +1,16 @@
 $prefix-cascader : #{$prefix}cascader;
 .#{$prefix-cascader}{
-    .#{$prefix}tooltip[zov-internal-reference]{
-        .#{$prefix}tooltip-body{
+    width: $form-dom-width;
+    display: inline-block;
+    text-align: left;
+    border-radius: $border-radius-button;
+    user-select: none;
+    .#{$prefix}tooltip[zov-internal-reference-cascader]{
+        width: 100%;
+        & .#{$prefix}tooltip-body{
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
             padding: 0;
         }
     }
@@ -41,7 +50,7 @@ $prefix-cascader : #{$prefix}cascader;
             color: $color-primary;
         }
         &-arrow-forward{
-            &>.zov-icon[zov-internal-reference]:nth-of-type(2){
+            &>.zov-icon[zov-internal-reference-cascader]:nth-of-type(2){
                 @include get-color-text();
             }
             position: absolute;

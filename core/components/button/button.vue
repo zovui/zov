@@ -2,7 +2,7 @@
 	<RenderElTag v-on="$listeners" v-bind="$attrs" :tag="tag" :class="classes">
 		<!-- 自定义Spin, 默认为 `loading` -->
 		<Spin
-			zov-internal-reference
+			zov-internal-reference-button
 			v-if="loading"
 			:spinname="spinname || 'loading'"
 		/>

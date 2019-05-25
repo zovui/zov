@@ -1,7 +1,7 @@
 <template>
 	<div class="zov-select">
 		<Drop
-			zov-internal-reference
+			zov-internal-reference-select
 			:no-arrow="noArrow"
 			trigger="focus"
 			:never="disabled"
@@ -18,6 +18,7 @@
 					:multiple="multiple"
 					:clearable="clearable"
 					:label-name="labelName"
+					:value-name="valueName"
 					v-model="query"
 					:dropShow="dropShow"
 					@on-remove-tag="select"
@@ -49,10 +50,10 @@
 						:disabled="props.item.disabled"
 					>
 						<slot :props="props">
-							{{ props.item[labelName] }}
+							{{ props.item[labelName] || props.item[valueName] }}
 						</slot>
 						<Icon
-							zov-internal-reference
+							zov-internal-reference-select
 							v-if="
 								currentValueArr.indexOf(
 									props.item[valueName]
@@ -99,7 +100,10 @@ export default {
 					let item = this.currentData[i]
 					if (
 						new RegExp(val).test(
-							item[this.currentQueryName].toString()
+							(
+								item[this.currentQueryName] ||
+								item[this.valueName]
+							).toString()
 						)
 					) {
 						this.queryResult.push(item)

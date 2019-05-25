@@ -7,6 +7,14 @@
 			<Button size="small" @click="size = 'small'">small</Button>
 		</p>
 		<div class="box">
+			基本
+			<Select
+				:data="[{ value: 1 }, { value: 2 }]"
+				v-model="base"
+				filterable
+				multiple
+			>
+			</Select>
 			单选不可搜索
 			<Select
 				:size="size"
@@ -15,18 +23,18 @@
 				v-model="value1"
 				value-name="id"
 				label-name="text"
-				query-name="id"
 				autofocus
 				:no-arrow="false"
 			>
 			</Select>
-			单选可搜索
+			单选可搜索 query-name="id"
 			<Select
 				:data="list"
 				placeholder="单选"
 				v-model="value2"
 				value-name="id"
 				label-name="text"
+				query-name="id"
 				filterable
 			>
 				<div slot-scope="{ props }">
@@ -45,7 +53,6 @@
 				v-model="value4"
 				value-name="id"
 				label-name="text"
-				query-name="id"
 				@on-change="change"
 				@on-open-change="open"
 				autofocus
@@ -254,7 +261,7 @@ export default {
 				let d = []
 				for (let i = 0; i < 4; i++) {
 					let x = {
-						text: '第' + i + '组',
+						text: '这是第' + i + '组',
 						children: []
 					}
 					for (let j = 0; j < 5; j++) {
@@ -267,6 +274,7 @@ export default {
 				}
 				return d
 			})(),
+			base: '',
 			value1: 4,
 			value2: '',
 			value3: [0, 2, 4],
