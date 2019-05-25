@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.1](https://github.com/zovui/zov/compare/v0.5.0...v0.5.1) (2019-05-25)
+
+
+### Performance Improvements
+
+* **select cascader big-data-list:** no has label ([d3b2a66](https://github.com/zovui/zov/commit/d3b2a66))
+
+
+
 # [0.5.0](https://github.com/zovui/zov/compare/v0.4.0...v0.5.0) (2019-05-24)
 
 
