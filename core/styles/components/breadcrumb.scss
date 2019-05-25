@@ -1,0 +1,29 @@
+$prefix-breadcrumb : #{$prefix}breadcrumb;
+$prefix-breadcrumb-item : #{$prefix}breadcrumb-item;
+
+.#{$prefix-breadcrumb}{
+    font-size: 14px;
+    line-height: 1.5;
+}
+.#{$prefix-breadcrumb-item}{
+    display: inline-block;
+    &-inner {
+        a {
+            @include get-color-text();
+            &:hover{
+                @include get-color-primary-hover();
+            }
+            &:active{
+                @include get-color-primary-active();
+            }
+        }
+    }
+    &-text {
+        @include get-color-title();
+        font-weight: bold;
+        cursor: default;
+    }
+    &-separator {
+        margin: 0 8px;
+    }
+}

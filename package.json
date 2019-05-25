@@ -1,6 +1,6 @@
 {
 	"name": "zov",
-	"version": "0.2.0",
+	"version": "0.4.0",
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
@@ -13,8 +13,9 @@
 	},
 	"dependencies": {
 		"dayjs": "^1.8.6",
-		"lodash": "^4.17.11",
+		"lodash.debounce": "^4.0.8",
 		"popper.js": "^1.14.5",
+		"resize-observer-polyfill": "^1.5.1",
 		"tinycolor2": "^1.4.1",
 		"v-click-outside-x": "^3.5.5",
 		"vue": "^2.6.6"
@@ -49,6 +50,8 @@
 		"lib",
 		"core"
 	],
+	"unpkg": "lib/zov.min.js",
+	"style": "lib/zov.min.css",
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"

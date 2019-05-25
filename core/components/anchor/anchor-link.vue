@@ -13,8 +13,9 @@
 	</div>
 </template>
 <script>
+const prefix = 'zov-anchor-link'
 export default {
-	name: 'AnchorLink',
+	name: prefix,
 	inject: ['anchorCom'],
 	props: {
 		href: String,

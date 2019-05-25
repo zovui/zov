@@ -1,0 +1,41 @@
+.#{$component-name}--vertical {
+    flex-direction: row;
+    height: 100%;
+    .#{$component-name}-nav {
+        flex-direction: column;
+        height: 100%;
+        .#{$component-name}-nav-action {
+            width: 100%;
+            height: 32px;
+        }
+    }
+    .#{$component-name}-tab {
+        text-align: center;
+    }
+    .#{$component-name}-content {
+        flex: 1 1 auto;
+    }
+}
+
+.#{$component-name}--vertical.#{$component-name}--left {
+    .#{$component-name}-nav {
+        order: 0;
+        margin-right: 20px;
+        border-right: 1px solid transparent;
+        @include get-color-border(border-color);
+    }
+    .#{$component-name}-content {
+        order: 1
+    }
+}
+.#{$component-name}--vertical.#{$component-name}--right {
+    .#{$component-name}-nav {
+        order: 1;
+        margin-left: 20px;
+        border-left: 1px solid transparent;
+        @include get-color-border(border-color);
+    }
+    .#{$component-name}-content {
+        order: 0
+    }
+}

@@ -1,0 +1,112 @@
+@import "../../mixins/get-color";
+@import "../../custom";
+
+.#{$component-name}--card {
+    // tab样式
+    .#{$component-name}-tab {
+        border: 1px solid transparent;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-weight: 500;
+        padding: 0 16px;
+        height: 40px;
+        line-height: 38px;
+        @include get-color-border(border-color);
+        @include get-color-divider(background);
+        &:not(.#{$component-name}-tab--disabled) {
+            &:hover {
+                @include get-color-primary-hover(color);
+            }
+        }
+        &--active {
+            @include get-color-primary-active(color);
+            @include get-color-bg(background);
+        }
+        &--disabled {
+            @include get-color-disabled(color);
+            cursor: not-allowed;
+            .#{$component-name}-closer {
+                @include get-color-disabled(color);
+                transition: none;
+                &:hover {
+                    @include get-color-disabled(color);
+                }
+            }
+        }
+    }
+    .#{$component-name}-closer {
+        display: inline-block;
+        margin-right: -0.5em;
+        margin-left: 3px;
+        font-size: 20px;
+        vertical-align: middle;
+        @include get-color-sub(color);
+        transition: $transition-time color $bezier;
+        &:hover {
+            @include get-color-sub-hover(color);
+        }
+    }
+}
+
+
+.#{$component-name}--horizontal {
+    &.#{$component-name}--card {
+        // tab样式
+        .#{$component-name}-tab {
+            display: inline-block;
+            margin-right: 2px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+    .#{$component-name}-card-roller {
+        display: inline-block;
+        white-space: nowrap;
+    }
+    &.#{$component-name}--top {
+        .#{$component-name}-nav-viewport {
+            margin-bottom: -1px;
+        }
+        .#{$component-name}-tab {
+            border-radius: 4px 4px 0 0;
+            border-bottom: none;
+        }
+    }
+    &.#{$component-name}--bottom {
+        .#{$component-name}-nav-viewport {
+            margin-top: -1px;
+        }
+        .#{$component-name}-tab {
+            border-radius: 0 0 4px 4px;
+            border-top: none;
+        }
+    }
+}
+
+.#{$component-name}--vertical {
+    &.#{$component-name}--card {
+        .#{$component-name}-tab {
+            display: block;
+            margin-bottom: 8px;
+        }
+    }
+    &.#{$component-name}--left {
+        .#{$component-name}-nav-viewport {
+            margin-right: -1px;
+        }
+        .#{$component-name}-tab {
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+        }
+    }
+    &.#{$component-name}--right {
+        .#{$component-name}-nav-viewport {
+            margin-left: -1px;
+        }
+        .#{$component-name}-tab {
+            border-radius: 0 4px 4px 0;
+            border-left: none;
+        }
+    }
+}
