@@ -8,6 +8,7 @@
 					{ value: 2, children: [{ value: 1 }, { value: 2 }] }
 				]"
 				v-model="base"
+				@on-change="change"
 			/>
 			<h3>常规</h3>
 			<div class="box">
@@ -198,6 +199,11 @@ export default {
 			value5: [],
 			value6: '',
 			value7: ''
+		}
+	},
+	methods: {
+		change(val) {
+			console.log(val)
 		}
 	}
 }
