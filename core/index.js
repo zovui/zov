@@ -30,14 +30,10 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
-<<<<<<< HEAD
 import Divider from './components/divider'
-
-=======
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import { Tabs, TabPane } from './components/tabs'
->>>>>>> dev
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -97,7 +93,7 @@ const components = {
 	BreadcrumbItem,
 	Tabs,
 	TabPane,
-    Divider
+	Divider
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -169,14 +165,11 @@ export {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
-<<<<<<< HEAD
-    Divider
-=======
+	Divider,
 	Breadcrumb,
 	BreadcrumbItem,
 	Tabs,
 	TabPane
->>>>>>> dev
 }
 // 将整个zov暴露出去
 export default zov
