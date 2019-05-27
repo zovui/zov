@@ -89,6 +89,22 @@
 					placeholder="这是一个可看的密码input"
 				/>
 			</li>
+			slot
+			<li>
+				<Input
+					v-model="inputV"
+					clearable
+					eye
+					placeholder="这是一个可看的密码input"
+				>
+					<template #prefix
+						><span>有</span></template
+					>
+					<template #suffix
+						><span>个</span></template
+					>
+				</Input>
+			</li>
 		</ul>
 	</div>
 </template>

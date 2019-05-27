@@ -93,6 +93,7 @@ $prefix-color-picker: #{$prefix}color-picker;
         }
         &-arrow{
             @include get-color-sub();
+            text-align: center;
             transform-origin: center;
             transition: transform $transition-time $bezier;
             &-up{

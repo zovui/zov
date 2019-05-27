@@ -3,6 +3,7 @@ import './icons/index.css'
 // 【_c】全局注册式组件
 import Affix from './components/affix'
 import { Anchor, AnchorLink } from './components/anchor'
+import BackTop from './components/back-top'
 import LongList from './components/long-list'
 import Icon from './components/icon'
 import Button from './components/button'
@@ -29,13 +30,21 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
+<<<<<<< HEAD
 import Divider from './components/divider'
 
+=======
+import Breadcrumb from './components/breadcrumb'
+import BreadcrumbItem from './components/breadcrumb-item'
+import { Tabs, TabPane } from './components/tabs'
+>>>>>>> dev
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
 import Notice from './components/notice'
 import Message from './components/message'
+import Modal from './components/modal'
+
 // 全局指令
 import './directives'
 const components = {
@@ -44,10 +53,12 @@ const components = {
 	LoadingBar,
 	Notice,
 	Message,
+	Modal,
 	// 【_f】
 	Affix,
 	Anchor,
 	AnchorLink,
+	BackTop,
 	LongList,
 	Icon,
 	Button,
@@ -82,6 +93,10 @@ const components = {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
+	Breadcrumb,
+	BreadcrumbItem,
+	Tabs,
+	TabPane,
     Divider
 }
 Object.keys(components).forEach(key => {
@@ -97,6 +112,7 @@ const install = (Vue, option = {}) => {
 	Vue.prototype.$LoadingBar = LoadingBar
 	Vue.prototype.$Notice = Notice
 	Vue.prototype.$Message = Message
+	Vue.prototype.$Modal = Modal
 }
 // 自动安装【browser端引用的时候可以省去Vue.use】
 if (typeof window !== 'undefined' && window.Vue) {
@@ -113,10 +129,12 @@ export {
 	LoadingBar,
 	Notice,
 	Message,
+	Modal,
 	// 【_f】
 	Affix,
 	Anchor,
 	AnchorLink,
+	BackTop,
 	LongList,
 	Icon,
 	Button,
@@ -151,7 +169,14 @@ export {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
+<<<<<<< HEAD
     Divider
+=======
+	Breadcrumb,
+	BreadcrumbItem,
+	Tabs,
+	TabPane
+>>>>>>> dev
 }
 // 将整个zov暴露出去
 export default zov

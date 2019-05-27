@@ -1,0 +1,47 @@
+@import "../../mixins/get-color";
+@import "../../custom";
+
+.#{$component-name}-nav {
+    display: flex;
+}
+
+.#{$component-name}-nav-action {
+    display: none;
+    flex: 0 0 auto;
+    position: relative;
+    cursor: pointer;
+    @include get-color-sub-hover(color);
+    .#{$component-name}-nav-action-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:hover {
+        @include get-color-sub(color);
+    }
+    &--disabled {
+        cursor: not-allowed;
+        @include get-color-disabled(color);
+        &:hover {
+            @include get-color-disabled(color);
+        }
+    }
+}
+
+.#{$component-name}-nav-viewport {
+    flex: 1 1 auto;
+    overflow: hidden;
+}
+
+.#{$component-name}-nav-roller {
+    position: relative;
+    transition: $transition-time transform $bezier;
+}
+
+// 可滚动时的样式变化
+.#{$component-name}-nav--scrollable {
+    .#{$component-name}-nav-action {
+        display: block;
+    }
+}

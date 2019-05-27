@@ -61,7 +61,7 @@ export default {
 	data() {
 		return {
 			currentActiveName: this.activeName + '',
-			currentOpenNames: this.openNames.join('').split(''),
+			currentOpenNames: this.openNames.join(',').split(','),
 			activeFullPath: [],
 			timer: null
 		}

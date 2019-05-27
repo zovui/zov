@@ -2,8 +2,10 @@
 	<!-- #005 -->
 	<div :class="classes">
 		<!-- 自定义前缀icon -->
-		<div class="zov-input-prefix" v-if="prefix">
-			<Icon :iconname="prefix" />
+		<div class="zov-input-prefix">
+			<slot name="prefix">
+				<Icon v-if="prefix" :iconname="prefix" />
+			</slot>
 		</div>
 		<!-- input 主体 -->
 		<input
@@ -14,7 +16,9 @@
 		/>
 		<div class="zov-input-suffix" v-if="clearable || suffix">
 			<!-- 自定义后缀icon -->
-			<Icon v-if="suffix" :iconname="suffix" />
+			<slot name="suffix">
+				<Icon v-if="suffix" :iconname="suffix" />
+			</slot>
 			<!-- 功能性后缀icon -->
 			<Icon
 				class="zov-input-suffix-tool"
@@ -78,11 +82,17 @@ export default {
 		innerClasses() {
 			return [
 				// 计算后缀个数，决定input padding值。
-				this.stylePrefix + '-prefix-' + this.transCount([this.prefix]),
+				this.stylePrefix +
+					'-prefix-' +
+					this.transCount([this.prefix || this.$slots.prefix]),
 				// 计算后缀个数，决定input padding值。
 				this.stylePrefix +
 					'-suffix-' +
-					this.transCount([this.clearable && this.value, this.suffix])
+					this.transCount([
+						this.clearable && this.value,
+						this.eye && this.value,
+						this.suffix || this.$slots.suffix
+					])
 			]
 		},
 		inputListeners() {

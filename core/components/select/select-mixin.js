@@ -95,8 +95,16 @@ export default {
 		dropShow(val) {
 			this.$emit('on-open-change', val)
 			if (!val && !this.multiple) {
+				let isCascaderC = this.isThisComponent('zov-cascader')
+				let queryName =
+					(isCascaderC && !this.filterable ? '__' : '') +
+					this.currentQueryName
+				let valueName =
+					(isCascaderC && !this.filterable ? '__' : '') +
+					this.valueName
 				this.query = this.currentItemArr[0]
-					? this.currentItemArr[0][this.currentQueryName]
+					? this.currentItemArr[0][queryName] ||
+					  this.currentItemArr[0][valueName]
 					: ''
 			}
 		}
@@ -132,7 +140,9 @@ export default {
 			let queryName =
 				(isCascaderC && !this.filterable ? '__' : '') +
 				this.currentQueryName
-			this.query = item[queryName]
+			let valueName =
+				(isCascaderC && !this.filterable ? '__' : '') + this.valueName
+			this.query = item[queryName] || item[valueName]
 			// 收起下拉
 			!isDefault &&
 				(isCascaderC
