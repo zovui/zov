@@ -7,7 +7,7 @@ $prefix-menu: #{$prefix}menu;
         text-overflow: ellipsis;
     }
     @mixin disabled () {
-        [disabled]{
+        &-sub[disabled], &-option[disabled]{
             position: relative;
             &:after{
                 content: '';
@@ -53,7 +53,7 @@ $prefix-menu: #{$prefix}menu;
         &-arrow{
             @include get-color-title(background-color);
         }
-        [disabled]{
+        .#{$prefix-menu}-sub[disabled], .#{$prefix-menu}-option[disabled]{
             @include get-color-placeholder(background-color);
             @include get-color-disabled(color);
         }
