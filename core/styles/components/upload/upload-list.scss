@@ -1,0 +1,140 @@
+$prefix-upload-list: #{$prefix}upload-list;
+.#{$prefix-upload-list}{
+    overflow: hidden;
+    &-text{
+        line-height: 22px;
+        margin-top: 8px;
+        position: relative;
+        cursor: pointer;
+        &-icon{
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0;
+            vertical-align: text-bottom;
+            @include get-color-placeholder();
+        }
+        &-name{
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        &-close{
+            cursor: pointer;
+            @include get-color-sub-hover();
+            position: absolute;
+            right: 4px;
+            margin-top: 2px;
+            font-size: 20px;
+            display: none;
+            &:hover {
+                @include get-color-sub();
+            }
+        }
+        &:hover {
+            @include get-color-divider(background-color);
+            .#{$prefix-upload-list}-text-close{
+                display: inline-block;
+            }
+        }
+    }
+
+    &-picture{
+        margin-top: 8px;
+        position: relative;
+        cursor: pointer;
+        height: 60px;
+        line-height: 60px;
+        border-width: $border-width-base;
+        border-style: solid;
+        @include get-color-border();
+        border-radius: $border-radius-base;
+        &-image{
+            width: 48px;
+            height: 48px;
+            margin-top: 5px;
+            margin-left: 6px;
+            position: absolute;
+        }
+        &-name{
+            margin-left: 8px;
+            vertical-align: middle;
+            display: block;
+            padding-left: 56px;
+        }
+        &-close{
+            cursor: pointer;
+            @include get-color-sub-hover();
+            position: absolute;
+            right: 4px;
+            top: 2px;
+            font-size: 20px;
+            &:hover {
+                @include get-color-sub();
+            }
+        }
+    }
+
+    &-picture-card{
+        position: relative;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        padding: 8px;
+        margin: {
+            right: 8px;
+            bottom: 8px;
+        }
+        display: inline-block;
+        border-width: $border-width-base;
+        border-style: solid;
+        @include get-color-border();
+        border-radius: $border-radius-base;
+        float: left;
+        &-container{
+            height: 100%;
+            position: relative;
+            &:after{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                @include get-color-mask();
+                transition: opacity $transition-hover-time $bezier;
+            }
+        }
+        &-image{
+            width: 100%;
+            height: 100%;
+        }
+        &-mask{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transition: opacity $transition-hover-time $bezier;
+            a {
+              margin-right: 8px;
+            }
+        }
+        &-icon{
+            font-size: 20px;
+            @include get-color-bg(color);
+            cursor: pointer;
+        }
+
+        &:hover {
+            .#{$prefix-upload-list}-picture-card-container{
+                &:after{
+                    opacity: 1;
+                }
+            }
+            .#{$prefix-upload-list}-picture-card-mask{
+                opacity: 1;
+            }
+        }
+    }
+}

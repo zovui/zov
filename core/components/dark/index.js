@@ -20,7 +20,8 @@ let colorsName = [
 	'color-border',
 	'color-divider',
 	'color-background',
-	'color-shadow'
+	'color-shadow',
+	'color-mask'
 ]
 let dark = {
 	open(callback) {

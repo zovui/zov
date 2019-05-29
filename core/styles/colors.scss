@@ -39,6 +39,7 @@ $color-border                       :   adjust-hue(saturate($color-default-borde
 $color-divider                      :   adjust-hue(saturate($color-default-divider,$color-neutral-saturate),$color-primary-hue) !default;
 $color-background                   :   adjust-hue(saturate($color-default-background,$color-neutral-saturate),$color-primary-hue) !default;
 $color-shadow                       :   rgba(0,0,0,0.25) !default;
+$color-mask                         :   rgba(0,0,0,0.25) !default;
 
 
 
@@ -59,6 +60,7 @@ body{
     --color-divider                             :   #{$color-divider};
     --color-background                          :   #{$color-background};
     --color-shadow                              :   rgba(0,0,0,0.25);
+    --color-mask                                :   rgba(0,0,0,0.25);
     /*
     * light
     */
@@ -73,6 +75,7 @@ body{
     --light-color-divider                       :   #{$color-divider};
     --light-color-background                    :   #{$color-background};
     --light-color-shadow                        :   rgba(0,0,0,0.25);
+    --light-color-mask                          :   rgba(0,0,0,0.25);
     /*
     * dark 见 @core/commponents/dark
     */
@@ -87,4 +90,5 @@ body{
     --dark-color-divider                        :   #{$color-text};
     --dark-color-background                     :   #{$color-title};
     --dark-color-shadow                         :   rgba(0,0,0,0.75);
+    --dark-color-mask                           :   rgba(255,255,255,0.25);
 }

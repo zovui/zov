@@ -51,6 +51,10 @@
     #{$color}: var(--color-background);
 }
 
+@mixin get-color-mask ($color:background-color) {
+    #{$color}: $color-mask;
+    #{$color}: var(--color-mask);
+}
 // 图标hover色
 @mixin get-color-sub-hover ($color:color) {
     #{$color}: lighten($color-sub, 13%);
