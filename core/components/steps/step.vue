@@ -29,7 +29,7 @@ import Emitter from '../../mixins/emitter'
 import { oneOf } from '../../utils'
 
 const prefix = 'zov-steps'
-const iconprefix = 'ivu-icon'
+const iconprefix = 'zov-iconfont'
 
 export default {
 	name: prefix,
@@ -37,7 +37,7 @@ export default {
 	props: {
 		status: {
 			validator(value) {
-				// return oneOf(value, ['wait', 'process', 'finish', 'error']);
+				return oneOf(value, ['wait', 'process', 'finish', 'error'])
 			}
 		},
 		title: {
@@ -78,9 +78,9 @@ export default {
 				icon = this.icon
 			} else {
 				if (this.currentStatus == 'finish') {
-					icon = 'ios-checkmark'
+					icon = 'checkmark'
 				} else if (this.currentStatus == 'error') {
-					icon = 'ios-close'
+					icon = 'close'
 				}
 			}
 
@@ -88,7 +88,7 @@ export default {
 				`${prefix}-icon`,
 				`${iconprefix}`,
 				{
-					[`${iconprefix}-${icon}`]: icon != ''
+					[`zi-${icon}`]: icon != ''
 				}
 			]
 		},

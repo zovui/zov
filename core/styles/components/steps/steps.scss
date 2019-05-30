@@ -1,13 +1,4 @@
 $prefix-steps: #{$prefix}steps;
-// $steps-wait-icon-color: rgba(0,0,0,1);
-$steps-wait-icon-color: #ccc;
-$steps-wait-title-color: #999;
-$steps-wait-description-color: #999;
-$steps-wait-tail-color: #999;
-$steps-title-color: #666;
-$primary-color: #666;
-$border-color-split: #fff;
-$error-color: red;
 
 .#{$prefix-steps} {
     font-size: 0;
@@ -20,84 +11,94 @@ $error-color: red;
 
         &.#{$prefix-steps}-status-wait{
             .#{$prefix-steps}-head-inner {
-                background-color: #fff;
                 > .#{$prefix-steps}-icon, span {
-                    color: $steps-wait-icon-color;
+                    color: $color-default-sub;
                 }
             }
             .#{$prefix-steps}-title {
-                color: $steps-wait-title-color;
+                color: $color-default-sub;
             }
             .#{$prefix-steps}-content {
-                color: $steps-wait-description-color;
+                color: $color-default-sub;
             }
             .#{$prefix-steps}-tail > i {
-                background-color: $steps-wait-tail-color;
+                // @include get-color-bg(background-color);
+                // background-color: $color-primary;
+                background-color: $color-border;
             }
         }
         &.#{$prefix-steps}-status-process {
             .#{$prefix-steps}-head-inner {
-                border-color: $primary-color;
-                background-color: $primary-color;
+                border-color: $color-primary;
+                // @include get-color-border(border-color);
+                // @include get-color-bg('background-color');
+                background: $color-primary;
                 > .#{$prefix-steps}-icon, span {
-                    color: #000;
+                    color: #fff;
                 }
             }
             .#{$prefix-steps}-title {
-                color: $steps-title-color;
+                color: $color-default-title;
             }
             .#{$prefix-steps}-content {
-                color: $steps-title-color;
+                color: $color-default-title;
             }
             .#{$prefix-steps}-tail > i {
-                background-color: $border-color-split;
+                // background-color: $border-color-split;
+                @include get-color-bg(background-color);
+                background-color: $color-border;
             }
         }
         &.#{$prefix-steps}-status-finish {
             .#{$prefix-steps}-head-inner {
-                background-color: #fff;
-                border-color: $primary-color;
+                // border-color: $primary-color;
+                // @include get-color-border();
+                border-color: $color-primary;
                 > .#{$prefix-steps}-icon, span {
-                    color: $primary-color;
+                    color: $color-primary;
                 }
             }
             .#{$prefix-steps}-tail > i:after {
                 width: 100%;
-                background: $primary-color;
-                // transition: all $transition-time $ease-in-out;
+                // background: $primary-color;
+                // @include get-color-bg(background-color);
+                background-color: $color-primary;
+                transition: all $transition-time;
                 opacity: 1;
             }
             .#{$prefix-steps}-title {
-                color: $steps-wait-title-color;
+                color: $color-default-title;
             }
             .#{$prefix-steps}-content {
-                color: $steps-wait-description-color;
+                color: $color-default-sub;
             }
         }
 
         &.#{$prefix-steps}-status-error {
             .#{$prefix-steps}-head-inner {
-                background-color: #fff;
-                border-color: $error-color;
+                border-color: $color-error;
                 > .#{$prefix-steps}-icon {
-                    color: $error-color;
+                    color: $color-error;
                 }
             }
             .#{$prefix-steps}-title {
-                color: $error-color;
+                color: $color-error;
             }
             .#{$prefix-steps}-content {
-                color: $error-color;
+                color: $color-error;
             }
             .#{$prefix-steps}-tail > i {
-                background-color: $border-color-split;
+                background-color: $color-border;
+                
             }
         }
 
         &.#{$prefix-steps}-next-error {
             .#{$prefix-steps}-tail > i,
             .#{$prefix-steps}-tail > i:after {
-                background-color: $error-color;
+                // background-color: $background-color;
+                // @include get-color-bg(background-color);
+                background-color: $color-primary;
             }
         }
 
@@ -116,7 +117,7 @@ $error-color: red;
             }
             &.#{$prefix-steps}-status-process {
                 .#{$prefix-steps}-head-inner > .#{$prefix-steps}-icon {
-                    color: $primary-color;
+                    color: $color-primary;
                 }
             }
         }
@@ -132,7 +133,7 @@ $error-color: red;
         vertical-align: top;
     }
     .#{$prefix-steps}-head {
-        background: #fff;
+        // background: #fff;
     }
 
     .#{$prefix-steps}-head-inner {
@@ -140,18 +141,17 @@ $error-color: red;
         width: 26px;
         height: 26px;
         line-height: 24px;
-        margin-right: 8px;
         text-align: center;
-        border: 1px solid $steps-wait-icon-color;
+        border: 1px solid $color-default-sub;
         border-radius: 50%;
         font-size: 14px;
-        // transition: background-color @transition-time @ease-in-out;
+        transition: background-color $transition-time;
 
         > .#{$prefix-steps}-icon {
             line-height: 1;
             position: relative;
 
-            &.ivu-icon {
+            &.zov-iconfont {
                 font-size: 24px;
                 &-ios-checkmark-empty,
                 &-ios-close-empty {
@@ -169,13 +169,11 @@ $error-color: red;
     }
 
     .#{$prefix-steps}-title {
-        display: inline-block;
         margin-bottom: 4px;
         padding-right: 10px;
         font-size: 14px;
         font-weight: bold;
-        color: #666;
-        background: #fff;
+        color: $color-default-title;
 
         > a:first-child:last-child {
             color: #666;
@@ -193,7 +191,6 @@ $error-color: red;
     }
     .#{$prefix-steps}-tail {
         width: 100%;
-        padding: 0 10px;
         position: absolute;
         left: 0;
         top: 13px;
@@ -202,14 +199,14 @@ $error-color: red;
             width: 100%;
             height: 1px;
             vertical-align: top;
-            background: $border-color-split;
+            @include get-color-bg(background-color);
             border-radius: 1px;
             position: relative;
             &:after {
                 content: '';
                 width: 0;
                 height: 100%;
-                background: $border-color-split;
+                background: $color-border;
                 opacity: 0;
                 position: absolute;
                 top: 0;
@@ -222,12 +219,11 @@ $error-color: red;
             width: 18px;
             height: 18px;
             line-height: 16px;
-            margin-right: 10px;
             text-align: center;
             border-radius: 50%;
             font-size: 12px;
 
-            > .#{$prefix-steps}-icon.ivu-icon {
+            > .#{$prefix-steps}-icon.zov-iconfont {
                 font-size: 16px;
                 top: 0;
             }
@@ -238,18 +234,17 @@ $error-color: red;
         .#{$prefix-steps}-title {
             margin-bottom: 4px;
             margin-top: 0;
-            color: #666;
+            color: $color-default-title;
             font-size: 12px;
             font-weight: bold;
         }
         .#{$prefix-steps}-content {
             font-size: 12px;
-            color: #999;
-            padding-left: 30px;
+            color: $color-default-sub;
         }
         .#{$prefix-steps}-tail {
             top: 8px;
-            padding: 0 8px;
+            // padding: 0 8px;
             > i {
                 height: 1px;
                 width: 100%;
@@ -277,10 +272,9 @@ $error-color: red;
     .#{$prefix-steps}-tail {
         position: absolute;
         left: 13px;
-        top: 0;
         height: 100%;
         width: 1px;
-        padding: 30px 0 4px 0;
+        // padding: 30px 0 4px 0;
         > i {
             height: 100%;
             width: 1px;
@@ -347,10 +341,9 @@ $error-color: red;
     }
     .#{$prefix-steps}-content {
         //max-width: 100px;
-        padding-left: 35px;
     }
     .#{$prefix-steps}-item:not(:first-child) .#{$prefix-steps}-head {
-        padding-left: 10px;
-        margin-left: -10px;
+        // padding-left: 10px;
+        // margin-left: -10px;
     }
 }
