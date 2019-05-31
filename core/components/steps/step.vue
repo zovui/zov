@@ -1,11 +1,11 @@
 <template>
 	<div :class="wrapClasses" :style="styles">
-		<div :class="[prefix + '-tail']"><i></i></div>
+		<div :class="[prefix + '-tail']"></div>
 		<div :class="[prefix + '-head']">
 			<div :class="[prefix + '-head-inner']">
 				<span
 					v-if="
-						!icon &&
+						!iconname &&
 							currentStatus != 'finish' &&
 							currentStatus != 'error'
 					"
@@ -47,7 +47,7 @@ export default {
 		content: {
 			type: String
 		},
-		icon: {
+		iconname: {
 			type: String
 		}
 	},
@@ -61,21 +61,39 @@ export default {
 		}
 	},
 	computed: {
+		isCenter() {
+			const {
+				$parent: { alignCenter }
+			} = this
+			return alignCenter
+		},
+		isVertical() {
+			const {
+				$parent: { direction }
+			} = this
+			return direction === 'vertical'
+		},
+		space() {
+			const {
+				$parent: { space }
+			} = this
+			return space
+		},
 		wrapClasses() {
 			return [
 				`${prefix}-item`,
 				`${prefix}-status-${this.currentStatus}`,
+				this.isCenter && !this.isVertical ? `${prefix}-center` : '',
 				{
-					[`${prefix}-custom`]: !!this.icon,
+					[`${prefix}-custom`]: !!this.iconname,
 					[`${prefix}-next-error`]: this.nextError
 				}
 			]
 		},
 		iconClasses() {
 			let icon = ''
-
-			if (this.icon) {
-				icon = this.icon
+			if (this.iconname) {
+				icon = this.iconname
 			} else {
 				if (this.currentStatus == 'finish') {
 					icon = 'checkmark'
@@ -94,7 +112,9 @@ export default {
 		},
 		styles() {
 			return {
-				width: `${(1 / this.total) * 100}%`
+				width: !this.space
+					? `${(1 / this.total) * 100}%`
+					: `${parseInt(this.space)}px`
 			}
 		}
 	},
@@ -108,12 +128,6 @@ export default {
 	},
 	created() {
 		this.currentStatus = this.status
-	},
-	mounted() {
-		// this.dispatch('Steps', 'append');
-	},
-	beforeDestroy() {
-		// this.dispatch('Steps', 'remove');
 	}
 }
 </script>

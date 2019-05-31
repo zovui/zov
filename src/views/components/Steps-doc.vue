@@ -18,6 +18,14 @@
 				@direction
 				非必传，步骤条的方向，类型：String，步骤条的方向，可选值为horizontal（水平）或vertical（垂直），default：horizontal
 			</p>
+			<p>
+				@space
+				非必传，每个step的间距，不填写将以百分比自适应间距。类型:number,string
+			</p>
+			<p>
+				@align-center
+				非必传，居中展示(在direction为vertical时无效)，类型：Boolean，default：false
+			</p>
 			<h4>Step props</h4>
 			<p>
 				@status
@@ -33,76 +41,58 @@
 				@icon 非必填，步骤的图标，类型：String，default：空
 			</p>
 		</div>
-		<Steps :current="current">
-			<Step
-				title="已完成"
-				content="这里是该步骤的描述信息"
-				status="finish"
-			></Step>
-			<Step
-				title="进行中"
-				content="这里是该步骤的描述信息"
-				status="process"
-			></Step>
-			<Step title="待进行" content="这里是该步骤的描述信息"></Step>
-			<Step title="待进行" content="这里是该步骤的描述信息"></Step>
-		</Steps>
+		<div class="box">
+			<Steps :current="current">
+				<Step title="已完成" content="这里是该步骤的描述信息"></Step>
+				<Step title="进行中" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+			</Steps>
 
-		<Steps size="small" :current="current">
-			<Step
-				title="已完成"
-				content="这里是该步骤的描述信息"
-				status="finish"
-			></Step>
-			<Step
-				title="进行中"
-				content="这里是该步骤的描述信息"
-				status="process"
-			></Step>
-			<Step title="待进行" content="这里是该步骤的描述信息"></Step>
-			<Step title="待进行" content="这里是该步骤的描述信息"></Step>
-		</Steps>
+			<Steps :current="current" :align-center="true">
+				<Step title="已完成" content="这里是该步骤的描述信息"></Step>
+				<Step title="进行中" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+			</Steps>
 
-		<Steps :current="current">
-			<Step title="注册" icon="iconfont albums"></Step>
-			<Step title="上传头像" icon=" zi-camera"></Step>
-			<Step title="验证邮箱" icon="ios-mail"></Step>
-		</Steps>
+			<Steps size="small" :current="current">
+				<Step title="已完成" content="这里是该步骤的描述信息"></Step>
+				<Step title="进行中" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+			</Steps>
 
-		<p>当前正在进行第 {{ current + 1 }} 步</p>
-		<Steps :current="current">
-			<Step title="步骤1"></Step>
-			<Step title="步骤2"></Step>
-			<Step title="步骤3"></Step>
-			<Step title="步骤4"></Step>
-		</Steps>
-		<Button type="primary" @click="next">Next step</Button>
+			<Steps :current="current">
+				<Step title="注册" iconname="cloud-done"></Step>
+				<Step title="上传头像" iconname="calendar"></Step>
+				<Step title="验证邮箱" iconname="hammer"></Step>
+				<Step title="验证通过" iconname="flag"></Step>
+			</Steps>
 
-		<Steps :current="current" direction="vertical">
-			<Step
-				title="已完成"
-				content="这里是该步骤的描述信息"
-				status="finish"
-			></Step>
-			<Step
-				title="已完成"
-				content="这里是该步骤的描述信息"
-				status="finish"
-			></Step>
-			<Step
-				title="进行中"
-				content="这里是该步骤的描述信息"
-				status="process"
-			></Step>
-			<Step title="待进行" content="这里是该步骤的描述信息"></Step>
-		</Steps>
+			<p>当前正在进行第 {{ current + 1 }} 步</p>
+			<Steps :current="current">
+				<Step title="步骤1"></Step>
+				<Step title="步骤2"></Step>
+				<Step title="步骤3"></Step>
+				<Step title="步骤4"></Step>
+			</Steps>
+			<Button type="primary" @click="next">Next step</Button>
 
-		<Steps :current="1" status="error">
-			<Step title="已完成" content="这里是该步骤的描述信息"></Step>
-			<Step title="进行中" content="这里是该步骤的描述信息"></Step>
-			<Step title="待进行" content="这里是该步骤的描述信息"></Step>
-			<Step title="待进行" content="这里是该步骤的描述信息"></Step>
-		</Steps>
+			<Steps :current="current" direction="vertical">
+				<Step title="已完成" content="这里是该步骤的描述信息"></Step>
+				<Step title="已完成" content="这里是该步骤的描述信息"></Step>
+				<Step title="进行中" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+			</Steps>
+
+			<Steps :current="1" status="error">
+				<Step title="已完成" content="这里是该步骤的描述信息"></Step>
+				<Step title="进行中" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+				<Step title="待进行" content="这里是该步骤的描述信息"></Step>
+			</Steps>
+		</div>
 	</div>
 </template>
 
@@ -125,4 +115,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.box {
+	margin-left: 15px;
+}
+</style>

@@ -8,75 +8,79 @@ $prefix-steps: #{$prefix}steps;
         display: inline-block;
         position: relative;
         vertical-align: top;
-
         &.#{$prefix-steps}-status-wait{
             .#{$prefix-steps}-head-inner {
+                @include get-color-bg();
                 > .#{$prefix-steps}-icon, span {
-                    color: $color-default-sub;
+                    @include get-color-sub(color);
                 }
             }
+
             .#{$prefix-steps}-title {
-                color: $color-default-sub;
+                @include get-color-text();
             }
+
             .#{$prefix-steps}-content {
-                color: $color-default-sub;
+                @include get-color-text();
             }
-            .#{$prefix-steps}-tail > i {
-                // @include get-color-bg(background-color);
-                // background-color: $color-primary;
-                background-color: $color-border;
+
+            .#{$prefix-steps}-tail {
+                @include get-color-sub(background-color);
             }
         }
+
         &.#{$prefix-steps}-status-process {
             .#{$prefix-steps}-head-inner {
                 border-color: $color-primary;
-                // @include get-color-border(border-color);
-                // @include get-color-bg('background-color');
                 background: $color-primary;
                 > .#{$prefix-steps}-icon, span {
                     color: #fff;
                 }
             }
+
             .#{$prefix-steps}-title {
-                color: $color-default-title;
+                @include get-color-title();
             }
+
             .#{$prefix-steps}-content {
-                color: $color-default-title;
+                @include get-color-title();
             }
-            .#{$prefix-steps}-tail > i {
-                // background-color: $border-color-split;
-                @include get-color-bg(background-color);
-                background-color: $color-border;
+
+            .#{$prefix-steps}-tail {
+                @include get-color-sub(background-color);
             }
         }
+
         &.#{$prefix-steps}-status-finish {
             .#{$prefix-steps}-head-inner {
-                // border-color: $primary-color;
-                // @include get-color-border();
+                @include get-color-bg();
                 border-color: $color-primary;
                 > .#{$prefix-steps}-icon, span {
                     color: $color-primary;
                 }
             }
-            .#{$prefix-steps}-tail > i:after {
+
+            .#{$prefix-steps}-tail:after {
                 width: 100%;
-                // background: $primary-color;
-                // @include get-color-bg(background-color);
+                height: 1px;
                 background-color: $color-primary;
                 transition: all $transition-time;
                 opacity: 1;
             }
+
             .#{$prefix-steps}-title {
-                color: $color-default-title;
+                @include get-color-title();
             }
+
             .#{$prefix-steps}-content {
-                color: $color-default-sub;
+                @include get-color-title();
             }
         }
 
         &.#{$prefix-steps}-status-error {
             .#{$prefix-steps}-head-inner {
                 border-color: $color-error;
+                @include get-color-bg();
                 > .#{$prefix-steps}-icon {
                     color: $color-error;
                 }
@@ -87,24 +91,23 @@ $prefix-steps: #{$prefix}steps;
             .#{$prefix-steps}-content {
                 color: $color-error;
             }
-            .#{$prefix-steps}-tail > i {
+            .#{$prefix-steps}-tail {
                 background-color: $color-border;
+                @include get-color-sub(background-color);
                 
             }
         }
 
         &.#{$prefix-steps}-next-error {
-            .#{$prefix-steps}-tail > i,
-            .#{$prefix-steps}-tail > i:after {
-                // background-color: $background-color;
-                // @include get-color-bg(background-color);
+            .#{$prefix-steps}-tail,
+            .#{$prefix-steps}-tail:after {
                 background-color: $color-primary;
             }
         }
 
         &.#{$prefix-steps}-custom {
             .#{$prefix-steps}-head-inner {
-                background: none;
+                @include get-color-bg();
                 border: 0;
                 width: auto;
                 height: auto;
@@ -115,6 +118,7 @@ $prefix-steps: #{$prefix}steps;
                     height: 20px;
                 }
             }
+
             &.#{$prefix-steps}-status-process {
                 .#{$prefix-steps}-head-inner > .#{$prefix-steps}-icon {
                     color: $color-primary;
@@ -122,6 +126,17 @@ $prefix-steps: #{$prefix}steps;
             }
         }
     }
+
+    .#{$prefix-steps}-center {
+        text-align: center;
+        .#{$prefix-steps}-title {
+            padding-right: 0;
+        }
+        .#{$prefix-steps}-tail {
+            left: 50%;
+        }
+    }
+
     &-item:last-child &-tail{
         display: none;
     }
@@ -132,9 +147,6 @@ $prefix-steps: #{$prefix}steps;
         display: inline-block;
         vertical-align: top;
     }
-    .#{$prefix-steps}-head {
-        // background: #fff;
-    }
 
     .#{$prefix-steps}-head-inner {
         display: block;
@@ -142,11 +154,11 @@ $prefix-steps: #{$prefix}steps;
         height: 26px;
         line-height: 24px;
         text-align: center;
-        border: 1px solid $color-default-sub;
+        border: 1px solid transparent;
+        @include get-color-sub(border-color);
         border-radius: 50%;
         font-size: 14px;
         transition: background-color $transition-time;
-
         > .#{$prefix-steps}-icon {
             line-height: 1;
             position: relative;
@@ -160,15 +172,18 @@ $prefix-steps: #{$prefix}steps;
             }
         }
     }
+
     .#{$prefix-steps}-main {
         margin-top: 2.5px;
         display: inline;
     }
+
     .#{$prefix-steps}-custom .#{$prefix-steps}-title{
         margin-top: 2.5px;
     }
 
     .#{$prefix-steps}-title {
+        margin-top: 5px;
         margin-bottom: 4px;
         padding-right: 10px;
         font-size: 14px;
@@ -179,38 +194,35 @@ $prefix-steps: #{$prefix}steps;
             color: #666;
         }
     }
+
     .#{$prefix-steps}-item-last {
         .#{$prefix-steps}-title {
             padding-right: 0;
             width: 100%;
         }
     }
+    
     .#{$prefix-steps}-content {
         font-size: 12px;
         color: #999;
     }
+
     .#{$prefix-steps}-tail {
         width: 100%;
         position: absolute;
         left: 0;
         top: 13px;
-        > i {
-            display: inline-block;
-            width: 100%;
-            height: 1px;
-            vertical-align: top;
-            @include get-color-bg(background-color);
-            border-radius: 1px;
-            position: relative;
-            &:after {
-                content: '';
-                width: 0;
-                height: 100%;
-                background: $color-border;
-                opacity: 0;
-                position: absolute;
-                top: 0;
-            }
+        display: inline-block;
+        height: 1px;
+        vertical-align: top;
+        @include get-color-bg(background-color);
+        &:after {
+            content: '';
+            width: 0;
+            background: $color-border;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
     }
 
@@ -222,34 +234,34 @@ $prefix-steps: #{$prefix}steps;
             text-align: center;
             border-radius: 50%;
             font-size: 12px;
-
             > .#{$prefix-steps}-icon.zov-iconfont {
                 font-size: 16px;
                 top: 0;
             }
         }
+
         .#{$prefix-steps}-main {
             margin-top: 0;
         }
+
         .#{$prefix-steps}-title {
+            margin-top: 5px;
             margin-bottom: 4px;
-            margin-top: 0;
-            color: $color-default-title;
+            @include get-color-text();
             font-size: 12px;
             font-weight: bold;
         }
+
         .#{$prefix-steps}-content {
             font-size: 12px;
-            color: $color-default-sub;
+            @include get-color-text();
         }
+
         .#{$prefix-steps}-tail {
             top: 8px;
-            // padding: 0 8px;
-            > i {
-                height: 1px;
-                width: 100%;
-                border-radius: 1px;
-            }
+            height: 1px;
+            width: 100%;
+            border-radius: 1px;
         }
     }
 
@@ -260,22 +272,20 @@ $prefix-steps: #{$prefix}steps;
         line-height: inherit;
         border-radius: 0;
         border: 0;
-        background: none;
     }
 }
 
 .#{$prefix-steps}-vertical {
     .#{$prefix-steps}-item {
         display: block;
-    }
 
-    .#{$prefix-steps}-tail {
-        position: absolute;
-        left: 13px;
-        height: 100%;
-        width: 1px;
-        // padding: 30px 0 4px 0;
-        > i {
+        .#{$prefix-steps}-title {
+            margin-top: 0;
+        }
+
+        .#{$prefix-steps}-tail {
+            position: absolute;
+            left: 13px;
             height: 100%;
             width: 1px;
             &:after {
@@ -286,7 +296,7 @@ $prefix-steps: #{$prefix}steps;
     }
 
     .#{$prefix-steps}-status-finish {
-        .#{$prefix-steps}-tail > i:after {
+        .#{$prefix-steps}-tail:after {
             height: 100%;
         }
     }
@@ -314,6 +324,7 @@ $prefix-steps: #{$prefix}steps;
     .#{$prefix-steps}-custom .#{$prefix-steps}-icon {
         left: 4px;
     }
+
     &.#{$prefix-steps}-small .#{$prefix-steps}-custom .#{$prefix-steps}-icon {
         left: 0;
     }
@@ -338,12 +349,5 @@ $prefix-steps: #{$prefix}steps;
 .#{$prefix-steps}-horizontal {
     &.#{$prefix-steps}-hidden {
         visibility: hidden;
-    }
-    .#{$prefix-steps}-content {
-        //max-width: 100px;
-    }
-    .#{$prefix-steps}-item:not(:first-child) .#{$prefix-steps}-head {
-        // padding-left: 10px;
-        // margin-left: -10px;
     }
 }

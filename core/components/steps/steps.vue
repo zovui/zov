@@ -46,6 +46,11 @@ export default {
 				return oneOf(value, ['horizontal', 'vertical'])
 			},
 			default: 'horizontal'
+		},
+		space: [Number, String],
+		alignCenter: {
+			type: Boolean,
+			default: false
 		}
 	},
 	computed: {
@@ -68,10 +73,8 @@ export default {
 				if (this.direction === 'horizontal') {
 					child.total = total
 				}
-
-				// 如果已存在status,且在初始化时,则略过
-				// todo 如果当前是error,在current改变时需要处理
 				if (!(isInit && child.currentStatus)) {
+					// 已存在status,且在初始化时,则略过， error,则需要处理
 					if (index == this.current) {
 						if (this.status != 'error') {
 							child.currentStatus = 'process'
@@ -96,7 +99,6 @@ export default {
 			})
 		},
 		updateCurrent(isInit) {
-			// 防止溢出边界
 			if (this.current < 0 || this.current >= this.$children.length) {
 				return
 			}
