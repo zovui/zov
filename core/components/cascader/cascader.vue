@@ -1,6 +1,7 @@
 <template>
-	<div class="zov-select zov-cascader">
+	<div class="zov-cascader">
 		<Drop
+			zov-internal-reference-cascader
 			:no-arrow="noArrow"
 			:trigger="trigger"
 			placement="bottom-start"
@@ -18,6 +19,7 @@
 					:multiple="multiple"
 					:clearable="clearable"
 					:label-name="'__' + labelName"
+					:value-name="'__' + valueName"
 					v-model="query"
 					:dropShow="dropShow"
 					@on-remove-tag="activeItem"
@@ -55,10 +57,10 @@
 									item['__' + labelName].replace(
 										item[labelName],
 										`
-                                <span class='zov-cascader-option-match'>
-                                    ${item[labelName]}
-                                </span>
-                            `
+                                            <span class='zov-cascader-option-match'>
+                                                ${item[labelName]}
+                                            </span>
+                                        `
 									)
 								"
 							/>
@@ -147,7 +149,10 @@ export default {
 					let item = this.querySelections[i]
 					if (
 						new RegExp(val).test(
-							item[this.currentQueryName].toString()
+							(
+								item[this.currentQueryName] ||
+								item[this.valueName]
+							).toString()
 						)
 					) {
 						this.queryResult.push(item)

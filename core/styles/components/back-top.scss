@@ -1,0 +1,30 @@
+$prefix-backtop: #{$prefix}back-top;
+
+.#{$prefix-backtop} {
+    z-index: $zindex-back-top;
+    position: fixed;
+    cursor: pointer;
+    display: none;
+	$size: 40px;
+    text-align: center;
+    font-size: $font-size-large;
+    &.#{$prefix-backtop}-show {
+		display: block;
+    }
+    &-inner {
+        width: $size;
+	    height: $size;
+        background-color: rgba(0,0,0,.6);
+        border-radius: 50%;
+        @include get-color-shadow();
+        transition: all $transition-time ease-in-out;
+        &:hover {
+            background-color: rgba(0,0,0,.7);
+        }
+    }
+	i {
+        font-size: 28px;
+        line-height: $size;
+        @include get-color-background-coloured;
+	}
+}

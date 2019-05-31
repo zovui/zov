@@ -1,6 +1,8 @@
 <template>
 	<div>
 		<h3>单例：每个组价对应一组data</h3>
+		基本
+		<BigDataList :data="[{ value: 1 }, { value: 2 }]" v-model="base" />
 		<div class="box">
 			<BigDataList
 				size="large"
@@ -106,6 +108,7 @@
 export default {
 	data() {
 		return {
+			base: '',
 			list: (() => {
 				let d = []
 				for (let i = 0; i < 10000; i++) {

@@ -31,13 +31,13 @@ $prefix-input : #{$prefix}input;
     }
     &-prefix{
         left: 0;
-        &>.zov-icon{
+        &>*{
             margin-left: $gap-x;
         }
     }
     &-suffix{
         right: 0;
-        &>.zov-icon{
+        &>*{
             margin-right: $gap-x;
         }
         &-tool{

@@ -141,7 +141,7 @@ $prefix-checkbox : #{$prefix}checkbox;
     }
 }
 // 半选中状态
-&.#{$prefix-checkbox}-indeterminate{
+.#{$prefix-checkbox}-indeterminate{
     .#{$prefix-checkbox}-inner{
         position: relative;
         &:after {
