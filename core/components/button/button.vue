@@ -1,7 +1,11 @@
 <template>
 	<RenderElTag v-on="$listeners" v-bind="$attrs" :tag="tag" :class="classes">
 		<!-- 自定义Spin, 默认为 `loading` -->
-		<Spin v-if="loading" :spinname="spinname || 'loading'" />
+		<Spin
+			zov-internal-reference-button
+			v-if="loading"
+			:spinname="spinname || 'loading'"
+		/>
 		<!-- 自定义图标 -->
 		<Icon v-if="iconname" :iconname="iconname" />
 		<slot></slot>

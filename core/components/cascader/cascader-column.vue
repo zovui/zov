@@ -17,7 +17,7 @@
 				:disabled="item.disabled"
 				@click.stop.capture="activeItem(item)"
 			>
-				{{ item[labelName] }}
+				{{ item[labelName] || item[valueName] }}
 				<div class="zov-cascader-option-arrow-forward">
 					<Icon
 						v-if="
@@ -26,7 +26,11 @@
 						"
 						iconname="checkmark"
 					/>
-					<Icon v-if="hasChildren(item)" iconname="arrow-forward" />
+					<Icon
+						zov-internal-reference-cascader
+						v-if="hasChildren(item)"
+						iconname="arrow-forward"
+					/>
 				</div>
 			</div>
 		</div>

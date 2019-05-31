@@ -1,6 +1,15 @@
 <template>
 	<div>
 		<div style="border: 1px dashed;">
+			<h3>基本</h3>
+			<Cascader
+				:data="[
+					{ value: 1, children: [{ value: 1 }, { value: 2 }] },
+					{ value: 2, children: [{ value: 1 }, { value: 2 }] }
+				]"
+				v-model="base"
+				@on-change="change"
+			/>
 			<h3>常规</h3>
 			<div class="box">
 				<Cascader
@@ -181,6 +190,7 @@ export default {
 				}
 				return d
 			})(),
+			base: '',
 			value: '',
 			value1: ['1,1,1', '1,1,2'],
 			value2: '',
@@ -189,6 +199,11 @@ export default {
 			value5: [],
 			value6: '',
 			value7: ''
+		}
+	},
+	methods: {
+		change(val) {
+			console.log(val)
 		}
 	}
 }

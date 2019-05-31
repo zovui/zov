@@ -24,6 +24,7 @@ export default {
 			this.currentItemArr = []
 			this.currentValueArr = []
 			this.$emit('input', '')
+			this.$emit('on-change', '')
 		}
 	}
 }

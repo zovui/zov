@@ -345,3 +345,45 @@ export function includes(collection, value) {
 	}
 	return false
 }
+
+/**
+ * 判断是否是函数
+ * @param value
+ * @return {boolean}
+ */
+export function isFunction(value) {
+	return typeOf(value) === 'function'
+}
+/**
+ * 查找数组里的某值
+ * @param array
+ * @param condition 判断函数
+ * @param returnAll 是否返回所有匹配结果
+ * @return {null|*}
+ */
+export function find(array, condition, returnAll = false) {
+	if (!Array.isArray(array)) {
+		return null
+	}
+	const matched = array.filter(condition)
+	if (matched.length === 0) {
+		return null
+	}
+	return returnAll ? matched : matched[0]
+}
+
+/**
+ * 查找元素下标
+ * @param array
+ * @param condition
+ */
+export function findIndex(array, condition) {
+	if (isFunction(Array.prototype.findIndex)) {
+		return array.findIndex(condition)
+	}
+	let i = 0
+	while (!condition[i]) {
+		i++
+	}
+	return i === array.length ? -1 : i
+}
