@@ -12,8 +12,7 @@ export default {
 	data() {
 		return {
 			stylePrefix: prefix,
-			txtClass: `${prefix}-inner-text`,
-			hasTxt: false
+			txtClass: `${prefix}-inner-text`
 		}
 	},
 	props: {
@@ -31,7 +30,7 @@ export default {
 		orientation: {
 			type: String,
 			default: 'center',
-			validator: function(value) {
+			validator(value) {
 				if (['center', 'left', 'right'].indexOf(value) !== -1) {
 					return value
 				}
@@ -41,7 +40,7 @@ export default {
 		type: {
 			type: String,
 			default: 'horizontal',
-			validator: function(value) {
+			validator(value) {
 				if (['horizontal', 'vertical'].indexOf(value) !== -1) {
 					return value
 				}
@@ -50,15 +49,16 @@ export default {
 		}
 	},
 	computed: {
-		classes: function() {
-			var hasTxt = !!this.$slots.default
-			this.hasTxt = hasTxt
+		hasTxt() {
+			return !!this.$slots.default
+		},
+		classes() {
 			return [
 				this.stylePrefix,
 				this.stylePrefix + '-' + this.type,
 				this.dashed ? this.stylePrefix + '-dashed' : '',
 				this.dotted ? this.stylePrefix + '-dotted' : '',
-				hasTxt
+				this.hasTxt
 					? this.stylePrefix + '-with-text-' + this.orientation
 					: ''
 			]
@@ -66,4 +66,3 @@ export default {
 	}
 }
 </script>
-<style></style>
