@@ -31,6 +31,8 @@ import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
 import Divider from './components/divider'
+import { Step, Steps } from './components/steps'
+
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import { Tabs, TabPane } from './components/tabs'
@@ -89,6 +91,8 @@ const components = {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
+	Step,
+	Steps,
 	Breadcrumb,
 	BreadcrumbItem,
 	Tabs,
@@ -166,6 +170,8 @@ export {
 	Checkbox,
 	CheckboxGroup,
 	Divider,
+	Step,
+	Steps,
 	Breadcrumb,
 	BreadcrumbItem,
 	Tabs,

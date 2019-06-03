@@ -170,28 +170,26 @@ export default {
 	},
 	watch: {
 		value(value) {
-			if (value) {
+			this.visible = value
+		},
+		visible(visible) {
+			this.$emit('input', visible)
+
+			if (visible) {
 				scrollLock()
 				if (typeof this.zIndex !== 'number') {
 					addIndex()
 					this.modalIndex = this.baseIndex + index
 				}
-			} else {
-				scrollUnlock()
-			}
-			this.visible = value
-		},
-		visible(visible) {
-			this.$emit('input', visible)
-			this.$emit('on-visible-change', visible)
-
-			if (visible) {
 				this.$emit('on-open')
 			} else {
+				scrollUnlock()
 				this.buttonLoading = false
 				this.loading = false
 				this.$emit('on-close')
 			}
+
+			this.$emit('on-visible-change', visible)
 		},
 		confirmLoading(loading) {
 			if (!loading) {

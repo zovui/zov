@@ -80,10 +80,8 @@ $prefix-color-picker: #{$prefix}color-picker;
     &-header{
         height: 100%;
         cursor: pointer;
-        &>div{
-            float: left;
-        }
         &-color{
+            float: left;
             @include png-bg();
             &>div{
                 box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
@@ -92,6 +90,7 @@ $prefix-color-picker: #{$prefix}color-picker;
             }
         }
         &-arrow{
+            float: right;
             @include get-color-sub();
             text-align: center;
             transform-origin: center;

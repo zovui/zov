@@ -1,7 +1,6 @@
 <script>
 import TabsNav from './tabs-nav'
 import TabsTab from './tabs-tab'
-import TabsContent from './tabs-content'
 import { find, findIndex, includes } from '../../utils'
 
 const COMPONENT_NAME = 'zov-tabs'
@@ -10,8 +9,7 @@ export default {
 	name: COMPONENT_NAME,
 	components: {
 		TabsNav,
-		TabsTab,
-		TabsContent
+		TabsTab
 	},
 	model: {
 		prop: 'activeId',
@@ -169,11 +167,7 @@ export default {
 					onPrev={() => this.$emit('on-prev')}>
 					{this.$slots.extra}
 				</TabsNav>
-				<TabsContent
-					tabPaneList={this.tabPaneList}
-					activeId={this.currentActiveId}
-				/>
-				<div class="zov-tabs-hidden">{this.$slots.default}</div>
+				<div class="zov-tabs-content">{this.$slots.default}</div>
 			</div>
 		)
 	}
