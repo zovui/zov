@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.6.0](https://github.com/zovui/zov/compare/v0.5.1...v0.6.0) (2019-06-03)
+
+
+### Bug Fixes
+
+* **color-picker:** active状态下值重置 ([92021fa](https://github.com/zovui/zov/commit/92021fa))
+* **menu:** menu disabled ([a80752f](https://github.com/zovui/zov/commit/a80752f))
+* **modal:** 修复快捷方法打开弹窗时，背景可滚动问题 ([3932fd9](https://github.com/zovui/zov/commit/3932fd9))
+* 修复了divider颜色 应用主题色 ([e62bdf4](https://github.com/zovui/zov/commit/e62bdf4))
+* 修复了divider颜色 应用主题色 ([bbe97a1](https://github.com/zovui/zov/commit/bbe97a1))
+
+
+### Features
+
+* **steps:** 新增steps组件 ([bff5e5c](https://github.com/zovui/zov/commit/bff5e5c))
+* **tabs:** 完善tab-pane lazy逻辑 ([21d995a](https://github.com/zovui/zov/commit/21d995a))
+
+
+### Performance Improvements
+
+* **select:** clear 后出发on-change事件 ([8f74888](https://github.com/zovui/zov/commit/8f74888))
+
+
+
 ## [0.5.1](https://github.com/zovui/zov/compare/v0.5.0...v0.5.1) (2019-05-25)
 
 
