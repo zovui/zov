@@ -1,0 +1,82 @@
+$prefix-progress : #{$prefix}progress;
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+.#{$prefix-progress}{
+    line-height: 22px;
+    &-line {
+        display: inline-block;
+        width: 100%;
+        vertical-align: middle;
+        &-icon{
+            font-size: 16px;
+            &-success{
+                color: $color-success;
+            }
+            &-exception{
+                color: $color-error;
+            }
+        }
+    }
+    &-outer {
+        @include get-color-border(background-color);
+        border-radius: 100px;
+        height: 10px;
+        vertical-align: middle;
+        font-size: 0;
+        line-height: 1;
+        &-text {
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+    }
+    &-inner {
+        display: inline-block;
+        height: 100%;
+        width: 0;
+        text-align: right;
+        border-radius: 100px;
+        @include get-color-primary-hover(background-color);
+        transition: width $transition-hover-time linear;
+        font-size: 0;
+        &-text {
+            display: inline-block;
+            font-size: 12px;
+            @include get-color-bg(color);
+            padding: 0 10px;
+            line-height: 1;
+        }
+    }
+
+    &-active {
+        .#{$prefix-progress}-inner {
+            background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+            background-size: 40px 40px;
+            animation: progress-bar-stripes 1s linear infinite;
+        }
+    }
+    &-success{
+        .#{$prefix-progress}-inner{
+            width: 100%;
+            background-color: $color-success;
+        }
+    }
+    &-exception{
+        .#{$prefix-progress}-inner{
+            background-color: $color-error;
+        }
+    }
+
+    &-show-info{
+        .#{$prefix-progress}-line{
+            padding-right: 100px;
+            margin-right: -100px;
+        }
+    }
+}
