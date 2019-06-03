@@ -1,19 +1,17 @@
 $prefix-divider : #{$prefix}divider;
-$prefix-divider-color:#e8e8e8;
-$prefix-divider-txt-color:rgba(0,0,0,0.85);
 .#{$prefix-divider}{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin:0;
     padding:0;
-    color: $prefix-divider-txt-color;
+    @include get-color-text();
     font-size:14px;
     line-height:1.5;
     list-style: none;
     -webkit-font-feature-settings: 'tnum';
     font-feature-settings: 'tnum';
-    background: $prefix-divider-color;
+    @include get-color-border('background');
     &,&-vertical{
         position: relative;
         display:inline-block;
@@ -36,7 +34,6 @@ $prefix-divider-txt-color:rgba(0,0,0,0.85);
     &-horizontal.#{$prefix-divider}-with-text-right{
         display: table;
         margin:16px 0px;
-        color: $prefix-divider-txt-color;
         font-weight:500;
         font-size:16px;
         white-space:nowrap;
@@ -48,7 +45,8 @@ $prefix-divider-txt-color:rgba(0,0,0,0.85);
             top:50%;
             display: table-cell;
             width:50%;
-            border-top:1px solid $prefix-divider-color;
+            border-top:1px solid;
+            @include get-color-border('border-top-color');
             transform: translateY(50%);
         }
     }
@@ -82,6 +80,12 @@ $prefix-divider-txt-color:rgba(0,0,0,0.85);
     }
     &-dashed{
         background: none;
-        border-top:1px dashed $prefix-divider-color;
+        border-top:1px dashed ;
+        @include get-color-border('border-top-color');
+    }
+    &-dotted{
+        background: none;
+        border-top:1px dotted;
+        @include get-color-border('border-top-color');
     }
 }
