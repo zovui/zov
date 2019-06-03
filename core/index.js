@@ -30,6 +30,7 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
+import Divider from './components/divider'
 import { Step, Steps } from './components/steps'
 
 import Breadcrumb from './components/breadcrumb'
@@ -95,7 +96,8 @@ const components = {
 	Breadcrumb,
 	BreadcrumbItem,
 	Tabs,
-	TabPane
+	TabPane,
+	Divider
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -167,6 +169,7 @@ export {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
+	Divider,
 	Step,
 	Steps,
 	Breadcrumb,
