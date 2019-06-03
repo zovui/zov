@@ -30,7 +30,7 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
-import Steps from './components/steps'
+import { Step, Steps } from './components/steps'
 
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
@@ -90,7 +90,7 @@ const components = {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
-	Step: Steps.Step,
+	Step,
 	Steps,
 	Breadcrumb,
 	BreadcrumbItem,
@@ -167,6 +167,8 @@ export {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
+	Step,
+	Steps,
 	Breadcrumb,
 	BreadcrumbItem,
 	Tabs,

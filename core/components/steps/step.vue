@@ -26,10 +26,10 @@
 </template>
 <script>
 import Emitter from '../../mixins/emitter'
-import { oneOf } from '../../utils'
+import { oneOf, findComponentUpward } from '../../utils'
 
-const prefix = 'zov-steps'
-const iconprefix = 'zov-iconfont'
+const prefix = 'zov-step'
+const parentName = 'zov-steps'
 
 export default {
 	name: prefix,
@@ -53,6 +53,7 @@ export default {
 	},
 	data() {
 		return {
+			parent: findComponentUpward(this, parentName),
 			prefix: prefix,
 			stepNumber: '',
 			nextError: false,
@@ -104,7 +105,7 @@ export default {
 
 			return [
 				`${prefix}-icon`,
-				`${iconprefix}`,
+				'zov-iconfont',
 				{
 					[`zi-${icon}`]: icon != ''
 				}
@@ -126,8 +127,14 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		this.parent.updateSteps()
+	},
 	created() {
 		this.currentStatus = this.status
+	},
+	beforeDestroy() {
+		this.parent.updateSteps()
 	}
 }
 </script>

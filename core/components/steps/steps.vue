@@ -8,21 +8,6 @@ import { oneOf } from '../../utils'
 
 const prefix = 'zov-steps'
 
-function debounce(fn) {
-	let waiting
-	return function() {
-		if (waiting) return
-		waiting = true
-		const context = this,
-			args = arguments
-		const later = function() {
-			waiting = false
-			fn.apply(context, args)
-		}
-		this.$nextTick(later)
-	}
-}
-
 export default {
 	name: prefix,
 	props: {
@@ -112,11 +97,6 @@ export default {
 				this.$children[this.current].currentStatus = this.status
 			}
 		},
-		debouncedAppendRemove() {
-			return debounce(function() {
-				this.updateSteps()
-			})
-		},
 		updateSteps() {
 			this.updateChildProps(true)
 			this.setNextError()
@@ -125,8 +105,6 @@ export default {
 	},
 	mounted() {
 		this.updateSteps()
-		this.$on('append', this.debouncedAppendRemove())
-		this.$on('remove', this.debouncedAppendRemove())
 	},
 	watch: {
 		current() {
