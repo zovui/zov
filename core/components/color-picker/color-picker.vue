@@ -59,7 +59,7 @@
 						class="zov-color-picker-recommend-colors-item"
 						v-for="item in colors"
 						:key="item"
-						@click="clickHandle(item)"
+						@click="setActiveColor(item)"
 					>
 						<div :style="{ 'background-color': item }"></div>
 					</div>
@@ -213,15 +213,18 @@ export default {
 	},
 	watch: {
 		dropShow(val) {
+			this.setActiveColor(this.value)
 			this.$emit('on-open-change', val)
-			this.setCurrentValue()
+		},
+		value(val) {
+			this.setActiveColor(val)
 		}
 	},
 	methods: {
 		inputHandle() {
 			this.val = changeColor(this.currentValue)
 		},
-		clickHandle(val) {
+		setActiveColor(val) {
 			this.saturationColors = changeColor(val)
 		},
 		submitHandle() {
@@ -231,7 +234,7 @@ export default {
 		},
 		cancelHandle() {
 			this.dropShow = false
-			this.clickHandle(this.value)
+			this.setActiveColor(this.value)
 		},
 		setCurrentValue() {
 			this.currentValue = toColorModelNum(this.formatColor)
@@ -239,7 +242,7 @@ export default {
 	},
 	mounted() {
 		this.autofocus && (this.dropShow = true)
-		this.setCurrentValue()
+		this.setActiveColor(this.value)
 	}
 }
 </script>
