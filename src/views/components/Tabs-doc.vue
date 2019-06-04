@@ -399,14 +399,25 @@ export default {
 	name: 'TabsDemo',
 	components: {
 		StaticTestComponent: {
+			data() {
+				return {
+					timeout: 0
+				}
+			},
 			mounted() {
+				setInterval(() => {
+					this.timeout++
+				}, 1000)
 				console.log('static component is mounted!')
 			},
 			destroyed() {
 				console.log('static component is destroyed!')
 			},
 			render(h) {
-				return h('p', "I'm static component!")
+				return h(
+					'p',
+					"I'm static component! " + 'timeout: ' + this.timeout
+				)
 			}
 		},
 		LazyTestComponent: {

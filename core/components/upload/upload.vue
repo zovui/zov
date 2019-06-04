@@ -5,8 +5,16 @@
 			:files="files"
 			:listType="listType"
 			:class="stylePrefix + '-picture-card'"
+			@on-preview="handlePreview"
+			@on-delete="handleDelete"
 		></UploadList>
-		<div :class="selectClasses" @click="handleClick">
+		<div
+			:class="selectClasses"
+			@click="handleClick"
+			@drop.prevent="handleDrop"
+			@dragover.prevent
+			@dragleave.prevent
+		>
 			<input
 				ref="fileInput"
 				:class="stylePrefix + '-input'"
@@ -30,6 +38,8 @@
 			v-if="showUploadList && ~['text', 'picture'].indexOf(listType)"
 			:files="files"
 			:listType="listType"
+			@on-preview="handlePreview"
+			@on-delete="handleDelete"
 		></UploadList>
 	</div>
 </template>
@@ -38,7 +48,15 @@
 import UploadList from './upload-list'
 import ajax from './ajax.js'
 
+import FileObject from './file.js'
+
 const prefix = 'zov-upload'
+
+const STATUS = {
+	LOADING: 'loading',
+	FINISHED: 'finished',
+	FAIL: 'fail'
+}
 
 export default {
 	name: prefix,
@@ -51,11 +69,6 @@ export default {
 		},
 		multiple: {
 			// 是否支持多选
-			type: Boolean,
-			default: false
-		},
-		paste: {
-			// 是否支持粘贴上传
 			type: Boolean,
 			default: false
 		},
@@ -97,7 +110,7 @@ export default {
 			type: Array,
 			default: () => []
 		},
-		maxSize: Number, // 上传的单文件大小限制
+		maxSize: Number, // 上传的单文件大小限制,kb
 		limit: {
 			type: Number,
 			validator: value => {
@@ -147,10 +160,7 @@ export default {
 			}
 		}, // 文件上传失败时的钩子
 		onPreview: {
-			type: Function,
-			default() {
-				return {}
-			}
+			type: Function
 		}, // 点击已上传文件时的钩子
 		onRemove: {
 			type: Function,
@@ -180,13 +190,27 @@ export default {
 	data() {
 		return {
 			stylePrefix: prefix,
-			files: this.defaultFileList
+			files: []
+		}
+	},
+	watch: {
+		defaultFileList: {
+			immediate: true,
+			handler(fileList) {
+				this.files = fileList.map(
+					file =>
+						new FileObject({
+							name: file.name || '',
+							url: file.url || ''
+						})
+				)
+			}
 		}
 	},
 	computed: {
 		selectClasses() {
 			return [
-				this.stylePrefix + '-select',
+				this.stylePrefix + '-' + this.type,
 				{
 					[this.stylePrefix + '-picture-card-select']:
 						this.listType === 'picture-card'
@@ -200,6 +224,15 @@ export default {
 	methods: {
 		handleClick() {
 			this.$refs.fileInput.click()
+		},
+		handleDrop(event) {
+			// dragleave和dragover事件的默认行为是拒绝接受任何被拖放的元素。因此需要阻止浏览器这种默认行为
+			if (this.type === 'drag' && !this.disabled) {
+				let files = event.dataTransfer.files
+				if (files) {
+					this.uploadFiles(files)
+				}
+			}
 		},
 		handleFileChange(event) {
 			let files = event.target.files
@@ -270,9 +303,39 @@ export default {
 				}
 			})
 		},
-		handleProgress() {},
-		handleSuccess() {},
-		handleError() {},
+		handleProgress(event, file) {
+			this.onProgress(event, file, this.files)
+			file.percent = event.percent || 0
+		},
+		handleSuccess(res, fileObject) {
+			if (fileObject) {
+				fileObject.status = STATUS.FINISHED
+				fileObject.response = res
+				this.onSuccess(res, fileObject, this.files)
+			}
+		},
+		handleError(err, response, fileObject) {
+			let files = this.files
+			fileObject.status = STATUS.FAIL
+			files.splice(files.indexOf(fileObject), 1)
+			this.onError(err, response, fileObject)
+		},
+		handlePreview(file) {
+			this.$emit('on-preview', file)
+
+			if (this.onPreview) {
+				this.onPreview(file)
+			} else if (file.url) {
+				window.open(file.url, '_blank')
+			} else {
+				return false
+			}
+		},
+		handleDelete(file) {
+			let files = this.files
+			files.splice(files.indexOf(file), 1)
+			this.onRemove(file, files)
+		},
 		uploadFiles(files) {
 			files = [...files]
 
@@ -284,7 +347,6 @@ export default {
 							if (this.isExceededLimit(uploadFiles)) {
 								this.onExceededLimit(uploadFiles, this.files)
 								return false
-								// todo 错误处理
 							} else {
 								uploadFiles.forEach(file => {
 									this.uploadFile(file)
@@ -307,15 +369,20 @@ export default {
 					}
 				})
 				.catch(() => {})
-			// this.validator(file).then(() => {
-			//
-			// }).catch(() => {
-			//
-			// });
 		},
 		upload(file) {
+			let fileObject = new FileObject({
+				status: STATUS.LOADING,
+				name: file.name,
+				url: file.url,
+				percent: 0,
+				file: file
+			})
+			this.files.push(fileObject)
+
 			let formData = new FormData()
 			formData.append(this.name, file)
+
 			ajax({
 				headers: this.headers,
 				withCredentials: this.withCredentials,
@@ -324,13 +391,13 @@ export default {
 				filename: this.name,
 				action: this.action,
 				onProgress: event => {
-					this.handleProgress(event, file)
+					this.handleProgress(event, fileObject)
 				},
 				onSuccess: res => {
-					this.handleSuccess(res, file)
+					this.handleSuccess(res, fileObject)
 				},
 				onError: (err, response) => {
-					this.handleError(err, response, file)
+					this.handleError(err, response, fileObject)
 				}
 			})
 		},
@@ -347,7 +414,12 @@ export default {
 
 			if (this.format.length) {
 				let postfix = name.split('.').pop()
-				if (!~this.format.indexOf(postfix)) {
+				if (
+					!(
+						~this.format.indexOf(postfix.toUpperCase()) ||
+						~this.format.indexOf(postfix.toLowerCase())
+					)
+				) {
 					this.onFormatError(file)
 					return false
 				}

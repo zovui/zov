@@ -1,19 +1,37 @@
 <template>
 	<div :class="stylePrefix">
 		<template v-if="listType === 'text'">
-			<UploadListText v-for="file in files" :file="file"></UploadListText>
+			<transition-group name="zov-drop" tag="div">
+				<UploadListText
+					v-for="file in files"
+					:file="file"
+					:key="file.id"
+					@on-delete="handleDelete"
+					@on-preview="handlePreview"
+				></UploadListText>
+			</transition-group>
 		</template>
 		<template v-if="listType === 'picture'">
-			<UploadListPicture
-				v-for="file in files"
-				:file="file"
-			></UploadListPicture>
+			<transition-group name="zov-drop" tag="div">
+				<UploadListPicture
+					v-for="file in files"
+					:file="file"
+					:key="file.id"
+					@on-delete="handleDelete"
+					@on-preview="handlePreview"
+				></UploadListPicture>
+			</transition-group>
 		</template>
 		<template v-if="listType === 'picture-card'">
-			<UploadListPictureCard
-				v-for="file in files"
-				:file="file"
-			></UploadListPictureCard>
+			<transition-group name="zov-scale" tag="div">
+				<UploadListPictureCard
+					v-for="file in files"
+					:file="file"
+					:key="file.id"
+					@on-delete="handleDelete"
+					@on-preview="handlePreview"
+				></UploadListPictureCard>
+			</transition-group>
 		</template>
 	</div>
 </template>
@@ -49,8 +67,14 @@ export default {
 		UploadListText,
 		UploadListPicture,
 		UploadListPictureCard
+	},
+	methods: {
+		handleDelete(file) {
+			this.$emit('on-delete', file)
+		},
+		handlePreview(file) {
+			this.$emit('on-preview', file)
+		}
 	}
 }
 </script>
-
-<style scoped></style>

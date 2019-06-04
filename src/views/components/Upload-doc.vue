@@ -4,10 +4,10 @@
 		<section class="section">
 			<h2>基本用法</h2>
 			<div>
-				<Upload>
+				<Upload action="//jsonplaceholder.typicode.com/posts/">
 					<Button><Icon iconname="cloud-upload"></Icon>上传</Button>
 				</Upload>
-				<Upload disabled>
+				<Upload action="//jsonplaceholder.typicode.com/posts/" disabled>
 					<Button><Icon iconname="cloud-upload"></Icon>上传</Button>
 				</Upload>
 			</div>
@@ -15,7 +15,7 @@
 		<section class="section">
 			<h2>支持多选</h2>
 			<div>
-				<Upload multiple>
+				<Upload action="//jsonplaceholder.typicode.com/posts/" multiple>
 					<Button><Icon iconname="cloud-upload"></Icon>上传</Button>
 				</Upload>
 			</div>
@@ -23,34 +23,79 @@
 		<section class="section">
 			<h2>已上传列表样式</h2>
 			<div>
-				<Upload :default-file-list="defaultFileList" listType="text">
-					<Button><Icon iconname="cloud-upload"></Icon>上传</Button>
-				</Upload>
-				<Upload :default-file-list="defaultFileList" listType="picture">
+				<Upload
+					action="//jsonplaceholder.typicode.com/posts/"
+					:default-file-list="defaultFileList"
+					list-type="text"
+				>
 					<Button><Icon iconname="cloud-upload"></Icon>上传</Button>
 				</Upload>
 				<Upload
+					action="//jsonplaceholder.typicode.com/posts/"
 					:default-file-list="defaultFileList"
-					listType="picture-card"
+					list-type="picture"
+				>
+					<Button><Icon iconname="cloud-upload"></Icon>上传</Button>
+				</Upload>
+				<Upload
+					action="//jsonplaceholder.typicode.com/posts/"
+					:default-file-list="defaultFileList"
+					list-Type="picture-card"
+					:on-success="handleSuccess"
 				>
 				</Upload>
 				<Upload
+					action="//jsonplaceholder.typicode.com/posts/"
 					:default-file-list="defaultFileList"
-					listType="picture-card"
+					list-Type="picture-card"
 				>
 					<span>点击上传</span>
 				</Upload>
 			</div>
 		</section>
-		<!--<section class="section">-->
-		<!--<h2>打开一个confirm</h2>-->
-		<!--<p class="props">-->
-		<!--confirm用于打开一个confirm弹窗，有固定的图标，有取消按钮。当使用render方法时，则优先使用render渲染body部分的内容。-->
-		<!--</p>-->
-		<!--<div>-->
-		<!--<Button @click="confirm">confirm</Button>-->
-		<!--</div>-->
-		<!--</section>-->
+		<section class="section">
+			<h2>拖拽上传</h2>
+			<div>
+				<Upload
+					action="//jsonplaceholder.typicode.com/posts/"
+					:default-file-list="defaultFileList"
+					list-Type="text"
+					type="drag"
+				>
+					<div class="drag-upload-container">
+						<Icon
+							class="drag-upload-icon"
+							iconname="cloud-upload"
+						></Icon>
+						<p class="drag-upload-text">
+							将文件拖到此处，或
+							<span class="drag-upload-strong">点击上传</span>
+						</p>
+					</div>
+				</Upload>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>上传校验</h2>
+			<div>
+				<Upload
+					action="//jsonplaceholder.typicode.com/posts/"
+					accept="image/jpeg, image/png"
+					:format="format"
+					:max-size="15"
+					:limit="3"
+					:on-error="handleError"
+					:on-remove="handleRemove"
+					:on-format-error="handleFormatError"
+					:on-exceeded-limit="handleExceededLimit"
+					:on-exceeded-size="handleExceededSize"
+					multiple
+				>
+					<Button><Icon iconname="cloud-upload"></Icon>上传</Button>
+				</Upload>
+			</div>
+		</section>
 	</article>
 </template>
 
@@ -73,10 +118,56 @@ export default {
 					name: 'zzzzzzzzzzzz.jpeg',
 					url: ''
 				}
-			]
+			],
+			format: ['jpg', 'jpeg', 'png']
 		}
 	},
-	methods: {}
+	methods: {
+		handleSuccess(res, file, files) {
+			file.url =
+				'https://camo.githubusercontent.com/a4ee422ec1accc811276f220561976f14005b13b/687474703a2f2f7a6f762e7468657068656e69782e636e2f696d672f6c6f676f2e35313134623463362e706e67'
+		},
+		handleError(err, response, file) {
+			this.$Message.error({
+				title: '提示',
+				text: file.name + '上传失败！',
+				duration: 500,
+				closable: false
+			})
+		},
+		handleRemove(file, fileList) {
+			this.$Message.info({
+				title: '提示',
+				text: file.name + '已删除',
+				duration: 500,
+				closable: false
+			})
+		},
+		handleFormatError(file) {
+			this.$Message.error({
+				title: '提示',
+				text: file.name + '格式错误！',
+				duration: 500,
+				closable: false
+			})
+		},
+		handleExceededLimit(uploadFiles, fileList) {
+			this.$Message.error({
+				title: '提示',
+				text: '已上传文件个数不能超过3个',
+				duration: 500,
+				closable: false
+			})
+		},
+		handleExceededSize(file) {
+			this.$Message.error({
+				title: '提示',
+				text: '单个文件大小不能超过15kb',
+				duration: 500,
+				closable: false
+			})
+		}
+	}
 }
 </script>
 
@@ -97,5 +188,22 @@ export default {
 }
 .mg-10 {
 	margin-bottom: 10px;
+}
+
+.drag-upload {
+	&-container {
+		border: 1px dashed #e4e4e4;
+		text-align: center;
+		border-radius: 4px;
+		height: 100px;
+		padding: 20px;
+	}
+	&-icon {
+		font-size: 30px;
+		color: #2d8cf0;
+	}
+	&-strong {
+		color: #2d8cf0;
+	}
 }
 </style>

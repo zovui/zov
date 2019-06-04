@@ -30,9 +30,13 @@ import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
+import Divider from './components/divider'
+import { Step, Steps } from './components/steps'
+
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import { Tabs, TabPane } from './components/tabs'
+import Progress from './components/progress'
 import Upload from './components/upload'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
@@ -89,10 +93,14 @@ const components = {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
+	Step,
+	Steps,
 	Breadcrumb,
 	BreadcrumbItem,
 	Tabs,
 	TabPane,
+	Divider,
+	Progress,
 	Upload
 }
 Object.keys(components).forEach(key => {
@@ -165,10 +173,14 @@ export {
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
+	Divider,
+	Step,
+	Steps,
 	Breadcrumb,
 	BreadcrumbItem,
 	Tabs,
 	TabPane,
+	Progress,
 	Upload
 }
 // 将整个zov暴露出去

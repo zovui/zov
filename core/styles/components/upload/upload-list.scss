@@ -6,6 +6,7 @@ $prefix-upload-list: #{$prefix}upload-list;
         margin-top: 8px;
         position: relative;
         cursor: pointer;
+        padding: 4px 0;
         &-icon{
             cursor: pointer;
             font-size: 16px;
@@ -22,7 +23,7 @@ $prefix-upload-list: #{$prefix}upload-list;
             @include get-color-sub-hover();
             position: absolute;
             right: 4px;
-            margin-top: 2px;
+            top: 6px;
             font-size: 20px;
             display: none;
             &:hover {
@@ -35,6 +36,12 @@ $prefix-upload-list: #{$prefix}upload-list;
                 display: inline-block;
             }
         }
+        &-progress {
+            margin-left: 10px;
+            margin-right: 20px;
+            height: 10px;
+            line-height: 10px;
+        }
     }
 
     &-picture{
@@ -42,23 +49,23 @@ $prefix-upload-list: #{$prefix}upload-list;
         position: relative;
         cursor: pointer;
         height: 60px;
-        line-height: 60px;
         border-width: $border-width-base;
         border-style: solid;
         @include get-color-border();
         border-radius: $border-radius-base;
+        display: flex;
+        align-items: center;
         &-image{
             width: 48px;
             height: 48px;
-            margin-top: 5px;
-            margin-left: 6px;
-            position: absolute;
+            margin: 0 8px;
+        }
+        &-right {
+            flex: 1;
+            padding-right: 20px;
         }
         &-name{
-            margin-left: 8px;
-            vertical-align: middle;
             display: block;
-            padding-left: 56px;
         }
         &-close{
             cursor: pointer;
@@ -70,6 +77,10 @@ $prefix-upload-list: #{$prefix}upload-list;
             &:hover {
                 @include get-color-sub();
             }
+        }
+        &-progress{
+            height: 10px;
+            line-height: 10px;
         }
     }
 
@@ -116,14 +127,14 @@ $prefix-upload-list: #{$prefix}upload-list;
             text-align: center;
             opacity: 0;
             transition: opacity $transition-hover-time $bezier;
-            a {
-              margin-right: 8px;
-            }
         }
         &-icon{
             font-size: 20px;
             @include get-color-bg(color);
             cursor: pointer;
+            &:first-of-type {
+                margin-right: 8px;
+            }
         }
 
         &:hover {
