@@ -10,6 +10,14 @@
 				suffix="search"
 			/>
 		</div>
+		<h3>自定义Icon</h3>
+		<ul class="icon_lists">
+			<li>
+				<Icon custom="ion ion-load-a" />
+				<div class="name">ion-load-a</div>
+			</li>
+		</ul>
+		<h3>默认icon</h3>
 		<ul class="icon_lists">
 			<li v-for="(item, index) in searchResult" :key="index">
 				<Icon :iconname="item.name" />
@@ -763,6 +771,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import url(https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css);
 .icon-header {
 	text-align: center;
 	margin-bottom: 50px;
