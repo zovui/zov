@@ -14,7 +14,7 @@
 			v-bind="inputAttrs"
 			v-on="inputListeners"
 		/>
-		<div class="zov-input-suffix" v-if="clearable || suffix">
+		<div class="zov-input-suffix">
 			<!-- 自定义后缀icon -->
 			<slot name="suffix">
 				<Icon v-if="suffix" :iconname="suffix" />
