@@ -41,7 +41,7 @@ export default {
 
 	watch: {
 		value(val) {
-			!this.dragging &&
+			!this.colorPickerComponent.dragging &&
 				(this.percent = clamp((val.hsl.h * 100) / 360, 0, 100))
 		}
 	},
