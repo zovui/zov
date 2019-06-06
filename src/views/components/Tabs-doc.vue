@@ -332,6 +332,25 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					给TabPane使用slot: label自定义label内容
+				</h2>
+				<div class="demo-content">
+					<Tabs>
+						<TabPane id="1" :lazy="false">
+							<template #label>
+								<Icon iconname="chatboxes"></Icon
+								>{{ slotLabel }}
+							</template>
+							<StaticTestComponent />
+						</TabPane>
+						<TabPane label="static" id="2" :lazy="false">
+							<StaticTestComponent />
+						</TabPane>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>
@@ -431,6 +450,12 @@ export default {
 				return h('p', "I'm lazy component!")
 			}
 		}
+	},
+	created() {
+		let count = 1
+		setInterval(() => {
+			this.slotLabel = 'label' + count++
+		}, 1000)
 	},
 	data() {
 		return {
@@ -599,7 +624,8 @@ export default {
 			activeKey: '1',
 			tabPosition: 'top',
 			cardTabPosition: 'top',
-			extraTabPosition: 'top'
+			extraTabPosition: 'top',
+			slotLabel: 'label'
 		}
 	},
 	methods: {
