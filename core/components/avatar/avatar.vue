@@ -1,10 +1,16 @@
 <template>
 	<span :class="classes">
-		<img :src="src" v-if="src" />
+		<img
+			:src="src"
+			v-if="src"
+			alt="hello"
+			:title="title"
+			@error="handleError"
+		/>
 		<Icon
-			:type="iconname"
+			v-else-if="iconname || custom"
 			:iconname="iconname"
-			v-else-if="iconname || customIcon"
+			:custom="custom"
 		></Icon>
 		<span
 			ref="children"
@@ -35,11 +41,7 @@ export default {
 			validator(value) {
 				return oneOf(value, ['small', 'large', 'default'])
 			},
-			default() {
-				return !this.$IVIEW || this.$IVIEW.size === ''
-					? 'default'
-					: this.$IVIEW.size
-			}
+			default: 'default'
 		},
 		src: {
 			type: String
@@ -47,7 +49,11 @@ export default {
 		iconname: {
 			type: String
 		},
-		customIcon: {
+		custom: {
+			type: String,
+			default: ''
+		},
+		title: {
 			type: String,
 			default: ''
 		}
@@ -68,7 +74,7 @@ export default {
 				`${prefix}-${this.size}`,
 				{
 					[`${prefix}-image`]: !!this.src,
-					[`${prefix}-icon`]: !!this.iconname || !!this.customIcon
+					[`${prefix}-icon`]: !!this.iconname || !!this.custom
 				}
 			]
 		},
@@ -91,16 +97,17 @@ export default {
 		setScale() {
 			this.isSlotShow = !this.src && !this.iconname
 			if (this.$refs.children) {
-				// set children width again to make slot centered
 				this.childrenWidth = this.$refs.children.offsetWidth
 				const avatarWidth = this.$el.getBoundingClientRect().width
-				// add 4px gap for each side to get better performance
 				if (avatarWidth - 8 < this.childrenWidth) {
 					this.scale = (avatarWidth - 8) / this.childrenWidth
 				} else {
 					this.scale = 1
 				}
 			}
+		},
+		handleError(e) {
+			this.$emit('on-error', e)
 		}
 	},
 	mounted() {

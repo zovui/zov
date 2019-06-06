@@ -29,7 +29,7 @@ $prefix-avatar: #{$prefix}avatar;
         background: transparent;
     }
 
-    .ivu-icon{
+    &.#{$prefix-avatar}-icon{
         position: relative;
         top: -1px;
     }
@@ -38,7 +38,7 @@ $prefix-avatar: #{$prefix}avatar;
 
     &-large {
         @include avatar-size(40px, 24px);
-        .ivu-icon{
+        &.#{$prefix-avatar}-icon{
             position: relative;
             top: -2px;
         }
