@@ -343,7 +343,10 @@
 								<Icon iconname="chatboxes"></Icon
 								>{{ slotLabel }}
 							</template>
-							<StaticTestComponent />
+							<ul v-for="item of items" :key="item">
+								<li>{{ item }}</li>
+							</ul>
+							<Button @click.native="appendItem">新增</Button>
 						</TabPane>
 						<TabPane label="static" id="2" :lazy="false">
 							<StaticTestComponent />
@@ -406,10 +409,6 @@
 	.demo-content {
 		margin: 10px 0;
 	}
-}
-
-.radio {
-	appearance: radio !important;
 }
 </style>
 
@@ -625,7 +624,8 @@ export default {
 			tabPosition: 'top',
 			cardTabPosition: 'top',
 			extraTabPosition: 'top',
-			slotLabel: 'label'
+			slotLabel: 'label',
+			items: []
 		}
 	},
 	methods: {
@@ -650,6 +650,9 @@ export default {
 					)
 				}, 3000)
 			})
+		},
+		appendItem() {
+			this.items.push('item' + this.items.length)
 		}
 	}
 }

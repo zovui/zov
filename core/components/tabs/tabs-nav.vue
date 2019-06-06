@@ -308,7 +308,7 @@ export default {
 									id={pane.id}
 									key={pane.id}
 									isActive={pane.id === this.activeId}
-									label={pane.$slots.label || pane.label}
+									label={pane.computedLabel}
 									disabled={pane.disabled}
 								/>
 							)
@@ -325,7 +325,7 @@ export default {
 									id={pane.id}
 									key={pane.id}
 									isActive={pane.id === this.activeId}
-									label={pane.$slots.label || pane.label}
+									label={pane.computedLabel}
 									disabled={pane.disabled}
 									closable={pane.closable}
 								/>
