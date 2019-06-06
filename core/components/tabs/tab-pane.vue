@@ -1,8 +1,3 @@
-<template>
-	<div class="zov-content-item" v-if="isRender" v-show="show">
-		<slot />
-	</div>
-</template>
 <script>
 export default {
 	name: 'zov-tab-pane',
@@ -34,7 +29,7 @@ export default {
 			default: false
 		}
 	},
-	created() {
+	mounted() {
 		if (this.Tabs === null) {
 			throw new Error('TabPane必须配合Tabs组件使用')
 		}
@@ -44,8 +39,9 @@ export default {
 			// 标记为渲染
 			this.isRender = true
 		}
+		this.computedLabel = this.$slots.label || this.label
 	},
-	destroyed() {
+	beforeDestroy() {
 		this.Tabs.removeTab(this.id)
 	},
 	inject: {
@@ -55,7 +51,8 @@ export default {
 	},
 	data() {
 		return {
-			isRender: false
+			isRender: false,
+			computedLabel: ''
 		}
 	},
 	computed: {
@@ -71,6 +68,18 @@ export default {
 			if (this.lazy && this.isRender === false && active === true) {
 				this.isRender = true
 			}
+		}
+	},
+	render() {
+		this.computedLabel = this.$slots.label || this.label
+		if (this.isRender) {
+			return (
+				<div
+					class="zov-content-item"
+					style={{ display: this.show ? 'block' : 'none' }}>
+					{this.$slots.default}
+				</div>
+			)
 		}
 	}
 }
