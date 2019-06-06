@@ -1,8 +1,6 @@
 <script>
 import TabsTab from './tabs-tab'
 import { find, findComponentsDownward } from '../../utils'
-import ResizeObserver from 'resize-observer-polyfill'
-import debounce from 'lodash.debounce'
 import { isHorizontal } from './helper'
 import TabsNavAction from './tabs-nav-action'
 import TabsNavViewport from './tabs-nav-viewport'
@@ -25,16 +23,7 @@ export default {
 		type: String
 	},
 	mounted() {
-		// 设置resize观察者
-		this.resizeObserver = new ResizeObserver(
-			debounce(this.handleResize.bind(this), 300)
-		)
-		// 观察viewport变化
-		this.resizeObserver.observe(this.$refs.viewport.$el)
 		this.redraw()
-	},
-	destroyed() {
-		this.resizeObserver.disconnect()
 	},
 	data() {
 		return {
@@ -52,8 +41,7 @@ export default {
 				height: 0
 			},
 			scrollX: 0,
-			scrollY: 0,
-			resizeObserver: null
+			scrollY: 0
 		}
 	},
 	computed: {
@@ -274,10 +262,12 @@ export default {
 			}
 			return position
 		},
-		handleResize() {
+		onResize() {
 			this.$nextTick(() => {
 				this.updateNavRect()
 				this.updateViewportRect()
+				this.updateRollerRect()
+				this.updateTabRectList()
 				this.$nextTick(() => {
 					this.scrollActiveTabToViewport()
 					if (isHorizontal(this.direction)) {
@@ -318,7 +308,7 @@ export default {
 									id={pane.id}
 									key={pane.id}
 									isActive={pane.id === this.activeId}
-									label={pane.$slots.label || pane.label}
+									label={pane.computedLabel}
 									disabled={pane.disabled}
 								/>
 							)
@@ -335,7 +325,7 @@ export default {
 									id={pane.id}
 									key={pane.id}
 									isActive={pane.id === this.activeId}
-									label={pane.$slots.label || pane.label}
+									label={pane.computedLabel}
 									disabled={pane.disabled}
 									closable={pane.closable}
 								/>
@@ -356,6 +346,7 @@ export default {
 				<TabsNavViewport
 					scrollX={this.scrollX}
 					scrollY={this.scrollY}
+					onResize={this.onResize}
 					ref="viewport">
 					{roller}
 				</TabsNavViewport>
