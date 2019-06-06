@@ -36,6 +36,7 @@ import { Step, Steps } from './components/steps'
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import { Tabs, TabPane } from './components/tabs'
+import Avatar from './components/avatar'
 import Progress from './components/progress'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
@@ -99,6 +100,7 @@ const components = {
 	Tabs,
 	TabPane,
 	Divider,
+	Avatar,
 	Progress
 }
 Object.keys(components).forEach(key => {
@@ -178,6 +180,7 @@ export {
 	BreadcrumbItem,
 	Tabs,
 	TabPane,
+	Avatar,
 	Progress
 }
 // 将整个zov暴露出去
