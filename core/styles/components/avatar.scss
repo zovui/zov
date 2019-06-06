@@ -19,7 +19,7 @@ $prefix-avatar: #{$prefix}avatar;
     display: inline-block;
     text-align: center;
     @include get-color-border(background-color);
-    @include get-color-text();
+    @include get-color-bg(color);
     white-space: nowrap;
     position: relative;
     overflow: hidden;
