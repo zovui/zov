@@ -119,6 +119,51 @@
 					</Timeline>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">倒序</h2>
+				<div class="demo-content">
+					<RadioGroup v-model="reverseMode" connected>
+						<Radio
+							v-for="mode of [
+								'left',
+								'right',
+								'alternate-left',
+								'alternate-right'
+							]"
+							:label="mode"
+							:key="mode"
+						/>
+					</RadioGroup>
+				</div>
+				<div class="demo-content">
+					是否倒序
+					<Switcher v-model="reverse" />
+				</div>
+				<div class="demo-content">
+					<Timeline pending :mode="reverseMode" :reverse="reverse">
+						<TimelineItem
+							>Create a services site 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Solve initial network problems
+							2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Technical testing 2015-09-01</TimelineItem
+						>
+						<TimelineItem
+							>Sed ut perspiciatis unde omnis iste natus error sit
+							voluptatem accusantium doloremque laudantium, totam
+							rem aperiam, eaque ipsa quae ab illo inventore
+							veritatis et quasi architecto beatae vitae dicta
+							sunt explicabo.</TimelineItem
+						>
+						<template #ghost-content>
+							Recoding...
+						</template>
+					</Timeline>
+				</div>
+			</section>
 		</article>
 	</main>
 </template>
@@ -243,7 +288,9 @@ export default {
 					}
 				}
 			],
-			mode: 'left'
+			mode: 'left',
+			reverse: false,
+			reverseMode: 'left'
 		}
 	}
 }

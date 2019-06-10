@@ -29,13 +29,15 @@ export default {
 					mode
 				)
 			}
-		}
+		},
+		reverse: Boolean
 	},
 	provide() {
 		const proxy = {
 			addItem: vm => this.addItem(vm),
 			removeItem: vm => this.removeItem(vm),
-			nextIsGhost: vm => this.nextIsGhost(vm)
+			nextIsGhost: vm => this.nextIsGhost(vm),
+			isLast: vm => this.isLast(vm)
 		}
 		return {
 			Timeline: proxy
@@ -50,6 +52,9 @@ export default {
 		classList() {
 			const classList = []
 			classList.push(`zov-timeline--${this.mode}`)
+			if (this.reverse) {
+				classList.push(`zov-timeline--reverse`)
+			}
 			return classList
 		}
 	},
@@ -68,12 +73,25 @@ export default {
 			if (index === -1) {
 				return false
 			}
+			// 倒序展示时，标记ghost节点本身下一个就是ghost
+			if (this.reverse) {
+				return (
+					this.items[index].$options.name === TimelineGhostItem.name
+				)
+			}
 			if (index === this.items.length - 1) {
 				return false
 			}
 			return (
 				this.items[index + 1].$options.name === TimelineGhostItem.name
 			)
+		},
+		isLast(vm) {
+			// 倒序展示时，原第一项元素变成最后一项
+			if (this.reverse) {
+				return vm === this.items[0]
+			}
+			return vm === this.items[this.items.length - 1]
 		}
 	}
 }

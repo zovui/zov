@@ -27,10 +27,19 @@ export default {
 			}
 			return false
 		},
+		isLast() {
+			if (this.Timeline) {
+				return this.Timeline.isLast(this)
+			}
+			return false
+		},
 		classList() {
 			const classList = []
 			if (this.nextIsGhost) {
 				classList.push('zov-timeline-item--next-ghost')
+			}
+			if (this.isLast) {
+				classList.push('zov-timeline-item--last')
 			}
 			return classList
 		}

@@ -10,6 +10,10 @@ $timeline-content-lintHeight: $timeline-content-fontSize * $line-height-base;
     list-style: none;
     margin: 0;
     padding: (($timeline-content-lintHeight / 2)) 0 0;
+    &--reverse {
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 
 .#{$component-name}-item {
@@ -63,7 +67,7 @@ $timeline-content-lintHeight: $timeline-content-fontSize * $line-height-base;
     .#{$component-name}-spin {
         @include get-color-bg(background-color);
     }
-    &:last-child {
+    &--last {
         .#{$component-name}-line {
             display: none;
         }
