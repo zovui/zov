@@ -3,7 +3,7 @@
 		class="zov-tooltip"
 		@mouseenter="hoverHandle('enter')"
 		@mouseleave="hoverHandle('leave')"
-		@click.stop="toggleHandle"
+		@click="toggleHandle"
 		@focus.capture="focusHandle('enter')"
 		v-click-outside.capture="outCloseHandle"
 	>

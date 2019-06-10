@@ -332,6 +332,28 @@
 					</Tabs>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">
+					给TabPane使用slot: label自定义label内容
+				</h2>
+				<div class="demo-content">
+					<Tabs>
+						<TabPane id="1" :lazy="false">
+							<template #label>
+								<Icon iconname="chatboxes"></Icon
+								>{{ slotLabel }}
+							</template>
+							<ul v-for="item of items" :key="item">
+								<li>{{ item }}</li>
+							</ul>
+							<Button @click.native="appendItem">新增</Button>
+						</TabPane>
+						<TabPane label="static" id="2" :lazy="false">
+							<StaticTestComponent />
+						</TabPane>
+					</Tabs>
+				</div>
+			</section>
 		</article>
 	</article>
 </template>
@@ -388,10 +410,6 @@
 		margin: 10px 0;
 	}
 }
-
-.radio {
-	appearance: radio !important;
-}
 </style>
 
 <script>
@@ -431,6 +449,12 @@ export default {
 				return h('p', "I'm lazy component!")
 			}
 		}
+	},
+	created() {
+		let count = 1
+		setInterval(() => {
+			this.slotLabel = 'label' + count++
+		}, 1000)
 	},
 	data() {
 		return {
@@ -599,7 +623,9 @@ export default {
 			activeKey: '1',
 			tabPosition: 'top',
 			cardTabPosition: 'top',
-			extraTabPosition: 'top'
+			extraTabPosition: 'top',
+			slotLabel: 'label',
+			items: []
 		}
 	},
 	methods: {
@@ -624,6 +650,9 @@ export default {
 					)
 				}, 3000)
 			})
+		},
+		appendItem() {
+			this.items.push('item' + this.items.length)
 		}
 	}
 }

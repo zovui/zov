@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.7.0](https://github.com/zovui/zov/compare/v0.6.0...v0.7.0) (2019-06-06)
+
+
+### Bug Fixes
+
+* **color-picker:** draging ([0be0726](https://github.com/zovui/zov/commit/0be0726))
+* **input:** suffix 判断逻辑 ([fe27b64](https://github.com/zovui/zov/commit/fe27b64))
+* **tabs:** 修复pane内容改变时，tab内容会消失的问题 ([f4a926e](https://github.com/zovui/zov/commit/f4a926e)), closes [#23](https://github.com/zovui/zov/issues/23)
+* **tabs:** 修复resize监听逻辑缺少的问题 ([dd88d40](https://github.com/zovui/zov/commit/dd88d40))
+* **tooltip:** 去掉click的stop ([70c2933](https://github.com/zovui/zov/commit/70c2933))
+
+
+### Features
+
+* **progress:** 新增进度条组件 ([e3b2d61](https://github.com/zovui/zov/commit/e3b2d61))
+* 新增avatar组件 ([4a0cce8](https://github.com/zovui/zov/commit/4a0cce8))
+
+
+### Performance Improvements
+
+* **icon:** icon custom icon ([36bc720](https://github.com/zovui/zov/commit/36bc720))
+
+
+
 # [0.6.0](https://github.com/zovui/zov/compare/v0.5.1...v0.6.0) (2019-06-03)
 
 

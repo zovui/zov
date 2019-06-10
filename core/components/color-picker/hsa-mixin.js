@@ -11,11 +11,6 @@ export default {
 			default: undefined
 		}
 	},
-	data() {
-		return {
-			dragging: false
-		}
-	},
 	computed: {
 		colorPickerComponent() {
 			return findComponentUpward(this, 'zov-color-picker')
@@ -35,17 +30,16 @@ export default {
 			this.handleSlide(e, this.down, 'down')
 		},
 		handleMouseDown(e) {
-			this.dragging = true
+			this.colorPickerComponent.dragging = true
 			this.handleChange(e, true)
 			window.addEventListener('mousemove', this.handleChange, false)
 			window.addEventListener('mouseup', this.handleMouseUp, false)
 		},
 		handleMouseUp(e) {
 			this.unbindEventListeners()
-			this.dragging = false
 			// 此处延迟处理是为了保证以下行为在 out-click 执行之后
 			setTimeout(() => {
-				this.colorPickerComponent.dropShow = true
+				this.colorPickerComponent.dragging = false
 			})
 		},
 		unbindEventListeners() {

@@ -2,7 +2,7 @@
 	<div :class="['zov-color-picker', sizeClasses]" :disabled="disabled">
 		<Drop
 			:no-arrow="noArrow"
-			:never="disabled"
+			:never="disabled || dragging"
 			v-model="dropShow"
 			placement="bottom-start"
 			:no-delay="true"
@@ -166,7 +166,8 @@ export default {
 			stylePrefix: prefix,
 			dropShow: false,
 			val: changeColor(this.value),
-			currentValue: undefined
+			currentValue: undefined,
+			dragging: false
 		}
 	},
 	computed: {

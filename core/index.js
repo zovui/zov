@@ -36,6 +36,7 @@ import { Step, Steps } from './components/steps'
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
 import { Tabs, TabPane } from './components/tabs'
+import Avatar from './components/avatar'
 import Progress from './components/progress'
 import Upload from './components/upload'
 // 【_f】全局方法式组件
@@ -100,6 +101,7 @@ const components = {
 	Tabs,
 	TabPane,
 	Divider,
+	Avatar,
 	Progress,
 	Upload
 }
@@ -180,6 +182,7 @@ export {
 	BreadcrumbItem,
 	Tabs,
 	TabPane,
+	Avatar,
 	Progress,
 	Upload
 }

@@ -2,7 +2,7 @@
 	<span
 		v-bind="$attrs"
 		v-on="$listeners"
-		:class="[prefix, 'zov-iconfont', 'zi-' + iconname]"
+		:class="[prefix, custom || ['zov-iconfont', 'zi-' + iconname]]"
 	></span>
 </template>
 <script>
@@ -17,6 +17,10 @@ export default {
 	props: {
 		iconname: {
 			type: String,
+			default: ''
+		},
+		custom: {
+			type: [Object, Array, String],
 			default: ''
 		}
 	}
