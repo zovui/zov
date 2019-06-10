@@ -3,7 +3,7 @@
 		<div class="zov-timeline-indicator">
 			<div class="zov-timeline-dot-wrap">
 				<slot name="dot">
-					<i class="zov-timeline-dot"></i>
+					<Spin class="zov-timeline-spin" />
 				</slot>
 			</div>
 			<div class="zov-timeline-line"></div>
@@ -14,8 +14,12 @@
 
 <script>
 import TimelineItem from './timeline-item'
+import Spin from '../spin'
 export default {
 	name: 'zov-timeline-ghost-item',
-	mixins: [TimelineItem]
+	mixins: [TimelineItem],
+	components: {
+		Spin
+	}
 }
 </script>

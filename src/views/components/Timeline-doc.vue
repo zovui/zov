@@ -75,9 +75,6 @@
 							>Network problems being solved
 							2015-09-01</TimelineItem
 						>
-						<template #ghost-dot>
-							<Spin />
-						</template>
 						<template #ghost-content>
 							Recoding...
 						</template>
@@ -116,9 +113,6 @@
 							>Network problems being solved
 							2015-09-01</TimelineItem
 						>
-						<template #ghost-dot>
-							<Spin />
-						</template>
 						<template #ghost-content>
 							Recoding...
 						</template>
@@ -188,7 +182,67 @@ export default {
 	name: 'TimelineDemo',
 	data() {
 		return {
-			componentIntroduction: [],
+			componentIntroduction: [
+				{
+					header: 'Timeline Props',
+					content: {
+						headers: ['props', '说明', '类型', '默认值'],
+						data: [
+							{
+								props: 'mode',
+								introduction:
+									'展示模式，可选模式有：left, right, alternate-left, alternate-right',
+								type: 'string',
+								default: 'left'
+							},
+							{
+								props: 'pending',
+								introduction: '是否处于pending状态',
+								type: 'boolean',
+								default: 'false'
+							}
+						]
+					}
+				},
+				{
+					header: 'Timeline slots',
+					content: {
+						headers: ['slot名', '说明'],
+						data: [
+							{
+								props: 'default',
+								introduction: 'TimelineItem存放处'
+							},
+							{
+								props: 'ghost-dot',
+								introduction:
+									'自定义pending状态时幽灵节点的图标'
+							},
+							{
+								props: 'ghost-content',
+								introduction:
+									'自定义pending状态时幽灵节点的内容'
+							}
+						]
+					}
+				},
+				{
+					header: 'TimelineItem slots',
+					content: {
+						headers: ['slot名', '说明'],
+						data: [
+							{
+								props: 'default',
+								introduction: 'TimelineItem内容'
+							},
+							{
+								props: 'dot',
+								introduction: '自定义节点的图标'
+							}
+						]
+					}
+				}
+			],
 			mode: 'left'
 		}
 	}
