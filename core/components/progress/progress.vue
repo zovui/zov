@@ -187,11 +187,17 @@ export default {
 		status(status) {
 			this.progressStatus = status
 		},
-		progressPercent(percent) {
-			if (percent >= 100 && ~['normal', 'active'].indexOf(this.status)) {
-				this.progressStatus = 'success'
-			} else {
-				this.progressStatus = this.status
+		progressPercent: {
+			immediate: true,
+			handler(percent) {
+				if (
+					percent >= 100 &&
+					~['normal', 'active'].indexOf(this.status)
+				) {
+					this.progressStatus = 'success'
+				} else {
+					this.progressStatus = this.status
+				}
 			}
 		}
 	},
