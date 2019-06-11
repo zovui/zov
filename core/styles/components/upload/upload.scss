@@ -1,0 +1,36 @@
+$prefix-upload: #{$prefix}upload;
+.#{$prefix-upload}{
+    &-select{
+        display: inline-block;
+    }
+    &-input{
+        display: none;
+    }
+    &-picture-card{
+        display: inline-block;
+        vertical-align: top;
+    }
+    &-picture-card-select{
+        position: relative;
+        border-radius: $border-radius-base;
+        border-width: $border-width-base;
+        border-style: dashed;
+        @include get-color-border();
+        width: 100px;
+        height: 100px;
+        vertical-align: top;
+        transition: border-color $transition-hover-time $bezier;
+        &:hover {
+            @include get-color-primary-hover(border-color);
+        }
+    }
+    &-picture-card-add-icon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 40px;
+        @include get-color-placeholder(color);
+        transform: translate(-50%, -50%);
+
+    }
+}

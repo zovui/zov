@@ -1,0 +1,151 @@
+$prefix-upload-list: #{$prefix}upload-list;
+.#{$prefix-upload-list}{
+    overflow: hidden;
+    &-text{
+        line-height: 22px;
+        margin-top: 8px;
+        position: relative;
+        cursor: pointer;
+        padding: 4px 0;
+        &-icon{
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0;
+            vertical-align: text-bottom;
+            @include get-color-placeholder();
+        }
+        &-name{
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        &-close{
+            cursor: pointer;
+            @include get-color-sub-hover();
+            position: absolute;
+            right: 4px;
+            top: 6px;
+            font-size: 20px;
+            display: none;
+            &:hover {
+                @include get-color-sub();
+            }
+        }
+        &:hover {
+            @include get-color-divider(background-color);
+            .#{$prefix-upload-list}-text-close{
+                display: inline-block;
+            }
+        }
+        &-progress {
+            margin-left: 10px;
+            margin-right: 20px;
+            height: 10px;
+            line-height: 10px;
+        }
+    }
+
+    &-picture{
+        margin-top: 8px;
+        position: relative;
+        cursor: pointer;
+        height: 60px;
+        border-width: $border-width-base;
+        border-style: solid;
+        @include get-color-border();
+        border-radius: $border-radius-base;
+        display: flex;
+        align-items: center;
+        &-image{
+            width: 48px;
+            height: 48px;
+            margin: 0 8px;
+        }
+        &-right {
+            flex: 1;
+            padding-right: 20px;
+        }
+        &-name{
+            display: block;
+        }
+        &-close{
+            cursor: pointer;
+            @include get-color-sub-hover();
+            position: absolute;
+            right: 4px;
+            top: 2px;
+            font-size: 20px;
+            &:hover {
+                @include get-color-sub();
+            }
+        }
+        &-progress{
+            height: 10px;
+            line-height: 10px;
+        }
+    }
+
+    &-picture-card{
+        position: relative;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        padding: 8px;
+        margin: {
+            right: 8px;
+            bottom: 8px;
+        }
+        display: inline-block;
+        border-width: $border-width-base;
+        border-style: solid;
+        @include get-color-border();
+        border-radius: $border-radius-base;
+        float: left;
+        &-container{
+            height: 100%;
+            position: relative;
+            &:after{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                @include get-color-mask();
+                transition: opacity $transition-hover-time $bezier;
+            }
+        }
+        &-image{
+            width: 100%;
+            height: 100%;
+        }
+        &-mask{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transition: opacity $transition-hover-time $bezier;
+        }
+        &-icon{
+            font-size: 20px;
+            @include get-color-bg(color);
+            cursor: pointer;
+            &:first-of-type {
+                margin-right: 8px;
+            }
+        }
+
+        &:hover {
+            .#{$prefix-upload-list}-picture-card-container{
+                &:after{
+                    opacity: 1;
+                }
+            }
+            .#{$prefix-upload-list}-picture-card-mask{
+                opacity: 1;
+            }
+        }
+    }
+}
