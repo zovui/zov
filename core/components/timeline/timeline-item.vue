@@ -3,7 +3,7 @@
 		<div class="zov-timeline-indicator">
 			<div class="zov-timeline-dot-wrap">
 				<slot name="dot">
-					<i class="zov-timeline-dot"></i>
+					<i class="zov-timeline-dot" :style="dotStyles"></i>
 				</slot>
 			</div>
 			<div class="zov-timeline-line"></div>
@@ -13,8 +13,17 @@
 </template>
 
 <script>
+import { includes } from '../../utils'
+const PresetColors = ['primary', 'info', 'success', 'warning', 'error']
+
 export default {
 	name: 'zov-timeline-item',
+	props: {
+		color: {
+			type: String,
+			default: 'primary'
+		}
+	},
 	inject: {
 		Timeline: {
 			default: null
@@ -33,6 +42,9 @@ export default {
 			}
 			return false
 		},
+		isPresetColor() {
+			return includes(PresetColors, this.color)
+		},
 		classList() {
 			const classList = []
 			if (this.nextIsGhost) {
@@ -41,7 +53,17 @@ export default {
 			if (this.isLast) {
 				classList.push('zov-timeline-item--last')
 			}
+			if (this.isPresetColor) {
+				classList.push(`zov-timeline-item--${this.color}`)
+			}
 			return classList
+		},
+		dotStyles() {
+			if (!this.isPresetColor) {
+				return {
+					borderColor: this.color
+				}
+			}
 		}
 	},
 	created() {

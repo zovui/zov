@@ -164,6 +164,24 @@
 					</Timeline>
 				</div>
 			</section>
+			<section class="demo">
+				<h2 class="demo-header">自定义dot颜色</h2>
+				<div class="demo-content">
+					<ColorPicker v-model="color" />
+				</div>
+				<div class="demo-content">
+					<Timeline>
+						<TimelineItem>不指定color, 默认为primary</TimelineItem>
+						<TimelineItem color="info">Info</TimelineItem>
+						<TimelineItem color="warning">Warning</TimelineItem>
+						<TimelineItem color="success">Success</TimelineItem>
+						<TimelineItem color="error">Error</TimelineItem>
+						<TimelineItem :color="color"
+							>可接受css的其他颜色值，例如purple</TimelineItem
+						>
+					</Timeline>
+				</div>
+			</section>
 		</article>
 	</main>
 </template>
@@ -272,6 +290,20 @@ export default {
 					}
 				},
 				{
+					header: 'Timeline Props',
+					content: {
+						headers: ['props', '说明', '类型', '默认值'],
+						data: [
+							{
+								props: 'color',
+								introduction: 'dot的边框颜色',
+								type: 'string',
+								default: 'primary'
+							}
+						]
+					}
+				},
+				{
 					header: 'TimelineItem slots',
 					content: {
 						headers: ['slot名', '说明'],
@@ -290,7 +322,8 @@ export default {
 			],
 			mode: 'left',
 			reverse: false,
-			reverseMode: 'left'
+			reverseMode: 'left',
+			color: 'purple'
 		}
 	}
 }

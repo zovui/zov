@@ -1,3 +1,4 @@
+@import "../../colors";
 @import "../../mixins/get-color";
 @import "../../custom";
 $component-name: $prefix + 'timeline';
@@ -81,6 +82,26 @@ $timeline-content-lintHeight: $timeline-content-fontSize * $line-height-base;
         }
         .#{$component-name}-item-content {
             min-height: 48px;
+        }
+    }
+    &--info {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-info;
+        }
+    }
+    &--success {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-success;
+        }
+    }
+    &--warning {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-warning;
+        }
+    }
+    &--error {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-error;
         }
     }
 }
