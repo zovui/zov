@@ -32,7 +32,7 @@ export default {
 	open(data) {
 		data = Object.assign(
 			{
-				title: '这是一条普通消息',
+				title: '消息',
 				status: 'open'
 			},
 			data
@@ -42,7 +42,7 @@ export default {
 	info(data) {
 		data = Object.assign(
 			{
-				title: '这是一条带图标的普通消息',
+				title: '消息',
 				status: 'info'
 			},
 			data
@@ -52,7 +52,7 @@ export default {
 	success(data) {
 		data = Object.assign(
 			{
-				title: '恭喜，操作成功',
+				title: '消息',
 				status: 'success'
 			},
 			data
@@ -62,7 +62,7 @@ export default {
 	error(data) {
 		data = Object.assign(
 			{
-				title: '遗憾，操作失败',
+				title: '消息',
 				status: 'error'
 			},
 			data
@@ -72,7 +72,7 @@ export default {
 	warning(data) {
 		data = Object.assign(
 			{
-				title: '注意，请注意',
+				title: '消息',
 				status: 'warning'
 			},
 			data
