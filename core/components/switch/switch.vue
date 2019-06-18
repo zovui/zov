@@ -59,6 +59,7 @@ export default {
 			}
 			this.currentValue = !this.currentValue
 			this.$emit('input', this.currentValue)
+			this.$emit('on-change', this.currentValue)
 		}
 	}
 }
