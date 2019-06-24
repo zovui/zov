@@ -2,6 +2,42 @@
 	<article class="container">
 		<h1>Checkbox</h1>
 		<section class="section">
+			<h3>参数</h3>
+			<h4>Checkbox props</h4>
+			<p>
+				@label 必传，String, Number, Boolean,
+				Object，当前项的值，default：-
+			</p>
+			<p>
+				@disabled 非必传，Boolean，是否禁用当前checkbox，default：false
+			</p>
+			<p>
+				@indeterminate
+				非必传，Boolean，是否展示为半选中中状态，default：false
+			</p>
+			<h4>CheckboxGroup props</h4>
+			<p>
+				@name 非必传，String，原生checkbox的name值，不设置时会自动生成
+			</p>
+			<p>
+				@value
+				非必传，Array，当前选中值，可使用v-modal双向绑定，default：[]
+			</p>
+			<p>
+				@disabled
+				非必传，Boolean，是否禁用所有当前CheckboxGroup下的checkbox，default：false
+			</p>
+			<p>
+				@vertical 非必传，Boolean，是否纵向布局，default：false
+			</p>
+			<h4>Checkbox events</h4>
+			<p>
+				@on-change，Checkbox组件单独使用并且选中值发生改变时触发，返回值：当前选中项的值
+			</p>
+			<h4>CheckboxGroup events</h4>
+			<p>@on-change，选中值发生改变时触发，返回值：当前选中项的值</p>
+		</section>
+		<section class="section">
 			<h2>默认状态</h2>
 			<p class="props">当前值: {{ checkbox1 }}</p>
 			<div>
