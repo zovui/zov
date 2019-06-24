@@ -66,7 +66,7 @@ export default {
 			list: {},
 			iconnames: {
 				info: 'information-circle',
-				success: 'arrow-popper-circl',
+				success: 'checkmark-circle',
 				error: 'close-circle',
 				warning: 'alert'
 			}
