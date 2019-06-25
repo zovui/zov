@@ -65,7 +65,7 @@ $prefix-button : #{$prefix}button;
         }
     }
     &>*{
-        &.zov-spin{
+        &.zov-spin[zov-internal-reference-button]{
             color: unset;
         }
         margin-right: 5px;

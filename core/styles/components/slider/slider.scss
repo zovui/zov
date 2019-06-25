@@ -1,0 +1,109 @@
+$prefix-slider: $prefix + 'slider';
+
+.#{$prefix-slider} {
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+        .#{$prefix-slider}-bar {
+            @include get-color-border(background-color);
+        }
+        .#{$prefix-slider}-tracker {
+            @include get-color-primary-active(background-color);
+        }
+        .#{$prefix-slider}-handle {
+            @include get-color-primary-active(border-color);
+        }
+    }
+    .#{$prefix}tooltip {
+        .#{$prefix}tooltip-body {
+            width: auto;
+        }
+    }
+}
+
+.#{$prefix-slider}-bar {
+    width: 100%;
+    height: 100%;
+    transition: background-color $transition-time;
+    @include get-color-divider(background-color);
+}
+
+.#{$prefix-slider}-tracker {
+    position: absolute;
+    z-index: 0;
+    transition: background-color $transition-time;
+    @include get-color-primary-hover(background-color);
+}
+
+.#{$prefix-slider}-marks {
+    position: absolute;
+    background: transparent;
+    z-index: 1;
+}
+
+.#{$prefix-slider}-handle-wrapper {
+    position: absolute;
+    z-index: 2
+}
+
+.#{$prefix-slider}-handle {
+    box-sizing: border-box;
+    display: block;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    width: 14px;
+    height: 14px;
+    transition: border-color $transition-time,
+                box-shadow $transition-time;
+    @include get-color-bg('background');
+    @include outline();
+    @include get-color-primary-hover('border-color');
+}
+
+.#{$prefix-slider}-dot {
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    width: 10px;
+    height: 10px;
+    @include get-color-border(border-color);
+    @include get-color-bg('background');
+    @include get-color-text();
+    &--active {
+        @include get-color-primary-active(border-color);
+    }
+}
+
+.#{$prefix-slider}-dot-label {
+    position: absolute;
+}
+
+.#{$prefix-slider}--disabled {
+    cursor: not-allowed;
+    .#{$prefix-slider}-tracker {
+        @include get-color-border(background-color);
+    }
+    .#{$prefix-slider}-handle {
+        outline: none;
+        &:active,&:focus{
+            box-shadow: none;
+        }
+        @include get-color-border(border-color);
+    }
+    .#{$prefix-slider}-dot {
+        &--active {
+            @include get-color-disabled(border-color);
+        }
+    }
+    &:hover {
+        .#{$prefix-slider}-tracker {
+            @include get-color-disabled(background-color);
+        }
+        .#{$prefix-slider}-handle {
+            @include get-color-disabled(border-color);
+        }
+    }
+}

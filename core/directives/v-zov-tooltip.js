@@ -1,23 +1,23 @@
 import Vue from 'vue'
 import Tooltip from '../components/tooltip'
 export default {
-    inserted (el, binding) {
-        let _props
-        if (typeof binding.value === 'string') {
-            _props = {
-                text: binding.value
-            }
-        } else if (typeof binding.value === 'object') {
-            _props = binding.value
-        }
-        let instance = new Vue({
-            render (h) {
-                return h(Tooltip, {
-                    props: _props
-                })
-            }
-        })
-        el.parentNode.appendChild(instance.$mount().$el)
-        instance.$mount().$el.appendChild(el)
-    }
+	inserted(el, binding) {
+		let _props
+		if (typeof binding.value === 'string') {
+			_props = {
+				text: binding.value
+			}
+		} else if (typeof binding.value === 'object') {
+			_props = binding.value
+		}
+		let instance = new Vue({
+			render(h) {
+				return h(Tooltip, {
+					props: _props
+				})
+			}
+		})
+		el.parentNode.appendChild(instance.$mount().$el)
+		instance.$mount().$el.appendChild(el)
+	}
 }

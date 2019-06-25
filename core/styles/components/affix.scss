@@ -1,0 +1,5 @@
+$prefix-affix: #{$prefix}affix;
+.#{$prefix-affix} {
+    position: fixed;
+    z-index: $zindex-affix;
+}

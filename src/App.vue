@@ -1,50 +1,5 @@
 <template>
-    <div>
-        <p style="padding: 15px 0; text-align: center">
-            主题
-            <Switcher v-model="isdark">
-                <span slot="open">亮</span>
-                <span slot="close">暗</span>
-            </Switcher>
-        </p>
-        <ul class="nav">
-            <Button
-                v-for="(item,index) in $router.options.routes"
-                :key="index"
-                @click="$router.push({path: item.path})"
-            >
-                {{ item.path.substr(1) }}
-            </Button>
-        </ul>
-        <router-view/>
-    </div>
+	<div>
+		<router-view />
+	</div>
 </template>
-<style lang="scss">
-    .nav {
-        padding: 30px;
-        a {
-            font-weight: bold;
-        }
-    }
-</style>
-<script>
-export default {
-    data () {
-        return {
-            isdark: false
-        }
-    },
-    watch: {
-        isdark (val) {
-            val ? this.$Dark.open(() => {
-                localStorage.setItem('zov-theme', 'dark')
-            }) : this.$Dark.close(() => {
-                localStorage.setItem('zov-theme', '')
-            })
-        }
-    },
-    mounted () {
-        this.isdark = (localStorage.getItem('zov-theme') === 'dark')
-    }
-}
-</script>

@@ -1,7 +1,9 @@
 @mixin dom-size ($difference-value: 0, $borderSize: 2, $children: no) {
-    font-size: $font-size-base;
-    height: $form-dom-height-base + $difference-value;
-    line-height: $form-dom-height-base - $borderSize + $difference-value;
+    @if $children == no{
+        font-size: $font-size-base;
+        height: $form-dom-height-base + $difference-value;
+        line-height: $form-dom-height-base - $borderSize + $difference-value;
+    }
     &-size{
         @if $children == no {
             &-large{

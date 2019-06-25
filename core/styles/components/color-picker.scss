@@ -80,10 +80,8 @@ $prefix-color-picker: #{$prefix}color-picker;
     &-header{
         height: 100%;
         cursor: pointer;
-        &>div{
-            float: left;
-        }
         &-color{
+            float: left;
             @include png-bg();
             &>div{
                 box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
@@ -92,7 +90,9 @@ $prefix-color-picker: #{$prefix}color-picker;
             }
         }
         &-arrow{
+            float: right;
             @include get-color-sub();
+            text-align: center;
             transform-origin: center;
             transition: transform $transition-time $bezier;
             &-up{
@@ -210,6 +210,7 @@ $prefix-color-picker: #{$prefix}color-picker;
     &-values{
         width: $W;
         padding: 0 15px 10px 15px;
+        text-align: center;
         &-rgba{
             display: flex;
             justify-content: space-between;
@@ -217,9 +218,8 @@ $prefix-color-picker: #{$prefix}color-picker;
                 flex: 1;
                 &>.zov-input{
                     font-size: $font-size-small;
-                    & input{
+                    input{
                         height: 26px;
-                        text-align: center;
                     }
                     width: 90%;
                 }
@@ -232,9 +232,8 @@ $prefix-color-picker: #{$prefix}color-picker;
             &>.zov-input{
                 font-size: $font-size-small;
                 width: 100%;
-                & input{
+                input{
                     height: 26px;
-                    text-align: center;
                 }
             }
             &>div{
