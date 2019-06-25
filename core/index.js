@@ -39,6 +39,7 @@ import BreadcrumbItem from './components/breadcrumb-item'
 import { Tabs, TabPane } from './components/tabs'
 import Avatar from './components/avatar'
 import Progress from './components/progress'
+import Upload from './components/upload'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -103,7 +104,8 @@ const components = {
 	Divider,
 	Avatar,
 	Progress,
-	Page
+	Page,
+	Upload
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -184,7 +186,8 @@ export {
 	TabPane,
 	Avatar,
 	Progress,
-	Page
+	Page,
+	Upload
 }
 // 将整个zov暴露出去
 export default zov

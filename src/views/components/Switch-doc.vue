@@ -5,6 +5,10 @@
 			<span slot="close">关</span>
 		</Switcher>
 		<Switcher v-model="v">
+			<span slot="open">这是开的状态</span>
+			<span slot="close">这是关的状态</span>
+		</Switcher>
+		<Switcher v-model="v" @on-change="change">
 			<Icon slot="open" iconname="unlock" />
 			<Icon slot="close" iconname="lock" />
 		</Switcher>
@@ -29,6 +33,11 @@ export default {
 	data() {
 		return {
 			v: true
+		}
+	},
+	methods: {
+		change(val) {
+			console.log(val)
 		}
 	}
 }

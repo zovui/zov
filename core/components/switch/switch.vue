@@ -1,8 +1,13 @@
 <template>
 	<div :class="classes" @click.stop="toggle" :disabled="disabled">
-		<span>
-			<slot name="open"></slot>
-			<slot name="close"></slot>
+		<span
+			:class="[
+				'zov-switch-slot',
+				currentValue ? 'zov-switch-slot-open' : 'zov-switch-slot-close'
+			]"
+		>
+			<slot name="open" v-if="currentValue"></slot>
+			<slot name="close" v-if="!currentValue"></slot>
 		</span>
 		<div class="zov-switch-inner"></div>
 	</div>
@@ -38,6 +43,9 @@ export default {
 	watch: {
 		value(val) {
 			this.currentValue = val
+		},
+		currentValue(val) {
+			this.$emit('on-change', val)
 		}
 	},
 	computed: {
