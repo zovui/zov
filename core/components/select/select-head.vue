@@ -14,7 +14,7 @@
 						:size="size"
 						v-if="data.length"
 						v-for="item in data"
-						:key="item[valueName] + 'key'"
+						:key="(item[labelName] || item[valueName]) + 'key'"
 						@on-close="$emit('on-remove-tag', item)"
 					>
 						{{ item[labelName] || item[valueName] }}

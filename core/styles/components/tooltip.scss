@@ -3,7 +3,7 @@ $prefix-tooltip: #{$prefix}tooltip;
     display: inline-block;
     &-body{
         @include get-color-text();
-        width: 220px;
+        min-width: 35px;
         padding: $gap-base / 2 $gap-base / 4 * 3;
     }
     &-high-color{
@@ -34,8 +34,10 @@ $prefix-tooltip: #{$prefix}tooltip;
         @include get-color-title();
         font-weight: $title-font-weight;
         font-size: $font-size-large;
+        max-width: 220px;
     }
     &-description{
         font-size: $font-size-small;
+        max-width: 220px;
     }
 }

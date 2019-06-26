@@ -32,6 +32,9 @@
 				<h3>DEMO</h3>
 				<h4>v-model</h4>
 				<div style="border: 1px dashed;margin: 30px 0">
+					<ToolTip text="基础" placement="bottom">
+						<Button looks="primary">基础</Button>
+					</ToolTip>
 					<ToolTip
 						v-model="show"
 						title="提示"
