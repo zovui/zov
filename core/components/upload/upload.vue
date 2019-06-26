@@ -269,7 +269,7 @@ export default {
 								reject()
 							})
 					} else if (beforeMultipleUploadReturn !== false) {
-						resolve(file)
+						resolve(files)
 					} else {
 						reject()
 					}
