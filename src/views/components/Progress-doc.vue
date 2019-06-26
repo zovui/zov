@@ -2,6 +2,36 @@
 	<article class="container">
 		<h1>Progress</h1>
 		<section class="section">
+			<h3>参数</h3>
+			<h4>Progress props</h4>
+			<p>
+				@percent 必传，Number，当前百分比，default：0
+			</p>
+			<p>
+				@type 非必传，String，样式类型，目前只支持线型，default：line
+			</p>
+			<p>
+				@format 非必传，Function，自定义进度信息样式，支持render函数
+			</p>
+			<p>
+				@textInside
+				非必传，Boolean，进度信息是否展示在进度条里，default：false
+			</p>
+			<p>
+				@showInfo 非必传，Boolean，进度信息是否展示，default：true
+			</p>
+			<p>
+				@strokeColor 非必传，String，进度条填充色，default：-
+			</p>
+			<p>
+				@strokeWidth 非必传，Number，进度条宽度，default：8
+			</p>
+			<p>
+				@status
+				非必传，String，进度条状态，可选值有：normal、active、success、exception，default：normal
+			</p>
+		</section>
+		<section class="section">
 			<h2>默认状态</h2>
 			<div>
 				<Progress></Progress>
