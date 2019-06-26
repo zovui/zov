@@ -290,7 +290,7 @@ export default {
 					}
 				},
 				{
-					header: 'Timeline Props',
+					header: 'TimelineItem Props',
 					content: {
 						headers: ['props', '说明', '类型', '默认值'],
 						data: [
