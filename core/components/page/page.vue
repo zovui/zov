@@ -8,7 +8,15 @@
 			/></a>
 		</li>
 		<div :class="simplePagerClasses" :title="currentPage + '/' + allPages">
-			<input
+			<!-- <input
+				type="text"
+				:value="currentPage"
+				@keydown="keyDown"
+				@keyup="keyUp"
+				@change="keyUp"
+			/> -->
+			<Input
+				:class="[stylePrefix + '-input']"
 				type="text"
 				:value="currentPage"
 				@keydown="keyDown"
@@ -52,7 +60,8 @@
 			:class="[stylePrefix + '-item-jump-prev']"
 			@click="fastPrev"
 		>
-			<a><Icon iconname="arrow-back"/></a>
+			<Icon :class="[stylePrefix + '-arrow']" iconname="arrow-back" />
+			<Icon :class="[stylePrefix + '-more']" iconname="more" />
 		</li>
 		<li
 			:title="currentPage - 3"
@@ -115,7 +124,8 @@
 			:class="[stylePrefix + '-item-jump-next']"
 			@click="fastNext"
 		>
-			<a><Icon class="" iconname="arrow-forward"/></a>
+			<Icon :class="[stylePrefix + '-arrow']" iconname="arrow-forward" />
+			<Icon :class="[stylePrefix + '-more']" iconname="more" />
 		</li>
 		<li
 			:title="allPages"
@@ -146,17 +156,12 @@
 	</ul>
 </template>
 <script>
+import { oneOf } from '../../utils'
 import Icon from '../icon'
+import Input from '../input'
 import Select from '../select'
 import Options from './options.vue'
-const oneOf = (value, validList) => {
-	for (let i = 0; i < validList.length; i++) {
-		if (value === validList[i]) {
-			return true
-		}
-	}
-	return false
-}
+
 const prefix = 'zov-page'
 export default {
 	name: prefix,
@@ -244,6 +249,13 @@ export default {
 		},
 		pageSize(val) {
 			this.currentPageSize = val
+		}
+	},
+	beforeCreated() {
+		if (this.pageSize == this.pageSizeOpts[0].value) {
+			return
+		} else {
+			this.pageSize = this.pageSizeOpts[0].value
 		}
 	},
 	computed: {

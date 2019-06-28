@@ -387,3 +387,11 @@ export function findIndex(array, condition) {
 	}
 	return i === array.length ? -1 : i
 }
+
+/**
+ *检验是否为数值或者数值字符串
+ * @param val
+ **/
+export function testNumber(val) {
+	return /^[1-9][0-9]*$/.test(val)
+}

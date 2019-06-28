@@ -1,7 +1,6 @@
 
 $prefix-page: #{$prefix}page;
 
-
 .#{$prefix-page} {
     &:after {
         content: '';
@@ -11,45 +10,41 @@ $prefix-page: #{$prefix}page;
         overflow: hidden;
         visibility: hidden;
     }
-
+    &-input{
+        width:50px;
+        margin-right:8px;
+        &:hover {
+            @include get-color-border();
+        }
+    }
     &-item {
         display: inline-block;
-        //float: left;
         vertical-align: middle;
         min-width: 34px;
         height: 34px;
-        line-height: 38px;
+        line-height: 34px;
         margin-right: 4px;
         text-align: center;
-        list-style: none;
-        background-color: #fff;
-        user-select: none;
         cursor: pointer;
-        font-family: Arial;
-        font-weight: 500;
-        border: 1px solid $color-default-border;
-        border-radius: 2px;
-        //transition: all @transition-time @ease-in-out;
-        //transition: border @transition-time @ease-in-out, color @transition-time @ease-in-out;
-
+        border: 1px solid;
+        @include get-color-border();
+        @include get-color-bg();
+        border-radius: $border-radius-button;
         a {
-            font-family: "Monospaced Number";
             margin: 0 6px;
             text-decoration: none;
-            color: $color-text;
-            //transition: none;
+            @include get-color-text();
         }
 
         &:hover {
-            border-color: $color-primary;
+            @include get-color-border();
             a {
-                color: $color-primary;
+                @include get-color-text();
             }
         }
 
         &-active {
-            border-color: $color-primary;
-
+            border:1px solid $color-primary;
             a, &:hover a {
                 color: $color-primary;
             }
@@ -57,40 +52,43 @@ $prefix-page: #{$prefix}page;
     }
 
     &-item-jump-prev, &-item-jump-next {
-        &:after {
-            content: "•••";
-            display: block;
-            letter-spacing: 1px;
-            color: #ccc;
-            text-align: center;
-        }
-
-        span{
-            display: none;
-        }
-
         &:hover {
-            &:after{
+            .#{$prefix-page}-more{
                 display: none;
             }
-            span{
-                display: inline;
+            .#{$prefix-page}-arrow{
+                display: block;
             }
         }
+    }
+
+    &-more{
+        display: block;
+        @include get-color-text();
+        text-align: center;
+        width:34px;
+        height:34px;
+        line-height:34px;
+
+    }
+    &-arrow{
+        display: none;
+        width:34px;
+        height:34px;
+        line-height:34px;
+
     }
 
 
 
     &-item-jump-prev:hover {
         span:after {
-            //content: "\F115";
             margin-left: -8px;
         }
     }
 
     &-item-jump-next:hover {
         span:after {
-           // content: "\F11F";
             margin-left: -8px;
         }
     }
@@ -109,40 +107,31 @@ $prefix-page: #{$prefix}page;
     &-item-jump-prev,
     &-item-jump-next {
         display: inline-block;
-        vertical-align: middle;
-        user-select: none;
-        //float: left;
+        vertical-align: middle; 
         min-width: 34px;
         height: 34px;
-        line-height: 34px - 2px;
-        list-style: none;
+        line-height: 34px;
         text-align: center;
         cursor: pointer;
-        color: #666;
+        @include get-color-text();
         font-family: Arial;
-        border: 1px solid $color-default-border;
-        border-radius: 2px;
-        //transition: all @transition-time @ease-in-out;
-    }
-    &-item-jump-prev,
-    &-item-jump-next{
-        border-color: transparent;
+        border: 1px solid;
+        @include get-color-border();
+        border-radius: $border-radius-button;
     }
 
     &-prev,
     &-next {
-        background-color: #fff;
-
+        @include get-color-bg();
         a {
-            color: #666;
+            @include get-color-text();
             font-size: 14px;
         }
 
         &:hover {
-            border-color: $color-primary;
-
+            @include get-color-border();
             a {
-                color: $color-primary;
+                @include get-color-text();
             }
         }
     }
@@ -150,12 +139,12 @@ $prefix-page: #{$prefix}page;
     &-disabled {
         cursor: not-allowed;
         a {
-            color: #ccc;
+            @include get-color-disabled(color);
         }
         &:hover {
-            border-color: $color-default-border;
+            @include get-color-disabled(border-color);
             a {
-                color: #ccc;
+                @include get-color-disabled(color);
                 cursor: not-allowed;
             }
         }
@@ -166,35 +155,22 @@ $prefix-page: #{$prefix}page;
     &-options {
         display: inline-block;
         vertical-align: middle;
-        //float: left;
         margin-left: 15px;
         &-sizer {
             display: inline-block;
-            //float: left;
             margin-right: 10px;
         }
 
         &-elevator {
             display: inline-block;
             vertical-align: middle;
-            //float: left;
-            height: 32px;
-            line-height: 32px;
-
-            input {
-                //.input;
-                border-radius: 2px;
-                margin: 0 8px;
-                width: 55px;
-                border:1px solid $color-default-border;
-                padding:0px 10px;
-            }
+            height: 34px;
+            line-height: 34px;
         }
     }
 
     &-total {
         display: inline-block;
-        //float: left;
         height: 34px;
         line-height: 34px;
         margin-right: 10px;
@@ -211,35 +187,15 @@ $prefix-page: #{$prefix}page;
 
     &-simple &-simple-pager {
         display: inline-block;
-        //float: left;
         margin-right: 8px;
         vertical-align: middle;
-
-        input {
-            width: 40px;
-            height: 24px;
-            margin: 0 8px;
-            padding: 5px 8px;
-            text-align: center;
-            box-sizing: border-box;
-            background-color: #fff;
-            outline: none;
-            border: 1px solid $color-default-border;
-            border-radius: 2px;
-            //transition: border-color @transition-time @ease-in-out;
-
-            &:hover {
-                border-color: $color-primary;
-            }
-        }
-
         span{
             padding: 0 8px 0 2px;
         }
     }
-
-    &-custom-text, &-custom-text:hover{
-        border-color: transparent;
+    &-custom-text, &-custom-text{
+        border:none;
+        margin:0 8px 0 4px;
     }
 }
 
@@ -255,7 +211,7 @@ $prefix-page: #{$prefix}page;
         min-width: 30px;
         height: 30px;
         line-height: 30px;
-        border-radius: 2px;
+        border-radius: $border-radius-button;
     }
 
     &.mini &-prev,
@@ -263,9 +219,8 @@ $prefix-page: #{$prefix}page;
         margin: 0;
         min-width: 30px;
         height: 30px;
-        line-height: 30px - 2px;
+        line-height: 30px;
         border: 0;
-
         a {
             i:after {
                 height: 30px;
@@ -277,7 +232,7 @@ $prefix-page: #{$prefix}page;
     &.mini &-item-jump-prev,
     &.mini &-item-jump-next {
         height: 30px;
-        line-height: 30px;
+        line-height: 1;
         border: none;
         margin-right: 0;
     }
@@ -286,10 +241,11 @@ $prefix-page: #{$prefix}page;
         margin-left: 8px;
         &-elevator {
             height: 26px;
-            line-height: 24px;
+            line-height: 1;
 
             input {
-                border: 1px solid $color-default-border;
+                border: 1px solid;
+                @include get-color-border();
                 width: 44px;
             }
         }

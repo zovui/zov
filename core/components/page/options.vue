@@ -14,10 +14,11 @@
 		</div>
 		<div v-if="showElevator" :class="ElevatorClasses">
 			跳至
-			<input
+			<Input
+				:class="[stylePrefix + '-input']"
 				type="text"
 				:value="current"
-				autocomplete="off"
+				:size="size"
 				@blur="changePage"
 				@keyup.enter="changePage"
 			/>
@@ -27,10 +28,9 @@
 </template>
 <script>
 import Select from '../../components/select/select.vue'
+import Input from '../../components/input/input.vue'
+import { testNumber } from '../../utils'
 
-function testNumber(val) {
-	return /^[1-9][0-9]*$/.test(val)
-}
 const prefix = 'zov-page'
 export default {
 	components: { Select },
@@ -45,7 +45,15 @@ export default {
 	},
 	data() {
 		return {
-			currentPageSize: this.pageSize
+			currentPageSize: this.pageSize,
+			stylePrefix: prefix
+		}
+	},
+	created() {
+		if (this.data[0].value == this.currentPageSize) {
+			return
+		} else {
+			this.currentPageSize = this.data[0].value
 		}
 	},
 	watch: {

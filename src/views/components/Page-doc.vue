@@ -184,7 +184,6 @@ export default {
 			current: 1,
 			total: 21,
 			pageSizeOpts: [
-				{ value: 10 },
 				{ value: 15 },
 				{ value: 25 },
 				{ value: 35 },
@@ -200,7 +199,6 @@ export default {
 			this.current = 1
 		},
 		onChange(page) {
-			console.log(page)
 			this.current = page
 		}
 	}
