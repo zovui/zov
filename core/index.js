@@ -106,7 +106,7 @@ const components = {
 	Avatar,
 	Progress,
 	Timeline,
-	TimelineItem
+	TimelineItem,
 	Page,
 	Upload
 }
@@ -190,7 +190,7 @@ export {
 	Avatar,
 	Progress,
 	Timeline,
-	TimelineItem
+	TimelineItem,
 	Page,
 	Upload
 }

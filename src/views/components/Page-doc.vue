@@ -5,8 +5,8 @@
 			<h3>简洁版</h3>
 			<div class="page-box">
 				<Page
-					:current="20"
-					:total="5000"
+					:current="1"
+					:total="total"
 					simple
 					@on-change="onChange"
 				></Page>
