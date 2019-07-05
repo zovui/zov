@@ -32,6 +32,7 @@ import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
 import Divider from './components/divider'
 import { Step, Steps } from './components/steps'
+import Page from './components/page'
 
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
@@ -104,9 +105,10 @@ const components = {
 	Divider,
 	Avatar,
 	Progress,
-	Upload,
 	Timeline,
 	TimelineItem
+	Page,
+	Upload
 }
 Object.keys(components).forEach(key => {
 	components['z' + key] = components[key]
@@ -187,9 +189,10 @@ export {
 	TabPane,
 	Avatar,
 	Progress,
-	Upload,
 	Timeline,
 	TimelineItem
+	Page,
+	Upload
 }
 // 将整个zov暴露出去
 export default zov

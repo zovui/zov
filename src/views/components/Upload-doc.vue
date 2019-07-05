@@ -2,6 +2,94 @@
 	<article class="container">
 		<h1>Upload</h1>
 		<section class="section">
+			<h3>参数</h3>
+			<h4>Upload props</h4>
+			<p>
+				@action 必传，String, Function，上传地址
+			</p>
+			<p>
+				@headers 非必传，Object，上传的请求头，default：{}
+			</p>
+			<p>
+				@multiple 非必传，Boolean，多选，default：false
+			</p>
+			<p>
+				@disabled 非必传，Boolean，禁用上传，default：false
+			</p>
+			<p>
+				@data 非必传，Object，上传附带数据，default：{}
+			</p>
+			<p>
+				@name 非必传，String，上传文件键值，default：file
+			</p>
+			<p>
+				@withCredentials
+				非必传，Boolean，上传请求是否携带cookie，default：false
+			</p>
+			<p>
+				@showUploadList 非必传，Boolean，是否展示上传列表，default：true
+			</p>
+			<p>
+				@type 非必传，String，上传控件类型，default：select
+			</p>
+			<p>
+				@accept 非必传，String，支持上传文件的MIME类型
+			</p>
+			<p>
+				@format 非必传，Array，支持上传文件后缀名列表，default：[]
+			</p>
+			<p>
+				@maxSize 非必传，Number，上传的单文件大小限制,kb
+			</p>
+			<p>
+				@limit 非必传，Number，上传文件的总个数限制，只支持整数
+			</p>
+			<p>
+				@defaultFileList 非必传，Array，默认已上传文件列表
+			</p>
+			<p>
+				@customRequest 非必传，Function，自定义上传实现
+			</p>
+			<p>
+				@listType
+				非必传，String，上传列表样式，可选值：text、picture、picture-card
+			</p>
+			<p>
+				@autoUpload
+				非必传，Boolean，是否在选取文件后立即自动上传，default：true
+			</p>
+			<p>
+				@beforeUpload 非必传，Function，上传文件之前的钩子
+			</p>
+			<p>
+				@beforeMultipleUpload 非必传，Function，批量上传文件之前的钩子
+			</p>
+			<p>
+				@onProgress 非必传，Function，文件上传中的钩子
+			</p>
+			<p>
+				@onSuccess 非必传，Function，文件上传成功的钩子
+			</p>
+			<p>
+				@onError 非必传，Function，文件上传失败时的钩子
+			</p>
+			<p>
+				@onPreview 非必传，Function，点击已上传文件时的钩子
+			</p>
+			<p>
+				@onRemove 非必传，Function，文件列表移除文件时的钩子
+			</p>
+			<p>
+				@onFormatError 非必传，Function，文件格式验证失败时的钩子
+			</p>
+			<p>
+				@onExceededSize 非必传，Function，文件大小验证失败时的钩子
+			</p>
+			<p>
+				@onExceededLimit 非必传，Function，文件数量超出预期的个数
+			</p>
+		</section>
+		<section class="section">
 			<h2>基本用法</h2>
 			<div>
 				<Upload action="//jsonplaceholder.typicode.com/posts/">

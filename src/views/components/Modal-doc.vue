@@ -2,6 +2,138 @@
 	<article class="container">
 		<h1>Modal</h1>
 		<section class="section">
+			<h3>参数</h3>
+			<h4>Modal props</h4>
+			<p>
+				@value
+				必填，Boolean，弹窗是否显示，可使用v-model双向绑定数据，default：false
+			</p>
+			<p>
+				@closable 非必传，Boolean，是否显示关闭按钮，default：true
+			</p>
+			<p>
+				@title 非必传，String，弹窗标题，default：提示
+			</p>
+			<p>
+				@width
+				非必传，String，Number，弹窗的宽度，支持百分比，default：520
+			</p>
+			<p>
+				@centered 非必传，Boolean，弹窗是否垂直居中，default：false
+			</p>
+			<p>
+				@mask 非必传，Boolean，是否显示遮罩层，default：true
+			</p>
+			<p>
+				@maskClosable
+				非必传，Boolean，是否允许点击遮罩层关闭，default：true
+			</p>
+			<p>
+				@confirmText 非必传，String，确定按钮文案，default：确定
+			</p>
+			<p>
+				@cancelText 非必传，String，取消按钮文案，default：取消
+			</p>
+			<p>
+				@headerHide 非必传，Boolean，是否隐藏弹窗头部，default：false
+			</p>
+			<p>
+				@footerHide 非必传，Boolean，是否隐藏对话框底部，default：false
+			</p>
+			<p>
+				@fullscreen 非必传，Boolean，是否全屏展示，default：false
+			</p>
+			<p>
+				@bottomAlign
+				非必填，String，底部对其方式，可选值有left、center、right，default：center
+			</p>
+			<p>
+				@confirmLoading
+				非必传，Boolean，点击确定按钮的时候是否显示loading状态，default：false
+			</p>
+			<p>
+				@contentLoading
+				非必传，Boolean，loading整个内容区域，default：false
+			</p>
+			<p>
+				@modalStyle 非必传，Object，弹窗样式，default：{}
+			</p>
+			<p>
+				@zIndex 非必传，Number，手动设置弹窗层级，default：-
+			</p>
+			<p>
+				@baseIndex
+				非必传，Number，当前弹窗基础层级，每次打开弹窗都会在当前基础层级上加一，default：1000
+			</p>
+			<p>
+				@transfer
+				非必传，Boolean，将弹窗dom结构转移到body元素中，default：true
+			</p>
+			<h4>Modal events</h4>
+			<p>@on-open，当弹窗打开时触发，返回值：null</p>
+			<p>@on-close，当弹窗关闭时触发，返回值：null</p>
+			<p>@on-visible-change，当弹窗可见行改变时触发，返回值：null</p>
+			<p>
+				@on-cancel，点击关闭按钮，取消按钮，或遮罩层时触发，返回值：null
+			</p>
+			<p>
+				@on-confirm，点击确定按钮时触发，confirmLoading为true时需要在on-confirm的事件处理函数中关闭弹窗，返回值：event
+			</p>
+			<h4>Modal instance</h4>
+			<p>this.$modal.alert(config) 通知类单按钮弹窗</p>
+			<p>this.$modal.info(config) type为info的alert型弹窗</p>
+			<p>this.$modal.success(config) type为success的alert型弹窗</p>
+			<p>this.$modal.error(config) type为error的alert型弹窗</p>
+			<p>this.$modal.warning(config) type为warning的alert型弹窗</p>
+			<p>this.$modal.confirm(config) type为confirm，确认类双按钮弹窗</p>
+			<p>this.$modal.remove() 关闭对话框</p>
+			<h4>config</h4>
+			<p>
+				@type String，控制alert弹窗中的icon类型
+			</p>
+			<p>
+				@title String，弹窗标题
+			</p>
+			<p>
+				@content String，中间内容区块文案
+			</p>
+			<p>
+				@render Function，弹窗中部内容区域的dom结构使用render函数渲染
+			</p>
+			<p>
+				@width Number，String，弹窗宽度，default: 400
+			</p>
+			<p>
+				@confirmText String，确认按钮文案
+			</p>
+			<p>
+				@cancelText String，取消按钮文案
+			</p>
+			<p>
+				@closable Boolean，是否展示关闭按钮，default: false
+			</p>
+			<p>
+				@maskClosable Boolean，是否支持点击遮罩层关闭，default: false
+			</p>
+			<p>
+				@confirmLoading
+				Boolean，确认按钮点击时候是否展示为loading状态，配合onConfirm使用，default:
+				false
+			</p>
+			<p>
+				@bottomAlign String，弹窗底部的对齐方式，default: right
+			</p>
+			<p>
+				@onConfirm Function，点击确定按钮时的回调，default: () => {}
+			</p>
+			<p>
+				@onCancel Function，点击取消按钮时的回调，default: () => {}
+			</p>
+			<p>
+				@headerHide Boolean，隐藏头部。default：true
+			</p>
+		</section>
+		<section class="section">
 			<h2>基本用法</h2>
 			<div>
 				<Button @click="handleShow('show1')">展示弹窗</Button>

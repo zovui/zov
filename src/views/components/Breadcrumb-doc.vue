@@ -2,6 +2,25 @@
 	<article class="container">
 		<h1>Breadcrumb</h1>
 		<section class="section">
+			<h3>参数</h3>
+			<h4>BreadcrumbItem props</h4>
+			<p>
+				@href 非必传，String，跳转目标，a链接跳转，default：-
+			</p>
+			<p>
+				@target 非必传，String，a链接的target属性值，default：_self
+			</p>
+			<h4>Breadcrumb props</h4>
+			<p>
+				@separator 非必传，String，导航分隔符，default：/
+			</p>
+			<p>
+				@target 非必传，String，a链接的target属性值，default：_self
+			</p>
+			<h4>BreadcrumbItem events</h4>
+			<p>@on-click，点击当前导航项时触发，返回值：event</p>
+		</section>
+		<section class="section">
 			<h2>基本用法</h2>
 			<div>
 				<BreadcrumbItem href="/index"

@@ -2,6 +2,48 @@
 	<article class="container">
 		<h1>Radio</h1>
 		<section class="section">
+			<h3>参数</h3>
+			<h4>Radio props</h4>
+			<p>
+				@label 必传，String, Number, Boolean, Object，当前项的值
+			</p>
+			<p>
+				@disabled 非必传，Boolean，禁用当前项，default：false
+			</p>
+			<h4>RadioGroup props</h4>
+			<p>
+				@name 非必传，String，原生radio的name值，不设置时会自动生成
+			</p>
+			<p>
+				@value 非必传，String, Number, Boolean,
+				Object，当前选中值，可使用v-modal双向绑定，default：-
+			</p>
+			<p>
+				@disabled
+				非必传，Boolean，是否禁用所有当前radioGroup下的checkbox，default：false
+			</p>
+			<p>
+				@border 非必传，Boolean，是否显示边框，default：false
+			</p>
+			<p>
+				@connected
+				非必传，Boolean，在显示边框的情况下是否组合，default：false
+			</p>
+			<p>
+				@buttonStyle
+				非必传，Boolean，按钮样式，在border为true或group为true时生效，可选参数：outline、solid，default：outline
+			</p>
+			<p>
+				@vertical 非必传，Boolean，纵向排列，default：false
+			</p>
+			<h4>Radio events</h4>
+			<p>
+				@on-change，Radio组件单独使用并且选中值发生改变时触发，返回值：当前选中项的值
+			</p>
+			<h4>RadioGroup events</h4>
+			<p>@on-change，选中值发生改变时触发，返回值：当前选中项的值</p>
+		</section>
+		<section class="section">
 			<h2>默认状态</h2>
 			<p class="props">当前值: {{ radio1 }}</p>
 			<div>

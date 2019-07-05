@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.8.0](https://github.com/zovui/zov/compare/v0.7.0...v0.8.0) (2019-06-26)
+
+
+### Bug Fixes
+
+* **notice:** notice success icon ([b302e92](https://github.com/zovui/zov/commit/b302e92))
+* **progress:** 初始化时，若percent为100，且不为exception状态时，需将状态变更为success ([fa11dcf](https://github.com/zovui/zov/commit/fa11dcf))
+* **switch:** 增加事件 ([d52d5b5](https://github.com/zovui/zov/commit/d52d5b5))
+
+
+### Features
+
+* **upload:** 新建上传组件 ([85dabc7](https://github.com/zovui/zov/commit/85dabc7))
+
+
+### Performance Improvements
+
+* **switch:** 修改宽度 ([4d4eba3](https://github.com/zovui/zov/commit/4d4eba3))
+
+
+
 # [0.7.0](https://github.com/zovui/zov/compare/v0.6.0...v0.7.0) (2019-06-06)
 
 

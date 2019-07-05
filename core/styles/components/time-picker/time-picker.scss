@@ -2,8 +2,8 @@ $prefix-time-picker: #{$prefix}time-picker;
 .#{$prefix-time-picker}{
     display: inline-block;
     & .#{$prefix}tooltip{
-        width: 100%;
         &-body{
+            width: 220px;
             padding: 0;
         }
     }
