@@ -1,6 +1,6 @@
 <template>
 	<ul :class="simpleWrapClasses" :style="styles" v-if="simple">
-		<li :title="'上一页'" :class="prevClasses" @click="prev">
+		<li title="上一页" :class="prevClasses" @click="prev">
 			<a
 				><Icon
 					:class="[stylePrefix + '-icon-size']"
@@ -8,13 +8,6 @@
 			/></a>
 		</li>
 		<div :class="simplePagerClasses" :title="currentPage + '/' + allPages">
-			<!-- <input
-				type="text"
-				:value="currentPage"
-				@keydown="keyDown"
-				@keyup="keyUp"
-				@change="keyUp"
-			/> -->
 			<Input
 				:class="[stylePrefix + '-input']"
 				type="text"
@@ -26,7 +19,7 @@
 			<span>/</span>
 			{{ allPages }}
 		</div>
-		<li :title="'下一页'" :class="nextClasses" @click="next">
+		<li title="下一页" :class="nextClasses" @click="next">
 			<a
 				><Icon
 					:class="[stylePrefix + '-icon-size']"
@@ -45,7 +38,7 @@
 				></slot
 			>
 		</span>
-		<li :title="'上一页'" :class="prevClasses" @click="prev">
+		<li title="上一页" :class="prevClasses" @click="prev">
 			<a
 				><template v-if="prevText !== ''">{{ prevText }}</template
 				><Icon v-else iconname="arrow-back"
@@ -55,7 +48,7 @@
 			<a>1</a>
 		</li>
 		<li
-			:title="'上五页'"
+			title="上五页"
 			v-if="currentPage > 5"
 			:class="[stylePrefix + '-item-jump-prev']"
 			@click="fastPrev"
@@ -119,7 +112,7 @@
 			<a>{{ currentPage + 3 }}</a>
 		</li>
 		<li
-			:title="'下五页'"
+			title="下五页"
 			v-if="allPages - currentPage >= 5"
 			:class="[stylePrefix + '-item-jump-next']"
 			@click="fastNext"
@@ -135,7 +128,7 @@
 		>
 			<a>{{ allPages }}</a>
 		</li>
-		<li :title="'下一页'" :class="nextClasses" @click="next">
+		<li title="下一页" :class="nextClasses" @click="next">
 			<a
 				><template v-if="nextText !== ''">{{ nextText }}</template
 				><Icon v-else iconname="arrow-forward"
@@ -168,7 +161,8 @@ export default {
 	components: {
 		Icon,
 		Select,
-		Options
+		Options,
+		Input
 	},
 	props: {
 		current: {

@@ -33,7 +33,7 @@ import { testNumber } from '../../utils'
 
 const prefix = 'zov-page'
 export default {
-	components: { Select },
+	components: { Select, Input },
 	props: {
 		data: Array,
 		showSizer: Boolean,
