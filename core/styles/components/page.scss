@@ -1,0 +1,253 @@
+
+$prefix-page: #{$prefix}page;
+
+.#{$prefix-page} {
+    &:after {
+        content: '';
+        display: block;
+        height: 0;
+        clear: both;
+        overflow: hidden;
+        visibility: hidden;
+    }
+    &-input{
+        width:50px;
+        margin-right:8px;
+        &:hover {
+            @include get-color-border();
+        }
+    }
+    &-item {
+        display: inline-block;
+        vertical-align: middle;
+        min-width: 34px;
+        height: 34px;
+        line-height: 34px;
+        margin-right: 4px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid;
+        @include get-color-border();
+        @include get-color-bg();
+        border-radius: $border-radius-button;
+        a {
+            margin: 0 6px;
+            text-decoration: none;
+            @include get-color-text();
+        }
+
+        &:hover {
+            @include get-color-border();
+            a {
+                @include get-color-text();
+            }
+        }
+
+        &-active {
+            border:1px solid $color-primary;
+            a, &:hover a {
+                color: $color-primary;
+            }
+        }
+    }
+
+    &-item-jump-prev, &-item-jump-next {
+        &:hover {
+            .#{$prefix-page}-more{
+                display: none;
+            }
+            .#{$prefix-page}-arrow{
+                display: block;
+            }
+        }
+    }
+
+    &-more{
+        display: block;
+        @include get-color-text();
+        text-align: center;
+        width:34px;
+        height:34px;
+        line-height:34px;
+
+    }
+    &-arrow{
+        display: none;
+        width:34px;
+        height:34px;
+        line-height:34px;
+
+    }
+
+
+
+    &-item-jump-prev:hover {
+        span:after {
+            margin-left: -8px;
+        }
+    }
+
+    &-item-jump-next:hover {
+        span:after {
+            margin-left: -8px;
+        }
+    }
+
+    &-prev{
+        margin-right: 4px;
+    }
+
+    &-item-jump-prev,
+    &-item-jump-next{
+        margin-right: 4px;
+    }
+
+    &-prev,
+    &-next,
+    &-item-jump-prev,
+    &-item-jump-next {
+        display: inline-block;
+        vertical-align: middle; 
+        min-width: 34px;
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        cursor: pointer;
+        @include get-color-text();
+        font-family: Arial;
+        border: 1px solid;
+        @include get-color-border();
+        border-radius: $border-radius-button;
+    }
+
+    &-prev,
+    &-next {
+        @include get-color-bg();
+        a {
+            @include get-color-text();
+            font-size: 14px;
+        }
+
+        &:hover {
+            @include get-color-border();
+            a {
+                @include get-color-text();
+            }
+        }
+    }
+
+    &-disabled {
+        cursor: not-allowed;
+        a {
+            @include get-color-disabled(color);
+        }
+        &:hover {
+            @include get-color-disabled(border-color);
+            a {
+                @include get-color-disabled(color);
+                cursor: not-allowed;
+            }
+        }
+    }
+    &-select{
+        width:60px;
+    }
+    &-options {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 15px;
+        &-sizer {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        &-elevator {
+            display: inline-block;
+            vertical-align: middle;
+            height: 34px;
+            line-height: 34px;
+        }
+    }
+
+    &-total {
+        display: inline-block;
+        height: 34px;
+        line-height: 34px;
+        margin-right: 10px;
+    }
+
+    &-simple &-prev,
+    &-simple &-next {
+        margin: 0;
+        border: 0;
+        height: 24px;
+        line-height: normal;
+        font-size: 18px;
+    }
+
+    &-simple &-simple-pager {
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: middle;
+        span{
+            padding: 0 8px 0 2px;
+        }
+    }
+    &-custom-text, &-custom-text{
+        border:none;
+        margin:0 8px 0 4px;
+    }
+}
+
+.#{$prefix-page} {
+    &.mini &-total {
+        height: 30px;
+        line-height: 30px;
+    }
+
+    &.mini &-item {
+        border: 0;
+        margin: 0;
+        min-width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: $border-radius-button;
+    }
+
+    &.mini &-prev,
+    &.mini &-next {
+        margin: 0;
+        min-width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border: 0;
+        a {
+            i:after {
+                height: 30px;
+                line-height: 30px;
+            }
+        }
+    }
+
+    &.mini &-item-jump-prev,
+    &.mini &-item-jump-next {
+        height: 30px;
+        line-height: 1;
+        border: none;
+        margin-right: 0;
+    }
+
+    &.mini &-options {
+        margin-left: 8px;
+        &-elevator {
+            height: 26px;
+            line-height: 1;
+
+            input {
+                border: 1px solid;
+                @include get-color-border();
+                width: 44px;
+            }
+        }
+    }
+}

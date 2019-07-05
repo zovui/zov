@@ -32,6 +32,7 @@ import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
 import Divider from './components/divider'
 import { Step, Steps } from './components/steps'
+import Page from './components/page'
 
 import Breadcrumb from './components/breadcrumb'
 import BreadcrumbItem from './components/breadcrumb-item'
@@ -103,6 +104,7 @@ const components = {
 	Divider,
 	Avatar,
 	Progress,
+	Page,
 	Upload
 }
 Object.keys(components).forEach(key => {
@@ -184,6 +186,7 @@ export {
 	TabPane,
 	Avatar,
 	Progress,
+	Page,
 	Upload
 }
 // 将整个zov暴露出去
