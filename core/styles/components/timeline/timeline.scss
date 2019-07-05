@@ -1,0 +1,107 @@
+@import "../../colors";
+@import "../../mixins/get-color";
+@import "../../custom";
+$component-name: $prefix + 'timeline';
+
+$timeline-dot-size: 12px;
+$timeline-content-fontSize: 14px;
+$timeline-content-lintHeight: $timeline-content-fontSize * $line-height-base;
+
+.#{$component-name} {
+    list-style: none;
+    margin: 0;
+    padding: (($timeline-content-lintHeight / 2)) 0 0;
+    &--reverse {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
+.#{$component-name}-item {
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 20px;
+    .#{$component-name}-indicator {
+        position: absolute;
+        top: 0;
+        width: 24px;
+        height: 100%;
+        .#{$component-name}-dot-wrap {
+            position: absolute;
+            top: $timeline-content-lintHeight / 2 * -1;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            min-height: $timeline-content-lintHeight;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: $timeline-dot-size;
+        }
+        .#{$component-name}-dot {
+            display: block;
+            box-sizing: border-box;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            width: $timeline-dot-size;
+            height: $timeline-dot-size;
+            @include get-color-bg(background-color);
+            @include get-color-primary-hover(border-color);
+        }
+        .#{$component-name}-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            border: 1px solid transparent;
+            width: 0;
+            height: 100%;
+            @include get-color-border(border-color);
+        }
+    }
+    .#{$component-name}-item-content {
+        position: relative;
+        font-size: $timeline-content-fontSize;
+        top: $timeline-content-lintHeight / 2 * -1
+    }
+    .#{$component-name}-spin {
+        @include get-color-bg(background-color);
+    }
+    &--last {
+        .#{$component-name}-line {
+            display: none;
+        }
+    }
+    &--next-ghost {
+        .#{$component-name}-indicator {
+            .#{$component-name}-line {
+                border: 1px dashed transparent;
+                @include get-color-border(border-color);
+            }
+        }
+        .#{$component-name}-item-content {
+            min-height: 48px;
+        }
+    }
+    &--info {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-info;
+        }
+    }
+    &--success {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-success;
+        }
+    }
+    &--warning {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-warning;
+        }
+    }
+    &--error {
+        .#{$component-name}-indicator .#{$component-name}-dot {
+            border-color: $color-error;
+        }
+    }
+}

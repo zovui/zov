@@ -40,6 +40,7 @@ import { Tabs, TabPane } from './components/tabs'
 import Avatar from './components/avatar'
 import Progress from './components/progress'
 import Upload from './components/upload'
+import { Timeline, TimelineItem } from './components/timeline'
 // 【_f】全局方法式组件
 import Dark from './components/dark'
 import LoadingBar from './components/loading-bar'
@@ -104,6 +105,8 @@ const components = {
 	Divider,
 	Avatar,
 	Progress,
+	Timeline,
+	TimelineItem
 	Page,
 	Upload
 }
@@ -186,6 +189,8 @@ export {
 	TabPane,
 	Avatar,
 	Progress,
+	Timeline,
+	TimelineItem
 	Page,
 	Upload
 }

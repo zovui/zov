@@ -1,0 +1,8 @@
+.#{$component-name}--left {
+    .#{$component-name}-indicator {
+        left: 0;
+    }
+    .#{$component-name}-item-content {
+        margin-left: 24px;
+    }
+}
