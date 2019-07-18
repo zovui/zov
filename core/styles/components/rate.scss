@@ -1,0 +1,69 @@
+$prefix-rate:#{$prefix}rate;
+.#{$prefix-rate} {
+    cursor: default;
+    .icon {
+        display: inline-block;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+        vertical-align: middle;
+        top: -2px;
+        position: relative;
+    }
+    .Rate__star {
+        color: #dedbdb;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        background: transparent none;
+        border: 0;
+        outline: none;
+        .icon {
+            top: 0;
+            vertical-align: middle;
+        }
+        &:hover{
+            transform: scale(1.15);
+        }
+        .count,
+        .desc {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 7px;
+        }
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+        &[disabled] {
+            opacity: 0.8;
+        }
+        &.hover[disabled],
+        &.filled[disabled] {
+            color: #efc20f;
+            opacity: 0.6;
+        }
+        &.disabled .count,
+        &.disabled .desc {
+            color: #ccc;
+        }
+    }
+
+    &.has-error{
+        .Rate__star {
+
+            color: #f37a77;
+        }
+        .Rate__star.hover {
+            color: #efc20f;
+        }
+        .Rate__star.filled {
+            color: #efc20f;
+        }
+    }
+    .Rate__view{
+        vertical-align: middle;
+        padding-left: 5px;
+    }
+
+}
