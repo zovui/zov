@@ -37,9 +37,9 @@ $prefix-page: #{$prefix}page;
         }
 
         &:hover {
-            @include get-color-border();
+            border:1px solid $color-primary;
             a {
-                @include get-color-text();
+                color: $color-primary;
             }
         }
 
@@ -82,12 +82,14 @@ $prefix-page: #{$prefix}page;
 
 
     &-item-jump-prev:hover {
+        border:1px solid $color-primary;
         span:after {
             margin-left: -8px;
         }
     }
 
     &-item-jump-next:hover {
+        border:1px solid $color-primary;
         span:after {
             margin-left: -8px;
         }
@@ -129,9 +131,9 @@ $prefix-page: #{$prefix}page;
         }
 
         &:hover {
-            @include get-color-border();
+            border:1px solid $color-primary;
             a {
-                @include get-color-text();
+                color: $color-primary;
             }
         }
     }
