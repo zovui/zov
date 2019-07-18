@@ -77,6 +77,10 @@ export default {
 		tag: {
 			type: String,
 			default: 'button'
+		},
+		circle: {
+			type: Boolean,
+			default: false
 		}
 	},
 	computed: {
@@ -88,7 +92,8 @@ export default {
 					[this.stylePrefix + '-type-' + this.looks]:
 						this.looks && this.looks !== 'default',
 					[this.stylePrefix + '-shape-' + this.shape]:
-						this.shape && this.shape !== 'default'
+						this.shape && this.shape !== 'default',
+					[this.stylePrefix + '-circle']: this.circle
 				}
 			]
 		}

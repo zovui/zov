@@ -64,6 +64,21 @@ $prefix-button : #{$prefix}button;
             border-radius: 2em;
         }
     }
+    // 设置button为圆形
+    &-circle{
+        padding: 0;
+        width: $form-dom-height-base;
+        border-radius: 50%;
+    }
+    &-size{
+        &-large.#{$prefix-button}-circle{
+            width: $form-dom-height-large;
+        }
+        &-small.#{$prefix-button}-circle{
+            width: $form-dom-height-small;
+        }
+    }
+
     &>*{
         &.zov-spin[zov-internal-reference-button]{
             color: unset;

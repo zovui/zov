@@ -111,9 +111,16 @@
 		</p>
 		<p>
 			无文本 button
-			<Button loading />
-			<Button looks="info" iconname="wifi" />
-			<Button looks="success" shape="circle" iconname="wifi" />
+			<Button loading :size="size" />
+			<Button looks="info" iconname="wifi" :size="size" />
+			<Button
+				looks="success"
+				shape="circle"
+				iconname="wifi"
+				:size="size"
+			/>
+			圆形 button
+			<Button circle iconname="close" :size="size" />
 		</p>
 		<p>
 			组合按钮
