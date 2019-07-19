@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.9.0](https://github.com/zovui/zov/compare/v0.8.0...v0.9.0) (2019-07-19)
+
+
+### Features
+
+* **button:** circle button ([d67cc33](https://github.com/zovui/zov/commit/d67cc33))
+* **page:** [C新建"p建帕�page组件age组件" ([b4b8f9c](https://github.com/zovui/zov/commit/b4b8f9c))
+* **timeline:** 修复文档报错的问题 ([81f125b](https://github.com/zovui/zov/commit/81f125b))
+* **timeline:** 完善默认使用时的样式 ([9bb5098](https://github.com/zovui/zov/commit/9bb5098))
+* **timeline:** 新增mode ([342cb35](https://github.com/zovui/zov/commit/342cb35))
+* **timeline:** 新增reverse模式 ([2f6846a](https://github.com/zovui/zov/commit/2f6846a))
+* **timeline:** 新增timelineItem prop: color, 可设置dot边框颜色 ([65ce251](https://github.com/zovui/zov/commit/65ce251))
+* **timeline:** 新增幽灵节点，以及props pending ([add7ebe](https://github.com/zovui/zov/commit/add7ebe))
+* **timeline:** 更新样式 ([23d62d7](https://github.com/zovui/zov/commit/23d62d7))
+* 修改杨�样式文件样式文件 ([08e1a85](https://github.com/zovui/zov/commit/08e1a85))
+* 新增page组件 ([4a5ce84](https://github.com/zovui/zov/commit/4a5ce84))
+* 新增timeline组件 ([7c805ca](https://github.com/zovui/zov/commit/7c805ca))
+* 解决代码冲突 ([4fd0198](https://github.com/zovui/zov/commit/4fd0198))
+* **修复bupage的hover效果:** 修复page的页码hover效果 ([650672f](https://github.com/zovui/zov/commit/650672f))
+
+
+
 # [0.8.0](https://github.com/zovui/zov/compare/v0.7.0...v0.8.0) (2019-06-26)
 
 
