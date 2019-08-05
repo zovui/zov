@@ -171,6 +171,7 @@ export default {
 		clearStatus() {
 			return (
 				this.clearable &&
+				!this.disabled &&
 				(this.currentValue || this.data.length) &&
 				this.mouseStatus === 'enter'
 			)

@@ -46,7 +46,7 @@ $prefix-select-head: #{$prefix}select-head;
             width: 100%;
             height: 100%;
             cursor: $cursor-disabled;
-
+            z-index: 2;
         }
     }
     &-no-filterable{

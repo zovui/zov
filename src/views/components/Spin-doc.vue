@@ -34,7 +34,12 @@
 					<li>5</li>
 				</ul>
 			</div>
-			<div v-zov-spin="cover">
+			<div
+				v-zov-spin="{
+					show: cover,
+					spinname: 'dbcircle'
+				}"
+			>
 				自定义指令
 				<ul class="ul">
 					<li>1</li>
@@ -73,12 +78,6 @@ export default {
 		flex: 1;
 		margin: 15px;
 		box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
-	}
-}
-.div {
-	position: relative;
-	.zov-spin {
-		font-size: 3em;
 	}
 }
 .ul {

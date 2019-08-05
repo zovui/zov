@@ -103,6 +103,7 @@
 				value-name="id"
 				label-name="text"
 				disabled
+				:value="2"
 			>
 				<div slot-scope="{ props }">
 					{{ props.item.text }}
