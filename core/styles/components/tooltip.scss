@@ -35,11 +35,13 @@ $prefix-tooltip: #{$prefix}tooltip;
         font-weight: $title-font-weight;
         font-size: $font-size-large;
         max-width: 220px;
-        line-height: initial
+        line-height: initial;
+        text-align: left;
     }
     &-description{
         font-size: $font-size-small;
         max-width: 220px;
-        line-height: initial
+        line-height: initial;
+        text-align: left;
     }
 }
