@@ -24,7 +24,7 @@
 					:size="size"
 					v-if="filterable"
 					v-model="currentValue"
-					:style="styles"
+					:style="inputSize"
 					ref="zov-select-head-input"
 				/>
 			</div>
@@ -36,6 +36,12 @@
 					{{ placeholder }}
 				</span>
 			</transition>
+			<div
+				class="zov-select-head-multiple-input-size-box"
+				ref="zov-select-head-input-size-box"
+			>
+				{{ this.currentValue }}
+			</div>
 		</template>
 		<template v-else>
 			<!-- 单选 -->
@@ -124,8 +130,8 @@ export default {
 		return {
 			stylePrefix: prefix,
 			currentValue: this.value,
-			currentWidth: null,
-			mouseStatus: 'leave'
+			mouseStatus: 'leave',
+			inputSize: { width: '3px' }
 		}
 	},
 	watch: {
@@ -133,6 +139,7 @@ export default {
 			this.currentValue = val
 		},
 		currentValue(val) {
+			this.updateInputSize()
 			this.$emit('input', val)
 		}
 	},
@@ -149,14 +156,6 @@ export default {
 						!this.filterable && this.multiple
 				}
 			]
-		},
-		styles() {
-			let ctx = document.createElement('canvas').getContext('2d')
-			let w = ctx.measureText(this.currentValue).width + 3
-			let W = this.currentWidth - 37
-			return {
-				width: (w > W ? W : w) + 'px'
-			}
 		},
 		arrowDownClasses() {
 			return [
@@ -202,10 +201,18 @@ export default {
 		removeTagEnd() {
 			// 解决删除tags动画完成后的高度变化导致popper不更新问题
 			findComponentDownward(this.$parent, 'zov-popper').popper.update()
+		},
+		updateInputSize() {
+			let sizeBox = this.$refs['zov-select-head-input-size-box']
+			sizeBox &&
+				this.$nextTick(() => {
+					let w = sizeBox.scrollWidth ? sizeBox.scrollWidth : 3
+					let W = this.$el.offsetWidth - 37
+					this.inputSize = {
+						width: (w > W ? W : w) + 'px'
+					}
+				})
 		}
-	},
-	mounted() {
-		this.currentWidth = this.$el.offsetWidth
 	}
 }
 </script>

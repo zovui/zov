@@ -34,6 +34,11 @@ export default {
 			// 父节点尺寸
 			type: String,
 			default: ''
+		},
+		gpuAcceleration: {
+			// 使用CSS 3D转换来定位popper
+			type: Boolean,
+			default: false
 		}
 	},
 	data() {
@@ -80,7 +85,7 @@ export default {
 						element: this.$refs['zov-popper-arrow']
 					},
 					computeStyle: {
-						gpuAcceleration: false // 使用CSS 3D转换来定位popper
+						gpuAcceleration: this.gpuAcceleration // 使用CSS 3D转换来定位popper
 					},
 					flip: {
 						// behavior: 'clockwise' // 转换方式，默认【'flip'】

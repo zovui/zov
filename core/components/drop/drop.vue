@@ -42,7 +42,8 @@ export default {
 			return Object.assign({}, _this.$attrs, {
 				placement: _this.$attrs.placement || 'bottom',
 				animationName: _this.$attrs.animationName || 'zov-drop',
-				trigger: _this.$attrs.trigger || 'click'
+				trigger: _this.$attrs.trigger || 'click',
+				gpuAcceleration: false
 			})
 		}
 	}

@@ -267,6 +267,8 @@
 			</div>
 		</div>
 		<ToolTip
+			never
+			auto-popup
 			v-for="item in [
 				'left',
 				'right',

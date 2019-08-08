@@ -96,6 +96,15 @@ $prefix-select-head: #{$prefix}select-head;
             // 重写在不同size下tag组件的size
             @include form-dom-size(-4, no);
         }
+        &-input-size-box{
+            position: absolute;
+            z-index: -1;
+            visibility: hidden;
+            word-break: break-all;
+            height: 1px;
+            overflow: hidden;
+            bottom: 0;
+        }
     }
     &-placeholder{
         position: absolute;

@@ -25,6 +25,7 @@
 				v-show="visible"
 				:size="currentH + '-' + currentW"
 				:fix="fix"
+				:gpuAcceleration="gpuAcceleration"
 			>
 				<div class="zov-tooltip-body">
 					<p v-if="title" class="zov-tooltip-title">
@@ -149,6 +150,11 @@ export default {
 		fix: {
 			type: Boolean,
 			default: true
+		},
+		gpuAcceleration: {
+			// 使用CSS 3D转换来定位popper
+			type: Boolean,
+			default: true
 		}
 	},
 	data() {
@@ -168,6 +174,11 @@ export default {
 			this.mouseStatus = this.visible ? 'enter' : 'leave'
 			this.$emit('input', val)
 			this.transPopperEventListeners(val)
+		}
+	},
+	computed: {
+		popper() {
+			return this.$refs['zov-popper'].popper
 		}
 	},
 	methods: {
@@ -235,11 +246,11 @@ export default {
 		transPopperEventListeners(val) {
 			// 根据tooltip组件的显示状态，决定popper的自动更新 「#007」
 			val
-				? this.$refs['zov-popper'].popper.enableEventListeners()
-				: this.$refs['zov-popper'].popper.disableEventListeners()
+				? this.popper.enableEventListeners()
+				: this.popper.disableEventListeners()
 		},
 		updatePopper() {
-			this.$refs['zov-popper'].popper.update()
+			this.popper.update()
 		}
 	},
 	mounted() {
