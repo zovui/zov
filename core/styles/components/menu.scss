@@ -61,6 +61,9 @@ $prefix-menu: #{$prefix}menu;
     &-sub{
         .#{$prefix}tooltip[zov-internal-reference-menu-sub]{
             display: block;
+            .#{$prefix}popper{
+                margin-top: 2px;
+            }
             .#{$prefix}tooltip-body{
                 min-width: 220px;
                 max-width: 350px;
@@ -91,7 +94,6 @@ $prefix-menu: #{$prefix}menu;
         }
         &-body{
             transition: height $transition-time;
-            overflow: hidden;
         }
     }
     &-group{

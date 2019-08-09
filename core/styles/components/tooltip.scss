@@ -1,6 +1,8 @@
 $prefix-tooltip: #{$prefix}tooltip;
 .#{$prefix-tooltip}{
     display: inline-block;
+    position: relative;
+    visibility: visible;
     &-body{
         @include get-color-text();
         min-width: 35px;
