@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/zovui/zov/compare/v0.9.2...v0.10.0) (2019-08-14)
+
+
+### Features
+
+* **slider:** 支持value为String类型 ([912cda6](https://github.com/zovui/zov/commit/912cda6))
+
+
+### Performance Improvements
+
+* **core:** directives 的上下文管理 ([181d20d](https://github.com/zovui/zov/commit/181d20d))
+
+
+
 <a name="0.9.2"></a>
 ## [0.9.2](https://github.com/zovui/zov/compare/v0.9.1...v0.9.2) (2019-08-12)
 
