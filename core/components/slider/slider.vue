@@ -137,11 +137,13 @@ export default {
 	props: {
 		// 值
 		value: {
-			type: [Number, Array],
+			type: [Number, String, Array],
 			default: 0,
 			validator(value) {
 				if (Array.isArray(value)) {
-					return value.every(v => typeof v === 'number')
+					return value.every(
+						v => typeof v === 'number' || typeof v === 'string'
+					)
 				}
 				return true
 			}
@@ -339,6 +341,7 @@ export default {
 		// 使值正常化
 		normalizeValue(value) {
 			let { min, max, step, precision, onlyMarks, marks } = this
+			value = Number(value)
 			if (!isNumber(value)) {
 				return min
 			}

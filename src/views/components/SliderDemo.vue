@@ -154,7 +154,7 @@
 export default {
 	data() {
 		return {
-			value1: 0,
+			value1: '30',
 			value2: 2,
 			rangeValue: [20, 30],
 			stepTestValue: 0,
