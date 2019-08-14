@@ -35,9 +35,7 @@ export default {
 	computed: {
 		styles() {
 			return {
-				transform: `translate3d(${this.scrollX}px, ${
-					this.scrollY
-				}px, 0)`
+				transform: `translate3d(${this.scrollX}px, ${this.scrollY}px, 0)`
 			}
 		}
 	},
