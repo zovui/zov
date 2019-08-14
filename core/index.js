@@ -49,7 +49,7 @@ import Message from './components/message'
 import Modal from './components/modal'
 
 // 全局指令
-import './directives'
+import RegisterDir from './directives'
 const components = {
 	// 【_c】
 	Dark,
@@ -124,6 +124,8 @@ const install = (Vue, option = {}) => {
 	Vue.prototype.$Notice = Notice
 	Vue.prototype.$Message = Message
 	Vue.prototype.$Modal = Modal
+	// 全局指令注册
+	RegisterDir(Vue)
 }
 // 自动安装【browser端引用的时候可以省去Vue.use】
 if (typeof window !== 'undefined' && window.Vue) {
