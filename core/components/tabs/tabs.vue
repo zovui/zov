@@ -39,7 +39,9 @@ export default {
 	},
 	mounted() {
 		if (!this.activeId && this.tabPaneList.length) {
-			this.changeTo(this.tabPaneList[0].id, true)
+			this.changeTo(this.tabPaneList[0].id)
+		} else {
+			this.changeTo(this.activeId)
 		}
 	},
 	provide() {
@@ -72,7 +74,7 @@ export default {
 	data() {
 		return {
 			tabPaneList: [],
-			currentActiveId: this.activeId
+			currentActiveId: null
 		}
 	},
 	computed: {
