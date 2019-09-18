@@ -99,6 +99,9 @@ export default {
 		}
 	},
 	watch: {
+		openNames(val) {
+			this.currentOpenNames = val.join(',').split(',')
+		},
 		activeName(val) {
 			this.currentActiveName = val
 		},
