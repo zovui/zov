@@ -39,7 +39,7 @@
 			<section class="demo">
 				<h2 class="demo-header">默认使用</h2>
 				<div class="demo-content">
-					<Tabs>
+					<Tabs v-model="activeKey">
 						<TabPane label="Tab1" id="1">Content of tab 1</TabPane>
 						<TabPane label="Tab 2" id="2">Content of tab 2</TabPane>
 						<TabPane label="Tab 3" id="3">Content of tab 3</TabPane>
@@ -620,7 +620,7 @@ export default {
 				}
 			],
 			bindingLabel: 'bindingLabel',
-			activeKey: '1',
+			activeKey: '2',
 			tabPosition: 'top',
 			cardTabPosition: 'top',
 			extraTabPosition: 'top',
