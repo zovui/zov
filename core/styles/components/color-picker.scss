@@ -82,11 +82,20 @@ $prefix-color-picker: #{$prefix}color-picker;
         cursor: pointer;
         &-color{
             float: left;
+            position: relative;
             @include png-bg();
             &>div{
                 box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
                 height: 100%;
                 width: 100%;
+                text-align: center;
+                @include get-color-sub(color);
+            }
+            &-empty{
+                background: transparent!important;
+                &>div{
+                    background-color: transparent!important;
+                }
             }
         }
         &-arrow{

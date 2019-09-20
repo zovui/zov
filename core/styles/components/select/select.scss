@@ -16,6 +16,7 @@ $prefix-select: #{$prefix}select;
     &-body{
         max-height: $drop-down-max-height;
         overflow-y: auto;
+        min-width: $form-dom-width;
     }
     &-no-data{
         padding: 0 1em;

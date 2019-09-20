@@ -38,6 +38,12 @@
 			v-model="c3"
 			format="hex"
 		/>
+		<ColorPicker
+			:size="size"
+			:disabled="disabled"
+			v-model="c4"
+			format="hex"
+		/>
 		<div
 			style="border: 3px dashed; text-align: left; margin: 15px;padding: 15px"
 		>
@@ -77,7 +83,8 @@ export default {
 			c: 'rgba(23, 11, 123, 1)',
 			c1: 'red',
 			c2: 'green',
-			c3: '#fff'
+			c3: '#fff',
+			c4: ''
 		}
 	},
 	methods: {

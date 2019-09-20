@@ -9,8 +9,15 @@
 		>
 			<template #drop-head>
 				<div class="zov-color-picker-header">
-					<div class="zov-color-picker-header-color">
-						<div :style="valueStyle"></div>
+					<div
+						:class="[
+							'zov-color-picker-header-color',
+							!value && 'zov-color-picker-header-color-empty'
+						]"
+					>
+						<div :style="valueStyle">
+							<Icon v-if="!value" iconname="remove" />
+						</div>
 					</div>
 					<div
 						:class="[
@@ -18,7 +25,12 @@
 							dropShow && 'zov-color-picker-header-arrow-up'
 						]"
 					>
-						<Icon iconname="arrow-down" />
+						<Icon
+							:iconname="
+								clearStatus ? 'close-circle' : 'arrow-down'
+							"
+							@click.self="clearHandle"
+						/>
 					</div>
 				</div>
 			</template>
@@ -210,6 +222,9 @@ export default {
 				this.setCurrentValue()
 				this.$emit('on-active-change', tinycolor(this.formatColor))
 			}
+		},
+		clearStatus() {
+			return Boolean(this.value)
 		}
 	},
 	watch: {
@@ -233,12 +248,20 @@ export default {
 			this.$emit('input', this.formatColor)
 			this.$emit('on-change', tinycolor(this.formatColor))
 		},
+		setCurrentValue() {
+			this.currentValue = toColorModelNum(this.formatColor)
+		},
 		cancelHandle() {
 			this.dropShow = false
 			this.setActiveColor(this.value)
 		},
-		setCurrentValue() {
-			this.currentValue = toColorModelNum(this.formatColor)
+		clearHandle() {
+			if (!this.clearStatus) return
+			setTimeout(() => {
+				this.dropShow = true
+			})
+			this.$emit('input', '')
+			this.$emit('on-clear')
 		}
 	},
 	mounted() {
