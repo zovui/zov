@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.1"></a>
+## [0.10.1](https://github.com/zovui/zov/compare/v0.10.0...v0.10.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **menu:** menu watch openNames ([4eb24a0](https://github.com/zovui/zov/commit/4eb24a0))
+* **tabs:** 修复指定v-model时，默认显示的tab不正确的问题 ([e03247e](https://github.com/zovui/zov/commit/e03247e))
+
+
+### Performance Improvements
+
+* **color-picker select:** drop width, color-picker clear ([6dfe251](https://github.com/zovui/zov/commit/6dfe251))
+
+
+
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/zovui/zov/compare/v0.9.2...v0.10.0) (2019-08-14)
 
