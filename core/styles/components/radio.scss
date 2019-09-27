@@ -19,7 +19,7 @@ $prefix-radio : #{$prefix}radio;
     padding: 0;
     position: relative;
     display: inline-block;
-
+    cursor: pointer;
     .#{$prefix-radio}-input{
         position: absolute;
         top: 0;
@@ -27,6 +27,7 @@ $prefix-radio : #{$prefix}radio;
         left: 0;
         right: 0;
         z-index: 1;
+        visibility: hidden;
     }
 
     // 不可选状态
