@@ -11,12 +11,15 @@ $prefix-select-head: #{$prefix}select-head;
     // 此处设置unset是考虑多选情况系tag项换行，动态高度。
     // 而高度是考line-height撑开。
     height: unset;
+    min-width: 90px;
     &-size{
         &-large{
             height: unset;
+            min-width: 110px;
         }
         &-small{
             height: unset;
+            min-width: 76px;
         }
     }
     & .#{$prefix}input{

@@ -2,6 +2,8 @@ $prefix-color-picker: #{$prefix}color-picker;
 .#{$prefix-color-picker}{
     $W: 240px;
     $bar-W: 10px;
+    min-width: 62px;
+    min-width: calc((1em + 8px) * 2 + 15px);
     @mixin png-bg () {
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
     }
@@ -53,11 +55,14 @@ $prefix-color-picker: #{$prefix}color-picker;
                 $clearance: 10px
             }
             &-color, &-arrow{
-                margin: $clearance / 2 - 1px;
+                margin: 5px;
                 $size: $type - $clearance;
                 width: $size;
                 height: $size;
                 line-height: $size;
+            }
+            &-arrow{
+                margin-left: 0;
             }
         }
         @include form-dom-size();
