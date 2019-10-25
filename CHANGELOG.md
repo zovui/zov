@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/zovui/zov/compare/v0.10.3...v0.11.0) (2019-10-25)
+
+
+### Features
+
+* **tabs:** 修复pane排序问题导致渲染时顺序不正确的问题 ([e0deced](https://github.com/zovui/zov/commit/e0deced))
+
+
+
 <a name="0.10.3"></a>
 ## [0.10.3](https://github.com/zovui/zov/compare/v0.10.2...v0.10.3) (2019-10-22)
 
