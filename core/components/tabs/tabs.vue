@@ -116,7 +116,7 @@ export default {
 			}
 			this.tabPaneList.push(tabPane)
 			this.tabPaneList.sort((pane1, pane2) => {
-				return pane1.order < pane2.order ? -1 : 1
+				return pane1.order < pane2.order ? -1 : 0
 			})
 			this.$emit('on-add', tabPane.id)
 		},
