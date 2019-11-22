@@ -89,8 +89,8 @@ export default {
 	watch: {
 		query(val) {
 			this.queryResult = []
-			this.queryLoading = true
 			if (val === '') return
+			this.queryLoading = true
 			this.throttleFn(() => {
 				/**
 				 * [test: 20万数据搜索耗时256ms]，【阻塞主线程】以下注释代码为主线程query操作，内存消耗为两部分，一、遍历；二、正则匹配

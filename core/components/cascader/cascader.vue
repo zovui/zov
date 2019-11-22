@@ -142,8 +142,8 @@ export default {
 		query(val) {
 			if (!this.filterable) return
 			this.queryResult = []
-			this.queryLoading = true
 			if (val === '') return
+			this.queryLoading = true
 			this.throttleFn(() => {
 				for (let i = 0; i < this.querySelections.length; i++) {
 					let item = this.querySelections[i]

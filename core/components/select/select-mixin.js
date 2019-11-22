@@ -88,7 +88,7 @@ export default {
 			currentQueryName: this.queryName || this.labelName,
 			timer: null,
 			loading: true,
-			queryLoading: true
+			queryLoading: false
 		}
 	},
 	watch: {

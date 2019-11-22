@@ -144,8 +144,8 @@ export default {
 		query(val) {
 			if (!this.filterable) return
 			this.queryResult = []
-			this.queryLoading = true
 			if (val === '') return
+			this.queryLoading = true
 			this.throttleFn(() => {
 				if (this.group) {
 					this.currentData.forEach(group => {
