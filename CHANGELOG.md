@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.1"></a>
+## [0.11.1](https://github.com/zovui/zov/compare/v0.11.0...v0.11.1) (2019-11-22)
+
+
+### Bug Fixes
+
+* **select:** nodate ([409c413](https://github.com/zovui/zov/commit/409c413))
+
+
+
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/zovui/zov/compare/v0.10.3...v0.11.0) (2019-10-25)
 
