@@ -180,6 +180,7 @@ export default {
 				}
 			}
 			this.$set(this.currentTime, index, item.text)
+			this.$emit('on-select')
 		}
 	}
 }

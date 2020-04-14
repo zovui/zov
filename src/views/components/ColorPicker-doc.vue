@@ -89,13 +89,13 @@ export default {
 	},
 	methods: {
 		open(b) {
-			console.log(b)
+			console.log('open', b)
 		},
 		change(c) {
-			console.log(c)
+			console.log('change', c)
 		},
 		active(c) {
-			console.log(c)
+			console.log('active', c)
 		}
 	}
 }

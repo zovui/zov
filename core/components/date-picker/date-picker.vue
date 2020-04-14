@@ -175,6 +175,32 @@ export default {
 				return f
 			}
 		},
+		valueFormat: {
+			type: String,
+			default() {
+				let f = ''
+				switch (this.type) {
+					case 'year':
+						f = 'YYYY'
+						break
+					case 'month':
+						f = 'YYYY-MM'
+						break
+					case 'week':
+						f = 'YYYY-WW'
+						break
+					case 'date':
+						f = 'YYYY-MM-DD'
+						break
+					case 'datetime':
+						f = this.use12HourSystem
+							? 'YYYY-MM-DD hh:mm:ss a'
+							: 'YYYY-MM-DD HH:mm:ss'
+						break
+				}
+				return f
+			}
+		},
 		showWeekNumbers: {
 			type: Boolean,
 			default: true
@@ -212,15 +238,13 @@ export default {
 	watch: {
 		dropShow(val) {
 			this.$emit('on-open-change', val)
-			!this.multipleOfCorrect && (this.query = this.currentValueArr[0])
+			!this.multipleOfCorrect &&
+				(this.query = this.currentItemArr[0]
+					? this.currentItemArr[0].label
+					: '')
 		},
 		query(val) {
-			if (!val) {
-				this.date = today
-				return
-			}
-			let date = dayjs(this.parseDate(val))
-			date.isValid() && (this.date = date)
+			this.initDate(val)
 		},
 		time() {
 			let len = this.currentItemArr.length
@@ -228,13 +252,30 @@ export default {
 			let date = this.setTimeToDate(this.currentItemArr[len - 1].origin)
 			this.currentItemArr[len - 1].origin = date
 			this.currentItemArr[len - 1].label = date.format(this.format)
-			this.currentValueArr[len - 1] = date.format(this.format)
-			this.query = this.currentValueArr[0]
+			this.currentValueArr[len - 1] = date.format(this.valueFormat)
+			this.query = this.currentItemArr[0].label
 			this.$emit('input', this.currentValueArr[0])
 			this.$emit('on-change', this.currentItemArr[0])
+		},
+		value() {
+			if (this.actionExecution) {
+				return
+			}
+			this.defaultSelected()
+			this.$emit(
+				'on-change',
+				this.multipleOfCorrect
+					? this.currentItemArr
+					: this.currentItemArr[0]
+			)
 		}
 	},
 	methods: {
+		initDate(val) {
+			val = val || today
+			let date = dayjs(val)
+			date.isValid() && (this.date = date)
+		},
 		clearDate() {
 			this.clear()
 			this.time = [0, 0, 0]
@@ -245,40 +286,47 @@ export default {
 				.set('minute', this.time[1])
 				.set('second', this.time[2])
 		},
-		dateFormatValue(date) {
+		dateFormatValue(date, format) {
+			format = format || this.format
 			if (this.type === 'week') {
 				const weekRegExp = /[W|w]{1,2}/
 				const twoWeekRegExp = /[W|w]{2,}/
 				const yearRegExp = /[Y|y]{1,}/
-				let dateValue = this.format.replace(
+				let dateValue = format.replace(
 					yearRegExp,
-					date.format(this.format.match(yearRegExp)[0])
+					date.format(format.match(yearRegExp)[0])
 				)
-				if (twoWeekRegExp.test(this.format)) {
+				if (twoWeekRegExp.test(format)) {
 					return dateValue.replace(
 						twoWeekRegExp,
 						date.week() < 10 ? '0' + date.week() : date.week()
 					)
-				} else if (weekRegExp.test(this.format)) {
+				} else if (weekRegExp.test(format)) {
 					return dateValue.replace(weekRegExp, date.week())
 				}
 			} else if (this.type === 'datetime') {
-				return this.setTimeToDate(date).format(this.format)
+				return this.setTimeToDate(date).format(format)
 			} else {
-				return date.format(this.format)
+				return date.format(format)
 			}
 		},
 		isSelected(val) {
 			let date = val.origin
 			return (
-				this.currentValueArr.indexOf(this.dateFormatValue(date)) !== -1
+				this.currentValueArr.indexOf(
+					this.dateFormatValue(date, this.valueFormat)
+				) !== -1
 			)
 		},
 		select(val, isDefault) {
 			if (val.disabled) return
+			this.actionExecution = true
 			this.multipleOfCorrect
 				? this.check(val, isDefault)
 				: this.single(val, isDefault)
+			this.$nextTick(() => {
+				this.actionExecution = false
+			})
 		},
 		single(val, isDefault) {
 			let date = val.origin
@@ -290,12 +338,14 @@ export default {
 				label: this.dateFormatValue(date),
 				origin: date
 			})
-			this.currentValueArr.push(this.dateFormatValue(date))
+			this.currentValueArr.push(
+				this.dateFormatValue(date, this.valueFormat)
+			)
 			// 暴露数据
 			this.$emit('input', this.currentValueArr[0])
-			this.$emit('on-change', val)
+			!isDefault && this.$emit('on-change', this.currentItemArr[0])
 			// 单选query值设置
-			this.query = this.currentValueArr[0]
+			this.query = this.currentItemArr[0].label
 			// 收起下拉
 			!isDefault && !(this.type === 'datetime') && this.dropHideBlur()
 		},
@@ -306,14 +356,16 @@ export default {
 					label: this.dateFormatValue(date),
 					origin: date
 				})
-				this.currentValueArr.push(this.dateFormatValue(date))
+				this.currentValueArr.push(
+					this.dateFormatValue(date, this.valueFormat)
+				)
 			}
 			if (isDefault) {
 				_addV.call(this)
 			} else {
 				if (this.isSelected(val)) {
 					let index = this.currentValueArr.indexOf(
-						this.dateFormatValue(date)
+						this.dateFormatValue(date, this.valueFormat)
 					)
 					this.$delete(this.currentItemArr, index)
 					this.$delete(this.currentValueArr, index)
@@ -323,7 +375,7 @@ export default {
 			}
 			// 暴露数据
 			this.$emit('input', this.currentValueArr)
-			this.$emit('on-change', this.currentItemArr)
+			!isDefault && this.$emit('on-change', this.currentItemArr)
 			// 获取焦点
 			!isDefault && this.dropShowFocus()
 		},
@@ -344,26 +396,23 @@ export default {
 			return val
 		},
 		defaultSelected() {
-			if (
-				!(
-					this.value === null ||
-					this.value === undefined ||
-					!this.value.toString()
-				)
-			) {
-				if (this.value instanceof Array) {
-					this.value.forEach(item => {
-						this.select(
-							{ origin: dayjs(this.parseDate(item)) },
-							'default'
-						)
-					})
-				} else if (typeof this.value === 'string') {
+			this.query = ''
+			this.currentItemArr = []
+			this.currentValueArr = []
+			if (this.value instanceof Array) {
+				this.value.forEach(item => {
 					this.select(
-						{ origin: dayjs(this.parseDate(this.value)) },
+						{ origin: dayjs(this.parseDate(item)) },
 						'default'
 					)
-				}
+					this.initDate(item)
+				})
+			} else if (this.value && typeof this.value === 'string') {
+				this.select(
+					{ origin: dayjs(this.parseDate(this.value)) },
+					'default'
+				)
+				this.initDate(this.value)
 			}
 		}
 	},
