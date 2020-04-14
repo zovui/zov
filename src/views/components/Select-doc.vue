@@ -28,6 +28,11 @@
 			>
 			</Select>
 			单选可搜索 query-name="id"
+			<Input
+				type="text"
+				v-model="value2"
+				style="width: 35px; flex: none"
+			/>
 			<Select
 				:data="list"
 				placeholder="单选"

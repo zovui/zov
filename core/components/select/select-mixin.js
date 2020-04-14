@@ -88,7 +88,8 @@ export default {
 			currentQueryName: this.queryName || this.labelName,
 			timer: null,
 			loading: true,
-			queryLoading: false
+			queryLoading: false,
+			actionExecution: false // 标识组件为内部操作
 		}
 	},
 	watch: {
@@ -107,6 +108,22 @@ export default {
 					  this.currentItemArr[0][valueName]
 					: ''
 			}
+		},
+		value() {
+			if (this.actionExecution) {
+				return
+			}
+			this.defaultSelected(() => {
+				if (this.autofocus) {
+					this.dropShowFocus()
+				} else {
+					this.dropHideBlur()
+				}
+				this.$emit(
+					'on-change',
+					this.multiple ? this.currentItemArr : this.currentItemArr[0]
+				)
+			})
 		}
 	},
 	methods: {
@@ -119,10 +136,14 @@ export default {
 			this.timer = setTimeout(callback, timeInterval || 300)
 		},
 		select(item, isDefault) {
+			this.actionExecution = true
 			if (item.disabled) return
 			this.multiple
 				? this.check(item, isDefault)
 				: this.single(item, isDefault)
+			this.$nextTick(() => {
+				this.actionExecution = false
+			})
 		},
 		single(item, isDefault) {
 			let isCascaderC = this.isThisComponent('zov-cascader')
@@ -135,7 +156,7 @@ export default {
 			this.currentValueArr.push(value)
 			// 暴露数据
 			this.$emit('input', value)
-			this.$emit('on-change', item)
+			!isDefault && this.$emit('on-change', item)
 			// 单选query值设置
 			let queryName =
 				(isCascaderC && !this.filterable ? '__' : '') +
@@ -175,7 +196,7 @@ export default {
 			}
 			// 暴露数据
 			this.$emit('input', this.currentValueArr)
-			this.$emit('on-change', this.currentItemArr)
+			!isDefault && this.$emit('on-change', this.currentItemArr)
 			// 获取焦点
 			!isDefault && this.dropShowFocus()
 		}

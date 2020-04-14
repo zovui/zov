@@ -8,6 +8,7 @@
 			placeholder="日"
 			v-model="a1"
 			format="YYYY年MM月DD日"
+			@on-change="change"
 		/>
 		月：
 		<DatePicker size="small" placeholder="月" type="month" v-model="a2" />
@@ -15,7 +16,13 @@
 		<DatePicker placeholder="年" type="year" v-model="a3" />
 		<p>多选</p>
 		日：
-		<DatePicker multiple placeholder="日" v-model="d1" />
+		<DatePicker
+			multiple
+			placeholder="日"
+			v-model="d1"
+			format="YYYY年MM月DD日"
+			@on-change="change"
+		/>
 		月：
 		<DatePicker multiple placeholder="月" type="month" v-model="d2" />
 		年：
@@ -34,6 +41,7 @@
 			placeholder="时间 time"
 			type="datetime"
 			v-model="d5"
+			format="YYYY年MM月DD日 hh时mm分ss秒"
 		/>
 		<h3>限制</h3>
 		<DatePicker
@@ -321,6 +329,11 @@ export default {
 			d4: ['2019-09'],
 			d5: '2019-03-12 10:12:33',
 			d6: ['2019-03-12 10:12:33', '2019-03-14 15:15:83']
+		}
+	},
+	methods: {
+		change(date) {
+			console.log(JSON.stringify(date))
 		}
 	}
 }

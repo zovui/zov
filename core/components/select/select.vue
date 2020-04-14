@@ -182,21 +182,20 @@ export default {
 	},
 	methods: {
 		defaultSelected(callback) {
-			if (
-				this.value === null ||
-				this.value === undefined ||
-				!this.value.toString()
-			) {
-				this.loading = false
-				return
-			}
+			this.currentValueArr = []
+			this.query = ''
+			this.currentItemArr = []
+			this.loading = false
 			this.value instanceof Array
 				? (this.currentValueArr = this.value)
 				: (this.currentValueArr[0] = this.value)
 			// 初始化选择
 			this.currentValueArr.forEach(item => {
 				for (let i = 0; i < this.currentData.length; i++) {
-					if (item === this.currentData[i][this.valueName]) {
+					if (
+						String(item) ===
+						String(this.currentData[i][this.valueName])
+					) {
 						this.select(this.currentData[i], 'default')
 						break
 					}

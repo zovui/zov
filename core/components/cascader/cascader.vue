@@ -216,14 +216,10 @@ export default {
 			}
 		},
 		defaultSelected(callback) {
-			if (
-				this.value === null ||
-				this.value === undefined ||
-				!this.value.toString()
-			) {
-				this.loading = false
-				return
-			}
+			this.currentValueArr = []
+			this.query = ''
+			this.currentItemArr = []
+			this.loading = false
 			this.value instanceof Array
 				? (this.currentValueArr = this.value)
 				: (this.currentValueArr[0] = this.value)

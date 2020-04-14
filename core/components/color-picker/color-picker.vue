@@ -234,6 +234,7 @@ export default {
 		},
 		value(val) {
 			this.setActiveColor(val)
+			this.$emit('on-change', tinycolor(this.formatColor))
 		}
 	},
 	methods: {
