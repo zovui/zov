@@ -28,6 +28,7 @@ import Slider from './components/slider'
 import Badge from './components/badge'
 import Radio from './components/radio'
 import RadioGroup from './components/radio-group'
+import Rate from './components/rate'
 import Checkbox from './components/checkbox'
 import CheckboxGroup from './components/checkbox-group'
 import Divider from './components/divider'
@@ -94,6 +95,7 @@ const components = {
 	Slider,
 	Radio,
 	RadioGroup,
+	Rate,
 	Checkbox,
 	CheckboxGroup,
 	Step,
@@ -179,6 +181,7 @@ export {
 	Badge,
 	Slider,
 	Radio,
+	Rate,
 	RadioGroup,
 	Checkbox,
 	CheckboxGroup,
