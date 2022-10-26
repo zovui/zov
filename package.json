@@ -1,6 +1,6 @@
 {
 	"name": "zov",
-	"version": "0.11.3",
+	"version": "0.11.4",
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",

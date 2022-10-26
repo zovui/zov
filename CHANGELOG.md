@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.4](https://github.com/zovui/zov/compare/v0.11.3...v0.11.4) (2022-10-26)
+
+
+### Bug Fixes
+
+* select data watch ([36ab9d0](https://github.com/zovui/zov/commit/36ab9d0))
+
+
+
+## [0.11.2](https://github.com/zovui/zov/compare/v0.11.1...v0.11.2) (2019-11-22)
+
+
+
 <a name="0.11.3"></a>
 ## [0.11.3](https://github.com/zovui/zov/compare/v0.11.1...v0.11.3) (2020-04-14)
 
