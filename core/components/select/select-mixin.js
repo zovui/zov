@@ -93,6 +93,9 @@ export default {
 		}
 	},
 	watch: {
+		data() {
+			this.currentData = this.data
+		},
 		dropShow(val) {
 			this.$emit('on-open-change', val)
 			if (!val && !this.multiple) {
