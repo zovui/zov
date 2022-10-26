@@ -3,7 +3,7 @@
 </div>
 
 # ZOV
-一个基于vue的后台系统组件库。[官网](http://zov.thephenix.cn)
+一个基于vue的后台系统组件库。[官网](http://zovui.thephenix.cn)
 
 ## 用法
 
